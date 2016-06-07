@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Carreira - TAES das IFES</title>
+</head>
+<body>
+  <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '236772623333172',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/pt_BR/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+    <div id="maindiv">
+        <H1>Simulador de Salário dos TAE das IFES</H1>
+        <div id="header">
+            <div id="header_link">
+                <a id="link_header" href="index.html">Calculadora</a>
+            </div>
+            <div id="header_link">
+                  <a id="link_header" href="carreira.html">Carreira</a>
+            </div>
+            <div id="header_link">
+                <a id="link_header" href="sobre.html">Sobre</a>
+            </div>
+        </div>   
+        <div class="titleHolder">
+          <h1  class="mainTitle">Carreira</h1>
+          <div class="fb-like" data-href="http://www.facebook.com/SalarioTAE/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false">
+          </div>
+        </div>
+        <p class="pcarreira">Entender o seu contracheque e ainda saber da onde vieram aqueles números pode não ser muito fácil. Por isso, resolvi tentar explicar mais ou menos como os cálculos principais são feitos. Antes de começar, um alerta: não sou da área de pagamentos, e as informações que escrevi aqui são baseadas no que li na internet ou deduzi sozinho (baseado no meus contracheques). As explicações podem estar erradas ou desatualizadas!</p>
+        <h3>Sumário</h3>
+        <ol>
+          <li class="sumario"><a href="#vb">Vencimento Básico</a>
+              <ol>
+                <li class="sumario"><a href="#extrap">Extrapolação</a></li>
+              </ol>
+          </li>
+          <li class="sumario"><a href="#urp">URP</a></li>
+          <li class="sumario"><a href="#prog">Progressão Funcional</a></li>
+          <li class="sumario"><a href="#cap">Adicional por capacitação</a></li>
+          <li class="sumario"><a href="#outrosad">Outros adicionais e auxílios</a>
+              <ol>
+                <li class="sumario"><a href="#outrosad">Alimentação</a></li>
+                <li class="sumario"><a href="#saude">Saúde</a></li>
+                <li class="sumario"><a href="#insa">Insalubridade</a></li>
+                <li class="sumario"><a href="#pre">Pré-escolar</a></li>
+                <li class="sumario"><a href="#trans">Transporte</a></li>
+              </ol>
+          </li>
+          <li class="sumario"><a href="#fg">Funções Gratificadas/Cargos de Chefia</a></li>
+          <li class="sumario"><a href="#irrf">Imposto de Renda Retido na Fonte</a></li>
+          <li class="sumario"><a href="#pss">Desconto do Plano de Seguridade Social (PSS)</a></li>
+          <li class="sumario"><a href="#funpresp">Previdência complementar - Funpresp</a></li>
+          <li class="sumario"><a href="#medvet">Médicos e veterinários</a></li>
+          <li class="sumario"><a href="#anuenio">Adicional por tempo de serviço</a></li>
+          <li class="sumario"><a href="#outros">Outros</a></li>
+        </ol>
+        
+        <h3 id="vb">Vencimento Básico</h3>
+        <p class="pcarreira">Em primeiro lugar, deve-se observar qual é o seu vencimento básico, de acordo com a matriz do PCCTAE (Plano de Carreira dos Cargos Técnico-Administrativos em Educação), que é regido pela <a href="http://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11091.htm">Lei nº 11.091/2005</a>.
+            Veja a matriz em vigor entre 03/2015 e 08/2016, para 40 horas semanais (clique para ampliar):</p>
+        <a href="img/MatrizPCCTAEFinal.png" target="_blank"><img src="img/MatrizPCCTAEFinal.png" height="25%" width="25%" style="float:left;padding-right:15px;"></a>
+        <p class="pcarreira">É importante ressaltar que essa é a matriz referente aos meses de Janeiro e Fevereiro de 2015. As outras matrizes, mais antigas e a final, estão disponíveis no link da lei acima. Outro ponto importante, pode ser que haja uma diferença nos centavos dos valores. Isto porque montei a tabela utilizando a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro. 
+            Para se localizar na matriz, é necessário saber três informações:
+            <ol style="list-style-position:inside;">
+                <li class="sumario">Classe: Depende do nível de escolaridade, sendo D para ensino médio e E para superior, e está descrito no edital do concurso.</li>
+                <li class="sumario">Nível: É referente à progressão funcional por capacitação, que pode ser realizada a cada 18 meses com a entrega de certificados com certo número de horas. Mais detalhes abaixo.</li>
+                <li class="sumario">Progressão: Esta é a progressão por tempo de serviço (oficialmente chamada de Progressão por Mérito Profissional), e pode ser avançada a cada 18 meses por no máximo 16 vezes. </li>
+            </ol></p>
+        <p class="pcarreira">De posse das informações acima, pode-se verificar na tabela qual é o piso do servidor. Por exemplo, um servidor Classe E recém contratado (Nível I e Progressão 1) está no P31. Caso fosse Classe D, estaria no P17. A situação do servidor está disponível no contracheque e no portal da transparência, sendo discrimnada a Classe (A-E) e a progressão, na forma de um número (101 significa Nível I e Progressão 1, 202 Nível II e Progressão 2, 416 Nível IV e Progressão 16).</p>
+        <p class="pcarreira">O cálculo dessa matriz é feito da seguinte forma: São definidos, por lei, o piso mínimo da Classe A (R$ 1140,64) e o valor do step (3,7%). Cada valor de P é calculado com um aumento dependente do step, e a posição sempre de acordo com a matriz já estabelecida.</p>
+        <h4 id="extrap">Extrapolação</h4>
+        <p class="pcarreira">
+          Seguindo uma ideia do colega Danilo Oliveira, resolvi colocar uma possibilidade de estimar os valores de VB do futuro, de acordo com os aumentos recentes. Depois de alguns testes, resolvi optar pela forma mais simples. Considero para os cálculos um aumento similar ao obtido no acordo de 2015, ou seja, 5% do piso ao ano, e aumento em 0,05% do step ao ano. 
+        </p>
+        <p class="pcarreira">
+          Obviamente, não será apenas o VB que irá mudar. A principal fonte de erro desta extrapolação (considerando que esteja correta) é o IRRF, que sofre alteração quase todo ano. Sem a correção do IRRF. Claro que qualquer outro ponto pode ser alterado, incluindo a própria carreira, mas a extrapolação indica o que vem por aí, se as coisas não mudarem muito.
+        </p>
+        <h3 id="urp">URP</h3>
+        <p class="pcarreira">Algumas universidades recebem um adicional chamado URP. A URP é um adicional antigo, cheio de polêmica (por ter sua legalidade contestada pela AGU) e que está aguardando julgamento no STF. Ela é calculada como 26,05% do vencimento básico do servidor, e deve ser adicionada ao vencimento básico nos cálculos de adicional por especialização, auxílio saúde e PSS, mas não é considerada nos cálculos de insalubridade e do IR. O processo judicial relativo à URP (da UnB) está aguardando julgamento no STF desde 2011, e pode ser acompanhado neste <a href="http://www.stf.jus.br/portal/processo/verProcessoAndamento.asp?numero=28819&classe=MS" target="_blank">link</a>.</p>
+        <h3 id="prog">Progressão Funcional</h3>
+        <p class="pcarreira">A progressão funcional pode ser realizada de duas formas: A Progressão Funcional por Mérito, e a Progressão Funcional por Capacitação.</p>
+        <p class="pcarreira">A Progressão por Mérito Profissional pode ser efetuada a cada 18 meses, desde que o servidor tenha executado as suas tarefas com desempenho positivo, a ser avaliado pela chefia imediata. Após a progressão, o servidor passa para o Piso seguinte da tabela do PCCTAE, ou seja, se estava no P31, vai para o P32.</p>
+        <p class="pcarreira">Já a Progressão por Capacitação é realizada com a entrega de certificados de cursos de aperfeiçoamento profissional, com um número crescente de horas, não cumulativas,  para cada nível, como na tabela abaixo. Neste caso, o servidor também passa para o piso subsequente da matriz.</p>
+        <a href="img/ProgressaoCapacitacao.png" target="_blank"><img class="centerImg" src="img/ProgressaoCapacitacao.png" height="100%" width="100%"></a>
+        <h3 id="cap">Adicional por capacitação</h3>
+        <p class="pcarreira">O adicional por capacitação, que não é considerado como parte da progressão funcional, é calculado de acordo com o tipo de especialização, levando-se em conta se o estudo foi em área relacionada ao cargo, de acordo com a tabela abaixo, disponível na <a href="http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2012/Lei/L12772.htm#anexoxvii">Lei 12.772/2012</a>.</p>        
+        <a href="img/TabelaQualif.png" target="_blank"><img class="centerImg" src="img/TabelaQualif.png"></a>          
+        
+        <h3 id="outrosad">Adicional de Insalubridade, Auxílios de Saúde, Transporte, Pré-escolar e outros.</h3>
+        
+        <p class="pcarreira">O cálculo de cada um destes auxílios ou adicionais é feito de uma maneira. O <strong>auxílio alimentação</strong> é o mais simples, pois todos servidores recebem R$ 458,00. Nenhum desconto incide sobre este valor.</p>
+        
+        <p id="saude" class="pcarreira">O auxílio ressarcimento é um benefício indenizatório aos sevidores que possuem plano de <strong>saúde</strong> particular. O valor deste auxílio é baseado na <a href="PortariaSaude.pdf" target="_blank">Portaria nº 625, de 21 de dezembro de 2012</a>, do Ministério do Planejamento, Orçamento e Gestão, e nenhum descondo incide sobre ele. O valor depende da remuneração bruto do servidor e de sua idade, como mostra a tabela abaixo:</p>
+        
+        <a href="img/TabelaSaude.png" target="_blank"><img src="img/TabelaSaude.png" class="centerImg"></a>        
+        
+        <p id="insa" class="pcarreira">O <strong>adicional de insalubridade</strong> é pago aos servidores que trabalham em ambientes insalubres ou manipulam produtos periogosos. Este adicional pode ser de 5%, 10% ou 20%, de acordo com o grau de insalubridade (mínimo, médio e máximo), segundo a <a href="https://www.planalto.gov.br/ccivil_03/Leis/L8270.htm">Lei 8.270/1991</a>. As especificações de cada grau ficam escondidas em um documento que não lembro mais qual é pra poder colocar aqui. :) O imposto de renda retido na fonte incide sobre a insalubridade, mas a contribuição ao PSS não.</p>
+        
+        <p id="pre" class="pcarreira">O <strong>auxílio pré-escolar (creche)</strong> é pago aos servidores com filhos com idade de até seis anos. O cálculo é realizado baseado no valor-teto definido para cada UF, sendo R$ 95,00 para o DF. De acordo com a faixa de reumneração do servidor, uma porcentagem deste teto é subtraída (veja a <a href="img/TabelaCreche.png" target="_blank">tabela</a>). No caso da UnB, a maioria dos servidores fica dentro da primeira categoria, logo, tem direito a um auxílio no valor de R$ 90,25. O IRRF também incide neste auxílio.</p>
+        
+        <p id="trans"class="pcarreira">O <strong>auxílio transporte</strong> é pago a todos que declararem que utilizam transporte público para ir ao local de trabalho. Seu cálculo é um pouco complicado. Primeiro, deve-se informar o gasto diário com o transporte, sendo que eles valor deve ser múltiplo de 20 centavos. Este valor é multiplicado por 22 (número de dias úteis em um mês "padrão"). Deste valor, subtraise uma alíquota que depende do vencimento básico. Esta alíquota é calculada como 6% do salário referente a 22 dias de trabalho. A fórmula matemática pode ser escrita assim:</p>
+        
+        <img src="img/auxTrans.png" class="centerImg">
+        
+        Em função deste cálculo, a partir de um certo vencimento básico, o servidor passa a não receber mais o auxílio, de acordo com o gasto diário.
+        
+        <p class="pcarreira">Estes são os auxílios e adicionais mais comuns, que eu saiba. Existem muitos outros, demais para mostrar cada um aqui. Na página do <a href="http://www.srh.unb.br/guia-do-servidor" target="_blank">Guia do Servidor</a> todos estão listados, mas sem a fórmula de cálculo exata.</p>
+        
+        <h3 id="fg">Funções Gratificadas/Cargos de Chefia</h3>
+       
+        <p class="pcarreira">O adicional de função gratificada é pago aos servidores que possuem cargo de chefia ou de direção em seu setor. As FGs são divididas em 9 níveis, sendo FG-01 a de maior valor, e FG-09 a de menor. Por exemplo, um Assistente de Diretor (de Faculdade, Instituto, etc) é classificado como FG-02, enquanto o Secretário Executivo de determinado centro de custo é FG-03. Os valores são mostrados na tabela abaixo. </p>
+        
+        <a href="img/TabelaFG.png" target="_blank"><img src="img/TabelaFG.png" class="centerImg"></a>
+        
+        <h3 id="irrf">Imposto de Renda Retido na Fonte</h3>
+       
+        <p class="pcarreira">O IRRF é calculado baseado em uma <a href="http://www.receita.fazenda.gov.br/Aliquotas/ContribFont2012a2015.htm" target="_blank">tabela</a> disponibilizada pela Receita Federal. De acordo com o valor-base (vencimento e outros adicionais em que o imposto incide), uma porcentagem é calculada, e desse valor é subtraído um valor fixo (de acordo com a faixa), sobrando assim o imposto que será descontado. Por exemplo, para R$ 3000,00 de valor-base, desconta-se 15% (R$ 450,00) menos o valor fixo de R$ 335,03, logo, o imposto pago será de 114,97. O valor-base de cálculo e o valor descontado do IRRF são descritos no contracheque, o que facilita sua conferência. Atualmente, esta é a tabela vigente:</p>
+         
+         <a href="img/TabelaIRRF.png" target="_blank"><img src="img/TabelaIRRF.png" class="centerImg"></a>
+        
+        <h3 id="pss">Desconto do PSS</h3>
+        
+        <p class="pcarreira">A contribuição ao Plano de Seguridade Social é ainda mais simples, pois é calculada 11% da remuneração. Desde Fevereiro de 2013, entretanto, há um valor teto para a base do PSS, fixado atualmente em R$ 5.189,82. O servidor que quiser contribuir com um valor maior (visando uma aposentadoria maior), pode aderir a um fundo de previdência, como o <a href="https://www.funpresp.com.br/portal/">Funpresp - Exe</a>. O PSS é regido pela <a href ="http://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l10.887.htm">lei 10.887/2004</a>, e foi modificado (principalmente quanto à criação do Fundo de Previdência Complementar - Funpresp -  pela <a href="http://www.planalto.gov.br/ccivil_03/_Ato2011-2014/2012/Lei/L12688.htm">lei 12.688/2012</a>). O cálculo também é baseado em um valor-base que é diferente do calculado para IRRF, mas também vem descriminado no contracheque.</p>  
+        
+        <h3 id="funpresp">Funpresp</h3>
+        
+        O <a href="https://www.funpresp.com.br/portal/">Funpresp - Exe</a> é uma fundação de previdência complementar para os servidores públicos federais do poder executivo. Basicamente, consistem em uma complementação à contribuição padrão ao PSS, de importância maior quando a remuneração do servidor supera o teto do PSS. A contribuição tem uma contrapartida do governo, e também tem uma característica de investimento. A adesão pode ser feita diretamente pelo Sigepe. Mais informações podem ser obtidas na página da fundação ou com consultores indicados pela instituição.
+        
+        <h3 id="medvet">Médicos e veterinários</h3>
+        <p class="pcarreira">Os médicos e veterinários possuem matriz salarial diferenciada dentro do PCCTAE. Para a jornada de 40 horas semanais, os valores de janeiro e fevereiro de 2015 são os da tabela abaixo. Para saber os valores atuais, basta multiplicar os valores da tabela comum por 2.</p>
+        <a href="img/TabelaMedicos2015_1.png" target="_blank"><img src="img/TabelaMedicos2015_1.png" height="90%" width="90%" class="centerImg"></a>    
+        
+        <h3 id="anuenio">Adicional por tempo de serviço</h3>
+        <p class="pcarreira">Este adicional, também chamado de anuênio ou quinquenio, é pago aos servidores que entraram na carerira até o ano de 1999. Calculado como 1% do VB a cada ano de serviço, foi modificado por algumas leis até ser cancelado defintivamente em 1999, sendo mantido para os servidores da época o direto de recebimento do percentual nesta data.</p>
+        <p class="pcarreira">Não tenho certeza quanto ao seu cálculo (em relação à incidência de URP, Incentivo, IRRF, PSS etc), porém o cálculo deve influenciar uma minoria de pessoas. Se você tiver estas respostas, pode entrar em contato.</p>
+        
+        <h3 id="outros">Outros</h3>
+        <p class="pcarreira">Estas são apenas as ocorrências mais comuns nos contracheques dos servidores, na realidade, muito mais descontos e adicionais existem. As formas de cálculo mencionadas aqui foram baseadas no que encontrei na legislação na internet, mas podem diferir em alguns pontos do método verdadeiro.</p>
+        <p class="pcarreira">Para informações oficiais, acesse procure a reitoria de sua instituição. Muitas informações são disponibilizadas no próprio site da IFES, como o <a href="http://www.srh.unb.br/guia-do-servidor" target="_blank">Guia do Servidor</a>, na página do DGP/UnB. Em caso de dúvidas ou problemas com seu contracheque, entre em contato pelos meios oficiais com o setor apropriado. No caso da UnB, o <a href="http://www.srh.unb.br/fale-com-dgp" target="_blank">Decanato de Gestão de Pessoas</a>.</p>
+    </div>
+        
+        <script>
+            var _gaq=[['_setAccount','UA-43605146-1'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+      <script id="_wauizv">var _wau = _wau || []; _wau.push(["classic", "jo9044c79opf", "izv"]);
+          (function() {var s=document.createElement("script"); s.async=true;
+          s.src="http://widgets.amung.us/classic.js";
+                       //document.getElementsByTagName("head")[0].appendChild(s);
+          })();
+      </script>
+</body>
+</html>

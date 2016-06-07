@@ -1,0 +1,73 @@
+/** Source: http://jsfiddle.net/syahrasi/us8uc/ */
+.tabs-menu1, .tabs-menu2 {
+    height: 30px;
+    /**float: left;*/
+    clear: both;
+    padding-left: 0;
+    margin: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.tabs-menu1 ul, .tabs-menu2 ul {
+  margin-top: 0;
+}
+
+.tabs-menu1 li, .tabs-menu2 li {
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: -2px;
+    background-color: #ccc;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.tabs-menu1 li.current, .tabs-menu2 li.current {
+    height: 31px;
+    position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+    z-index: 5;
+}
+
+.tabs-menu1 li a, .tabs-menu2 li a {
+    padding: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none; 
+}
+
+.tabs-menu1 .current a, .tabs-menu2 .current a {
+    color: #000;
+}
+
+.tab {
+    border: 1px solid black;    
+    background-color: #fff;
+    float: left;
+    width: 580px;
+    height: 200px;
+    height: 226px;
+}
+
+.tab-content1, .tab-content2 {
+    width: 580px;
+    padding: 5px;
+    display: none;
+}
+
+.tab-content1 p, .tab-content2 p  {
+  margin-top: 2px;
+}
+
+#tab-carreira1 {
+ display: block;   
+}
+#tab-carreira2 {
+ display: block;   
+}

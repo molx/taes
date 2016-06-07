@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+  <![endif]-->
+  <!--[if IE 7]>
+  <html class="no-js lt-ie9 lt-ie8">
+    <![endif]-->
+    <!--[if IE 8]>
+    <html class="no-js lt-ie9">
+      <![endif]-->
+      <!--[if gt IE 8]>
+      <!-->
+        <html class="no-js">
+        <!--<![endif]-->
+      <head>
+        <meta charset="utf-8">
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+        <title>
+          Simulador de Salário dos TAE das IFES
+        </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/tabs.css">
+        <!--<script src="js/vendor/modernizr-2.6.2.min.js"></script> 
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">-->
+        <script src="js/vendor/jquery.min.js"></script>
+        <!--
+          <script>
+              window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')
+          </script>
+        <script src="js/plugins.js"></script> -->
+        <script src="js/main.js"></script>
+        <script src="js/compressed.js"></script>
+        <script type="text/javascript" src="js/nhpup_1.1.js"></script>
+      </head>
+      <body onLoad="firstload();">
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '236772623333172',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/pt_BR/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+        <!--[if lt IE 7]>
+        <p class="chromeframe">
+          You are using an
+          <strong>
+          outdated
+          </strong>
+          browser. Please
+          <a href="http://browsehappy.com/">upgrade your browser</a>
+          or
+          <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a>
+          to improve your experience.
+        </p>
+        <![endif]-->
+        <div id="maindiv">
+          <H1>
+            Simulador de Salário dos TAE das IFES
+          </H1>
+          <div id="header">
+            <div id="header_link">
+              <a id="link_header" href="index.html">Calculadora</a>
+            </div>
+            <div id="header_link">
+              <a id="link_header" href="carreira.html">Carreira</a>
+            </div>
+            <div id="header_link">
+              <a id="link_header" href="sobre.html">Sobre</a>
+            </div>
+          </div>
+          <div class="titleHolder">
+            <h1 class="mainTitle">
+              Calculadora
+            </h1>
+            <div class="fb-like" data-href="http://www.facebook.com/SalarioTAE/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false">
+            </div>
+              <div id="cbajuda">
+                <input type="checkbox" name="ajuda" id="checkajuda" value="Ajuda" checked> Mostrar ajuda
+              </div>
+          </div>
+          <h2>
+            Simulação 1
+          </h2>
+          <form name="myform" action="" method="GET">
+            <div id="divdata">
+              <ul class="tabs-menu1">
+                <li class="current"><a href="#tab-carreira1">Carreira</a></li>
+                <li><a href="#tab-ad1">Adicionais e Auxílios</a></li>
+                <li><a href="#tab-prev1">Previdência</a></li>
+              </ul>
+              <div class="tab">
+                <div id="tab-carreira1" class="tab-content1">
+                  <p>
+                  <span onmouseover="nhpup.popup('Vários valores dependem do período do salário. Esta opção pode não estar 100% apurada para períodos anteriores ao atual.');">
+                    Período:                                        
+                    <select name="ddAno" id="ddAno" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                      <option value="1">
+                        Até 12/2013
+                      </option>
+                      <option value="2">
+                        Entre 01/2014 e 02/2014
+                      </option>
+                      <option value="3">
+                        Entre 03/2014 e 12/2014
+                      </option>
+                      <option value="4">
+                        Entre 01/2015 e 02/2015
+                      </option>
+                      <option value="5">
+                        Entre 03/2015 e 12/2015
+                      </option>
+                      <option value="6" selected>
+                        Entre 01/2016 e 07/2016
+                      </option>
+                      <option value="7">
+                        Entre 08/2016 e 12/2016
+                      </option>
+                      <option value="8">
+                        Após 01/2017
+                      </option>
+                      <option value="9">
+                        2020 (Extrapolado)
+                      </option>
+                      <option value="10">
+                        2025 (Extrapolado)
+                      </option>
+                      <option value="11">
+                        2030 (Extrapolado)
+                      </option>
+                    </select>
+                  </span>
+                  <small>clique <a href="carreira.html#extrap" target="_blank">aqui</a> para detalhes sobre a extrapolação</small>
+                  </p> 
+                <p>
+                  <span onmouseover="nhpup.popup('A classe é definida pela exigência de escolaridade do cargo.');">
+                    Classe:
+                    <select name="ddClasse" id="ddClasse" onClick="updateQuali(this.form, this.form.ddClasse.value);"
+                      onKeyDown="updateQuali(this.form, this.form.ddClasse.value);" onKeyPress="updateQuali(this.form, this.form.ddClasse.value);"
+                      onKeyUp="updateQuali(this.form, this.form.ddClasse.value);">
+                      <option value="1" selected>
+                        A
+                      </option>
+                      <option value="6">
+                        B
+                      </option>
+                      <option value="11">
+                        C
+                      </option>
+                      <option value="17">
+                        D
+                      </option>
+                      <option value="31">
+                        E
+                      </option>
+                    </select>
+                  </span>
+                  <span style="padding-left: 50px;" onmouseover="nhpup.popup('A Progressão por capacitação profissional varia em 4 níveis e pode ser obtida pela realização de cursos.');">
+                    Nível:
+                    <select name="ddProg" id="ddProg" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                      <option value="1" selected>
+                        I
+                      </option>
+                      <option value="2">
+                        II
+                      </option>
+                      <option value="3">
+                        III
+                      </option>
+                      <option value="4">
+                        IV
+                      </option>
+                    </select>
+                  </span>
+                  <span style="padding-left: 50px;" onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
+                    Progressão:                                        
+                    <select name="ddNivel" id="ddNivel" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                      <option value="1" selected>
+                        1
+                      </option>
+                      <option value="2">
+                        2
+                      </option>
+                      <option value="3">
+                        3
+                      </option>
+                      <option value="4">
+                        4
+                      </option>
+                      <option value="5">
+                        5
+                      </option>
+                      <option value="6">
+                        6
+                      </option>
+                      <option value="7">
+                        7
+                      </option>
+                      <option value="8">
+                        8
+                      </option>
+                      <option value="9">
+                        9
+                      </option>
+                      <option value="10">
+                        10
+                      </option>
+                      <option value="11">
+                        11
+                      </option>
+                      <option value="12">
+                        12
+                      </option>
+                      <option value="13">
+                        13
+                      </option>
+                      <option value="14">
+                        14
+                      </option>
+                      <option value="15">
+                        15
+                      </option>
+                      <option value="16">
+                        16
+                      </option>
+                    </select>
+                  </span>
+                  </p>
+                  <p>
+                  <span onmouseover="nhpup.popup('O adicional por Função Gratificada é pago a servidores que exercem cargos de chefia.');">
+                    FG:
+                    <select name="ddFG" id="ddFG" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                      <option value="0" selected>
+                        Não
+                      </option>
+                      <option value="1">
+                        FG-1
+                      </option>
+                      <option value="2">
+                        FG-2
+                      </option>
+                      <option value="3">
+                        FG-3
+                      </option>
+                      <option value="4">
+                        FG-4
+                      </option>
+                      <option value="5">
+                        FG-5
+                      </option>
+                      <option value="6">
+                        FG-6
+                      </option>
+                      <option value="7">
+                        FG-7
+                      </option>
+                      <option value="8">
+                        FG-8
+                      </option>
+                      <option value="9">
+                        FG-9
+                      </option>
+                    </select>
+                    <input type="text" NAME="txFG" value="R$ 0,00" readonly>
+                  </span>
+                  <span style="padding-left: 25px;" onmouseover="nhpup.popup('O ocupante de Cargo de Direção pode receber o valor integral como substituto à remuneração ou como adicional, no valor de 60% do valor integral.');">
+                    CD:
+                    <select name="ddCD" id="ddCD" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                      <option value="0" selected>
+                        Não
+                      </option>
+                      <option value="1">
+                        CD-1
+                      </option>
+                      <option value="2">
+                        CD-2
+                      </option>
+                      <option value="3">
+                        CD-3
+                      </option>
+                      <option value="4">
+                        CD-4
+                      </option>
+                    </select>
+                    <input type="radio" name="rdCD" value="0.6" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)" checked>60%
+                    <input type="radio" name="rdCD" value="1" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">100%
+                  <input type="text" NAME="txCD" value="R$ 0,00" readonly>
+                  </span>
+                  </p>
+                  <p>
+                  <span>Carga horária:</span>
+                  <select name="ddCargaH" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                    <option value="1" selected>
+                      40 horas
+                    </option>
+                    <option value="0.75">
+                      30 horas
+                    </option>
+                    <option value="0.5">
+                      20 horas
+                    </option>
+                  </select>
+                  <span style="padding-left: 25px;" onmouseover="nhpup.popup('O Adicional por Tempo de Serviço é calculado como 5% por cada período de 5 anos. Ele foi revogado em 1999, mas se mantém para aqueles que o recebiam na época.')">
+                    Anuênio:</span> 
+                    <input type="number" name="numAnuenio" min="0" max="35" step="1" value="0"
+                    style="width: 35px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
+                    onKeyUp="validateGD2(this.form);">
+                    %
+                  </p>
+                  <p>
+                  Qualificação:
+                  <select name="ddQuali" id="ddQuali" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                    <option value="0" selected>
+                      Mínima do Cargo
+                    </option>
+                    <option value="0.1">
+                      Fundamental Completo
+                    </option>
+                    <option value="0.15">
+                      Médio Completo
+                    </option>
+                    <option value="0.2">
+                      Médio Técnico
+                    </option>
+                    <option value="0.25">
+                      Graduação Completa
+                    </option>
+                    <option value="0.30">
+                      Especialização
+                    </option>
+                    <option value="0.52">
+                      Mestrado
+                    </option>
+                    <option value="0.75">
+                      Doutorado
+                    </option>
+                  </select>
+                  <span onmouseover="nhpup.popup('O valor do incentivo à qualificação depende se os estudos foram em área diretamente relacionada ao cargo ou não.');">
+                  <input type="radio" name="areaquali" value="qualid" onClick="calcSalario(this.form)" checked>
+                  Direta 
+                  <input type="radio" name="areaquali" value="qualii" onClick="calcSalario(this.form)">
+                  Indireta
+                  </span>
+                  </p>
+                  <p>
+                  <span onmouseover="nhpup.popup('A URP é um adicional recebido em algumas IFES. É um assunto polêmico que está prestes a ser julgado no STF, com tendência de que seja removida dos servidores. Marque esta opção caso você receba URP. Veja o menu Carreira para mais informações.');">
+                  <input type="checkbox" name="removeurp" value="removeURP" onClick="calcSalario(this.form)">
+                  URP
+                  </span>
+                  <span style="padding-left: 25px;" onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Nota: Apenas os valores de 2015 para 40 horas semanais estão configurados apropriadamente.');">
+                  <input type="checkbox" name="medico" value="medico" onClick="calcSalario(this.form)">
+                  Médico/Veterinário                                        
+                  </span>
+                  <span style="padding-left: 25px;" onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
+                    Nº de dependentes IR:
+                    <input type="number" name="numDepIRRF" min="0" max="20" step="1" value="0"
+                    style="width: 35px;" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form);"
+                    onKeyUp="calcSalario(this.form);">
+                    <input type="text" NAME="txDepIRRF" value="R$ 0,00" readonly>
+                  </span>
+                  </p>
+                  </div>
+                  <div id="tab-ad1" class="tab-content1">
+                  <p>
+                  <span onmouseover="nhpup.popup('O reembolso por contrato de Plano de Saúde particular segue uma tabela definida pelo Governo Federal e depende do salário bruto e da idade do servidor.');">
+                    <input type="checkbox" name="saude" value="Saude" onClick="calcSalario(this.form)">
+                    Saúde Suplementar - Idade do servidor:                                        
+                    <select name="ddIdade" id="ddIdade" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)" style="width: 70px;">
+                      <option value="0">
+                        0-18 anos
+                      </option>
+                      <option value="1">
+                        19-23 anos
+                      </option>
+                      <option value="2">
+                        24-28 anos
+                      </option>
+                      <option value="3">
+                        29-33 anos
+                      </option>
+                      <option value="4">
+                        34-38 anos
+                      </option>
+                      <option value="5">
+                        39-43 anos
+                      </option>
+                      <option value="6">
+                        44-48 anos
+                      </option>
+                      <option value="7">
+                        49-53 anos
+                      </option>
+                      <option value="8">
+                        54-58 anos
+                      </option>
+                      <option value="9">
+                        59+ anos
+                      </option>
+                    </select>
+                    <INPUT TYPE="text" NAME="txSaude" VALUE="0" readonly>
+                  </span>
+                  </p>
+                  <p style="margin: 0;">
+                    Dependente 1:
+                    <select name="ddIdadeDep1" id="ddIdadeDep1" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)" style="width: 70px;">
+                      <option value="1000" selected>
+                        Não
+                      </option>
+                      <option value="0">
+                        0-18 anos
+                      </option>
+                      <option value="1">
+                        19-23 anos
+                      </option>
+                      <option value="2">
+                        24-28 anos
+                      </option>
+                      <option value="3">
+                        29-33 anos
+                      </option>
+                      <option value="4">
+                        34-38 anos
+                      </option>
+                      <option value="5">
+                        39-43 anos
+                      </option>
+                      <option value="6">
+                        44-48 anos
+                      </option>
+                      <option value="7">
+                        49-53 anos
+                      </option>
+                      <option value="8">
+                        54-58 anos
+                      </option>
+                      <option value="9">
+                        59+ anos
+                      </option>
+                    </select>
+                    Dependente 2:
+                    <select name="ddIdadeDep2" id="ddIdadeDep2" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)" style="width: 70px;">
+                      <option value="1000" selected>
+                        Não
+                      </option>
+                      <option value="0">
+                        0-18 anos
+                      </option>
+                      <option value="1">
+                        19-23 anos
+                      </option>
+                      <option value="2">
+                        24-28 anos
+                      </option>
+                      <option value="3">
+                        29-33 anos
+                      </option>
+                      <option value="4">
+                        34-38 anos
+                      </option>
+                      <option value="5">
+                        39-43 anos
+                      </option>
+                      <option value="6">
+                        44-48 anos
+                      </option>
+                      <option value="7">
+                        49-53 anos
+                      </option>
+                      <option value="8">
+                        54-58 anos
+                      </option>
+                      <option value="9">
+                        59+ anos
+                      </option>
+                    </select>
+                    Dependente 3:
+                    <select name="ddIdadeDep3" id="ddIdadeDep3" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)" style="width: 70px;">
+                      <option value="1000" selected>
+                        Não
+                      </option>
+                      <option value="0">
+                        0-18 anos
+                      </option>
+                      <option value="1">
+                        19-23 anos
+                      </option>
+                      <option value="2">
+                        24-28 anos
+                      </option>
+                      <option value="3">
+                        29-33 anos
+                      </option>
+                      <option value="4">
+                        34-38 anos
+                      </option>
+                      <option value="5">
+                        39-43 anos
+                      </option>
+                      <option value="6">
+                        44-48 anos
+                      </option>
+                      <option value="7">
+                        49-53 anos
+                      </option>
+                      <option value="8">
+                        54-58 anos
+                      </option>
+                      <option value="9">
+                        59+ anos
+                      </option>
+                    </select>
+                  </p>
+                  <hr class="hrsaude">
+                  <p>
+                  <span onmouseover="nhpup.popup('O valor do transporte é calculado com base no gasto diário do servidor (arredondado para cima em steps de R$ 0,2). Caso receba auxílio-alimentação, valores referentes a saída para almoço não devem ser considerados. Além disso, o valor sofre um desconto de 6% do vencimento proporcional a 22 dias.');">
+                  <input type="checkbox" name="trans" value="Trans" onClick="calcSalario(this.form)">
+                  Transporte - Gasto Diário: R$
+                  <input type="number" name="gastoTrans" min="2" max="50" step="0.2" value="8"
+                    style="width: 50px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
+                    onKeyUp="validateGD2(this.form);">
+                  <input type="text" style="width:75px;" name="txTrans" id="txTrans" value="0" readonly>
+                  </span>
+                  <span style="padding-left: 10px">
+                  <input type="checkbox" name="alim" value="Alim" onClick="calcSalario(this.form)" checked> Alimentação:
+                  <input style="width:75px;" type="text" name="txAlim" id="txAlim" value="R$ 373,00" readonly>
+                  </span>
+                  <!--<input type="checkbox" name="insa" value="Insa" onClick="calcSalario(this.form)" style="margin-left: 20px;"> --> 
+                  </p>
+                  <p>
+                  <span>Adicional de Risco:</span>
+                  <select name="ddInsa" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                    <option value="0" selected>
+                      Nenhum
+                    </option>
+                    <option value="0.05">
+                      Insal. (5%)
+                    </option>
+                    <option value="0.1">
+                      Insal. (10%)
+                    </option>
+                    <option value="0.2">
+                      Insal. (20%)
+                    </option>
+                    <option value="0.1">
+                      Peric. (10%)
+                    </option>
+                  </select>
+                  <!-- Insalubridade: -->
+                  <input type="text" name="txInsa" value="0" readonly>
+                  </p>
+                  <p>
+                  <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form)">  -->
+                  Auxílio pré-escolar. Nº:
+                  <input type="number" name="numCreche" min="0" max="10" step="1" value="0"
+                    style="width: 30px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
+                    onKeyUp="validateGD2(this.form);">
+                  <INPUT TYPE="text" NAME="txCreche" VALUE="0" readonly>
+                  <span onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. O valor aqui é referente a 1% dos rendimentos, seguindo a regra do Sintfub/UnB.')">
+                    <input type="checkbox" name="sintfub" value="" onClick="calcSalario(this.form)" style="margin-left: 4px;">
+                    Sindicato:
+                  <INPUT TYPE="text" NAME="txsintfub" VALUE="R$ 0,00" readonly>
+                  </span>
+                  </p>
+                  
+              </div>
+              <div id="tab-prev1" class="tab-content1">
+              <p>
+                  <span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013, existe um teto no valor base da previdência. Os servidores anteriores a mudança ficaram no regime antigo. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">
+                  <input type="checkbox" name="novopss" value="" onClick="calcSalario(this.form)" checked> Novo regime da Previdência
+                  </span>
+              </p>
+              <p>
+              <br>
+                  <span onmouseover="nhpup.popup('Selecione Sim e então defina a alíquota ou a participação, caso tenha aderido à Funpresp.');">
+                    Funpresp:</span>
+                  <INPUT TYPE="text" NAME="txFunp" VALUE="R$ 0,00" readonly>
+                   (o tipo de participação é definido automaticamente)
+              </p>
+              <p>
+                Aderido: 
+                Não <input type="radio" name="funp_ad" value="nao" checked onClick="calcSalario(this.form)">
+                Sim <input type="radio" name="funp_ad" value="sim" onClick="calcSalario(this.form)">
+              </p>
+              <p>
+                <input type="radio" id="funp_plano_norm1" name="funp_plano" value="normal" onClick="calcSalario(this.form)" disabled>
+                <span onmouseover="nhpup.popup('Caso tenha aderido à Funpresp na modalidade ativo normal, a contribuição pode ser feita em uma das três alíquotas disponíveis.');">
+                  Ativo normal. Alíquota:
+                </span>
+                <select id = "ddFunp1" name="ddFunp" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                  <option value="0.075">
+                    7,5%
+                  </option>
+                  <option value="0.080">
+                    8%
+                  </option>
+                  <option value="0.085">
+                    8,5%
+                  </option>
+                </select>
+              </p>
+              <p>
+                <input type="radio" id="funp_plano_alt1" name="funp_plano" value="alt" onClick="calcSalario(this.form)" disabled>
+                Ativo alternativo. Participação: R$
+                <input type="number" id="numFunpAlt1" name="numFunpAlt" min="78" max="2000" step="1" value="200" style="width:60px" onClick="calcSalario(this.form)">
+              </p>
+              </div>
+            </div>
+            </div>
+            <div id="divresults1">
+              <div id="divresults1_1">
+                <p>
+                  <span onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
+                    Vencimento:
+                    <INPUT TYPE="text" NAME="txVB" VALUE="0" readonly>
+                  </span>
+                </p>
+                <p>
+                  Bruto:
+                  <INPUT TYPE="text" NAME="txBruto" VALUE="0" readonly>
+                </p>
+                <p>
+                  PSS:
+                  <INPUT TYPE="text" NAME="txInss" VALUE="0" readonly>
+                </p>
+                <p>
+                  IRRF:
+                  <INPUT TYPE="text" NAME="txIrrf" VALUE="0" readonly>
+                </p>
+                <p>
+                  Líquido:
+                  <INPUT TYPE="text" NAME="txResult" VALUE="0" readonly>
+                </p>
+              </div>
+              <div id="divresults1_2">
+                <p onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graudação, especialização, pós-graduação)');">
+                  Incentivo:
+                  <INPUT TYPE="text" NAME="txQualif" VALUE="0" readonly>
+                </p>
+                <p>
+                  URP:
+                  <INPUT TYPE="text" NAME="txURP" VALUE="0" readonly>
+                <p>
+                  Base PSS:
+                  <INPUT TYPE="text" NAME="txbINSS" VALUE="0" readonly>
+                </p>
+                <p>
+                  Base IRRF:
+                  <INPUT TYPE="text" NAME="txbIRRF" VALUE="0" readonly>
+                </p>
+                <p>
+                  Desconto:
+                  <INPUT TYPE="text" NAME="txdesconto" VALUE="0" readonly>
+                </p>
+              </div>
+          </div>
+          </form>
+        </div>
+        <hr>
+        <div id="div_botoes">
+          <p style="margin: auto;">
+            <span style="margin: 0 30px;" onclick="inverterform('baixo')"><img src="img/setabaixo.jpg" style="width: 18px; height: 18px;">Copiar para baixo </span><span style="margin: 0 30px;" onclick="inverterform('cima')"><img src="img/setacima.jpg" style="width: 18px; height: 18px;">Copiar para cima </span><span style="margin: 0 30px;" onClick="inverterform('inverter')"> <img src="img/setainv.jpg" style="width: 36px; height: 18px;">Inveter</span>
+          </p>
+        </div>
+        <hr>
+        <div id="maindiv2">
+          <h2>
+            Simulação 2
+          </h2>
+          <form name="myform2" action="" method="GET">
+            <div id="divdata2">
+              <ul class="tabs-menu2">
+                <li class="current"><a href="#tab-carreira2">Carreira</a></li>
+                <li><a href="#tab-ad2">Adicionais e Auxílios</a></li>
+                <li><a href="#tab-prev2">Previdência</a></li>
+              </ul>
+              <div class="tab">
+                <div id="tab-carreira2" class="tab-content2">
+                  <p>
+                  <span onmouseover="nhpup.popup('Vários valores dependem do período do salário. Esta opção pode não estar 100% apurada para períodos anteriores ao atual.');">
+                    Período:                                        
+                    <select name="ddAno" id="ddAno" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                      <option value="1">
+                        Até 12/2013
+                      </option>
+                      <option value="2">
+                        Entre 01/2014 e 02/2014
+                      </option>
+                      <option value="3">
+                        Entre 03/2014 e 12/2014
+                      </option>
+                      <option value="4">
+                        Entre 01/2015 e 02/2015
+                      </option>
+                      <option value="5">
+                        Entre 03/2015 e 12/2015
+                      </option>
+                      <option value="6" selected>
+                        Entre 01/2016 e 07/2016
+                      </option>
+                      <option value="7">
+                        Entre 08/2016 e 12/2016
+                      </option>
+                      <option value="8">
+                        Após 01/2017
+                      </option>
+                      <option value="9">
+                        2020 (Extrapolado)
+                      </option>
+                      <option value="10">
+                        2025 (Extrapolado)
+                      </option>
+                      <option value="11">
+                        2030 (Extrapolado)
+                      </option>
+                    </select>
+                  </span>
+                  <small>clique <a href="carreira.html#extrap" target="_blank">aqui</a> para detalhes sobre a extrapolação</small>
+                  </p> 
+                <p>
+                  <span onmouseover="nhpup.popup('A classe é definida pela exigência de escolaridade do cargo.');">
+                    Classe:
+                    <select name="ddClasse" id="ddClasse" onClick="updateQuali(this.form, this.form.ddClasse.value);"
+                      onKeyDown="updateQuali(this.form, this.form.ddClasse.value);" onKeyPress="updateQuali(this.form, this.form.ddClasse.value);"
+                      onKeyUp="updateQuali(this.form, this.form.ddClasse.value);">
+                      <option value="1" selected>
+                        A
+                      </option>
+                      <option value="6">
+                        B
+                      </option>
+                      <option value="11">
+                        C
+                      </option>
+                      <option value="17">
+                        D
+                      </option>
+                      <option value="31">
+                        E
+                      </option>
+                    </select>
+                  </span>
+                  <span style="padding-left: 50px;" onmouseover="nhpup.popup('A Progressão por capacitação profissional varia em 4 níveis e pode ser obtida pela realização de cursos.');">
+                    Nível:
+                    <select name="ddProg" id="ddProg" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                      <option value="1" selected>
+                        I
+                      </option>
+                      <option value="2">
+                        II
+                      </option>
+                      <option value="3">
+                        III
+                      </option>
+                      <option value="4">
+                        IV
+                      </option>
+                    </select>
+                  </span>
+                  <span style="padding-left: 50px;" onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
+                    Progressão:                                        
+                    <select name="ddNivel" id="ddNivel" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                      <option value="1" selected>
+                        1
+                      </option>
+                      <option value="2">
+                        2
+                      </option>
+                      <option value="3">
+                        3
+                      </option>
+                      <option value="4">
+                        4
+                      </option>
+                      <option value="5">
+                        5
+                      </option>
+                      <option value="6">
+                        6
+                      </option>
+                      <option value="7">
+                        7
+                      </option>
+                      <option value="8">
+                        8
+                      </option>
+                      <option value="9">
+                        9
+                      </option>
+                      <option value="10">
+                        10
+                      </option>
+                      <option value="11">
+                        11
+                      </option>
+                      <option value="12">
+                        12
+                      </option>
+                      <option value="13">
+                        13
+                      </option>
+                      <option value="14">
+                        14
+                      </option>
+                      <option value="15">
+                        15
+                      </option>
+                      <option value="16">
+                        16
+                      </option>
+                    </select>
+                  </span>
+                  </p>
+                  <p>
+                  <span>
+                    FG:
+                    <select name="ddFG" id="ddFG" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                      <option value="0" selected>
+                        Não
+                      </option>
+                      <option value="1">
+                        FG-1
+                      </option>
+                      <option value="2">
+                        FG-2
+                      </option>
+                      <option value="3">
+                        FG-3
+                      </option>
+                      <option value="4">
+                        FG-4
+                      </option>
+                      <option value="5">
+                        FG-5
+                      </option>
+                      <option value="6">
+                        FG-6
+                      </option>
+                      <option value="7">
+                        FG-7
+                      </option>
+                      <option value="8">
+                        FG-8
+                      </option>
+                      <option value="9">
+                        FG-9
+                      </option>
+                    </select>
+                    <input type="text" NAME="txFG" value="R$ 0,00" readonly>
+                  </span>
+                  <span style="padding-left: 25px;" onmouseover="nhpup.popup('O ocupante de Cargo de Direção pode receber o valor integral como substituto à remuneração ou como adicional, no valor de 60% do valor integral.');">
+                    CD:
+                    <select name="ddCD" id="ddCD" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                      <option value="0" selected>
+                        Não
+                      </option>
+                      <option value="1">
+                        CD-1
+                      </option>
+                      <option value="2">
+                        CD-2
+                      </option>
+                      <option value="3">
+                        CD-3
+                      </option>
+                      <option value="4">
+                        CD-4
+                      </option>
+                    </select>
+                    <input type="radio" name="rdCD" value="0.6" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)" checked>60%
+                    <input type="radio" name="rdCD" value="1" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">100%
+                  <input type="text" NAME="txCD" value="R$ 0,00" readonly>
+                  </span>
+                  </p>
+                  <p>
+                  <span>Carga horária:</span>
+                  <select name="ddCargaH" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                    <option value="1" selected>
+                      40 horas
+                    </option>
+                    <option value="0.75">
+                      30 horas
+                    </option>
+                    <option value="0.5">
+                      20 horas
+                    </option>
+                  </select>
+                  <span style="padding-left: 25px;" onmouseover="nhpup.popup('O Adicional por Tempo de Serviço é calculado como 5% por cada período de 5 anos. Ele foi revogado em 1999, mas se mantém para aqueles que o recebiam na época.')">
+                    Anuênio:</span> 
+                    <input type="number" name="numAnuenio" min="0" max="35" step="1" value="0"
+                    style="width: 35px;" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form);"
+                    onKeyUp="calcSalario(this.form);">
+                    %
+                  </p>
+                  <p>
+                  Qualificação:
+                  <select name="ddQuali" id="ddQuali" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                    <option value="0" selected>
+                      Mínima do Cargo
+                    </option>
+                    <option value="0.1">
+                      Fundamental Completo
+                    </option>
+                    <option value="0.15">
+                      Médio Completo
+                    </option>
+                    <option value="0.2">
+                      Médio Técnico
+                    </option>
+                    <option value="0.25">
+                      Graduação Completa
+                    </option>
+                    <option value="0.30">
+                      Especialização
+                    </option>
+                    <option value="0.52">
+                      Mestrado
+                    </option>
+                    <option value="0.75">
+                      Doutorado
+                    </option>
+                  </select>
+                  <span onmouseover="nhpup.popup('O valor do incentivo à qualificação depende se os estudos foram em área diretamente relacionada ao cargo ou não.');">
+                  <input type="radio" name="areaquali" value="qualid" onClick="calcSalario(this.form)" checked>
+                  Direta 
+                  <input type="radio" name="areaquali" value="qualii" onClick="calcSalario(this.form)">
+                  Indireta
+                  </span>
+                  </p>
+                  <p>
+                  <span onmouseover="nhpup.popup('A URP é um adicional recebido em algumas IFES. É um assunto polêmico que está prestes a ser julgado no STF, com tendência de que seja removida dos servidores. Marque esta opção caso você receba URP. Veja o menu Carreira para mais informações.');">
+                  <input type="checkbox" name="removeurp" value="removeURP" onClick="calcSalario(this.form)">
+                  URP
+                  </span>
+                  <span style="padding-left: 25px;" onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Nota: Apenas os valores de 2015 para 40 horas semanais estão configurados apropriadamente.');">
+                  <input type="checkbox" name="medico" value="medico" onClick="calcSalario(this.form)">
+                  Médico/Veterinário                                        
+                  </span>
+                  <span style="padding-left: 25px;" onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
+                    Nº de dependentes IR:
+                    <input type="number" name="numDepIRRF" min="0" max="20" step="1" value="0"
+                    style="width: 35px;" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form);"
+                    onKeyUp="calcSalario(this.form);">
+                    <INPUT TYPE="text" NAME="txDepIRRF" VALUE="R$ 0,00" readonly>
+                  </span>
+                  </p>
+                  </div>
+                  <div id="tab-ad2" class="tab-content2">
+                                    <p>
+                  <span onmouseover="nhpup.popup('O reembolso por contrato de Plano de Saúde particular segue uma tabela definida pelo Governo Federal e depende do salário bruto e da idade do servidor.');">
+                    <input type="checkbox" name="saude" value="Saude" onClick="calcSalario(this.form)">
+                    Saúde Suplementar - Idade do servidor:                                        
+                    <select name="ddIdade" id="ddIdade" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)" style="width: 70px;">
+                      <option value="0">
+                        0-18 anos
+                      </option>
+                      <option value="1">
+                        19-23 anos
+                      </option>
+                      <option value="2">
+                        24-28 anos
+                      </option>
+                      <option value="3">
+                        29-33 anos
+                      </option>
+                      <option value="4">
+                        34-38 anos
+                      </option>
+                      <option value="5">
+                        39-43 anos
+                      </option>
+                      <option value="6">
+                        44-48 anos
+                      </option>
+                      <option value="7">
+                        49-53 anos
+                      </option>
+                      <option value="8">
+                        54-58 anos
+                      </option>
+                      <option value="9">
+                        59+ anos
+                      </option>
+                    </select>
+                    <INPUT TYPE="text" NAME="txSaude" VALUE="0" readonly>
+                  </span>
+                  </p>
+                  <p style="margin: 0;">
+                    Dependente 1:
+                    <select name="ddIdadeDep1" id="ddIdadeDep1" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)" style="width: 70px;">
+                      <option value="1000" selected>
+                        Não
+                      </option>
+                      <option value="0">
+                        0-18 anos
+                      </option>
+                      <option value="1">
+                        19-23 anos
+                      </option>
+                      <option value="2">
+                        24-28 anos
+                      </option>
+                      <option value="3">
+                        29-33 anos
+                      </option>
+                      <option value="4">
+                        34-38 anos
+                      </option>
+                      <option value="5">
+                        39-43 anos
+                      </option>
+                      <option value="6">
+                        44-48 anos
+                      </option>
+                      <option value="7">
+                        49-53 anos
+                      </option>
+                      <option value="8">
+                        54-58 anos
+                      </option>
+                      <option value="9">
+                        59+ anos
+                      </option>
+                    </select>
+                    Dependente 2:
+                    <select name="ddIdadeDep2" id="ddIdadeDep2" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)" style="width: 70px;">
+                      <option value="1000" selected>
+                        Não
+                      </option>
+                      <option value="0">
+                        0-18 anos
+                      </option>
+                      <option value="1">
+                        19-23 anos
+                      </option>
+                      <option value="2">
+                        24-28 anos
+                      </option>
+                      <option value="3">
+                        29-33 anos
+                      </option>
+                      <option value="4">
+                        34-38 anos
+                      </option>
+                      <option value="5">
+                        39-43 anos
+                      </option>
+                      <option value="6">
+                        44-48 anos
+                      </option>
+                      <option value="7">
+                        49-53 anos
+                      </option>
+                      <option value="8">
+                        54-58 anos
+                      </option>
+                      <option value="9">
+                        59+ anos
+                      </option>
+                    </select>
+                    Dependente 3:
+                    <select name="ddIdadeDep3" id="ddIdadeDep3" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
+                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)" style="width: 70px;">
+                      <option value="1000" selected>
+                        Não
+                      </option>
+                      <option value="0">
+                        0-18 anos
+                      </option>
+                      <option value="1">
+                        19-23 anos
+                      </option>
+                      <option value="2">
+                        24-28 anos
+                      </option>
+                      <option value="3">
+                        29-33 anos
+                      </option>
+                      <option value="4">
+                        34-38 anos
+                      </option>
+                      <option value="5">
+                        39-43 anos
+                      </option>
+                      <option value="6">
+                        44-48 anos
+                      </option>
+                      <option value="7">
+                        49-53 anos
+                      </option>
+                      <option value="8">
+                        54-58 anos
+                      </option>
+                      <option value="9">
+                        59+ anos
+                      </option>
+                    </select>
+                  </p>
+                  <hr class="hrsaude">
+                  <p>
+                  <span onmouseover="nhpup.popup('O valor do transporte é calculado com base no gasto diário do servidor (arredondado para cima em steps de R$ 0,2). Caso receba auxílio-alimentação, valores referentes a saída para almoço não devem ser considerados. Além disso, o valor sofre um desconto de 6% do vencimento proporcional a 22 dias.');">
+                  <input type="checkbox" name="trans" value="Trans" onClick="calcSalario(this.form)">
+                  Transporte - Gasto Diário: R$
+                  <input type="number" name="gastoTrans" min="2" max="50" step="0.2" value="8"
+                    style="width: 50px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
+                    onKeyUp="validateGD2(this.form);">
+                  <input type="text" style="width:75px;" name="txTrans" id="txTrans" value="0" readonly>
+                  </span>
+                  <span style="padding-left: 10px">
+                  <input type="checkbox" name="alim" value="Alim" onClick="calcSalario(this.form)" checked> Alimentação:
+                  <input type="text" style="width:75px;" name="txAlim" id="txAlim" value="R$ 373,00" readonly>
+                  </span>
+                  <!--<input type="checkbox" name="insa" value="Insa" onClick="calcSalario(this.form)" style="margin-left: 20px;"> --> 
+                  </p>
+                  <p>
+                  <span>Adicional de Risco:</span>
+                  <select name="ddInsa" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                    <option value="0" selected>
+                      Nenhum
+                    </option>
+                    <option value="0.05">
+                      Insal. (5%)
+                    </option>
+                    <option value="0.1">
+                      Insal. (10%)
+                    </option>
+                    <option value="0.2">
+                      Insal. (20%)
+                    </option>
+                    <option value="0.1">
+                      Peric. (10%)
+                    </option>
+                  </select>
+                  <!-- Insalubridade: -->
+                  <INPUT TYPE="text" NAME="txInsa" VALUE="0" readonly>
+                  </p>
+                  <p>
+                  <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form)">  -->
+                  Auxílio pré-escolar. Nº:
+                  <input type="number" name="numCreche" min="0" max="10" step="1" value="0"
+                    style="width: 30px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
+                    onKeyUp="validateGD2(this.form);">
+                  <INPUT TYPE="text" NAME="txCreche" VALUE="0" readonly>
+                  <span onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. O valor aqui é referente a 1% dos rendimentos, seguindo a regra do Sintfub/UnB.')">
+                    <input type="checkbox" name="sintfub" value="" onClick="calcSalario(this.form)" style="margin-left: 4px;">
+                    Sindicato:
+                  <INPUT TYPE="text" NAME="txsintfub" VALUE="R$ 0,00" readonly>
+                  </span>
+                  </p>
+              </div>
+              <div id="tab-prev2" class="tab-content2">
+              <p>
+                  <span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013, existe um teto no valor base da previdência. Os servidores anteriores a mudança ficaram no regime antigo. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">
+                  <input type="checkbox" name="novopss" value="" onClick="calcSalario(this.form)" checked> Novo regime da Previdência
+                  </span>
+              </p>
+              <p>
+              <br>
+                  <span onmouseover="nhpup.popup('Selecione Sim e então defina a alíquota ou a participação, caso tenha aderido à Funpresp.');">
+                    Funpresp:</span>
+                  <INPUT TYPE="text" NAME="txFunp" VALUE="R$ 0,00" readonly>
+                   (o tipo de participação é definido automaticamente)
+              </p>
+              <p>
+                Aderido: 
+                Não <input type="radio" name="funp_ad" value="nao" checked onClick="calcSalario(this.form)">
+                Sim <input type="radio" name="funp_ad" value="sim" onClick="calcSalario(this.form)">
+              </p>
+              <p>
+                <input type="radio" id="funp_plano_norm2" name="funp_plano" value="normal" onClick="calcSalario(this.form)" disabled>
+                <span onmouseover="nhpup.popup('Caso tenha aderido à Funpresp na modalidade ativo normal, a contribuição pode ser feita em uma das três alíquotas disponíveis.');">
+                  Ativo normal. Alíquota:
+                </span>
+                <select id="ddFunp2" name="ddFunp" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                  <option value="0.075">
+                    7,5%
+                  </option>
+                  <option value="0.080">
+                    8%
+                  </option>
+                  <option value="0.085">
+                    8,5%
+                  </option>
+                </select>
+              </p>
+              <p>
+                <input type="radio" id="funp_plano_alt2" name="funp_plano" value="alt" onClick="calcSalario(this.form)" disabled>
+                Ativo alternativo. Participação: R$
+                <input type="number"  id="numFunpAlt2" name="numFunpAlt" min="78" max="2000" step="1" value="200" style="width:60px" onClick="calcSalario(this.form)">
+              </p>
+              </div>
+            </div>
+            </div>
+            <div id="divresults2">
+              <div id="divresults2_1">
+                <p>
+                  <span onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
+                    Vencimento:
+                    <INPUT TYPE="text" NAME="txVB" VALUE="0" readonly>
+                  </span>
+                </p>
+                <p>
+                  Bruto:
+                  <INPUT TYPE="text" NAME="txBruto" VALUE="0" readonly>
+                </p>
+                <p>
+                  PSS:
+                  <INPUT TYPE="text" NAME="txInss" VALUE="0" readonly>
+                </p>
+                <p>
+                  IRRF:
+                  <INPUT TYPE="text" NAME="txIrrf" VALUE="0" readonly>
+                </p>
+                <p>
+                  Líquido:
+                  <INPUT TYPE="text" NAME="txResult" VALUE="0" readonly>
+                </p>
+              </div>
+              <div id="divresults2_2">
+                <p onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graudação, especialização, pós-graduação)');">
+                  Incentivo:
+                  <INPUT TYPE="text" NAME="txQualif" VALUE="0" readonly>
+                </p>
+                <p>
+                  URP:
+                  <INPUT TYPE="text" NAME="txURP" VALUE="0" readonly>
+                <p>
+                  Base PSS:
+                  <INPUT TYPE="text" NAME="txbINSS" VALUE="0" readonly>
+                </p>
+                <p>
+                  Base IRRF:
+                  <INPUT TYPE="text" NAME="txbIRRF" VALUE="0" readonly>
+                </p>
+                <p>
+                  Desconto:
+                  <INPUT TYPE="text" NAME="txdesconto" VALUE="0" readonly>
+                </p>
+              </div>
+          </div>
+          </form>
+        </div>
+        <hr>
+        <div id="maindiv3">
+          <h2>
+            Comparação
+          </h2>
+          Diferença no líquido:
+          <input type="text" name="diffLiqAbs" id="diffLiqAbs" value="0" readonly> O Líquido 2 equivale a
+          <input type="text" name="diffLiqPor" id="diffLiqPor" value="0" readonly> do Líquido 1.
+          <br>
+          <br>
+        </div>
+        <div id="rodape">
+          <b>
+          Atenção
+          </b>: Os valores calculados aqui não podem ser considerados 100% corretos devido a possíveis erros nos cálculos
+          <br> e mudanças nas fórmulas e nos valores e alíquotas de impostos e gratificações.
+          <br> Não me responsabilizo por eventuais diferenças entre a simulação e os valores reais. 
+          <br> Clique <a href="sobre.html">aqui</a> para mais detalhes.
+          <br>
+          <br> Desenvolvido por
+          <a href="http://www.alanmol.com.br" target="_blank">Alan Mól</a> 2013-2016
+          <br>
+        </div>
+        <script>
+          var _gaq = [
+              ['_setAccount', 'UA-43605146-1'],
+              ['_trackPageview']
+          ];
+          (function(d, t) {
+              var g = d.createElement(t),
+                  s = d.getElementsByTagName(t)[0];
+              g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+              s.parentNode.insertBefore(g, s)
+          }(document, 'script'));
+        </script>
+      </body>
+    </html>
