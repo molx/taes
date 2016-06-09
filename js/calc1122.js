@@ -191,23 +191,23 @@ function valorSaude(bruto, ftidade, periodo) {
 }
 
 function valorCreche(bruto, periodo, n) {
-    if(periodo < 6) {
-        var desc = 0;
-        if(bruto < 6200.8) {
-            desc = 0.05;
-        } else if(bruto < 12401.6) {
-            desc = 0.1;
-        } else if(bruto < 18602.4) {
-            desc = 0.15;
-        } else if(bruto < 24803.2) {
-            desc = 0.2;
-        } else {
-            desc = 0.25;
-        }
-        return 95 * (1 - desc) * n;
+    var teto = 95;
+    if(periodo >= 6) {
+      teto = 321;
+    } 
+    var desc = 0;
+    if (bruto < 6200.8) {
+        desc = 0.05;
+    } else if(bruto < 12401.6) {
+        desc = 0.1;
+    } else if(bruto < 18602.4) {
+        desc = 0.15;
+    } else if(bruto < 24803.2) {
+        desc = 0.2;
     } else {
-        return 321.00 * n;
+        desc = 0.25;
     }
+    return teto * (1 - desc) * n;
 }
 
 function valorTransporte(vencimento, gasto) {
@@ -407,7 +407,7 @@ function calcSalario(form) {
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value,
         periodo);
     var baseirrf = vencimento + urp + qualificacao + ftinsa *
-        vencimento + fungrat + creche - aliqinss - aliqfunp -
+        vencimento + fungrat - aliqinss - aliqfunp -
         reducaoDepsIRRF;
     var aliqirrf = valorIRRF(baseirrf, periodo);
 
@@ -433,7 +433,7 @@ function calcSalario(form) {
     form.txTrans.value = formatValor(Math.round(transporte * 100) /
         100);
     form.txAlim.value = formatValor(alimentacao);
-    form.txCreche.value = formatValor(creche);
+    form.txCreche.value = formatValor(Math.round(creche * 100) / 100);
     form.txURP.value = formatValor(Math.round(urp * 100) / 100);
     form.txbIRRF.value = formatValor(Math.round(baseirrf * 100) / 100);
     form.txbINSS.value = formatValor(Math.round(baseinss * 100) / 100);
