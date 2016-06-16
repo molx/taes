@@ -268,45 +268,39 @@ function valorCD(CD, periodo) {
 
 function calcSalario(form) {
     var periodo = parseInt(form.ddAno.value, 10);
-    if(form.medico.checked) {
+    if(periodo == 1) {
+        ftstep = 1.036;
+        base = 1086.32;
+    } else if(periodo == 2) {
+        ftstep = 1.037;
+        base = 1086.32;
+    } else if(periodo == 3) {
+        ftstep = 1.037;
+        base = 1140.64;
+    } else if(periodo == 4) {
         ftstep = 1.038;
-        if(periodo <= 4) {
-            base = 2281.27;
-        } else {
-            base = 2395.33;
-        }
-    } else {
-        if(periodo == 1) {
-            ftstep = 1.036;
-            base = 1086.32;
-        } else if(periodo == 2) {
-            ftstep = 1.037;
-            base = 1086.32;
-        } else if(periodo == 3) {
-            ftstep = 1.037;
-            base = 1140.64;
-        } else if(periodo == 4) {
-            ftstep = 1.038;
-            base = 1140.64;
-        } else if(periodo == 5 || periodo == 6) {
-            ftstep = 1.038;
-            base = 1197.67;
-        } else if(periodo == 7) {
-            ftstep = 1.038;
-            base = 1263.54;
-        } else if(periodo == 8) {
-            ftstep = 1.039;
-            base = 1326.72;
-        } else if(periodo == 9) {
-            ftstep = 1.0405;
-            base = 1535.84;
-        } else if(periodo == 10) {
-            ftstep = 1.043;
-            base = 1960.17;
-        } else if(periodo == 11) {
-            ftstep = 1.0455;
-            base = 2501.73;
-        }
+        base = 1140.64;
+    } else if(periodo == 5 || periodo == 6) {
+        ftstep = 1.038;
+        base = 1197.67;
+    } else if(periodo == 7) {
+        ftstep = 1.038;
+        base = 1263.54;
+    } else if(periodo == 8) {
+        ftstep = 1.039;
+        base = 1326.72;
+    } else if(periodo == 9) {
+        ftstep = 1.0405;
+        base = 1535.84;
+    } else if(periodo == 10) {
+        ftstep = 1.043;
+        base = 1960.17;
+    } else if(periodo == 11) {
+        ftstep = 1.0455;
+        base = 2501.73;
+    }
+    if(form.medico.checked) {
+      base = base * 2;
     }
     var ftvb = parseFloat(form.ddClasse.value) + parseFloat(form.ddNivel
         .value) + parseFloat(form.ddProg.value) - 3;

@@ -74,7 +74,7 @@
         <h3 id="vb">Vencimento Básico</h3>
         <p class="pcarreira">Em primeiro lugar, deve-se observar qual é o seu vencimento básico, de acordo com a matriz do PCCTAE (Plano de Carreira dos Cargos Técnico-Administrativos em Educação), que é regido pela <a href="http://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11091.htm">Lei nº 11.091/2005</a>.
             Veja a matriz em vigor entre 03/2015 e 08/2016, para 40 horas semanais (clique para ampliar):</p>
-        <a href="img/MatrizPCCTAEFinal.png" target="_blank"><img src="img/MatrizPCCTAEFinal.png" height="25%" width="25%" style="float:left;padding-right:15px;"></a>
+        <a href="img/MatrizAgo2016.png" target="_blank"><img src="img/MatrizAgo2016.png" height="25%" width="25%" style="float:left;padding-right:15px;"></a>
         <p class="pcarreira">É importante ressaltar que essa é a matriz referente aos meses de Janeiro e Fevereiro de 2015. As outras matrizes, mais antigas e a final, estão disponíveis no link da lei acima. Outro ponto importante, pode ser que haja uma diferença nos centavos dos valores. Isto porque montei a tabela utilizando a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro. 
             Para se localizar na matriz, é necessário saber três informações:
             <ol style="list-style-position:inside;">
@@ -108,11 +108,11 @@
         
         <p id="saude" class="pcarreira">O auxílio ressarcimento é um benefício indenizatório aos sevidores que possuem plano de <strong>saúde</strong> particular. O valor deste auxílio é baseado na <a href="PortariaSaude.pdf" target="_blank">Portaria nº 625, de 21 de dezembro de 2012</a>, do Ministério do Planejamento, Orçamento e Gestão, e nenhum descondo incide sobre ele. O valor depende da remuneração bruto do servidor e de sua idade, como mostra a tabela abaixo:</p>
         
-        <a href="img/TabelaSaude.png" target="_blank"><img src="img/TabelaSaude.png" class="centerImg"></a>        
+        <a href="img/TabelaSaudeNova.png" target="_blank"><img src="img/TabelaSaudeNova.png" class="centerImg" width="757" height="357"></a>        
         
         <p id="insa" class="pcarreira">O <strong>adicional de insalubridade</strong> é pago aos servidores que trabalham em ambientes insalubres ou manipulam produtos periogosos. Este adicional pode ser de 5%, 10% ou 20%, de acordo com o grau de insalubridade (mínimo, médio e máximo), segundo a <a href="https://www.planalto.gov.br/ccivil_03/Leis/L8270.htm">Lei 8.270/1991</a>. As especificações de cada grau ficam escondidas em um documento que não lembro mais qual é pra poder colocar aqui. :) O imposto de renda retido na fonte incide sobre a insalubridade, mas a contribuição ao PSS não.</p>
         
-        <p id="pre" class="pcarreira">O <strong>auxílio pré-escolar (creche)</strong> é pago aos servidores com filhos com idade de até seis anos. O cálculo é realizado baseado no valor-teto definido para cada UF, sendo R$ 95,00 para o DF. De acordo com a faixa de reumneração do servidor, uma porcentagem deste teto é subtraída (veja a <a href="img/TabelaCreche.png" target="_blank">tabela</a>). No caso da UnB, a maioria dos servidores fica dentro da primeira categoria, logo, tem direito a um auxílio no valor de R$ 90,25. O IRRF também incide neste auxílio.</p>
+        <p id="pre" class="pcarreira">O <strong>auxílio pré-escolar (creche)</strong> é pago aos servidores com filhos com idade de até seis anos. O cálculo é realizado baseado no valor-teto, sendo R$ 321,00 desde o início de 2016. De acordo com a faixa de reumneração do servidor, uma porcentagem deste teto é subtraída (veja a <a href="img/TabelaCreche.png" target="_blank">tabela</a>). O IRRF também não incide neste auxílio, ou seja, o valor obtido após o cálculo é recebido integralmente, assim como o os auxílios alimentação e transporte.</p>
         
         <p id="trans"class="pcarreira">O <strong>auxílio transporte</strong> é pago a todos que declararem que utilizam transporte público para ir ao local de trabalho. Seu cálculo é um pouco complicado. Primeiro, deve-se informar o gasto diário com o transporte, sendo que eles valor deve ser múltiplo de 20 centavos. Este valor é multiplicado por 22 (número de dias úteis em um mês "padrão"). Deste valor, subtraise uma alíquota que depende do vencimento básico. Esta alíquota é calculada como 6% do salário referente a 22 dias de trabalho. A fórmula matemática pode ser escrita assim:</p>
         
