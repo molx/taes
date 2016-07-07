@@ -316,8 +316,7 @@ function calcSalario(form) {
     }
     
     var anuenio = (form.numAnuenio.value / 100) * vencimento
-        //var baseurp = Math.round(base * (Math.pow(ftstep, parseFloat(form.ddClasse.value)-1)) * ftcarga * 100) / 100;
-        // baseurp no meu contracheque de jan/15 veio sem a progressÃ£o, mas o VB veio com. Se for a regra, usar comentado acima, senÃ£o, apagar baseurp e substituir por vencimento na formula da urp abaixo.
+ 
     var alimentacao = 0;
     if(periodo < 6) {
         alimentacao = (form.alim.checked) ? 373 : 0;
@@ -400,9 +399,11 @@ function calcSalario(form) {
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value,
         periodo);
-    var baseirrf = vencimento + urp + qualificacao + ftinsa *
-        vencimento + fungrat - aliqinss - aliqfunp -
-        reducaoDepsIRRF;
+        
+        //Eu chutei que CD 60% nao incidia IR, mas pelo FB falaram que incide.
+        //Caso não incida basta remover de baseirrf. Quando é 100%, cargodir = 0
+    var baseirrf = vencimento + urp + qualificacao + ftinsa*vencimento + 
+        fungrat + cargodir - aliqinss - aliqfunp - reducaoDepsIRRF;
     var aliqirrf = valorIRRF(baseirrf, periodo);
 
     var salario = Math.round((bruto - aliqirrf - aliqinss - aliqfunp -
