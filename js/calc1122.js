@@ -233,14 +233,34 @@ function valorFG(FG, periodo) {
         130.63, 83.31, 61.61, 50.00);
     var FG2015 = Array(0, 804.49, 541.23, 438.79, 223.35, 181.23,
         132.89, 84.75, 62.69, 50.86);
+    var FG2016 = Array(0, 848.74, 571.00, 462.92, 235.63, 191.20,
+        140.20, 89.41, 66.14, 53.66);
+    var FG2017 = Array(0, 891.17, 599.55, 486.07, 247.42, 200.76,
+        147.21, 93.88, 69.44, 56.34);
+    var FG2018 = Array(0, 933.50, 628.03, 509.16, 259.17, 210.29,
+        154.20, 98.34, 72.74, 59.02);
+    var FG2019 = Array(0, 975.51, 656.29, 532.07, 270.83, 219.76,
+        161.14, 101.77, 76.02, 61.67);
+    
     var valor = 0;
     if(periodo == 1) {
-        valor = FG2013[FG];
+      valor = FG2013[FG];
     } else if(periodo <= 2) {
-        valor = FG2014[FG];
-    } else {
-        valor = FG2015[FG];
-    }
+      valor = FG2014[FG];
+    } else if(periodo <= 6) {
+      //até 07/2016
+      valor = FG2015[FG];
+    } else if(periodo == 7) {
+      //até 12/2016
+      valor = FG2016[FG];
+    } else if(periodo == 8) {
+      //até 12/2017
+      valor = FG2017[FG];
+    } else if(periodo <= 9) {
+      //a partir de 2018
+      //perido 2019 nao implementado
+      valor = FG2018[FG];
+    }  
     return valor;
 }
 
@@ -249,6 +269,10 @@ function valorCD(CD, periodo) {
   var CD2013 = Array(0, 9575.95, 8004.90, 9284.22, 4563.53);
   var CD2014 = Array(0, 10315.37, 8623.02, 6769.47, 4915.92);
   var CD2015 = Array(0, 11111.90, 9288.86, 7292.19, 5295.51);
+  var CD2016 = Array(0, 11723.05, 9799.75, 7693.26, 5586.77);
+  var CD2017 = Array(0, 12309.21, 10289.74, 8077.92, 5866.10);
+  var CD2018 = Array(0, 12893.89, 10778.5, 8461.62, 6144.74);
+  var CD2019 = Array(0, 13474.12, 11263.53, 8842.29, 6421.26);
   var valor = 0;
   if(periodo == 1) { //Placeholder para atualizações futuras, não está retroativo
     // até 2013
@@ -256,12 +280,19 @@ function valorCD(CD, periodo) {
   } else if(periodo <= 3) {
     //até 2014
     valor = CD2014[CD]
-  } else if(periodo <= 5) {
-    //até 2015
+  } else if(periodo <= 6) {
+    //até 08/2016
     valor = CD2015[CD]
+  } else if(periodo == 7) {
+    //até 12/2016
+    valor = CD2016[CD]
+  } else if(periodo == 8) {
+    //até 12/2017
+    valor = CD2017[CD]
   } else {
-    //a partir de 2016 == 2015
-    valor = CD2015[CD]
+    //A partir de 2018
+    valor = CD2018[CD]
+    //Tabelas de 2019 inserida mas sem o periodo ainda
   }
   return valor;
 }
