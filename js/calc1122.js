@@ -336,18 +336,22 @@ function calcSalario(form) {
     var remuneracao = vencimento + urp + qualificacao + Math.floor(
         ftinsa * vencimento * 100) / 100 + anuenio;
     var sintfub = (form.sintfub.checked) ? remuneracao * 0.01 : 0;
-    var saude = (form.saude.checked) ? valorSaude(remuneracao,
-            parseInt(form.ddIdade.value, 10), periodo) +
-        valorSaude(remuneracao, parseInt(form.ddIdadeDep1.value, 10),
-            periodo) +
-        valorSaude(remuneracao, parseInt(form.ddIdadeDep2.value, 10),
-            periodo) +
-        valorSaude(remuneracao, parseInt(form.ddIdadeDep3.value, 10),
-            periodo) :
-        0;
-    var creche = valorCreche(remuneracao, periodo, form.numCreche.value);
+    
     var fungrat = valorFG(parseInt(form.ddFG.value, 10), periodo);
     var cargodir = (form.rdCD[0].checked) ? valorCD(form.ddCD.value, periodo)*0.6 : 0;
+    
+    var basesaude = remuneracao + fungrat + cargodir;
+    var saude = (form.saude.checked) ? valorSaude(basesaude,
+            parseInt(form.ddIdade.value, 10), periodo) +
+        valorSaude(basesaude, parseInt(form.ddIdadeDep1.value, 10),
+            periodo) +
+        valorSaude(basesaude, parseInt(form.ddIdadeDep2.value, 10),
+            periodo) +
+        valorSaude(basesaude, parseInt(form.ddIdadeDep3.value, 10),
+            periodo) :
+        0;
+        
+    var creche = valorCreche(remuneracao, periodo, form.numCreche.value);
     var bruto = remuneracao + saude + alimentacao + transporte +
         creche + fungrat + cargodir;
     var baseinss = vencimento + urp + qualificacao;
