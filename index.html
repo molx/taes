@@ -90,7 +90,7 @@
             <div class="fb-like" data-href="http://www.facebook.com/SalarioTAE/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false">
             </div>
               <div id="cbajuda">
-                <input type="checkbox" name="ajuda" id="checkajuda" value="Ajuda" checked> Mostrar ajuda
+                <input type="checkbox" name="ajuda" id="checkajuda" value="Ajuda"> Mostrar ajuda
               </div>
           </div>
           <h2>
@@ -418,7 +418,7 @@
                         59+ anos
                       </option>
                     </select>
-                    <INPUT TYPE="text" NAME="txSaude" VALUE="0" readonly>
+                    <INPUT TYPE="text" NAME="txSaude" VALUE="R$ 0,00" readonly>
                   </span>
                   </p>
                   <p style="margin: 0;">
@@ -542,7 +542,7 @@
                   <input type="number" name="gastoTrans" min="2" max="99" step="0.2" value="8"
                     style="width: 50px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
                     onKeyUp="validateGD2(this.form);">
-                  <input type="text" style="width:75px;" name="txTrans" id="txTrans" value="0" readonly>
+                  <input type="text" style="width:75px;" name="txTrans" id="txTrans" value="R$ 0,00" readonly>
                   </span>
                   <span style="padding-left: 10px">
                   <input type="checkbox" name="alim" value="Alim" onClick="calcSalario(this.form)" checked> Alimentação:
@@ -570,7 +570,12 @@
                     </option>
                   </select>
                   <!-- Insalubridade: -->
-                  <input type="text" name="txInsa" value="0" readonly>
+                  <input type="text" name="txInsa" value="R$ 0,00" readonly>
+                  <span onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. O valor aqui é referente a 1% dos rendimentos, seguindo a regra do Sintfub/UnB.')">
+                    <input type="checkbox" name="sintfub" value="" onClick="calcSalario(this.form)" style="margin-left: 4px;">
+                    Sindicato:
+                  <INPUT TYPE="text" NAME="txsintfub" VALUE="R$ 0,00" readonly>
+                  </span>
                   </p>
                   <p>
                   <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form)">  -->
@@ -578,14 +583,14 @@
                   <input type="number" name="numCreche" min="0" max="10" step="1" value="0"
                     style="width: 30px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
                     onKeyUp="validateGD2(this.form);">
-                  <INPUT TYPE="text" NAME="txCreche" VALUE="0" readonly>
-                  <span onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. O valor aqui é referente a 1% dos rendimentos, seguindo a regra do Sintfub/UnB.')">
-                    <input type="checkbox" name="sintfub" value="" onClick="calcSalario(this.form)" style="margin-left: 4px;">
-                    Sindicato:
-                  <INPUT TYPE="text" NAME="txsintfub" VALUE="R$ 0,00" readonly>
+                  <INPUT TYPE="text" NAME="txCreche" VALUE="R$ 0,00" readonly>
+                  <span>Noturno (h/mês):
+                    <input type="number" name="noturno" min="0" max="240" step="1" value="0"
+                      style="width: 48px;" onClick="calcSalario(this.form)" 
+                      onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);">
+                  <INPUT TYPE="text" NAME="txNoturno" VALUE="R$ 0,00" readonly>
                   </span>
                   </p>
-                  
               </div>
               <div id="tab-prev1" class="tab-content1">
               <p>
@@ -1011,7 +1016,7 @@
                         59+ anos
                       </option>
                     </select>
-                    <INPUT TYPE="text" NAME="txSaude" VALUE="0" readonly>
+                    <INPUT TYPE="text" NAME="txSaude" VALUE="R$ 0,00" readonly>
                   </span>
                   </p>
                   <p style="margin: 0;">
@@ -1135,7 +1140,7 @@
                   <input type="number" name="gastoTrans" min="2" max="99" step="0.2" value="8"
                     style="width: 50px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
                     onKeyUp="validateGD2(this.form);">
-                  <input type="text" style="width:75px;" name="txTrans" id="txTrans" value="0" readonly>
+                  <input type="text" style="width:75px;" name="txTrans" id="txTrans" value="R$ 0,00" readonly>
                   </span>
                   <span style="padding-left: 10px">
                   <input type="checkbox" name="alim" value="Alim" onClick="calcSalario(this.form)" checked> Alimentação:
@@ -1163,7 +1168,12 @@
                     </option>
                   </select>
                   <!-- Insalubridade: -->
-                  <INPUT TYPE="text" NAME="txInsa" VALUE="0" readonly>
+                  <INPUT TYPE="text" NAME="txInsa" VALUE="R$ 0,00" readonly>
+                    <span onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. O valor aqui é referente a 1% dos rendimentos, seguindo a regra do Sintfub/UnB.')">
+                      <input type="checkbox" name="sintfub" value="" onClick="calcSalario(this.form)" style="margin-left: 4px;">
+                      Sindicato:
+                    <INPUT TYPE="text" NAME="txsintfub" VALUE="R$ 0,00" readonly>
+                    </span>
                   </p>
                   <p>
                   <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form)">  -->
@@ -1171,11 +1181,12 @@
                   <input type="number" name="numCreche" min="0" max="10" step="1" value="0"
                     style="width: 30px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
                     onKeyUp="validateGD2(this.form);">
-                  <INPUT TYPE="text" NAME="txCreche" VALUE="0" readonly>
-                  <span onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. O valor aqui é referente a 1% dos rendimentos, seguindo a regra do Sintfub/UnB.')">
-                    <input type="checkbox" name="sintfub" value="" onClick="calcSalario(this.form)" style="margin-left: 4px;">
-                    Sindicato:
-                  <INPUT TYPE="text" NAME="txsintfub" VALUE="R$ 0,00" readonly>
+                  <INPUT TYPE="text" NAME="txCreche" VALUE="R$ 0,00" readonly>
+                  <span>Noturno (h/mês):
+                    <input type="number" name="noturno" min="0" max="240" step="1" value="0"
+                      style="width: 48px;" onClick="calcSalario(this.form)" 
+                      onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);">
+                  <INPUT TYPE="text" NAME="txNoturno" VALUE="R$ 0,00" readonly>
                   </span>
                   </p>
               </div>
