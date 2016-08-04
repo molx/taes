@@ -357,6 +357,7 @@ function calcSalario(form) {
     if(ftcarga == 0.5) {
         alimentacao = alimentacao / 2;
     }
+    
     var transporte = (form.trans.checked) ? valorTransporte(
         vencimento, form.gastoTrans.value) : 0;
     var ftinsa = form.ddInsa.value;
@@ -367,6 +368,10 @@ function calcSalario(form) {
     var remuneracao = vencimento + urp + qualificacao + Math.floor(
         ftinsa * vencimento * 100) / 100 + anuenio;
     var sintfub = (form.sintfub.checked) ? remuneracao * 0.01 : 0;
+    
+    var noturno = (remuneracao/(30*8*ftcarga))*(form.noturno.value*(60/52.5))*0.25;
+    //http://progep.sites.ufms.br/coordenadorias/administracao-de-pessoal/divisao-de-pagamento/adicional-noturno/
+    //http://www.progep.ufu.br/procedimento/adicional-noturno
     
     var fungrat = valorFG(parseInt(form.ddFG.value, 10), periodo);
     var cargodir = (form.rdCD[0].checked) ? valorCD(form.ddCD.value, periodo)*0.6 : 0;
@@ -384,7 +389,7 @@ function calcSalario(form) {
         
     var creche = valorCreche(remuneracao, periodo, form.numCreche.value);
     var bruto = remuneracao + saude + alimentacao + transporte +
-        creche + fungrat + cargodir;
+        creche + fungrat + cargodir + noturno;
     var baseinss = vencimento + urp + qualificacao;
     var tetoinss = 4663.75
     if(periodo >= 6) {
@@ -477,6 +482,7 @@ function calcSalario(form) {
     form.txDepIRRF.value = formatValor(reducaoDepsIRRF);
     form.txFG.value = formatValor(fungrat);
     form.txCD.value = (form.rdCD[0].checked) ? formatValor(Math.round(cargodir * 100) / 100) : formatValor(valorCD(form.ddCD.value, periodo));
+    form.txNoturno.value = formatValor(Math.round(noturno * 100)/100);
 }
 
 function inverterform(tipo) {
