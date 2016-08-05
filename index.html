@@ -245,8 +245,8 @@
                   <p>
                   <span onmouseover="nhpup.popup('O adicional por Função Gratificada é pago a servidores que exercem cargos de chefia.');">
                     FG:
-                    <select name="ddFG" id="ddFG" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
-                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                    <select name="ddFG" id="ddFG" onClick="nocd(this.form);calcSalario(this.form)" onKeyPress="nocd(this.form);calcSalario(this.form)"
+                      onKeyDown="nocd(this.form);calcSalario(this.form)" onKeyUp="nocd(this.form);calcSalario(this.form)">
                       <option value="0" selected>
                         Não
                       </option>
@@ -254,7 +254,7 @@
                         FG-1
                       </option>
                       <option value="2">
-                        FG-2
+                        FG-2  
                       </option>
                       <option value="3">
                         FG-3
@@ -282,8 +282,8 @@
                   </span>
                   <span style="padding-left: 25px;" onmouseover="nhpup.popup('O ocupante de Cargo de Direção pode receber o valor integral como substituto à remuneração ou como adicional, no valor de 60% do valor integral.');">
                     CD:
-                    <select name="ddCD" id="ddCD" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
-                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                    <select name="ddCD" id="ddCD" onClick="nofg(this.form);calcSalario(this.form)" onKeyPress="nofg(this.form);calcSalario(this.form)"
+                      onKeyDown="nofg(this.form);calcSalario(this.form)" onKeyUp="nofg(this.form);calcSalario(this.form)">
                       <option value="0" selected>
                         Não
                       </option>
@@ -843,8 +843,8 @@
                   <p>
                   <span>
                     FG:
-                    <select name="ddFG" id="ddFG" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
-                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                    <select name="ddFG" id="ddFG" onClick="nocd(this.form);calcSalario(this.form)" onKeyPress="nocd(this.form);calcSalario(this.form)"
+                      onKeyDown="nocd(this.form);calcSalario(this.form)" onKeyUp="nocd(this.form);calcSalario(this.form)">
                       <option value="0" selected>
                         Não
                       </option>
@@ -880,8 +880,8 @@
                   </span>
                   <span style="padding-left: 25px;" onmouseover="nhpup.popup('O ocupante de Cargo de Direção pode receber o valor integral como substituto à remuneração ou como adicional, no valor de 60% do valor integral.');">
                     CD:
-                    <select name="ddCD" id="ddCD" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
-                      onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
+                    <select name="ddCD" id="ddCD" onClick="nofg(this.form);calcSalario(this.form)" onKeyPress="nofg(this.form);calcSalario(this.form)"
+                      onKeyDown="nofg(this.form);calcSalario(this.form)" onKeyUp="nofg(this.form);calcSalario(this.form)">
                       <option value="0" selected>
                         Não
                       </option>

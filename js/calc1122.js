@@ -297,6 +297,18 @@ function valorCD(CD, periodo) {
   return valor;
 }
 
+function nocd(form) {
+  if (form.ddFG.value != 0) {
+    form.ddCD.value = 0
+  }
+}
+
+function nofg(form) {
+  if (form.ddCD.value != 0) {
+    form.ddFG.value = 0
+  }
+}
+
 function calcSalario(form) {
     var periodo = parseInt(form.ddAno.value, 10);
     if(periodo == 1) {
@@ -483,6 +495,8 @@ function calcSalario(form) {
     form.txFG.value = formatValor(fungrat);
     form.txCD.value = (form.rdCD[0].checked) ? formatValor(Math.round(cargodir * 100) / 100) : formatValor(valorCD(form.ddCD.value, periodo));
     form.txNoturno.value = formatValor(Math.round(noturno * 100)/100);
+    
+    cdorfg(form);
 }
 
 function inverterform(tipo) {
