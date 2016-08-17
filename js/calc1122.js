@@ -484,8 +484,7 @@ function calcSalario(form) {
     form.txURP.value = formatValor(Math.round(urp * 100) / 100);
     form.txbIRRF.value = formatValor(Math.round(baseirrf * 100) / 100);
     form.txbINSS.value = formatValor(Math.round(baseinss * 100) / 100);
-    form.txdesconto.value = formatValor(Math.round((aliqirrf +
-        aliqinss) * 100) / 100);
+    form.txdesconto.value = formatValor(Math.round((bruto - salario) * 100) / 100);
     form.txsintfub.value = formatValor(Math.round(sintfub * 100) /
         100);
     form.txQualif.value = formatValor(Math.round(qualificacao * 100) /
