@@ -8,6 +8,7 @@ function updateQuali(form, classs) {
     var allvalues = Array(0, 1, 2, 3, 4, 5, 6, 7);
     var newoptions = Array();
     var newvalues = Array();
+    var curValue = form.ddQuali.value;
     var classe = parseFloat(classs);
     if(classe <= 11) {
         newoptions = alloptions;
@@ -30,6 +31,9 @@ function updateQuali(form, classs) {
         option = new Option(newoptions[i], newvalues[i]);
         // Add to the end of the existing options
         form.ddQuali.options[form.ddQuali.length] = option;
+    }
+    if (newvalues.includes(parseInt(curValue))) {
+      form.ddQuali.value = curValue;
     }
     calcSalario(form);
 }
@@ -495,7 +499,7 @@ function calcSalario(form) {
     form.txCD.value = (form.rdCD[0].checked) ? formatValor(Math.round(cargodir * 100) / 100) : formatValor(valorCD(form.ddCD.value, periodo));
     form.txNoturno.value = formatValor(Math.round(noturno * 100)/100);
     
-    cdorfg(form);
+    //cdorfg(form);
 }
 
 function inverterform(tipo) {
@@ -639,6 +643,6 @@ function inverterform(tipo) {
     form1.ddQuali.value = values2[6]
     form2.ddQuali.value = values1[6]
 
-    calcSalario(form1)
-    calcSalario(form2)
+    calcSalario(form1);
+    calcSalario(form2);
 }

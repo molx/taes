@@ -34,7 +34,7 @@
           </script>
         <script src="js/plugins.js"></script> -->
         <script src="js/main.js"></script>
-        <script src="js/compressed.js"></script>
+        <script src="js/calc1122.js"></script>
         <script type="text/javascript" src="js/nhpup_1.1.js"></script>
       </head>
       <body onLoad="firstload();">
@@ -150,9 +150,7 @@
                 <p>
                   <span onmouseover="nhpup.popup('A classe é definida pela exigência de escolaridade do cargo.');">
                     Classe:
-                    <select name="ddClasse" id="ddClasse" onClick="updateQuali(this.form, this.form.ddClasse.value);"
-                      onKeyDown="updateQuali(this.form, this.form.ddClasse.value);" onKeyPress="updateQuali(this.form, this.form.ddClasse.value);"
-                      onKeyUp="updateQuali(this.form, this.form.ddClasse.value);">
+                    <select name="ddClasse" id="ddClasse" onchange="updateQuali(this.form, this.form.ddClasse.value);">
                       <option value="1" selected>
                         A
                       </option>
@@ -331,27 +329,27 @@
                   Qualificação:
                   <select name="ddQuali" id="ddQuali" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
                     <option value="0" selected>
-                      Mínima do Cargo
+                      Exigência Mínima
                     </option>
-                    <option value="0.1">
+                    <option value="1">
                       Fundamental Completo
                     </option>
-                    <option value="0.15">
+                    <option value="2">
                       Médio Completo
                     </option>
-                    <option value="0.2">
+                    <option value="3">
                       Médio Técnico
                     </option>
-                    <option value="0.25">
+                    <option value="4">
                       Graduação Completa
                     </option>
-                    <option value="0.30">
+                    <option value="5">
                       Especialização
                     </option>
-                    <option value="0.52">
+                    <option value="6">
                       Mestrado
                     </option>
-                    <option value="0.75">
+                    <option value="7">
                       Doutorado
                     </option>
                   </select>
@@ -748,9 +746,7 @@
                 <p>
                   <span onmouseover="nhpup.popup('A classe é definida pela exigência de escolaridade do cargo.');">
                     Classe:
-                    <select name="ddClasse" id="ddClasse" onClick="updateQuali(this.form, this.form.ddClasse.value);"
-                      onKeyDown="updateQuali(this.form, this.form.ddClasse.value);" onKeyPress="updateQuali(this.form, this.form.ddClasse.value);"
-                      onKeyUp="updateQuali(this.form, this.form.ddClasse.value);">
+                    <select name="ddClasse" id="ddClasse" onchange="updateQuali(this.form, this.form.ddClasse.value);">
                       <option value="1" selected>
                         A
                       </option>
@@ -929,27 +925,27 @@
                   Qualificação:
                   <select name="ddQuali" id="ddQuali" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)" onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">
                     <option value="0" selected>
-                      Mínima do Cargo
+                      Exigência Mínima
                     </option>
-                    <option value="0.1">
+                    <option value="1">
                       Fundamental Completo
                     </option>
-                    <option value="0.15">
+                    <option value="2">
                       Médio Completo
                     </option>
-                    <option value="0.2">
+                    <option value="3">
                       Médio Técnico
                     </option>
-                    <option value="0.25">
+                    <option value="4">
                       Graduação Completa
                     </option>
-                    <option value="0.30">
+                    <option value="5">
                       Especialização
                     </option>
-                    <option value="0.52">
+                    <option value="6">
                       Mestrado
                     </option>
-                    <option value="0.75">
+                    <option value="7">
                       Doutorado
                     </option>
                   </select>
