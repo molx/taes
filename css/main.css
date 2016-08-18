@@ -22,6 +22,7 @@ body {
     font-size: 1em;
     line-height: 1.3;    
     overflow-y: scroll; /*Garantindo scrollbar para não dançar entre páginas */
+    font-family: 'Source Sans Pro', sans-serif;
 }
 input[type="text"] {
     border: 0;
