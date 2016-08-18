@@ -225,19 +225,18 @@ a:hover {
     color: #888888;
 }
 
-ol {
-  counter-reset: item;
+.sumario ol {
+  counter-reset: section;
   font-size: 14px;
 }
 
 .sumario li {
-  display: block
+  display: block;
 }
 
-.sumario li:before {
-  content: counters(item, ".") ". "; 
-  counter-increment: item 
-  
+.sumario li::before {
+  counter-increment: section;
+  content: counters(section,".") " "; 
 }
 
 #link_header{
