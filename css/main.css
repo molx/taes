@@ -225,7 +225,7 @@ a:hover {
     color: #888888;
 }
 
-.sumario ol {
+ol {
   counter-reset: section;
   font-size: 14px;
 }
