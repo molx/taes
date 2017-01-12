@@ -24,6 +24,7 @@ body {
     overflow-y: scroll; /*Garantindo scrollbar para não dançar entre páginas */
     font-family: 'Source Sans Pro', sans-serif;
 }
+
 input[type="text"] {
     border: 0;
     font-weight: bold;
@@ -141,27 +142,31 @@ textarea {
     margin-right: auto;*/
 }
 #divdata, #divdata2 {
-  /*width: 600px;*/
-  float:left;    
-  margin: 0 auto;
+  /*float:left;    */
+  display:table-cell;
+  /*margin: 0 auto;*/
 }
 #divresults1, #divresults2 {  
   /**position: absolute;*/
   padding: 0 5px;
   width: 400px;    
   text-align: left;
-  float: right;
-  height: 240px;
-  border: 1px solid black;   
+  /*float: right;*/
+  overflow: auto;
   margin-top: 31px;
+  /*display:table-cell;*/
+  border: 1px solid black;   
 }
+
 #divresults1_1, #divresults2_1 {
     margin-left: 0;
     float: left;
+    /*margin-top: 20px;*/
 }
 #divresults1_2, #divresults2_2 {
     margin-left: 10px;
     float: right;
+    /*margin-top: 20px;*/
 }
 #ddQuali {
   resize: none;
@@ -281,6 +286,13 @@ ol {
     cursor: pointer;
 }
 
+.calcform {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 10px;
+  height: 100%;
+}
+
 .centerImg {    
     display: block;
     margin-left: auto;
@@ -292,6 +304,15 @@ ol {
   z-index: 6 !important;
 }
 
+.clearfix:after
+{
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+    line-height: 0;  
+}
 
 
 /* ==========================================================================
