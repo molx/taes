@@ -115,7 +115,8 @@ textarea {
 }
 
 .titleHolder {
-  height: 45px;
+  height: 60px;
+  width: 1000px;
 }
 
 .fb-like {
@@ -125,6 +126,13 @@ textarea {
   margin-top: -10px;
   margin-left: 10px;
 }
+
+.fb-page {
+  float: left; 
+  margin-top: -10px;
+  margin-left: 10px;
+}
+
 
 #cbajuda {
     float: right;    

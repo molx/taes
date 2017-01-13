@@ -39,7 +39,7 @@
         <script type="text/javascript" src="js/nhpup_1.1.js"></script>
       </head>
       <body onLoad="firstload();">
-<script>
+<!--<script>
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '236772623333172',
@@ -55,7 +55,17 @@
      js.src = "//connect.facebook.net/pt_BR/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-</script>
+</script>-->
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.8&appId=112195985836387";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+      </script>
+
         <!--[if lt IE 7]>
         <p class="chromeframe">
           You are using an
@@ -84,16 +94,27 @@
               <a id="link_header" href="sobre.html">Sobre</a>
             </div>
           </div>
+          
+          
           <div class="titleHolder">
-            <h1 class="mainTitle">
-              Calculadora
-            </h1>
-            <div class="fb-like" data-href="http://www.facebook.com/SalarioTAE/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false">
+            <div style="float: left; width: 40%;">
+              <!--<div class="fb-like" data-href="http://www.facebook.com/SalarioTAE/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false">-->
+              <div class="fb-page" data-href="https://www.facebook.com/SalarioTAE/" data-width="450" data-height="70" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/SalarioTAE/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/SalarioTAE/">Simulador de Salário dos TAE das IFES</a></blockquote></div>
             </div>
+            <div style="float: left; width: 20%;">
+              <h1 class="mainTitle">
+                Calculadora
+              </h1>
+            </div>
+            <div style="float: right; width: 40%;">
               <div id="cbajuda">
                 <input type="checkbox" name="ajuda" id="checkajuda" value="Ajuda"> Mostrar ajuda
               </div>
+            </div>
+            <br style="clear: left;" />
           </div>
+          
+          
           <h2>
             Simulação 1
           </h2>
