@@ -157,6 +157,7 @@ textarea {
   margin-top: 31px;
   /*display:table-cell;*/
   border: 1px solid black;   
+  min-height: 246px;
 }
 
 #divresults1_1, #divresults2_1 {

@@ -51,6 +51,7 @@ ul {
     background-color: #fff;
     float: left;
     width: 580px;
+    min-height: 246px;
 }
 
 .tab-content1, .tab-content2 {
