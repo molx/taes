@@ -107,11 +107,12 @@ textarea {
    ========================================================================== */
 
 .mainTitle {
-  position: absolute;
+  /*position: absolute;
   left: 0;
   right: 0;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto;*/
+  margin: 0 auto;
 }
 
 .titleHolder {
@@ -187,6 +188,7 @@ textarea {
   margin: 0 auto;
   font-size: 12px;
   text-align: center;
+  display: table;
 }
 
 #pup {
