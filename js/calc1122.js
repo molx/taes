@@ -408,8 +408,10 @@ function calcSalario(form) {
         creche + fungrat + cargodir + noturno;
     var baseinss = vencimento + urp + qualificacao;
     var tetoinss = 4663.75
-    if(periodo >= 6) {
-        tetoinss = 5189.82
+    if (periodo >= 6 && periodo < 8) {
+      tetoinss = 5189.82
+    } else {
+      tetoinss = 5531.31
     }
     if(form.novopss.checked && (baseinss > tetoinss)) {
         baseinss = tetoinss; //Se for da nova previdencia, o calculo é feito baseado no teto. 
