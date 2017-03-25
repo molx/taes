@@ -404,8 +404,19 @@ function calcSalario(form) {
         0;
         
     var creche = valorCreche(remuneracao, periodo, form.numCreche.value);
+    
+    if (form.ferias.checked) {
+      var ferias = (remuneracao + fungrat + cargodir)/3
+      var aliqirrfferias = valorIRRF(ferias, periodo);
+    } else {
+      var ferias = 0;
+      var aliqirrfferias = 0;
+    }
+    
+    var decter = form.decter.checked ? (remuneracao + fungrat + cargodir)/2 : 0
+    
     var bruto = remuneracao + saude + alimentacao + transporte +
-        creche + fungrat + cargodir + noturno;
+        creche + fungrat + cargodir + noturno + ferias + decter;
     var baseinss = vencimento + urp + qualificacao;
     var tetoinss = 4663.75
     if (periodo >= 6 && periodo < 8) {
@@ -457,15 +468,17 @@ function calcSalario(form) {
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value,
         periodo);
-        
+    
         //Eu chutei que CD 60% nao incidia IR, mas pelo FB falaram que incide.
         //Caso não incida basta remover de baseirrf. Quando é 100%, cargodir = 0
     var baseirrf = vencimento + urp + qualificacao + ftinsa*vencimento + 
         fungrat + cargodir - aliqinss - aliqfunp - reducaoDepsIRRF;
     var aliqirrf = valorIRRF(baseirrf, periodo);
-
+        
+    var desc_13 = (form.decter.checked && form.decter_par.value == "2") ? aliqirrf + aliqinss + aliqfunp : 0;
+    
     var salario = Math.round((bruto - aliqirrf - aliqinss - aliqfunp -
-        sintfub) * 100) / 100;
+        desc_13 - sintfub) * 100) / 100;
     if(form.name == "myform") {
         liq1 = salario;
     } else {
@@ -500,6 +513,11 @@ function calcSalario(form) {
     form.txFG.value = formatValor(fungrat);
     form.txCD.value = (form.rdCD[0].checked) ? formatValor(Math.round(cargodir * 100) / 100) : formatValor(valorCD(form.ddCD.value, periodo));
     form.txNoturno.value = formatValor(Math.round(noturno * 100)/100);
+    form.txFerias.value = formatValor(Math.round(ferias * 100)/100);
+    form.txIrrfFerias.value = formatValor(Math.round(aliqirrfferias * 100)/100);
+    form.txDecter.value = formatValor(Math.round(decter * 100)/100);
+    form.txDesc13.value = formatValor(Math.round(desc_13 * 100)/100);
+    
     
     //cdorfg(form);
 }
@@ -522,7 +540,8 @@ function inverterform(tipo) {
             .value, form1.numFunpAlt.value, form1.numDepIRRF.value,
             form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
             form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked, 
-            form1.rdCD[1].checked);
+            form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked, 
+            form1.decter_par.value);
 
         var values2 = Array(form2.ddClasse.value, form2.ddProg.value,
             form2.ddFG.value, form2.ddNivel.value, form2.ddCargaH
@@ -536,7 +555,8 @@ function inverterform(tipo) {
             .value, form2.numFunpAlt.value, form2.numDepIRRF.value,
             form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
             form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked, 
-            form2.rdCD[1].checked);
+            form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked, 
+            form2.decter_par.value);
 
     } else if(tipo == "cima") {
 
@@ -552,7 +572,8 @@ function inverterform(tipo) {
             .value, form2.numFunpAlt.value, form2.numDepIRRF.value,
             form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
             form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked, 
-            form2.rdCD[1].checked);
+            form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked, 
+            form2.decter_par.value);
 
         var values1 = values2;
 
@@ -570,7 +591,8 @@ function inverterform(tipo) {
             .value, form1.numFunpAlt.value, form1.numDepIRRF.value,
             form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
             form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked, 
-            form1.rdCD[1].checked);
+            form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked, 
+            form1.decter_par.value);
 
         var values2 = values1;
     }
@@ -604,8 +626,10 @@ function inverterform(tipo) {
     form1.ddIdadeDep3.value = values2[26]
     form1.ddCD.value = values2[27]
     form1.rdCD[0].checked = values2[28]
-    form1.rdCD[1].checked= values2[29]
-
+    form1.rdCD[1].checked = values2[29]
+    form1.ferias.checked = values2[30]
+    form1.decter.checked = values2[31]
+    form1.decter_par.value  = values2[32]
 
 
     form2.ddClasse.value = values1[0]
@@ -638,6 +662,9 @@ function inverterform(tipo) {
     form2.ddCD.value = values1[27]
     form2.rdCD[0].checked = values1[28]
     form2.rdCD[1].checked= values1[29]
+    form2.ferias.checked = values1[30]
+    form2.decter.checked = values1[31]
+    form2.decter_par.value  = values1[32]
 
     updateQuali(form1, values2[0])
     updateQuali(form2, values1[0])

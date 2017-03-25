@@ -557,8 +557,8 @@
                   <input type="text" style="width:75px;" name="txTrans" id="txTrans" value="R$ 0,00" readonly>
                   </span>
                   <span style="padding-left: 10px">
-                  <input type="checkbox" name="alim" value="Alim" onClick="calcSalario(this.form)" checked> Alimentação:
-                  <input style="width:75px;" type="text" name="txAlim" id="txAlim" value="R$ 373,00" readonly>
+                    <input type="checkbox" name="alim" value="Alim" onClick="calcSalario(this.form)" checked> Alimentação:
+                    <input style="width:75px;" type="text" name="txAlim" id="txAlim" value="R$ 373,00" readonly>
                   </span>
                   <!--<input type="checkbox" name="insa" value="Insa" onClick="calcSalario(this.form)" style="margin-left: 20px;"> --> 
                   </p>
@@ -590,18 +590,31 @@
                   </span>
                   </p>
                   <p>
-                  <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form)">  -->
-                  Auxílio pré-escolar. Nº:
-                  <input type="number" name="numCreche" min="0" max="10" step="1" value="0"
-                    style="width: 30px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
-                    onKeyUp="validateGD2(this.form);">
-                  <INPUT TYPE="text" NAME="txCreche" VALUE="R$ 0,00" readonly>
-                  <span>Noturno (h/mês):
-                    <input type="number" name="noturno" min="0" max="240" step="1" value="0"
-                      style="width: 48px;" onClick="calcSalario(this.form)" 
-                      onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);">
-                  <INPUT TYPE="text" NAME="txNoturno" VALUE="R$ 0,00" readonly>
-                  </span>
+                    <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form)">  -->
+                    Auxílio pré-escolar. Nº:
+                    <input type="number" name="numCreche" min="0" max="10" step="1" value="0"
+                      style="width: 30px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
+                      onKeyUp="validateGD2(this.form);">
+                    <INPUT TYPE="text" NAME="txCreche" VALUE="R$ 0,00" readonly>
+                    <span>Noturno (h/mês):
+                      <input type="number" name="noturno" min="0" max="240" step="1" value="0"
+                        style="width: 48px;" onClick="calcSalario(this.form)" 
+                        onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);">
+                    <INPUT TYPE="text" NAME="txNoturno" VALUE="R$ 0,00" readonly>
+                    </span>
+                  </p>
+                  <p>
+                    <span>
+                      <input type="checkbox" name="ferias" value="ferias" onClick="calcSalario(this.form)"> 1/3 de Férias:
+                      <input style="width:85px;" type="text" name="txFerias" id="txFerias" value="R$ 0,00" readonly>
+                    </span>
+                    <span style="padding-left: 50px" onmouseover="nhpup.popup('O 13º salário é pago em duas parcelas, sendo a primeira em junho e a segunda em dezembro. Na primeira parcela nenhum imposto ou contribuição é descontado, sendo o ajuste feito na segunda parcela, pois o valor final do 13º salário é igual ao salário do mês de dezembro.');">
+                      <input type="checkbox" name="decter" value="decter" onClick="calcSalario(this.form)"> 13º Salário:
+                      <input style="width:85px;" type="text" name="txDecter" id="txDecter" value="R$ 0,00" readonly>
+                      Parcela: 
+                      <input type="radio" name="decter_par" value="1" onClick="calcSalario(this.form)" checked>1ª
+                      <input type="radio" name="decter_par" value="2" onClick="calcSalario(this.form)" style="margin-left: 15px;">2ª 
+                    </span>
                   </p>
               </div>
               <div id="tab-prev1" class="tab-content1">
@@ -668,10 +681,13 @@
                   <INPUT TYPE="text" NAME="txIrrf" VALUE="0" readonly>
                 </p>
                 <p>
+                  IRRF Férias:
+                  <INPUT TYPE="text" NAME="txIrrfFerias" VALUE="0" readonly>
+                </p>
+                <p>
                   Líquido:
                   <INPUT TYPE="text" NAME="txResult" VALUE="0" readonly>
                 </p>
-                </br></br>
               </div>
               <div id="divresults1_2">
                 <p onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
@@ -690,7 +706,11 @@
                   <INPUT TYPE="text" NAME="txbIRRF" VALUE="0" readonly>
                 </p>
                 <p>
-                  Desconto:
+                  Desconto 13º:
+                  <INPUT TYPE="text" NAME="txDesc13" VALUE="0" readonly>
+                </p>
+                <p>
+                  Descontos:
                   <INPUT TYPE="text" NAME="txdesconto" VALUE="0" readonly>
                 </p>
               </div>
@@ -1179,18 +1199,31 @@
                     </span>
                   </p>
                   <p>
-                  <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form)">  -->
-                  Auxílio pré-escolar. Nº:
-                  <input type="number" name="numCreche" min="0" max="10" step="1" value="0"
-                    style="width: 30px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
-                    onKeyUp="validateGD2(this.form);">
-                  <INPUT TYPE="text" NAME="txCreche" VALUE="R$ 0,00" readonly>
-                  <span>Noturno (h/mês):
-                    <input type="number" name="noturno" min="0" max="240" step="1" value="0"
-                      style="width: 48px;" onClick="calcSalario(this.form)" 
-                      onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);">
-                  <INPUT TYPE="text" NAME="txNoturno" VALUE="R$ 0,00" readonly>
-                  </span>
+                    <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form)">  -->
+                    Auxílio pré-escolar. Nº:
+                    <input type="number" name="numCreche" min="0" max="10" step="1" value="0"
+                      style="width: 30px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
+                      onKeyUp="validateGD2(this.form);">
+                    <INPUT TYPE="text" NAME="txCreche" VALUE="R$ 0,00" readonly>
+                    <span>Noturno (h/mês):
+                      <input type="number" name="noturno" min="0" max="240" step="1" value="0"
+                        style="width: 48px;" onClick="calcSalario(this.form)" 
+                        onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);">
+                      <INPUT TYPE="text" NAME="txNoturno" VALUE="R$ 0,00" readonly>
+                    </span>
+                  </p>
+                  <p>
+                    <span>
+                      <input type="checkbox" name="ferias" value="ferias" onClick="calcSalario(this.form)"> 1/3 de Férias:
+                      <input style="width:85px;" type="text" name="txFerias" id="txFerias" value="R$ 0,00" readonly>
+                    </span>
+                    <span style="padding-left: 50px" onmouseover="nhpup.popup('O 13º salário é pago em duas parcelas, sendo a primeira em junho e a segunda em dezembro. Na primeira parcela nenhum imposto ou contribuição é descontado, sendo o ajuste feito na segunda parcela, pois o valor final do 13º salário é igual ao salário do mês de dezembro.');">
+                      <input type="checkbox" name="decter" value="decter" onClick="calcSalario(this.form)"> 13º Salário:
+                      <input style="width:85px;" type="text" name="txDecter" id="txDecter" value="R$ 0,00" readonly>
+                      Parcela: 
+                      <input type="radio" name="decter_par" value="1" onClick="calcSalario(this.form)" checked>1ª
+                      <input type="radio" name="decter_par" value="2" onClick="calcSalario(this.form)" style="margin-left: 15px;">2ª 
+                    </span>
                   </p>
               </div>
               <div id="tab-prev2" class="tab-content2">
@@ -1208,7 +1241,7 @@
               </p>
               <p>
                 Aderido: 
-                Não <input type="radio" name="funp_ad" value="nao" checked onClick="calcSalario(this.form)">
+                Não <input type="radio" name="funp_ad" value="nao" onClick="calcSalario(this.form)" checked>
                 Sim <input type="radio" name="funp_ad" value="sim" onClick="calcSalario(this.form)">
               </p>
               <p>
@@ -1257,10 +1290,13 @@
                   <INPUT TYPE="text" NAME="txIrrf" VALUE="0" readonly>
                 </p>
                 <p>
+                  IRRF Férias:
+                  <INPUT TYPE="text" NAME="txIrrfFerias" VALUE="0" readonly>
+                </p>
+                <p>
                   Líquido:
                   <INPUT TYPE="text" NAME="txResult" VALUE="0" readonly>
                 </p>
-                </br></br>
               </div>
               <div id="divresults2_2">
                 <p onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
@@ -1279,7 +1315,11 @@
                   <INPUT TYPE="text" NAME="txbIRRF" VALUE="0" readonly>
                 </p>
                 <p>
-                  Desconto:
+                  Desconto 13º:
+                  <INPUT TYPE="text" NAME="txDesc13" VALUE="0" readonly>
+                </p>
+                <p>
+                  Descontos:
                   <INPUT TYPE="text" NAME="txdesconto" VALUE="0" readonly>
                 </p>
               </div>
