@@ -552,8 +552,8 @@
                   <input type="checkbox" name="trans" value="Trans" onClick="calcSalario(this.form)">
                   Transporte - Gasto Diário: R$
                   <input type="number" name="gastoTrans" min="2" max="99" step="0.2" value="8"
-                    style="width: 50px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
-                    onKeyUp="validateGD2(this.form);">
+                    style="width: 50px;" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form);"
+                    onKeyUp="calcSalario(this.form);">
                   <input type="text" style="width:75px;" name="txTrans" id="txTrans" value="R$ 0,00" readonly>
                   </span>
                   <span style="padding-left: 10px">

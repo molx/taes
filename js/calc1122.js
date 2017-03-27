@@ -66,11 +66,8 @@ function validateGD1(evt, form) {
 
 function validateGD2(form) {
     var valor = form.gastoTrans.value;
-    if(valor > 20) {
+    if(valor > 99) {
         valor = valor.toString().substring(0, valor.length - 1);
-        if(valor > 20) {
-            valor = valor.toString().substring(0, valor.length - 1);
-        }
     } else {
         valor = parseInt(valor, 10);
     }
