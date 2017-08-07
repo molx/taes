@@ -563,8 +563,8 @@
                   <!--<input type="checkbox" name="insa" value="Insa" onClick="calcSalario(this.form)" style="margin-left: 20px;"> --> 
                   </p>
                   <p>
-                  <span>Adicional de risco:</span>
-                  <select name="ddInsa" onchange="calcSalario(this.form)">
+                  <span>Adic. de risco:</span>
+                  <select name="ddInsa" onchange="calcSalario(this.form)" style="width: 90px;">
                     <option value="0" selected>
                       Nenhum
                     </option>
@@ -581,12 +581,19 @@
                       Peric. (10%)
                     </option>
                   </select>
-                  <!-- Insalubridade: -->
                   <input type="text" name="txInsa" value="R$ 0,00" readonly>
-                  <span onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. O valor aqui é referente a 1% dos rendimentos, seguindo a regra do Sintfub/UnB.')">
-                    <input type="checkbox" name="sintfub" value="" onClick="calcSalario(this.form)" style="margin-left: 4px;">
+                  <span onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. As principais formas de cálculo são 1% da sua remuneração e 1% do menor VB da categoria.')">
+                    <input type="checkbox" name="sindicato" value="" onClick="calcSalario(this.form)" style="margin-left: 1px;">
                     Sindicato:
-                  <INPUT TYPE="text" NAME="txsintfub" VALUE="R$ 0,00" readonly>
+                    <INPUT TYPE="text" NAME="txSindicato" VALUE="R$ 0,00" readonly>
+                    <select name="ddSindTipo" id="ddSindTipo" onchange="calcSalario(this.form)" style="width: 90px;">
+                        <option value="max" selected>
+                          1% Rem.
+                        </option>
+                        <option value="min">
+                          1% Cat.
+                        </option>
+                    </select>
                   </span>
                   </p>
                   <p>
@@ -1172,8 +1179,8 @@
                   <!--<input type="checkbox" name="insa" value="Insa" onClick="calcSalario(this.form)" style="margin-left: 20px;"> --> 
                   </p>
                   <p>
-                  <span>Adicional de risco:</span>
-                  <select name="ddInsa" onchange="calcSalario(this.form)">
+                  <span>Adic. de risco:</span>
+                  <select name="ddInsa" onchange="calcSalario(this.form)" style="width: 90px;">
                     <option value="0" selected>
                       Nenhum
                     </option>
@@ -1190,13 +1197,20 @@
                       Peric. (10%)
                     </option>
                   </select>
-                  <!-- Insalubridade: -->
                   <INPUT TYPE="text" NAME="txInsa" VALUE="R$ 0,00" readonly>
-                    <span onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. O valor aqui é referente a 1% dos rendimentos, seguindo a regra do Sintfub/UnB.')">
-                      <input type="checkbox" name="sintfub" value="" onClick="calcSalario(this.form)" style="margin-left: 4px;">
-                      Sindicato:
-                    <INPUT TYPE="text" NAME="txsintfub" VALUE="R$ 0,00" readonly>
-                    </span>
+                  <span onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. As principais formas de cálculo são 1% da sua remuneração e 1% do menor VB da categoria.')">
+                    <input type="checkbox" name="sindicato" value="" onClick="calcSalario(this.form)" style="margin-left: 1px;">
+                    Sindicato:
+                    <INPUT TYPE="text" NAME="txSindicato" VALUE="R$ 0,00" readonly>
+                    <select name="ddSindTipo" id="ddSindTipo" onchange="calcSalario(this.form)" style="width: 90px;">
+                        <option value="max" selected>
+                          1% Rem.
+                        </option>
+                        <option value="min">
+                          1% Cat.
+                        </option>
+                    </select>
+                  </span>
                   </p>
                   <p>
                     <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form)">  -->

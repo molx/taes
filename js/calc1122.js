@@ -380,7 +380,14 @@ function calcSalario(form) {
     var qualificacao = ftpg * vencimento
     var remuneracao = vencimento + urp + qualificacao + Math.floor(
         ftinsa * vencimento * 100) / 100 + anuenio;
-    var sintfub = (form.sintfub.checked) ? remuneracao * 0.01 : 0;
+        
+    if (form.ddSindTipo.value == "max") {
+      var sindicato = (form.sindicato.checked) ? remuneracao * 0.01 : 0;
+    } else { //form.ddSindTipo.value == "min"
+      var sindicato = Math.floor(0.01 * base * (Math.pow(ftstep, parseFloat(form.ddClasse.value) - 1)) *
+        ftcarga * 100) / 100
+    }
+    
     
     var noturno = (remuneracao/(30*8*ftcarga))*(form.noturno.value*(60/52.5))*0.25;
     //http://progep.sites.ufms.br/coordenadorias/administracao-de-pessoal/divisao-de-pagamento/adicional-noturno/
@@ -475,7 +482,7 @@ function calcSalario(form) {
     var desc_13 = (form.decter.checked && form.decter_par.value == "2") ? aliqirrf + aliqinss + aliqfunp : 0;
     
     var salario = Math.round((bruto - aliqirrf - aliqinss - aliqfunp -
-        desc_13 - sintfub) * 100) / 100;
+        desc_13 - sindicato) * 100) / 100;
     if(form.name == "myform") {
         liq1 = salario;
     } else {
@@ -501,7 +508,7 @@ function calcSalario(form) {
     form.txbIRRF.value = formatValor(Math.round(baseirrf * 100) / 100);
     form.txbINSS.value = formatValor(Math.round(baseinss * 100) / 100);
     form.txdesconto.value = formatValor(Math.round((bruto - salario) * 100) / 100);
-    form.txsintfub.value = formatValor(Math.round(sintfub * 100) /
+    form.txSindicato.value = formatValor(Math.round(sindicato * 100) /
         100);
     form.txQualif.value = formatValor(Math.round(qualificacao * 100) /
         100);
@@ -531,14 +538,14 @@ function inverterform(tipo) {
             .saude.checked, form1.ddIdade.value, form1.removeurp.checked,
             form1.trans.checked, form1.gastoTrans.value, form1.alim
             .checked, form1.ddInsa.value, form1.numCreche.value,
-            form1.sintfub.checked, form1.areaquali[0].checked,
+            form1.sindicato.checked, form1.areaquali[0].checked,
             form1.areaquali[1].checked, form1.novopss.checked,
             form1.ddFunp.value, form1.numAnuenio.value, form1.funp_ad
             .value, form1.numFunpAlt.value, form1.numDepIRRF.value,
             form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
             form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked, 
             form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked, 
-            form1.decter_par.value);
+            form1.decter_par.value, form1.ddSindTipo.value);
 
         var values2 = Array(form2.ddClasse.value, form2.ddProg.value,
             form2.ddFG.value, form2.ddNivel.value, form2.ddCargaH
@@ -546,14 +553,14 @@ function inverterform(tipo) {
             .saude.checked, form2.ddIdade.value, form2.removeurp.checked,
             form2.trans.checked, form2.gastoTrans.value, form2.alim
             .checked, form2.ddInsa.value, form2.numCreche.value,
-            form2.sintfub.checked, form2.areaquali[0].checked,
+            form2.sindicato.checked, form2.areaquali[0].checked,
             form2.areaquali[1].checked, form2.novopss.checked,
             form2.ddFunp.value, form2.numAnuenio.value, form2.funp_ad
             .value, form2.numFunpAlt.value, form2.numDepIRRF.value,
             form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
             form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked, 
             form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked, 
-            form2.decter_par.value);
+            form2.decter_par.value, form2.ddSindTipo.value);
 
     } else if(tipo == "cima") {
 
@@ -563,14 +570,14 @@ function inverterform(tipo) {
             .saude.checked, form2.ddIdade.value, form2.removeurp.checked,
             form2.trans.checked, form2.gastoTrans.value, form2.alim
             .checked, form2.ddInsa.value, form2.numCreche.value,
-            form2.sintfub.checked, form2.areaquali[0].checked,
+            form2.sindicato.checked, form2.areaquali[0].checked,
             form2.areaquali[1].checked, form2.novopss.checked,
             form2.ddFunp.value, form2.numAnuenio.value, form2.funp_ad
             .value, form2.numFunpAlt.value, form2.numDepIRRF.value,
             form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
             form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked, 
             form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked, 
-            form2.decter_par.value);
+            form2.decter_par.value, form2.ddSindTipo.value);
 
         var values1 = values2;
 
@@ -582,14 +589,14 @@ function inverterform(tipo) {
             .saude.checked, form1.ddIdade.value, form1.removeurp.checked,
             form1.trans.checked, form1.gastoTrans.value, form1.alim
             .checked, form1.ddInsa.value, form1.numCreche.value,
-            form1.sintfub.checked, form1.areaquali[0].checked,
+            form1.sindicato.checked, form1.areaquali[0].checked,
             form1.areaquali[1].checked, form1.novopss.checked,
             form1.ddFunp.value, form1.numAnuenio.value, form1.funp_ad
             .value, form1.numFunpAlt.value, form1.numDepIRRF.value,
             form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
             form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked, 
             form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked, 
-            form1.decter_par.value);
+            form1.decter_par.value, form1.ddSindTipo.value);
 
         var values2 = values1;
     }
@@ -609,7 +616,7 @@ function inverterform(tipo) {
     form1.alim.checked = values2[12]
     form1.ddInsa.value = values2[13]
     form1.numCreche.value = values2[14]
-    form1.sintfub.checked = values2[15]
+    form1.sindicato.checked = values2[15]
     form1.areaquali[0].checked = values2[16]
     form1.areaquali[1].checked = values2[17]
     form1.novopss.checked = values2[18]
@@ -626,7 +633,8 @@ function inverterform(tipo) {
     form1.rdCD[1].checked = values2[29]
     form1.ferias.checked = values2[30]
     form1.decter.checked = values2[31]
-    form1.decter_par.value  = values2[32]
+    form1.decter_par.value = values2[32]
+    form1.ddSindTipo.value = values2[33]
 
 
     form2.ddClasse.value = values1[0]
@@ -644,7 +652,7 @@ function inverterform(tipo) {
     form2.alim.checked = values1[12]
     form2.ddInsa.value = values1[13]
     form2.numCreche.value = values1[14]
-    form2.sintfub.checked = values1[15]
+    form2.sindicato.checked = values1[15]
     form2.areaquali[0].checked = values1[16]
     form2.areaquali[1].checked = values1[17]
     form2.novopss.checked = values1[18]
@@ -661,7 +669,8 @@ function inverterform(tipo) {
     form2.rdCD[1].checked= values1[29]
     form2.ferias.checked = values1[30]
     form2.decter.checked = values1[31]
-    form2.decter_par.value  = values1[32]
+    form2.decter_par.value = values1[32]
+    form2.ddSindTipo.value = values1[33]
 
     updateQuali(form1, values2[0])
     updateQuali(form2, values1[0])
