@@ -440,6 +440,9 @@
           baseinss = tetoinss; //Se for da nova previdencia, o calculo é feito baseado no teto. 
       }
       var aliqinss = Math.floor(baseinss * 0.11 * 100) / 100;
+      if (form.pss_aliq.value == "14") {
+        aliqinss = Math.floor(baseinss * 0.14 * 100) / 100;  
+      }
   
       var aliqfunp = 0
   
