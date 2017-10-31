@@ -436,13 +436,19 @@
       } else {
         tetoinss = 5531.31
       }
-      if(form.novopss.checked && (baseinss > tetoinss)) {
-          baseinss = tetoinss; //Se for da nova previdencia, o calculo é feito baseado no teto. 
+      var aliqinss = 0;
+      
+      if(form.novopss.checked || baseinss < tetoinss) { // Se novo regime ou se estiver abaixo do teto
+        if (baseinss > tetoinss) { //Se for maior que teto.
+          baseinss = tetoinss;  
+        } 
+        aliqinss = baseinss * 0.11 //Novo regime, sempre 11%;
+      } else {                 // Regime antigo acima do teto
+      // Até o teto sempre 11%, a partir daí 11% ou 14% dependendo da simulação
+          aliqinss = tetoinss * 0.11 + (baseinss - tetoinss) * parseFloat(form.pss_aliq.value);  
       }
-      var aliqinss = Math.floor(baseinss * 0.11 * 100) / 100;
-      if (form.pss_aliq.value == "14") {
-        aliqinss = Math.floor(baseinss * 0.14 * 100) / 100;  
-      }
+      
+      aliqinss =  Math.floor(aliqinss * 100) / 100;
   
       var aliqfunp = 0
   
@@ -556,7 +562,7 @@
               form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
               form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked, 
               form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked, 
-              form1.decter_par.value, form1.ddSindTipo.value);
+              form1.decter_par.value, form1.ddSindTipo.value, form1.pss_aliq.value);
   
           var values2 = Array(form2.ddClasse.value, form2.ddProg.value,
               form2.ddFG.value, form2.ddNivel.value, form2.ddCargaH
@@ -571,7 +577,7 @@
               form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
               form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked, 
               form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked, 
-              form2.decter_par.value, form2.ddSindTipo.value);
+              form2.decter_par.value, form2.ddSindTipo.value, form2.pss_aliq.value);
   
       } else if(tipo == "cima") {
   
@@ -588,7 +594,7 @@
               form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
               form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked, 
               form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked, 
-              form2.decter_par.value, form2.ddSindTipo.value);
+              form2.decter_par.value, form2.ddSindTipo.value, form2.pss_aliq.value);
   
           var values1 = values2;
   
@@ -607,7 +613,7 @@
               form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
               form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked, 
               form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked, 
-              form1.decter_par.value, form1.ddSindTipo.value);
+              form1.decter_par.value, form1.ddSindTipo.value, form1.pss_aliq.value);
   
           var values2 = values1;
       }
@@ -646,6 +652,7 @@
       form1.decter.checked = values2[31]
       form1.decter_par.value = values2[32]
       form1.ddSindTipo.value = values2[33]
+      form1.pss_aliq.value = values2[34]
   
   
       form2.ddClasse.value = values1[0]
@@ -682,6 +689,7 @@
       form2.decter.checked = values1[31]
       form2.decter_par.value = values1[32]
       form2.ddSindTipo.value = values1[33]
+      form2.pss_aliq.value = values1[34]
   
       updateQuali(form1, values2[0])
       updateQuali(form2, values1[0])
