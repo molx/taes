@@ -330,16 +330,16 @@
       } else if(periodo == 7) {
           ftstep = 1.038;
           base = 1263.54;
-      } else if(periodo == 8) {
+      } else if(periodo <= 9) {
           ftstep = 1.039;
           base = 1326.72;
-      } else if(periodo == 9) {
+      } else if(periodo == 10) {
           ftstep = 1.0405;
           base = 1535.84;
-      } else if(periodo == 10) {
+      } else if(periodo == 11) {
           ftstep = 1.043;
           base = 1960.17;
-      } else if(periodo == 11) {
+      } else if(periodo == 12) {
           ftstep = 1.0455;
           base = 2501.73;
       }
@@ -433,9 +433,11 @@
       var tetoinss = 4663.75
       if (periodo >= 6 && periodo < 8) {
         tetoinss = 5189.82
-      } else {
+      } else if (periodo < 9) {
         tetoinss = 5531.31
-      }
+      } else {
+		tetoinss = 5645.81
+	  }
       var aliqinss = 0;
       
       if(form.novopss.checked || baseinss < tetoinss) { // Se novo regime ou se estiver abaixo do teto
