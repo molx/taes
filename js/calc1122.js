@@ -429,7 +429,7 @@
       
       var bruto = remuneracao + saude + alimentacao + transporte +
           creche + fungrat + cargodir + noturno + ferias + decter;
-      var baseinss = vencimento + urp + qualificacao;
+      var baseinss = remuneracao; //vencimento + urp + qualificacao;
       var tetoinss = 4663.75
       if (periodo >= 6 && periodo < 8) {
         tetoinss = 5189.82
@@ -447,7 +447,7 @@
         aliqinss = baseinss * 0.11 //Novo regime, sempre 11%;
       } else {                 // Regime antigo acima do teto
       // Até o teto sempre 11%, a partir daí 11% ou 14% dependendo da simulação
-          aliqinss = tetoinss * 0.11 + (baseinss - tetoinss) * parseFloat(form.pss_aliq.value);  
+        aliqinss = tetoinss * 0.11 + (baseinss - tetoinss) * parseFloat(form.pss_aliq.value);  
       }
       
       aliqinss =  Math.floor(aliqinss * 100) / 100;
@@ -501,7 +501,7 @@
       var desc_13 = (form.decter.checked && form.decter_par.value == "2") ? aliqirrf + aliqinss + aliqfunp : 0;
       
       var salario = Math.round((bruto - aliqirrf - aliqinss - aliqfunp -
-          desc_13 - sindicato) * 100) / 100;
+          desc_13 - sindicato) * 100) / 100 - form.numOutros.value;
       if(form.name == "myform") {
           liq1 = salario;
       } else {
