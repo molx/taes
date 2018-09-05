@@ -564,7 +564,8 @@
               form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
               form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked, 
               form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked, 
-              form1.decter_par.value, form1.ddSindTipo.value, form1.pss_aliq.value);
+              form1.decter_par.value, form1.ddSindTipo.value, form1.pss_aliq.value, 
+			  form1.numOutros.value);
   
           var values2 = Array(form2.ddClasse.value, form2.ddProg.value,
               form2.ddFG.value, form2.ddNivel.value, form2.ddCargaH
@@ -579,7 +580,8 @@
               form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
               form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked, 
               form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked, 
-              form2.decter_par.value, form2.ddSindTipo.value, form2.pss_aliq.value);
+              form2.decter_par.value, form2.ddSindTipo.value, form2.pss_aliq.value, 
+			  form2.numOutros.value);
   
       } else if(tipo == "cima") {
   
@@ -596,7 +598,8 @@
               form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
               form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked, 
               form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked, 
-              form2.decter_par.value, form2.ddSindTipo.value, form2.pss_aliq.value);
+              form2.decter_par.value, form2.ddSindTipo.value, form2.pss_aliq.value, 
+			  form2.numOutros.value);
   
           var values1 = values2;
   
@@ -615,7 +618,8 @@
               form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
               form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked, 
               form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked, 
-              form1.decter_par.value, form1.ddSindTipo.value, form1.pss_aliq.value);
+              form1.decter_par.value, form1.ddSindTipo.value, form1.pss_aliq.value,
+			  form1.numOutros.value);
   
           var values2 = values1;
       }
@@ -655,6 +659,7 @@
       form1.decter_par.value = values2[32]
       form1.ddSindTipo.value = values2[33]
       form1.pss_aliq.value = values2[34]
+	  form1.numOutros.value = values2[35]
   
   
       form2.ddClasse.value = values1[0]
@@ -692,6 +697,7 @@
       form2.decter_par.value = values1[32]
       form2.ddSindTipo.value = values1[33]
       form2.pss_aliq.value = values1[34]
+	  form2.numOutros.value = values1[35]
   
       updateQuali(form1, values2[0])
       updateQuali(form2, values1[0])
