@@ -501,7 +501,7 @@
       var desc_13 = (form.decter.checked && form.decter_par.value == "2") ? aliqirrf + aliqinss + aliqfunp : 0;
       
       var salario = Math.round((bruto - aliqirrf - aliqinss - aliqfunp -
-          desc_13 - sindicato) * 100) / 100 - form.numOutros.value;
+          desc_13 - sindicato - aliqirrfferias) * 100) / 100 - form.numOutros.value;
       if(form.name == "myform") {
           liq1 = salario;
       } else {
