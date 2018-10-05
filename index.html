@@ -298,7 +298,7 @@
 									</select>
 									<input type="text" NAME="txFG" value="R$ 0,00" readonly>
 								</span>
-								<span style="padding-left: 25px;" onmouseover="nhpup.popup('O ocupante de Cargo de Direção pode receber o valor integral como substituto à remuneração ou como adicional, no valor de 60% do valor integral.');">
+								<span style="padding-left: 15px;" onmouseover="nhpup.popup('O ocupante de Cargo de Direção pode receber o valor integral como substituto à remuneração ou como adicional, no valor de 60% do valor integral.');">
 									CD:
 									<select name="ddCD" id="ddCD" onchange="nofg(this.form);calcSalario(this.form)">
 										<option value="0" selected>
@@ -322,7 +322,7 @@
 									<input type="radio" name="rdCD" value="1" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form)"
 										onKeyDown="calcSalario(this.form)" onKeyUp="calcSalario(this.form)">100%
 									<input type="text" NAME="txCD" value="R$ 0,00" readonly>
-								</span>
+								</span>								
 							</p>
 							<p>
 								<span>Carga horária:</span>
@@ -627,15 +627,20 @@
 						</div>
 						<div id="tab-prev1" class="tab-content1">
 							<p>
+								<span onmouseover="nhpup.popup('A contribuição sobre os valores recebidos a título de gratificação é opcional, conforme o Art. 4 § 2 da Lei 10.887/2004');">
+									<input type="checkbox" name="pssfgcd" value="PSSfgcd" onClick="calcSalario(this.form)"> Incluir valores de FG e CD no cálculo da contribuição.
+								</span>
+							</p>
+							<p>
 								<span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013, existe um teto no valor base da previdência. Os servidores anteriores a mudança ficaram no regime antigo. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">
 								<input type="checkbox" name="novopss" value="" onClick="calcSalario(this.form)" checked> Novo regime da Previdência (ingresso após 02/2013)
 								</span>
 							</p>
-							<p>
+							<!--<p>
 								Alíquota: 
 								11% (atual) <input type="radio" name="pss_aliq" value="0.11" checked onClick="calcSalario(this.form)" style="margin-right: 10px;">
 								14% (MP) <input type="radio" name="pss_aliq" value="0.14" onClick="calcSalario(this.form)">
-							</p>
+							</p>-->
 							<p>
 								<span onmouseover="nhpup.popup('Selecione Sim e então defina a alíquota ou a participação, caso tenha aderido à Funpresp.');">
 								Funpresp:</span>
@@ -644,8 +649,8 @@
 							</p>
 							<p>
 								Aderido: 
-								Não <input type="radio" name="funp_ad" value="nao" checked onClick="calcSalario(this.form)">
-								Sim <input type="radio" name="funp_ad" value="sim" onClick="calcSalario(this.form)">
+								<input type="radio" name="funp_ad" value="nao" onClick="calcSalario(this.form)" checked> Não
+								<input type="radio" name="funp_ad" value="sim" style="margin-left:15px;" onClick="calcSalario(this.form)"> Sim
 							</p>
 							<p>
 								<input type="radio" id="funp_plano_norm1" name="funp_plano" value="normal" onClick="calcSalario(this.form)" disabled>
@@ -1259,15 +1264,20 @@
 						</div>
 						<div id="tab-prev2" class="tab-content2">
 							<p>
+								<span onmouseover="nhpup.popup('A contribuição sobre os valores recebidos a título de gratificação é opcional, conforme o Art. 4 § 2 da Lei 10.887/2004');">
+									<input type="checkbox" name="pssfgcd" value="PSSfgcd" onClick="calcSalario(this.form)"> Incluir valores de FG e CD no cálculo da contribuição.
+								</span>
+							</p>
+							<p>
 								<span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013, existe um teto no valor base da previdência. Os servidores anteriores a mudança ficaram no regime antigo. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">
 								<input type="checkbox" name="novopss" value="" onClick="calcSalario(this.form)" checked> Novo regime da Previdência (ingresso após 02/2013)
 								</span>
 							</p>
-							<p>
+							<!--<p>
 								Alíquota: 
 								11% (atual) <input type="radio" name="pss_aliq" value="0.11" checked onClick="calcSalario(this.form)" style="margin-right: 10px;">
 								14% (MP) <input type="radio" name="pss_aliq" value="0.14" onClick="calcSalario(this.form)">
-							</p>
+							</p>-->
 							<p>
 								<span onmouseover="nhpup.popup('Selecione Sim e então defina a alíquota ou a participação, caso tenha aderido à Funpresp.');">
 								Funpresp:</span>
@@ -1276,8 +1286,8 @@
 							</p>
 							<p>
 								Aderido: 
-								Não <input type="radio" name="funp_ad" value="nao" onClick="calcSalario(this.form)" checked>
-								Sim <input type="radio" name="funp_ad" value="sim" onClick="calcSalario(this.form)">
+								<input type="radio" name="funp_ad" value="nao" onClick="calcSalario(this.form)" checked> Não
+								<input type="radio" name="funp_ad" value="sim" style="margin-left:15px;" onClick="calcSalario(this.form)"> Sim
 							</p>
 							<p>
 								<input type="radio" id="funp_plano_norm2" name="funp_plano" value="normal" onClick="calcSalario(this.form)" disabled>
