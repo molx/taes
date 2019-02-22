@@ -257,10 +257,12 @@ function valorFG(FG, periodo) {
     } else if (periodo == 8) {
         //até 12/2017
         valor = FG2017[FG];
-    } else if (periodo <= 9) {
-        //a partir de 2018
-        //perido 2019 nao implementado
+    } else if (periodo == 9) {
+        //a partir de 2018        
         valor = FG2018[FG];
+    } else if (periodo >= 10) {
+        //a partir de 2019
+        valor = FG2019[FG];
     }
     return valor;
 }
@@ -290,10 +292,12 @@ function valorCD(CD, periodo) {
     } else if (periodo == 8) {
         //até 12/2017
         valor = CD2017[CD]
-    } else {
+    } else if (periodo == 9){
         //A partir de 2018
-        valor = CD2018[CD]
-        //Tabelas de 2019 inserida mas sem o periodo ainda
+        valor = CD2018[CD]        
+    } else {
+        //A partir de 2019
+        valor = CD2019[CD]        
     }
     return valor;
 }
@@ -330,18 +334,9 @@ function calcSalario(form) {
     } else if (periodo == 7) {
         ftstep = 1.038;
         base = 1263.54;
-    } else if (periodo <= 9) {
+    } else {
         ftstep = 1.039;
         base = 1326.72;
-    } else if (periodo == 10) {
-        ftstep = 1.0405;
-        base = 1535.84;
-    } else if (periodo == 11) {
-        ftstep = 1.043;
-        base = 1960.17;
-    } else if (periodo == 12) {
-        ftstep = 1.0455;
-        base = 2501.73;
     }
     if (form.medico.checked) {
         base = base * 2;
@@ -435,9 +430,12 @@ function calcSalario(form) {
         tetoinss = 5189.82
     } else if (periodo < 9) {
         tetoinss = 5531.31
-    } else {
+    } else if (periodo == 9) {
         tetoinss = 5645.81
-    }
+    } else {
+	    tetoinss = 5839.45	
+	}
+	
     var aliqinss = 0;
 
     if (form.novopss.checked || baseinss < tetoinss) { // Se novo regime ou se estiver abaixo do teto
