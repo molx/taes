@@ -35,7 +35,7 @@
 			</script>
 			<script src="js/plugins.js"></script> -->
 		<script src="js/main.js"></script>
-		<script src="js/calc1122.js"></script>
+		<script src="js/compressed.js"></script>
 		<script type="text/javascript" src="js/nhpup_1.1.js"></script>
 	</head>
 	<body onLoad="firstload();">
@@ -624,10 +624,17 @@
 								<span onmouseover="nhpup.popup('A contribuição sobre os valores recebidos a título de gratificação é opcional, conforme o Art. 4 § 2 da Lei 10.887/2004');">
 									<input type="checkbox" name="pssfgcd" value="PSSfgcd" onClick="calcSalario(this.form)"> Incluir valores de FG e CD no cálculo da contribuição.
 								</span>
-							</p>
+							</p>							
+							<span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013, existe um teto no valor base da previdência. Os servidores anteriores a mudança ficaram no regime antigo. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">Regime da previdência:							
 							<p>
-								<span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013, existe um teto no valor base da previdência. Os servidores anteriores a mudança ficaram no regime antigo. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">
-								<input type="checkbox" name="novopss" value="" onClick="calcSalario(this.form)" checked> Novo regime da Previdência (ingresso após 02/2013)
+								<span onmouseover="nhpup.popup('´Para servidores que ingressaram até 2013, o PSS é cobrado como 11% sobre a remuneração total.');">
+									<input type="radio" name="novopss" value="antigo" onClick="calcSalario(this.form)"> Ingresso antes de 2013
+								</span>
+								<span style="margin-left:20px;" onmouseover="nhpup.popup('Para os servidores que entraram a partir 2013, o PSS é cobrado como 11% sobre o teto do PSS.');">
+									<input type="radio" name="novopss" value="novo" onClick="calcSalario(this.form)" checked> Ingresso após 2013
+								</span>
+								<span  style="margin-left:20px;" onmouseover="nhpup.popup('Na proposta de reforma do Governo Federal, a alíquota é progressiva, como no Imposto de Renda.');">
+									<input type="radio" name="novopss" value="reforma" onClick="calcSalario(this.form)"> Proposta de Reforma
 								</span>
 							</p>
 							<!--<p>
@@ -1256,9 +1263,16 @@
 									<input type="checkbox" name="pssfgcd" value="PSSfgcd" onClick="calcSalario(this.form)"> Incluir valores de FG e CD no cálculo da contribuição.
 								</span>
 							</p>
+							<span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013, existe um teto no valor base da previdência. Os servidores anteriores a mudança ficaram no regime antigo. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">Regime da previdência:
 							<p>
-								<span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013, existe um teto no valor base da previdência. Os servidores anteriores a mudança ficaram no regime antigo. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">
-								<input type="checkbox" name="novopss" value="" onClick="calcSalario(this.form)" checked> Novo regime da Previdência (ingresso após 02/2013)
+								<span onmouseover="nhpup.popup('Para servidores que ingressaram até 2013, o PSS é cobrado como 11% sobre a remuneração total.');">
+									<input type="radio" name="novopss" value="antigo" onClick="calcSalario(this.form)"> Ingresso antes de 2013
+								</span>
+								<span style="margin-left:20px;" onmouseover="nhpup.popup('Para os servidores que entraram a partir 2013, o PSS é cobrado como 11% sobre o teto do PSS.');">
+									<input type="radio" name="novopss" value="novo" onClick="calcSalario(this.form)" checked> Ingresso após 2013
+								</span>
+								<span  style="margin-left:20px;" onmouseover="nhpup.popup('Na proposta de reforma do Governo Federal, a alíquota é progressiva, como no Imposto de Renda.');">
+									<input type="radio" name="novopss" value="reforma" onClick="calcSalario(this.form)"> Proposta de Reforma
 								</span>
 							</p>
 							<!--<p>

@@ -131,6 +131,27 @@ function valorIRRF(base, periodo) {
     return Math.floor(aliquota * 100) / 100;
 }
 
+function valorPSS(base) {    
+	if (base <= 998.00) {
+		aliquota = base * 0.075;
+	} else if (base <= 2000.00 ) {
+		aliquota = base * 0.090 - 14.97;
+	} else if (base <= 3000.00) {
+		aliquota = base * 0.12 - 74.97;
+	} else if (base <=  5839.45) {
+		aliquota = base * 0.14 - 134.97;
+	} else if (base <=  10000.00) {
+		aliquota = base * 0.145 - 164.17;
+	} else if (base <=  20000.00) {
+		aliquota = base * 0.165 - 364.17;
+	} else if (base <=  39000.00) {
+		aliquota = base * 0.19 - 864.17;	
+	} else {
+		aliquota = base * 0.22 -  2034.17;
+	}
+    return Math.floor(aliquota * 100) / 100;
+}
+
 function dependentesIR(deps, periodo) {
     var aliq = 0;
     if (periodo == 1) { // Ano 2013
@@ -438,17 +459,20 @@ function calcSalario(form) {
 	
     var aliqinss = 0;
 
-    if (form.novopss.checked || baseinss < tetoinss) { // Se novo regime ou se estiver abaixo do teto
+    if (form.novopss.value == "novo" || baseinss < tetoinss) { // Se novo regime ou se estiver abaixo do teto
         if (baseinss > tetoinss) { //Se for maior que teto.
             baseinss = tetoinss;
         }
         aliqinss = baseinss * 0.11 //Novo regime, sempre 11%;
+	} else if (form.novopss.value == "reforma") {
+		aliqinss = valorPSS(baseinss);
     } else { // Regime antigo acima do teto
         // Até o teto sempre 11%, a partir daí 11% ou 14% dependendo da simulação
         aliqinss = tetoinss * 0.11 + (baseinss - tetoinss) * 0.11 //parseFloat(form.pss_aliq.value);  MP dos 14% foi revogada
     }
 
     if (form.pssfgcd.checked) {
+		// Não adaptado para a Reforma
         aliqinss = aliqinss + fungrat * 0.11 + cargodir * 0.11;
     }
     aliqinss = Math.floor(aliqinss * 100) / 100;
@@ -559,7 +583,7 @@ function inverterform(tipo) {
             form1.trans.checked, form1.gastoTrans.value, form1.alim
             .checked, form1.ddInsa.value, form1.numCreche.value,
             form1.sindicato.checked, form1.areaquali[0].checked,
-            form1.areaquali[1].checked, form1.novopss.checked,
+            form1.areaquali[1].checked, form1.novopss.value,
             form1.ddFunp.value, form1.numAnuenio.value, form1.funp_ad
             .value, form1.numFunpAlt.value, form1.numDepIRRF.value,
             form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
@@ -575,7 +599,7 @@ function inverterform(tipo) {
             form2.trans.checked, form2.gastoTrans.value, form2.alim
             .checked, form2.ddInsa.value, form2.numCreche.value,
             form2.sindicato.checked, form2.areaquali[0].checked,
-            form2.areaquali[1].checked, form2.novopss.checked,
+            form2.areaquali[1].checked, form2.novopss.value,
             form2.ddFunp.value, form2.numAnuenio.value, form2.funp_ad
             .value, form2.numFunpAlt.value, form2.numDepIRRF.value,
             form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
@@ -593,7 +617,7 @@ function inverterform(tipo) {
             form2.trans.checked, form2.gastoTrans.value, form2.alim
             .checked, form2.ddInsa.value, form2.numCreche.value,
             form2.sindicato.checked, form2.areaquali[0].checked,
-            form2.areaquali[1].checked, form2.novopss.checked,
+            form2.areaquali[1].checked, form2.novopss.value,
             form2.ddFunp.value, form2.numAnuenio.value, form2.funp_ad
             .value, form2.numFunpAlt.value, form2.numDepIRRF.value,
             form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
@@ -613,7 +637,7 @@ function inverterform(tipo) {
             form1.trans.checked, form1.gastoTrans.value, form1.alim
             .checked, form1.ddInsa.value, form1.numCreche.value,
             form1.sindicato.checked, form1.areaquali[0].checked,
-            form1.areaquali[1].checked, form1.novopss.checked,
+            form1.areaquali[1].checked, form1.novopss.value,
             form1.ddFunp.value, form1.numAnuenio.value, form1.funp_ad
             .value, form1.numFunpAlt.value, form1.numDepIRRF.value,
             form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
@@ -643,7 +667,7 @@ function inverterform(tipo) {
     form1.sindicato.checked = values2[15]
     form1.areaquali[0].checked = values2[16]
     form1.areaquali[1].checked = values2[17]
-    form1.novopss.checked = values2[18]
+    form1.novopss.value = values2[18]
     form1.ddFunp.value = values2[19]
     form1.numAnuenio.value = values2[20]
     form1.funp_ad.value = values2[21]
@@ -681,7 +705,7 @@ function inverterform(tipo) {
     form2.sindicato.checked = values1[15]
     form2.areaquali[0].checked = values1[16]
     form2.areaquali[1].checked = values1[17]
-    form2.novopss.checked = values1[18]
+    form2.novopss.value = values1[18]
     form2.ddFunp.value = values1[19]
     form2.numAnuenio.value = values1[20]
     form2.funp_ad.value = values1[21]
