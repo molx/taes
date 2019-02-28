@@ -131,7 +131,7 @@ function valorIRRF(base, periodo) {
     return Math.floor(aliquota * 100) / 100;
 }
 
-function valorPSS(base) {    
+function calcPSSreforma(base) {    
 	if (base <= 998.00) {
 		aliquota = base * 0.075;
 	} else if (base <= 2000.00 ) {
@@ -212,19 +212,19 @@ function valorSaude(bruto, ftidade, periodo) {
     }
 }
 
-function valorCreche(bruto, periodo, n) {
+function valorCreche(rem, periodo, n) {
     var teto = 95;
     if (periodo >= 6) {
         teto = 321;
     }
     var desc = 0;
-    if (bruto < 6200.8) {
+    if (rem < 6200.8) {
         desc = 0.05;
-    } else if (bruto < 12401.6) {
+    } else if (rem < 12401.6) {
         desc = 0.1;
-    } else if (bruto < 18602.4) {
+    } else if (rem < 18602.4) {
         desc = 0.15;
-    } else if (bruto < 24803.2) {
+    } else if (rem < 24803.2) {
         desc = 0.2;
     } else {
         desc = 0.25;
@@ -431,7 +431,9 @@ function calcSalario(form) {
             periodo) :
         0;
 
-    var creche = valorCreche(remuneracao, periodo, form.numCreche.value);
+	var basecreche = vencimento + urp + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio;
+	//basecreche aparentemente não leva em consideração o Incentivo à Qualificação - outros a ver
+    var creche = valorCreche(basecreche, periodo, form.numCreche.value);
 
     if (form.ferias.checked) {
         var ferias = (remuneracao + fungrat + cargodir) / 3
@@ -445,7 +447,7 @@ function calcSalario(form) {
 
     var bruto = remuneracao + saude + alimentacao + transporte +
         creche + fungrat + cargodir + noturno + ferias + decter;
-    var baseinss = remuneracao; //vencimento + urp + qualificacao;
+    var basepss = remuneracao; //vencimento + urp + qualificacao;
     var tetoinss = 4663.75
     if (periodo >= 6 && periodo < 8) {
         tetoinss = 5189.82
@@ -457,30 +459,32 @@ function calcSalario(form) {
 	    tetoinss = 5839.45	
 	}
 	
-    var aliqinss = 0;
-
-    if (form.novopss.value == "novo" || baseinss < tetoinss) { // Se novo regime ou se estiver abaixo do teto
-        if (baseinss > tetoinss) { //Se for maior que teto.
-            baseinss = tetoinss;
-        }
-        aliqinss = baseinss * 0.11 //Novo regime, sempre 11%;
-	} else if (form.novopss.value == "reforma") {
-		aliqinss = valorPSS(baseinss);
-    } else { // Regime antigo acima do teto
-        // Até o teto sempre 11%, a partir daí 11% ou 14% dependendo da simulação
-        aliqinss = tetoinss * 0.11 + (baseinss - tetoinss) * 0.11 //parseFloat(form.pss_aliq.value);  MP dos 14% foi revogada
+    var valorpss = 0;
+	
+	if (form.pssfgcd.checked) {		
+        basepss += fungrat + cargodir;
     }
+	
+    if (form.novopss.value == "rpc" && basepss > tetoinss) { // Se for regime complementar e se for maior que teto.
+        basepss = tetoinss;       
+    } 	
+	
+	if (form.reformaPSS.checked) {
+		valorpss = calcPSSreforma(basepss);
+	} else {
+		valorpss = basepss * 0.11;
+	}
 
     if (form.pssfgcd.checked) {
 		// Não adaptado para a Reforma
-        aliqinss = aliqinss + fungrat * 0.11 + cargodir * 0.11;
+        valorpss = valorpss + fungrat * 0.11 + cargodir * 0.11;
     }
-    aliqinss = Math.floor(aliqinss * 100) / 100;
+    valorpss = Math.floor(valorpss * 100) / 100;
 
     var aliqfunp = 0
 
     if (form.funp_ad.value == "sim") {
-        if (baseinss == tetoinss) { //Só pode ser ativo normal quem entrou depois de 02/2013 e recebe acima do teto da previdência
+        if (basepss == tetoinss) { //Só pode ser ativo normal quem entrou depois de 02/2013 e recebe acima do teto da previdência
             var basefunp = vencimento + urp + qualificacao - tetoinss;
             aliqfunp = basefunp * form.ddFunp.value;
             if (form.name == "myform") {
@@ -520,12 +524,12 @@ function calcSalario(form) {
     //Eu chutei que CD 60% nao incidia IR, mas pelo FB falaram que incide.
     //Caso não incida basta remover de baseirrf. Quando é 100%, cargodir = 0
     var baseirrf = vencimento + urp + qualificacao + ftinsa * vencimento +
-        fungrat + cargodir - aliqinss - aliqfunp - reducaoDepsIRRF;
+        fungrat + cargodir - valorpss - aliqfunp - reducaoDepsIRRF;
     var aliqirrf = valorIRRF(baseirrf, periodo);
 
-    var desc_13 = (form.decter.checked && form.decter_par.value == "2") ? aliqirrf + aliqinss + aliqfunp : 0;
+    var desc_13 = (form.decter.checked && form.decter_par.value == "2") ? aliqirrf + valorpss + aliqfunp : 0;
 
-    var salario = Math.round((bruto - aliqirrf - aliqinss - aliqfunp -
+    var salario = Math.round((bruto - aliqirrf - valorpss - aliqfunp -
         desc_13 - sindicato - aliqirrfferias) * 100) / 100 - form.numOutros.value;
     if (form.name == "myform") {
         liq1 = salario;
@@ -540,7 +544,7 @@ function calcSalario(form) {
     form.txResult.value = formatValor(salario);
     form.txInsa.value = formatValor(Math.floor(ftinsa * vencimento *
         100) / 100);
-    form.txInss.value = formatValor(Math.round(aliqinss * 100) / 100);
+    form.txInss.value = formatValor(Math.round(valorpss * 100) / 100);
     form.txBruto.value = formatValor(Math.round(bruto * 100) / 100);
     form.txIrrf.value = formatValor(Math.round(aliqirrf * 100) / 100);
     form.txSaude.value = formatValor(saude);
@@ -550,7 +554,7 @@ function calcSalario(form) {
     form.txCreche.value = formatValor(Math.round(creche * 100) / 100);
     form.txURP.value = formatValor(Math.round(urp * 100) / 100);
     form.txbIRRF.value = formatValor(Math.round(baseirrf * 100) / 100);
-    form.txbINSS.value = formatValor(Math.round(baseinss * 100) / 100);
+    form.txbINSS.value = formatValor(Math.round(basepss * 100) / 100);
     form.txdesconto.value = formatValor(Math.round((bruto - salario) * 100) / 100);
     form.txSindicato.value = formatValor(Math.round(sindicato * 100) /
         100);

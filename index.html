@@ -35,7 +35,7 @@
 			</script>
 			<script src="js/plugins.js"></script> -->
 		<script src="js/main.js"></script>
-		<script src="js/compressed.js"></script>
+		<script src="js/calc1122.js"></script>
 		<script type="text/javascript" src="js/nhpup_1.1.js"></script>
 	</head>
 	<body onLoad="firstload();">
@@ -625,18 +625,19 @@
 									<input type="checkbox" name="pssfgcd" value="PSSfgcd" onClick="calcSalario(this.form)"> Incluir valores de FG e CD no cálculo da contribuição.
 								</span>
 							</p>							
-							<span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013, existe um teto no valor base da previdência. Os servidores anteriores a mudança ficaram no regime antigo. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">Regime da previdência:							
+							<span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013 ou migraram para o RPC, existe um teto no valor base da previdência. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">Regime da previdência:</span>				
 							<p>
-								<span onmouseover="nhpup.popup('´Para servidores que ingressaram até 2013, o PSS é cobrado como 11% sobre a remuneração total.');">
-									<input type="radio" name="novopss" value="antigo" onClick="calcSalario(this.form)"> Ingresso antes de 2013
+								<span onmouseover="nhpup.popup('Para servidores que ingressaram até 02/2013, o PSS é cobrado como 11% sobre a remuneração total.');">
+									<input type="radio" name="novopss" value="rpps" onClick="calcSalario(this.form)"> Regime Próprio (RPPS)
 								</span>
-								<span style="margin-left:20px;" onmouseover="nhpup.popup('Para os servidores que entraram a partir 2013, o PSS é cobrado como 11% sobre o teto do PSS.');">
-									<input type="radio" name="novopss" value="novo" onClick="calcSalario(this.form)" checked> Ingresso após 2013
+								<span style="margin-left:20px;" onmouseover="nhpup.popup('Para os servidores que entraram a partir 02/2013 ou fizeram a migração, o PSS é cobrado como 11% sobre o teto do PSS.');">
+									<input type="radio" name="novopss" value="rpc" onClick="calcSalario(this.form)" checked> Regime Complementar (RPC)
 								</span>
-								<span  style="margin-left:20px;" onmouseover="nhpup.popup('Na proposta de reforma do Governo Federal, a alíquota é progressiva, como no Imposto de Renda.');">
-									<input type="radio" name="novopss" value="reforma" onClick="calcSalario(this.form)" disabled> Proposta de Reforma
+								<br/>
+								<span  onmouseover="nhpup.popup('Na proposta de reforma do Governo Federal, a alíquota do PSS é progressiva, como no Imposto de Renda.');">
+									<input type="checkbox" name="reformaPSS" value="reformaPSS" onClick="calcSalario(this.form)"> Proposta de Reforma 2019
 								</span>
-							</p>
+							<p>
 							<!--<p>
 								Alíquota: 
 								11% (atual) <input type="radio" name="pss_aliq" value="0.11" checked onClick="calcSalario(this.form)" style="margin-right: 10px;">
@@ -665,12 +666,10 @@
 									<option value="0.080">
 										8%
 									</option>
-									<option value="0.085">
+									<option value="0.085" selected>
 										8,5%
 									</option>
-								</select>
-							</p>
-							<p>
+								</select><br/>
 								<input type="radio" id="funp_plano_alt1" name="funp_plano" value="alt" onClick="calcSalario(this.form)" disabled>
 								Ativo alternativo. Participação: R$
 								<input type="number" id="numFunpAlt1" name="numFunpAlt" min="98.5" max="2000" step="0.5" value="200" style="width:60px" onClick="calcSalario(this.form)">
@@ -1262,19 +1261,20 @@
 								<span onmouseover="nhpup.popup('A contribuição sobre os valores recebidos a título de gratificação é opcional, conforme o Art. 4 § 2 da Lei 10.887/2004');">
 									<input type="checkbox" name="pssfgcd" value="PSSfgcd" onClick="calcSalario(this.form)"> Incluir valores de FG e CD no cálculo da contribuição.
 								</span>
-							</p>
-							<span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013, existe um teto no valor base da previdência. Os servidores anteriores a mudança ficaram no regime antigo. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">Regime da previdência:
+							</p>							
+							<span onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013 ou migraram para o RPC, existe um teto no valor base da previdência. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">Regime da previdência:</span>				
 							<p>
-								<span onmouseover="nhpup.popup('Para servidores que ingressaram até 2013, o PSS é cobrado como 11% sobre a remuneração total.');">
-									<input type="radio" name="novopss" value="antigo" onClick="calcSalario(this.form)"> Ingresso antes de 2013
+								<span onmouseover="nhpup.popup('Para servidores que ingressaram até 02/2013, o PSS é cobrado como 11% sobre a remuneração total.');">
+									<input type="radio" name="novopss" value="rpps" onClick="calcSalario(this.form)"> Regime Próprio (RPPS)
 								</span>
-								<span style="margin-left:20px;" onmouseover="nhpup.popup('Para os servidores que entraram a partir 2013, o PSS é cobrado como 11% sobre o teto do PSS.');">
-									<input type="radio" name="novopss" value="novo" onClick="calcSalario(this.form)" checked> Ingresso após 2013
+								<span style="margin-left:20px;" onmouseover="nhpup.popup('Para os servidores que entraram a partir 02/2013 ou fizeram a migração, o PSS é cobrado como 11% sobre o teto do PSS.');">
+									<input type="radio" name="novopss" value="rpc" onClick="calcSalario(this.form)" checked> Regime Complementar (RPC)
 								</span>
-								<span  style="margin-left:20px;" onmouseover="nhpup.popup('Na proposta de reforma do Governo Federal, a alíquota é progressiva, como no Imposto de Renda.');">
-									<input type="radio" name="novopss" value="reforma" onClick="calcSalario(this.form)" disabled> Proposta de Reforma
+								<br/>
+								<span  onmouseover="nhpup.popup('Na proposta de reforma do Governo Federal, a alíquota do PSS é progressiva, como no Imposto de Renda.');">
+									<input type="checkbox" name="reformaPSS" value="reformaPSS" onClick="calcSalario(this.form)"> Proposta de Reforma 2019
 								</span>
-							</p>
+							<p>
 							<!--<p>
 								Alíquota: 
 								11% (atual) <input type="radio" name="pss_aliq" value="0.11" checked onClick="calcSalario(this.form)" style="margin-right: 10px;">
@@ -1303,12 +1303,10 @@
 									<option value="0.080">
 										8%
 									</option>
-									<option value="0.085">
+									<option value="0.085" selected>
 										8,5%
 									</option>
-								</select>
-							</p>
-							<p>
+								</select><br/>
 								<input type="radio" id="funp_plano_alt2" name="funp_plano" value="alt" onClick="calcSalario(this.form)" disabled>
 								Ativo alternativo. Participação: R$
 								<input type="number"  id="numFunpAlt2" name="numFunpAlt" min="98.5" max="2000" step="0.5" value="200" style="width:60px" onClick="calcSalario(this.form)">
