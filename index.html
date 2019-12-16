@@ -35,7 +35,7 @@
 			</script>
 			<script src="js/plugins.js"></script> -->
 		<script src="js/main.js"></script>
-		<script src="js/compressed.js"></script>
+		<script src="js/calc1122.js"></script>
 		<script type="text/javascript" src="js/nhpup_1.1.js"></script>
 	</head>
 	<body onLoad="firstload();">
@@ -254,6 +254,10 @@
 										</option>
 									</select>
 								</span>
+								<span style="padding-left: 20px;" onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
+								<input type="checkbox" name="medico" value="medico" onClick="calcSalario(this.form)">
+								Médico/Veterinário                                        
+								</span>	
 							</p>
 							<p>
 								<span onmouseover="nhpup.popup('O adicional por Função Gratificada é pago a servidores que exercem cargos de chefia.');">
@@ -381,15 +385,22 @@
 							</p>
 							<p>
 								<span onmouseover="nhpup.popup('A URP é um adicional recebido em algumas IFES. É um assunto polêmico que está prestes a ser julgado no STF, com tendência de que seja removida dos servidores. Marque esta opção caso você receba URP. Veja o menu Carreira para mais informações.');">
-								<input type="checkbox" name="removeurp" value="removeURP" onClick="calcSalario(this.form)">
-								URP
-								</span>
-								<span style="padding-left: 25px;" onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
-								<input type="checkbox" name="medico" value="medico" onClick="calcSalario(this.form)">
-								Médico/Veterinário                                        
-								</span>
+								<!--<input type="checkbox" name="removeurp" value="removeURP" onClick="calcSalario(this.form)">-->
+								URP:
+								<select name="ddURP" id="ddURP" onchange="calcSalario(this.form)">
+									<option value="0" selected>
+										Não
+									</option>
+									<option value="1">
+										Referência antes Agosto/2016
+									</option>
+									<option value="2">
+										Referência atual
+									</option>									
+								</select>
+								</span>														
 								<span style="padding-left: 25px;" onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
-								Nº de dependentes IR:
+								Nº de dep. IR:
 								<input type="number" name="numDepIRRF" min="0" max="20" step="1" value="0"
 									style="width: 35px;" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form);"
 									onKeyUp="calcSalario(this.form);">
@@ -897,6 +908,10 @@
 										</option>
 									</select>
 								</span>
+								<span style="padding-left: 20px;" onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
+								<input type="checkbox" name="medico" value="medico" onClick="calcSalario(this.form)">
+								Médico/Veterinário                                        
+								</span>
 							</p>
 							<p>
 								<span>
@@ -1024,15 +1039,22 @@
 							</p>
 							<p>
 								<span onmouseover="nhpup.popup('A URP é um adicional recebido em algumas IFES. É um assunto polêmico que está prestes a ser julgado no STF, com tendência de que seja removida dos servidores. Marque esta opção caso você receba URP. Veja o menu Carreira para mais informações.');">
-								<input type="checkbox" name="removeurp" value="removeURP" onClick="calcSalario(this.form)">
-								URP
-								</span>
-								<span style="padding-left: 25px;" onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
-								<input type="checkbox" name="medico" value="medico" onClick="calcSalario(this.form)">
-								Médico/Veterinário                                        
-								</span>
+								<!--<input type="checkbox" name="removeurp" value="removeURP" onClick="calcSalario(this.form)">-->
+								URP:
+								<select name="ddURP" id="ddURP" onchange="calcSalario(this.form)">
+									<option value="0" selected>
+										Não
+									</option>
+									<option value="1">
+										Referência antes Agosto/2016
+									</option>
+									<option value="2">
+										Referência atual
+									</option>									
+								</select>
+								</span>								
 								<span style="padding-left: 25px;" onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
-								Nº de dependentes IR:
+								Nº de dep. IR:
 								<input type="number" name="numDepIRRF" min="0" max="20" step="1" value="0"
 									style="width: 35px;" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form);"
 									onKeyUp="calcSalario(this.form);">

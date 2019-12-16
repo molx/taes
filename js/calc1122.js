@@ -392,8 +392,16 @@ function calcSalario(form) {
         vencimento, form.gastoTrans.value) : 0;
     var ftinsa = form.ddInsa.value;
     var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked);
-    var urp = (form.removeurp.checked) ? vencimento * 0.2605 * (1 +
-        ftpg) : 0;
+    /*var urp = (form.removeurp.checked) ? vencimento * 0.2605 * (1 +
+        ftpg) : 0;*/
+	var urp = 0;
+	if (form.ddURP.value == 1) {
+		//Calcula a URP usando a tabela até Julho 2016, periodo = 6;
+		var vencURP = Math.floor(1197.67 * (Math.pow(1.038, ftvb)) * ftcarga * 100) / 100;		
+		urp = vencURP * 0.2605 * (1 + ftpg);
+	} else if (form.ddURP.value == 2) {
+		urp = vencimento * 0.2605 * (1 + ftpg);
+	}
     var qualificacao = ftpg * vencimento
     var remuneracao = vencimento + urp + qualificacao + Math.floor(
         ftinsa * vencimento * 100) / 100 + anuenio;
@@ -583,7 +591,7 @@ function inverterform(tipo) {
         var values1 = Array(form1.ddClasse.value, form1.ddProg.value,
             form1.ddFG.value, form1.ddNivel.value, form1.ddCargaH
             .value, form1.ddAno.value, form1.ddQuali.value, form1
-            .saude.checked, form1.ddIdade.value, form1.removeurp.checked,
+            .saude.checked, form1.ddIdade.value, form1.ddURP.value,
             form1.trans.checked, form1.gastoTrans.value, form1.alim
             .checked, form1.ddInsa.value, form1.numCreche.value,
             form1.sindicato.checked, form1.areaquali[0].checked,
@@ -599,7 +607,7 @@ function inverterform(tipo) {
         var values2 = Array(form2.ddClasse.value, form2.ddProg.value,
             form2.ddFG.value, form2.ddNivel.value, form2.ddCargaH
             .value, form2.ddAno.value, form2.ddQuali.value, form2
-            .saude.checked, form2.ddIdade.value, form2.removeurp.checked,
+            .saude.checked, form2.ddIdade.value, form2.ddURP.value,
             form2.trans.checked, form2.gastoTrans.value, form2.alim
             .checked, form2.ddInsa.value, form2.numCreche.value,
             form2.sindicato.checked, form2.areaquali[0].checked,
@@ -617,7 +625,7 @@ function inverterform(tipo) {
         var values2 = Array(form2.ddClasse.value, form2.ddProg.value,
             form2.ddFG.value, form2.ddNivel.value, form2.ddCargaH
             .value, form2.ddAno.value, form2.ddQuali.value, form2
-            .saude.checked, form2.ddIdade.value, form2.removeurp.checked,
+            .saude.checked, form2.ddIdade.value, form2.ddURP.value,
             form2.trans.checked, form2.gastoTrans.value, form2.alim
             .checked, form2.ddInsa.value, form2.numCreche.value,
             form2.sindicato.checked, form2.areaquali[0].checked,
@@ -637,7 +645,7 @@ function inverterform(tipo) {
         var values1 = Array(form1.ddClasse.value, form1.ddProg.value,
             form1.ddFG.value, form1.ddNivel.value, form1.ddCargaH
             .value, form1.ddAno.value, form1.ddQuali.value, form1
-            .saude.checked, form1.ddIdade.value, form1.removeurp.checked,
+            .saude.checked, form1.ddIdade.value, form1.ddURP.value,
             form1.trans.checked, form1.gastoTrans.value, form1.alim
             .checked, form1.ddInsa.value, form1.numCreche.value,
             form1.sindicato.checked, form1.areaquali[0].checked,
@@ -662,7 +670,7 @@ function inverterform(tipo) {
 
     form1.saude.checked = values2[7]
     form1.ddIdade.value = values2[8]
-    form1.removeurp.checked = values2[9]
+    form1.ddURP.value = values2[9]
     form1.trans.checked = values2[10]
     form1.gastoTrans.value = values2[11]
     form1.alim.checked = values2[12]
@@ -700,7 +708,7 @@ function inverterform(tipo) {
 
     form2.saude.checked = values1[7]
     form2.ddIdade.value = values1[8]
-    form2.removeurp.checked = values1[9]
+    form2.ddURP.value = values1[9]
     form2.trans.checked = values1[10]
     form2.gastoTrans.value = values1[11]
     form2.alim.checked = values1[12]
