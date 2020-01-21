@@ -468,7 +468,11 @@ function calcSalario(form) {
 	    tetoinss = 5839.45	
 	} else {
 		tetoinss = 6101.06
-	}
+	}	
+	//Base precisa ser definida antes da aliquota pra seleção correta
+    if (form.novopss.value == "rpc" && basepss > tetoinss) { // Se for regime complementar e se for maior que teto.
+        basepss = tetoinss;       
+    } 
 	
 	if (periodo >= 12) {
 		if (basepss <= 1045.00) {
@@ -494,11 +498,7 @@ function calcSalario(form) {
 	
 	if (form.pssfgcd.checked) {		
         basepss += fungrat + cargodir;
-    }
-	
-    if (form.novopss.value == "rpc" && basepss > tetoinss) { // Se for regime complementar e se for maior que teto.
-        basepss = tetoinss;       
-    } 	
+    }		
 	
 	valorpss = basepss * aliqpss;	
 
