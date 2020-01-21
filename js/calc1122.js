@@ -131,7 +131,7 @@ function valorIRRF(base, periodo) {
     return Math.floor(aliquota * 100) / 100;
 }
 
-function calcPSSreforma(base) {    
+/*function calcPSSreforma(base) {    
 	if (base <= 998.00) {
 		aliquota = base * 0.075;
 	} else if (base <= 2000.00 ) {
@@ -150,7 +150,7 @@ function calcPSSreforma(base) {
 		aliquota = base * 0.22 -  2034.17;
 	}
     return Math.floor(aliquota * 100) / 100;
-}
+}*/
 
 function dependentesIR(deps, periodo) {
     var aliq = 0;
@@ -457,14 +457,37 @@ function calcSalario(form) {
         creche + fungrat + cargodir + noturno + ferias + decter;
     var basepss = remuneracao; //vencimento + urp + qualificacao;
     var tetoinss = 4663.75
+	var aliqpss = 0.11
     if (periodo >= 6 && periodo < 8) {
         tetoinss = 5189.82
     } else if (periodo < 9) {
         tetoinss = 5531.31
     } else if (periodo == 9) {
         tetoinss = 5645.81
-    } else {
+    } else if (periodo == 10) {
 	    tetoinss = 5839.45	
+	} else {
+		tetoinss = 6101.06
+	}
+	
+	if (periodo >= 12) {
+		if (basepss <= 1045.00) {
+			aliqpss = 0.075;
+		} else if (basepss <= 2000) {
+			aliqpss = 0.09;
+		} else if (basepss <= 3000) {
+			aliqpss = 0.12;
+		} else if (basepss <= tetoinss) {
+			aliqpss = 0.14;
+		} else if (basepss <= 10000) {
+			aliqpss = 0.145;
+		} else if (basepss <= 20000) {
+			aliqpss = 0.165;
+		} else if (basepss <= 39000) {
+			aliqpss = 0.19;
+		} else {
+			aliqpss = 0.22;
+		} 
 	}
 	
     var valorpss = 0;
@@ -477,15 +500,10 @@ function calcSalario(form) {
         basepss = tetoinss;       
     } 	
 	
-	if (form.reformaPSS.checked) {
-		valorpss = calcPSSreforma(basepss);
-	} else {
-		valorpss = basepss * 0.11;
-	}
+	valorpss = basepss * aliqpss;	
 
-    if (form.pssfgcd.checked) {
-		// Não adaptado para a Reforma
-        valorpss = valorpss + fungrat * 0.11 + cargodir * 0.11;
+    if (form.pssfgcd.checked) {		
+        valorpss = valorpss + fungrat * aliqpss + cargodir * aliqpss;
     }
     valorpss = Math.floor(valorpss * 100) / 100;
 

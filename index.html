@@ -35,7 +35,7 @@
 			</script>
 			<script src="js/plugins.js"></script> -->
 		<script src="js/main.js"></script>
-		<script src="js/calc1122.js"></script>
+		<script src="js/compressed.js"></script>
 		<script type="text/javascript" src="js/nhpup_1.1.js"></script>
 	</head>
 	<body onLoad="firstload();">
@@ -151,13 +151,19 @@
 											Entre 08/2016 e 12/2016
 										</option>
 										<option value="8">
-											Após 01/2017
+											Entre 01/2017 e 12/2017
 										</option>
 										<option value="9">
-											Após 01/2018
+											Entre 01/2018 e 12/2018
 										</option>
-										<option value="10" selected>
-											Após 01/2019
+										<option value="10">
+											Entre 01/2019 e 12/2019
+										</option>
+										<option value="11" selected>
+											Entre 01/2020 e 02/2020
+										</option>
+										<option value="12">
+											Após 03/2020
 										</option>
 									</select>
 								</span>
@@ -650,16 +656,8 @@
 								<span style="margin-left:20px;" onmouseover="nhpup.popup('Para os servidores que entraram a partir 02/2013 ou fizeram a migração, o PSS é cobrado como 11% sobre o teto do PSS.');">
 									<input type="radio" name="novopss" value="rpc" onClick="calcSalario(this.form)" checked> Regime Complementar (RPC)
 								</span>
-								<br/>
-								<span  onmouseover="nhpup.popup('Na proposta de reforma do Governo Federal, a alíquota do PSS é progressiva, como no Imposto de Renda.');">
-									<input type="checkbox" name="reformaPSS" value="reformaPSS" onClick="calcSalario(this.form)"> Proposta de Reforma 2019
-								</span>
-							<p>
-							<!--<p>
-								Alíquota: 
-								11% (atual) <input type="radio" name="pss_aliq" value="0.11" checked onClick="calcSalario(this.form)" style="margin-right: 10px;">
-								14% (MP) <input type="radio" name="pss_aliq" value="0.14" onClick="calcSalario(this.form)">
-							</p>-->
+								<br/>								
+							</p>							
 							<p>
 								<span onmouseover="nhpup.popup('Selecione Sim e então defina a alíquota ou a participação, caso tenha aderido à Funpresp.');">
 								Funpresp:</span>
@@ -805,13 +803,19 @@
 											Entre 08/2016 e 12/2016
 										</option>
 										<option value="8">
-											Após 01/2017
+											Entre 01/2017 e 12/2017
 										</option>
 										<option value="9">
-											Após 01/2018
+											Entre 01/2018 e 12/2018
 										</option>
-										<option value="10" selected>
-											Após 01/2019
+										<option value="10">
+											Entre 01/2019 e 12/2019
+										</option>
+										<option value="11" selected>
+											Entre 01/2020 e 02/2020
+										</option>
+										<option value="12">
+											Após 03/2020
 										</option>
 									</select>
 								</span>
@@ -1304,16 +1308,8 @@
 								<span style="margin-left:20px;" onmouseover="nhpup.popup('Para os servidores que entraram a partir 02/2013 ou fizeram a migração, o PSS é cobrado como 11% sobre o teto do PSS.');">
 									<input type="radio" name="novopss" value="rpc" onClick="calcSalario(this.form)" checked> Regime Complementar (RPC)
 								</span>
-								<br/>
-								<span  onmouseover="nhpup.popup('Na proposta de reforma do Governo Federal, a alíquota do PSS é progressiva, como no Imposto de Renda.');">
-									<input type="checkbox" name="reformaPSS" value="reformaPSS" onClick="calcSalario(this.form)"> Proposta de Reforma 2019
-								</span>
-							<p>
-							<!--<p>
-								Alíquota: 
-								11% (atual) <input type="radio" name="pss_aliq" value="0.11" checked onClick="calcSalario(this.form)" style="margin-right: 10px;">
-								14% (MP) <input type="radio" name="pss_aliq" value="0.14" onClick="calcSalario(this.form)">
-							</p>-->
+								<br/>								
+							</p>							
 							<p>
 								<span onmouseover="nhpup.popup('Selecione Sim e então defina a alíquota ou a participação, caso tenha aderido à Funpresp.');">
 								Funpresp:</span>
