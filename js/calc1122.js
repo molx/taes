@@ -473,6 +473,9 @@ function calcSalario(form) {
     if (form.novopss.value == "rpc" && basepss > tetoinss) { // Se for regime complementar e se for maior que teto.
         basepss = tetoinss;       
     } 
+	if (form.pssfgcd.checked) {		
+        basepss += fungrat + cargodir;
+    }	
 	
 	if (periodo >= 12) {
 		if (basepss <= 1045.00) {
@@ -494,12 +497,7 @@ function calcSalario(form) {
 		} 
 	}
 	
-    var valorpss = 0;
-	
-	if (form.pssfgcd.checked) {		
-        basepss += fungrat + cargodir;
-    }		
-	
+    var valorpss = 0;	
 	valorpss = basepss * aliqpss;	
 
     if (form.pssfgcd.checked) {		
