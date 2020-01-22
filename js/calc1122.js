@@ -131,6 +131,30 @@ function valorIRRF(base, periodo) {
     return Math.floor(aliquota * 100) / 100;
 }
 
+function calcPSS(periodo, base, teto) {
+	var valor = 0;
+	if (periodo < 12) {
+		valor = base * 0.11;
+	} else {		
+		if (base <= 1045.00) { //salario minimo
+            valor = 0.075 * base;
+        } else if (base <= 2000) {
+            valor = base * 0.09 - 15.68;
+        } else if (base <= 3000) {
+            valor = base * 0.12 - 75.68;
+        } else if (base <= teto) { 
+            valor = base * 0.14 - 135.68;
+        } else if (base <= 10000) { 
+            valor = base * 0.145 - 166.18;
+        } else if (base <= 39000) { 
+            valor = base * 0.165 - 366.18;
+        } else { //teto PSS
+            valor = base * 0.22 - 2511.18;
+        } 
+	}
+	return Math.floor(valor * 100) / 100;
+}
+
 /*function calcPSSreforma(base) {    
 	if (base <= 998.00) {
 		aliquota = base * 0.075;
@@ -456,60 +480,35 @@ function calcSalario(form) {
     var bruto = remuneracao + saude + alimentacao + transporte +
         creche + fungrat + cargodir + noturno + ferias + decter;
     var basepss = remuneracao; //vencimento + urp + qualificacao;
-    var tetoinss = 4663.75
-	var aliqpss = 0.11
+    var tetopss = 4663.75
+	
     if (periodo >= 6 && periodo < 8) {
-        tetoinss = 5189.82
+        tetopss = 5189.82
     } else if (periodo < 9) {
-        tetoinss = 5531.31
+        tetopss = 5531.31
     } else if (periodo == 9) {
-        tetoinss = 5645.81
+        tetopss = 5645.81
     } else if (periodo == 10) {
-	    tetoinss = 5839.45	
+	    tetopss = 5839.45	
 	} else {
-		tetoinss = 6101.06
+		tetopss = 6101.06
 	}	
-	//Base precisa ser definida antes da aliquota pra seleção correta
-    if (form.novopss.value == "rpc" && basepss > tetoinss) { // Se for regime complementar e se for maior que teto.
-        basepss = tetoinss;       
-    } 
-	if (form.pssfgcd.checked) {		
+	
+    if (form.pssfgcd.checked) {		
         basepss += fungrat + cargodir;
+    }
+	
+	if (form.novopss.value == "rpc" && basepss > tetopss) { // Se for regime complementar e se for maior que teto.
+        basepss = tetopss;       
     }	
 	
-	if (periodo >= 12) {
-		if (basepss <= 1045.00) {
-			aliqpss = 0.075;
-		} else if (basepss <= 2000) {
-			aliqpss = 0.09;
-		} else if (basepss <= 3000) {
-			aliqpss = 0.12;
-		} else if (basepss <= tetoinss) {
-			aliqpss = 0.14;
-		} else if (basepss <= 10000) {
-			aliqpss = 0.145;
-		} else if (basepss <= 20000) {
-			aliqpss = 0.165;
-		} else if (basepss <= 39000) {
-			aliqpss = 0.19;
-		} else {
-			aliqpss = 0.22;
-		} 
-	}
-	
-    var valorpss = 0;	
-	valorpss = basepss * aliqpss;	
-
-    if (form.pssfgcd.checked) {		
-        valorpss = valorpss + fungrat * aliqpss + cargodir * aliqpss;
-    }
-    valorpss = Math.floor(valorpss * 100) / 100;
-
+	var valorpss = calcPSS(periodo, basepss, tetopss);	
+    
     var aliqfunp = 0
 
     if (form.funp_ad.value == "sim") {
-        if (basepss == tetoinss) { //Só pode ser ativo normal quem entrou depois de 02/2013 e recebe acima do teto da previdência
-            var basefunp = vencimento + urp + qualificacao - tetoinss;
+        if (basepss == tetopss) { //Só pode ser ativo normal quem entrou depois de 02/2013 e recebe acima do teto da previdência
+            var basefunp = vencimento + urp + qualificacao - tetopss;
             aliqfunp = basefunp * form.ddFunp.value;
             if (form.name == "myform") {
                 document.getElementById("funp_plano_norm1").checked =
