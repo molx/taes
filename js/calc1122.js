@@ -138,18 +138,20 @@ function calcPSS(periodo, base, teto) {
 	} else {		
 		if (base <= 1045.00) { //salario minimo
             valor = 0.075 * base;
-        } else if (base <= 2000) {
+        } else if (base <= 2089.60) {
             valor = base * 0.09 - 15.68;
-        } else if (base <= 3000) {
-            valor = base * 0.12 - 75.68;
+        } else if (base <= 3134.40) {
+            valor = base * 0.12 - 78.36;
         } else if (base <= teto) { 
-            valor = base * 0.14 - 135.68;
-        } else if (base <= 10000) { 
-            valor = base * 0.145 - 166.18;
-        } else if (base <= 39000) { 
-            valor = base * 0.165 - 366.18;
-        } else { //teto PSS
-            valor = base * 0.22 - 2511.18;
+            valor = base * 0.14 - 141.05;
+        } else if (base <= 10448.00) { 
+            valor = base * 0.145 - 171.56;
+        } else if (base <= 20896.20) { 
+            valor = base * 0.165 - 380.52;
+        } else if (base <= 40474.20) { 
+            valor = base * 0.19 - 902.92;
+        } else {
+            valor = base * 0.22 - 2117.14;
         } 
 	}
 	return Math.floor(valor * 100) / 100;
