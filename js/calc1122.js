@@ -484,17 +484,19 @@ function calcSalario(form) {
     var basepss = remuneracao; //vencimento + urp + qualificacao;
     var tetopss = 4663.75
 	
-    if (periodo >= 6 && periodo < 8) {
+    if (periodo == 6 || periodo == 7) {
         tetopss = 5189.82
-    } else if (periodo < 9) {
+    } else if (periodo == 8) {
         tetopss = 5531.31
     } else if (periodo == 9) {
         tetopss = 5645.81
     } else if (periodo == 10) {
 	    tetopss = 5839.45	
-	} else {
+	} else if (periodo == 11 || periodo == 12) {
 		tetopss = 6101.06
-	}	
+	}	else {
+        tetopss = 6433.57
+    }
 	
     if (form.pssfgcd.checked) {		
         basepss += fungrat + cargodir;
