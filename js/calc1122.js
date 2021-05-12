@@ -163,11 +163,11 @@ function calcPSS(periodo, base, teto) {
         } else if (base <= 6433.57) { //teto
             valor = base * 0.14 - 148.70;
         } else if (base <= 11017.42) { 
-            valor = base * 0.145 - 180.86;
+            valor = base * 0.145 - 180.87;
         } else if (base <= 22034.83) { 
-            valor = base * 0.165 - 401.23;
+            valor = base * 0.165 - 401.22;
         } else if (base <= 42967.92) { 
-            valor = base * 0.19 - 952.10;
+            valor = base * 0.19 - 952.09;
         } else {
             valor = base * 0.22 - 2241.13;
         } 
