@@ -421,10 +421,15 @@ function calcSalario(form) {
     /*var urp = (form.removeurp.checked) ? vencimento * 0.2605 * (1 +
         ftpg) : 0;*/
 	var urp = 0;
+	form.numURP.disabled = true;
 	if (form.ddURP.value == 1) {
+		/* Na verdade o valor foi totalmente congelado, não só a tabela
 		//Calcula a URP usando a tabela até Julho 2016, periodo = 6;
 		var vencURP = Math.floor(1197.67 * (Math.pow(1.038, ftvb)) * ftcarga * 100) / 100;		
 		urp = vencURP * 0.2605 * (1 + ftpg);
+		*/
+		form.numURP.disabled = false;
+		urp = parseFloat(form.numURP.value);
 	} else if (form.ddURP.value == 2) {
 		urp = vencimento * 0.2605 * (1 + ftpg);
 	}
@@ -620,8 +625,8 @@ function inverterform(tipo) {
             form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
             form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked,
             form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked,
-            form1.decter_par.value, form1.ddSindTipo.value, //form1.pss_aliq.value, 
-            form1.numOutros.value);
+            form1.decter_par.value, form1.ddSindTipo.value, 0,//form1.pss_aliq.value, 
+            form1.numOutros.value, form1.numURP.value);
 
         var values2 = Array(form2.ddClasse.value, form2.ddProg.value,
             form2.ddFG.value, form2.ddNivel.value, form2.ddCargaH
@@ -636,8 +641,8 @@ function inverterform(tipo) {
             form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
             form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked,
             form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked,
-            form2.decter_par.value, form2.ddSindTipo.value, //form2.pss_aliq.value, 
-            form2.numOutros.value);
+            form2.decter_par.value, form2.ddSindTipo.value, 0,//form2.pss_aliq.value, 
+            form2.numOutros.value, form2.numURP.value);
 
     } else if (tipo == "cima") {
 
@@ -654,8 +659,8 @@ function inverterform(tipo) {
             form2.ddIdadeDep1.value, form2.ddIdadeDep2.value,
             form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked,
             form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked,
-            form2.decter_par.value, form2.ddSindTipo.value, //form2.pss_aliq.value, 
-            form2.numOutros.value);
+            form2.decter_par.value, form2.ddSindTipo.value, 0,//form2.pss_aliq.value, 
+            form2.numOutros.value, form2.numURP.value);
 
         var values1 = values2;
 
@@ -674,8 +679,8 @@ function inverterform(tipo) {
             form1.ddIdadeDep1.value, form1.ddIdadeDep2.value,
             form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked,
             form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked,
-            form1.decter_par.value, form1.ddSindTipo.value, //form1.pss_aliq.value,
-            form1.numOutros.value);
+            form1.decter_par.value, form1.ddSindTipo.value, 0,//form1.pss_aliq.value,
+            form1.numOutros.value, form1.numURP.value);
 
         var values2 = values1;
     }
@@ -716,7 +721,7 @@ function inverterform(tipo) {
     form1.ddSindTipo.value = values2[33]
     //form1.pss_aliq.value = values2[34]
     form1.numOutros.value = values2[35]
-
+	form1.numURP.value = values1[36]
 
     form2.ddClasse.value = values1[0]
     form2.ddProg.value = values1[1]
@@ -754,6 +759,7 @@ function inverterform(tipo) {
     form2.ddSindTipo.value = values1[33]
     //form2.pss_aliq.value = values1[34]
     form2.numOutros.value = values1[35]
+	form2.numURP.value = values1[36]
 
     updateQuali(form1, values2[0])
     updateQuali(form2, values1[0])

@@ -139,7 +139,7 @@
 								<span onmouseover="nhpup.popup('Vários valores dependem do período do salário. Selecione o período em que o salário seria recebido, independente de seu ingresso na IFES. Esta opção tem maior chance de erros para períodos anteriores ao atual.');">
 									Período do pagamento: 
 									<select name="ddAno" id="ddAno" onchange="calcSalario(this.form)">
-										<option value="1">
+										<!--<option value="1">
 											Até 12/2013
 										</option>
 										<option value="2">
@@ -153,7 +153,7 @@
 										</option>
 										<option value="5">
 											Entre 03/2015 e 12/2015
-										</option>
+										</option>-->
 										<option value="6">
 											Entre 01/2016 e 07/2016
 										</option>
@@ -403,7 +403,7 @@
 								</span>
 							</p>
 							<p>
-								<span onmouseover="nhpup.popup('A URP é um adicional recebido em algumas IFES. É um assunto polêmico que está prestes a ser julgado no STF, com tendência de que seja removida dos servidores. Marque esta opção caso você receba URP. Veja o menu Carreira para mais informações.');">
+								<span onmouseover="nhpup.popup('A URP é um adicional recebido em algumas IFES. É um assunto polêmico que está aguardando julgamento no STF, com tendência de que seja removida dos servidores. Marque esta opção caso você receba URP. Veja o menu Carreira para mais informações.');">
 								<!--<input type="checkbox" name="removeurp" value="removeURP" onClick="calcSalario(this.form)">-->
 								URP:
 								<select name="ddURP" id="ddURP" onchange="calcSalario(this.form)">
@@ -411,12 +411,13 @@
 										Não
 									</option>
 									<option value="1">
-										Referência antes Agosto/2016
+										Congelada
 									</option>
 									<option value="2">
-										Referência atual
+										Variável
 									</option>									
 								</select>
+								R$<input type="number" name="numURP" min="0" max="10000" step="0.01" value="0" style="width:80px" onkeypress="calcSalario(this.form)" onkeydown="calcSalario(this.form)" onkeyup="calcSalario(this.form)" onclick="calcSalario(this.form)" disabled>
 								</span>														
 								<span style="padding-left: 25px;" onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
 								Nº de dep. IR:
@@ -794,7 +795,7 @@
 								<span onmouseover="nhpup.popup('Vários valores dependem do período do salário. Selecione o período em que o salário seria recebido, independente de seu ingresso na IFES. Esta opção tem maior chance de erros para períodos anteriores ao atual.');">
 									Período do pagamento: 
 									<select name="ddAno" id="ddAno" onchange="calcSalario(this.form)">
-										<option value="1">
+										<!--<option value="1">
 											Até 12/2013
 										</option>
 										<option value="2">
@@ -808,7 +809,7 @@
 										</option>
 										<option value="5">
 											Entre 03/2015 e 12/2015
-										</option>
+										</option>-->
 										<option value="6">
 											Entre 01/2016 e 07/2016
 										</option>
@@ -1058,7 +1059,7 @@
 								</span>
 							</p>
 							<p>
-								<span onmouseover="nhpup.popup('A URP é um adicional recebido em algumas IFES. É um assunto polêmico que está prestes a ser julgado no STF, com tendência de que seja removida dos servidores. Marque esta opção caso você receba URP. Veja o menu Carreira para mais informações.');">
+								<span onmouseover="nhpup.popup('A URP é um adicional recebido em algumas IFES. É um assunto polêmico que está aguardando julgamento no STF, com tendência de que seja removida dos servidores. Marque esta opção caso você receba URP. Veja o menu Carreira para mais informações.');">
 								<!--<input type="checkbox" name="removeurp" value="removeURP" onClick="calcSalario(this.form)">-->
 								URP:
 								<select name="ddURP" id="ddURP" onchange="calcSalario(this.form)">
@@ -1066,13 +1067,14 @@
 										Não
 									</option>
 									<option value="1">
-										Referência antes Agosto/2016
+										Congelada
 									</option>
 									<option value="2">
-										Referência atual
+										Variável
 									</option>									
 								</select>
-								</span>								
+								R$<input type="number" name="numURP" min="0" max="10000" step="0.01" value="0" style="width:80px" onkeypress="calcSalario(this.form)" onkeydown="calcSalario(this.form)" onkeyup="calcSalario(this.form)" onclick="calcSalario(this.form)" disabled>
+								</span>							
 								<span style="padding-left: 25px;" onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
 								Nº de dep. IR:
 								<input type="number" name="numDepIRRF" min="0" max="20" step="1" value="0"
