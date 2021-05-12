@@ -135,14 +135,14 @@ function calcPSS(periodo, base, teto) {
 	var valor = 0;
 	if (periodo < 12) {
 		valor = base * 0.11;
-	} else {		
+	} else if (periodo == 12) { //2020
 		if (base <= 1045.00) { //salario minimo
             valor = 0.075 * base;
         } else if (base <= 2089.60) {
             valor = base * 0.09 - 15.68;
         } else if (base <= 3134.40) {
             valor = base * 0.12 - 78.36;
-        } else if (base <= teto) { 
+        } else if (base <= 6101.06) { // teto
             valor = base * 0.14 - 141.05;
         } else if (base <= 10448.00) { 
             valor = base * 0.145 - 171.56;
@@ -152,6 +152,24 @@ function calcPSS(periodo, base, teto) {
             valor = base * 0.19 - 902.92;
         } else {
             valor = base * 0.22 - 2117.14;
+        } 
+	} else { //2021
+		if (base <= 1100.00) { //salario minimo
+            valor = 0.075 * base;
+        } else if (base <= 2203.48) {
+            valor = base * 0.09 - 16.50;
+        } else if (base <= 3305.22) {
+            valor = base * 0.12 - 82.60;
+        } else if (base <= 6433.57) { //teto
+            valor = base * 0.14 - 148.70;
+        } else if (base <= 11017.42) { 
+            valor = base * 0.145 - 180.86;
+        } else if (base <= 22034.83) { 
+            valor = base * 0.165 - 401.23;
+        } else if (base <= 42967.92) { 
+            valor = base * 0.19 - 952.10;
+        } else {
+            valor = base * 0.22 - 2241.13;
         } 
 	}
 	return Math.floor(valor * 100) / 100;
