@@ -25,6 +25,10 @@ html {
 	background-color: #bbb;
 }
 
+html, body {
+  overflow-x:scroll;
+}
+
 header {
 	margin: 0 0 1em 0;
 	padding-top: 5px;
@@ -139,10 +143,6 @@ textarea {
 	border-bottom: 1px solid #505050;
 }
 
-.titleHolder {
-	width: 1000px;
-}
-
 .fb-like {
 	float: left;
 	width: 49px;
@@ -166,12 +166,12 @@ textarea {
 
 #maindiv,
 #maindiv3 {
-	width: 1000px;
+	max-width: 1000px;
 	margin: 0 auto;
 }
 
 #maindiv2 {
-	width: 1000px;
+	max-width: 1000px;
 	margin: -1em auto 0 auto;
 }
 
@@ -182,15 +182,16 @@ textarea {
 #divdata,
 #divdata2 {
 	/*float:left;    */
-	display: table-cell;
+	display: inline-block;
 	/*margin: 0 auto;*/
 	vertical-align: top;
+	text-align: left;
 }
 
 #divresults1,
 #divresults2 {
 	padding: 0 5px;
-	width: 400px;
+	/*width: 400px;*/
 	text-align: left;
 	overflow: auto;
 	margin: 31px 0 0 5px;
@@ -198,6 +199,7 @@ textarea {
 	min-height: 261px;
 	background-color: #FCFCFC;
 	box-shadow: 0px 2px 2px #6f6f6f;
+	display: inline-block;
 }
 
 #divresults1_1,
@@ -333,7 +335,6 @@ ol {
 
 #div_botoes {
 	text-align: center;
-	width: 1000px;
 	margin: 5px auto 0 auto;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -348,10 +349,11 @@ ol {
 }
 
 .calcform {
-	display: table;
+	/*display: table;
 	border-collapse: separate;
-	/*border-spacing: 10px;*/
+	border-spacing: 10px;*/
 	height: 100%;
+	text-align: center;
 }
 
 .centerImg {
@@ -493,6 +495,18 @@ ol {
 
 @media only screen and (min-width: 35em) {
 	/* Style adjustments for viewports that meet the condition */
+}
+
+@media (max-width: 800px) {
+	#maindiv2 {
+		margin: 0 auto 0 auto;
+	}
+}
+
+@media (max-width: 1000px) {
+	#maindiv {
+		padding: 0 1em;
+	}
 }
 
 @media print,
