@@ -9,7 +9,7 @@ $(document).ready(function() {
         $(tab).fadeIn();
     });
     
-    $(".tabs-menu2 a").click(function(event) {
+	$(".tabs-menu2 a").click(function(event) {
         event.preventDefault();
         $(this).parent().addClass("current");
         $(this).parent().siblings().removeClass("current");

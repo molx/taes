@@ -138,17 +138,14 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+.titleHolder {
+	text-align:center;
+}
+
 .mainTitle {
 	margin: 0 auto;
 	border-bottom: 1px solid #505050;
-}
-
-.fb-like {
-	float: left;
-	width: 49px;
-	height: 50px;
-	margin-top: -10px;
-	margin-left: 10px;
+	display: inline-block;
 }
 
 .fb-page {
@@ -157,11 +154,15 @@ textarea {
   margin-left: 10px;*/
 }
 
-#cbajuda {
-	float: right;
+.cbajuda {
 	position: relative;
 	top: 20px;
 	margin-right: 5px;
+	width: 350px;
+	display: inline-block;
+}
+.cbajuda > div {
+	float: right;
 }
 
 #maindiv,
@@ -179,8 +180,7 @@ textarea {
 	clear: both;
 }
 
-#divdata,
-#divdata2 {
+.divdata {
 	/*float:left;    */
 	display: inline-block;
 	/*margin: 0 auto;*/
@@ -188,10 +188,9 @@ textarea {
 	text-align: left;
 }
 
-#divresults1,
-#divresults2 {
+.divresults {
 	padding: 0 5px;
-	/*width: 400px;*/
+	max-width: 380px;
 	text-align: left;
 	overflow: auto;
 	margin: 31px 0 0 5px;
@@ -202,15 +201,19 @@ textarea {
 	display: inline-block;
 }
 
-#divresults1_1,
-#divresults2_1 {
+.divresults > div {
+	
+	display: inline-block;
+	line-height: 2em;
+}
+
+.divresults_col {
 	margin-left: 0;
 	float: left;
 	/*margin-top: 20px;*/
 }
 
-#divresults1_2,
-#divresults2_2 {
+.divresults_2 {
 	margin-left: 10px;
 	float: right;
 	/*margin-top: 20px;*/
@@ -229,7 +232,7 @@ footer {
 }
 
 .footer-disclaimer {
-	width: 600px;
+	max-width: 600px;
 	margin: 0 auto;
 }
 
@@ -252,12 +255,12 @@ footer {
 }
 
 .hrsaude {
-	width: 570px;
+	width: 98%;
 	margin: 0.5em 0 1.5em 0;
 }
 
 hr {
-	width: 500px;
+	width: 80%;
 	margin: 0 auto;
 	display: table;
 }
@@ -307,7 +310,7 @@ ol {
 	margin: 10px 0 0 0;
 	text-align: center;
 	background-color: #DDDDDD;
-	height: 2em;
+	min-height: 2em;
 	box-shadow: 0px 2px 2px #6f6f6f;
 }
 
@@ -507,6 +510,28 @@ ol {
 	#maindiv {
 		padding: 0 1em;
 	}
+	
+	.titleHolder {
+		max-width: auto;
+		margin: 0 auto;
+	}
+	
+	.mainTitle {		
+		display: block;
+	}
+
+	.fb-page {
+		float: none;
+	}
+
+	.cbajuda {		
+		top: 0;
+		width: auto;
+	}
+	.cbajuda > div {
+		float: none;
+	}
+
 }
 
 @media print,

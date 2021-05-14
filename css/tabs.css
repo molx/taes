@@ -1,5 +1,5 @@
 /** Source: http://jsfiddle.net/syahrasi/us8uc/ */
-.tabs-menu1, .tabs-menu2 {
+.tabs-menu {
     height: 30px;
     /**float: left;*/
     clear: both;
@@ -11,11 +11,11 @@ ul {
   list-style-type: none;
 }
 
-.tabs-menu1 ul, .tabs-menu2 ul {
+.tabs-menu ul {
   margin-top: 0;
 }
 
-.tabs-menu1 li, .tabs-menu2 li {
+.tabs-menu li {
     height: 30px;
     line-height: 30px;
     float: left;
@@ -28,11 +28,11 @@ ul {
 	transition: background-color 0.3s;
 }
 
-.tabs-menu1 li:hover, .tabs-menu2 li:hover {
+.tabs-menu li:hover {
     background-color: #FCFCFC;
 }
 
-.tabs-menu1 li.current, .tabs-menu2 li.current {
+.tabs-menu li.current {
     height: 31px;
     position: relative;
     background-color: #fcfcfc;
@@ -40,14 +40,14 @@ ul {
     z-index: 5;
 }
 
-.tabs-menu1 li a, .tabs-menu2 li a {
+.tabs-menu li a {
     padding: 5px 10px;
     text-transform: uppercase;
     color: #000;
     text-decoration: none; 
 }
 
-.tabs-menu1 .current a, .tabs-menu2 .current a {
+.tabs-menu .current a {
     font-weight: bold;
 }
 
@@ -55,19 +55,21 @@ ul {
     border: 1px solid black;    
     background-color: #fcfcfc;
     float: left;
-    width: 580px;
+    max-width: 590px;
     min-height: 261px;
 	box-shadow: 0px 2px 2px #6f6f6f;
 }
 
-.tab-content1, .tab-content2 {
-    width: 580px;
+.tab-content {
+    max-width: 580px;
     padding: 5px;
     display: none;	
 }
 
-.tab-content1 p, .tab-content2 p  {
-  margin-top: 2px;
+.tab-content div  {
+  margin-top: 0.6em;
+  display: inline-block;
+  margin-right:10px;
 }
 
 #tab-carreira1 {

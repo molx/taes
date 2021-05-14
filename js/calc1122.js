@@ -438,18 +438,22 @@ function calcSalario(form) {
     var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked);
     /*var urp = (form.removeurp.checked) ? vencimento * 0.2605 * (1 +
         ftpg) : 0;*/
-	var urp = 0;
-	form.numURP.disabled = true;
+	var urp = 0;	
 	if (form.ddURP.value == 1) {
 		/* Na verdade o valor foi totalmente congelado, não só a tabela
 		//Calcula a URP usando a tabela até Julho 2016, periodo = 6;
 		var vencURP = Math.floor(1197.67 * (Math.pow(1.038, ftvb)) * ftcarga * 100) / 100;		
 		urp = vencURP * 0.2605 * (1 + ftpg);
 		*/
-		form.numURP.disabled = false;
+		if (form.numURP.disabled) {
+			form.numURP.disabled = false;
+		}				
 		urp = parseFloat(form.numURP.value);
 	} else if (form.ddURP.value == 2) {
+		form.numURP.disabled = true;
 		urp = vencimento * 0.2605 * (1 + ftpg);
+	} else {
+		form.numURP.disabled = true;
 	}
     var qualificacao = ftpg * vencimento
     var remuneracao = vencimento + urp + qualificacao + Math.floor(
