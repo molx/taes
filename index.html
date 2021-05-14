@@ -1,17 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7">
-    <![endif]-->
-    <!--[if IE 7]>
-    <html class="no-js lt-ie9 lt-ie8">
-        <![endif]-->
-        <!--[if IE 8]>
-        <html class="no-js lt-ie9">
-            <![endif]-->
-            <!--[if gt IE 8]>
-            <!-->
-<html class="no-js">
-		<!--<![endif]-->
+<html>
 	<head>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-43605146-1"></script>
@@ -19,7 +7,6 @@
 		  window.dataLayer = window.dataLayer || [];
 		  function gtag(){dataLayer.push(arguments);}
 		  gtag('js', new Date());
-
 		  gtag('config', 'UA-43605146-1');
 		</script>
 		<meta name="google-site-verification" content="H8pNplduoGqN7y_l3C6x-KmyIFN88WcaWOGr34FxF70" />
@@ -36,37 +23,10 @@
 		<link rel="stylesheet" href="css/main.css">
 		<link rel="stylesheet" href="css/tabs.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
-		<!--<script src="js/vendor/modernizr-2.6.2.min.js"></script> 
-			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js">-->
-		<script src="js/vendor/jquery.min.js"></script>
-		<!--
-			<script>
-				window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')
-			</script>
-			<script src="js/plugins.js"></script> -->
+		<script src="js/vendor/jquery.min.js"></script>		
 		<script src="js/main.js"></script>
 		<script src="js/compressed.js"></script>
 		<script type="text/javascript" src="js/nhpup_1.1.js"></script>
-	</head>
-	<body onLoad="firstload();">
-		<!--<script>
-			window.fbAsyncInit = function() {
-			  FB.init({
-				appId      : '236772623333172',
-				xfbml      : true,
-				version    : 'v2.5'
-			  });
-			};
-			
-			(function(d, s, id){
-			   var js, fjs = d.getElementsByTagName(s)[0];
-			   if (d.getElementById(id)) {return;}
-			   js = d.createElement(s); js.id = id;
-			   js.src = "//connect.facebook.net/pt_BR/sdk.js";
-			   fjs.parentNode.insertBefore(js, fjs);
-			 }(document, 'script', 'facebook-jssdk'));
-			</script>-->
-		<div id="fb-root"></div>
 		<script>(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
 			if (d.getElementById(id)) return;
@@ -75,34 +35,20 @@
 			fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));
 		</script>
-		<!--[if lt IE 7]>
-		<p class="chromeframe">
-			You are using an
-			<strong>
-			outdated
-			</strong>
-			browser. Please
-			<a href="http://browsehappy.com/">upgrade your browser</a>
-			or
-			<a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a>
-			to improve your experience.
-		</p>
-		<![endif]-->
-		<div id="maindiv">
-			<H1>
+	</head>
+	<body onLoad="firstload();">		
+		<!--<div id="fb-root" style="display:none;"></div>-->
+		<header>
+			<h1>
 				Simulador de Salário dos TAE das IFES
-			</H1>
-			<div id="header">
-				<div id="header_link">
-					<a id="link_header" href="index.html">Calculadora</a>
-				</div>
-				<div id="header_link">
-					<a id="link_header" href="carreira.html">Carreira</a>
-				</div>
-				<div id="header_link">
-					<a id="link_header" href="sobre.html">Sobre</a>
-				</div>
+			</h1>
+			<div id="menu-bar">				
+					<a class="menu-active" href="index.html">CALCULADORA</a>
+					<a href="carreira.html">CARREIRA</a>
+					<a href="sobre.html">SOBRE</a>					
 			</div>
+		</header>
+		<div id="maindiv">
 			<div class="titleHolder">
 				<div style="float: left; width: 40%;">
 					<!--<div class="fb-like" data-href="http://www.facebook.com/SalarioTAE/" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false">-->
@@ -122,6 +68,7 @@
 				</div>
 				<br style="clear: left;" />
 			</div>
+			<div class="main-content">
 			<h2>
 				Simulação 1
 			</h2>
@@ -220,7 +167,7 @@
 										</option>
 									</select>
 								</span>
-								<span style="padding-left: 50px;" onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
+								<span style="padding-left: 40px;" onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
 									Progressão:                                        
 									<select name="ddNivel" id="ddNivel" onchange="calcSalario(this.form)">
 										<option value="1" selected>
@@ -876,7 +823,7 @@
 										</option>
 									</select>
 								</span>
-								<span style="padding-left: 50px;" onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
+								<span style="padding-left: 40px;" onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
 									Progressão:                                        
 									<select name="ddNivel" id="ddNivel" onchange="calcSalario(this.form)">
 										<option value="1" selected>
@@ -1437,17 +1384,15 @@
 			<br>
 			<br>
 		</div>
-		<div id="rodape">
-			<b>
-			Atenção
-			</b>: Os valores calculados aqui não podem ser considerados 100% corretos devido a possíveis erros nos cálculos
-			<br> e mudanças nas fórmulas e nos valores e alíquotas de impostos e gratificações.
-			<br> Não me responsabilizo por eventuais diferenças entre a simulação e os valores reais. 
-			<br> Clique <a href="sobre.html">aqui</a> para mais detalhes.
-			<br>
-			<br> Desenvolvido por
-			<a href="http://www.alanmol.com.br" target="_blank">Alan Mól</a> 2013-2020
-			<br>
 		</div>
+		<footer>
+			<div class="footer-disclaimer">
+				<b>Atenção</b>: Os valores calculados aqui não podem ser considerados 100% corretos devido a possíveis erros nos cálculos e mudanças nas fórmulas e nos valores e alíquotas de impostos e gratificações.
+				<br> Não me responsabilizo por eventuais diferenças entre a simulação e os valores reais. 
+				<br> Clique <a href="sobre.html">aqui</a> para mais detalhes.
+				<br>
+				<br> Desenvolvido por <a href="http://www.alanmol.com.br" target="_blank">Alan Mól</a> - 2013-2021
+			</div>
+		</footer>
 	</body>
 </html>
