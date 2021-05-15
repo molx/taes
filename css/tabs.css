@@ -54,14 +54,12 @@ ul {
 .tab {
     border: 1px solid black;    
     background-color: #fcfcfc;
-    float: left;
-    max-width: 590px;
+    float: left;    
     min-height: 261px;
 	box-shadow: 0px 2px 2px #6f6f6f;
 }
 
-.tab-content {
-    max-width: 580px;
+.tab-content {    
     padding: 5px;
     display: none;	
 }
