@@ -460,7 +460,7 @@ function calcSalario(form) {
         ftinsa * vencimento * 100) / 100 + anuenio;
 
     if (form.ddSindTipo.value == "max") {
-        var sindicato = (form.sindicato.checked) ? remuneracao * 0.01 : 0;
+        var sindicato = (form.sindicato.checked) ? vencimento * 0.01 : 0;
     } else { //form.ddSindTipo.value == "min"
         var sindicato = Math.floor(0.01 * base * (Math.pow(ftstep, parseFloat(form.ddClasse.value) - 1)) *
             ftcarga * 100) / 100
