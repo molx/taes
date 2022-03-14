@@ -539,9 +539,11 @@ function calcSalario(form) {
 	    tetopss = 5839.45	
 	} else if (periodo == 11 || periodo == 12) {
 		tetopss = 6101.06
-	}	else {
+	}	else if (periodo == 13) {
         tetopss = 6433.57
-    }
+    } else {
+		tetopss = 7087.23
+	}
 	
     if (form.pssfgcd.checked) {		
         basepss += fungrat + cargodir;
