@@ -417,10 +417,13 @@ function calcSalario(form) {
     } else if (periodo == 7) {
         ftstep = 1.038;
         base = 1263.54;
-    } else {
+    } else if (periodo > 7 && periodo < 15) {
         ftstep = 1.039;
         base = 1326.72;
-    }
+    } else {
+		ftstep = 1.039;
+        base = 1326.72 * 1.05;
+	}
     if (form.medico.checked) {
         base = base * 2;
     }
