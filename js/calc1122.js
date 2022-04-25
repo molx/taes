@@ -649,6 +649,7 @@ function calcSalario(form) {
 
 
     //cdorfg(form);
+	saveStorage();
 }
 
 function inverterform(tipo) {
