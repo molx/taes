@@ -480,10 +480,13 @@ function calcSalario(form) {
     var remuneracao = vencimento + urp + qualificacao + Math.floor(
         ftinsa * vencimento * 100) / 100 + anuenio;
 
-    if (form.ddSindTipo.value == "max") {
-        var sindicato = (form.sindicato.checked) ? vencimento * 0.01 : 0;
-    } else { //form.ddSindTipo.value == "min"
-        var sindicato = Math.floor(0.01 * base * (Math.pow(ftstep, parseFloat(form.ddClasse.value) - 1)) *
+	var sindicato = 0;
+    if (form.ddSindTipo.value == "vb") {
+        sindicato = (form.sindicato.checked) ? vencimento * 0.01 : 0;
+	} else if (form.ddSindTipo.value == "rem") {
+		sindicato = (form.sindicato.checked) ? remuneracao * 0.01 : 0;
+    } else { //form.ddSindTipo.value == "cat"
+        sindicato = Math.floor(0.01 * base * (Math.pow(ftstep, parseFloat(form.ddClasse.value) - 1)) *
             ftcarga * 100) / 100
     }
 
