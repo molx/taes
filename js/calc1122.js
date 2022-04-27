@@ -563,6 +563,9 @@ function calcSalario(form) {
     if (form.funp_ad.value == "sim") {
         if (basepss == tetopss) { //Só pode ser ativo normal quem entrou depois de 02/2013 e recebe acima do teto da previdência
             var basefunp = vencimento + urp + qualificacao - tetopss;
+			if (form.pssfgcd.checked) {		
+				basefunp += fungrat + cargodir;
+			}
             aliqfunp = basefunp * form.ddFunp.value;
             if (form.name == "myform") {
                 document.getElementById("funp_plano_norm1").checked =
