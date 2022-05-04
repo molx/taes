@@ -481,15 +481,16 @@ function calcSalario(form) {
         ftinsa * vencimento * 100) / 100 + anuenio;
 
 	var sindicato = 0;
-    if (form.ddSindTipo.value == "vb") {
-        sindicato = (form.sindicato.checked) ? vencimento * 0.01 : 0;
-	} else if (form.ddSindTipo.value == "rem") {
-		sindicato = (form.sindicato.checked) ? remuneracao * 0.01 : 0;
-    } else { //form.ddSindTipo.value == "cat"
-        sindicato = Math.floor(0.01 * base * (Math.pow(ftstep, parseFloat(form.ddClasse.value) - 1)) *
-            ftcarga * 100) / 100
-    }
-
+	if (form.sindicato.checked) {
+		if (form.ddSindTipo.value == "vb") {
+			sindicato = vencimento * 0.01;
+		} else if (form.ddSindTipo.value == "rem") {
+			sindicato = remuneracao * 0.01;
+		} else { //form.ddSindTipo.value == "cat"
+			sindicato = Math.floor(0.01 * base * (Math.pow(ftstep, parseFloat(form.ddClasse.value) - 1)) *
+				ftcarga * 100) / 100;
+		}
+	}
 
     var noturno = (remuneracao / (30 * 8 * ftcarga)) * (form.noturno.value * (60 / 52.5)) * 0.25;
     //http://progep.sites.ufms.br/coordenadorias/administracao-de-pessoal/divisao-de-pagamento/adicional-noturno/
