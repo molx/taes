@@ -171,7 +171,7 @@ function calcPSS(periodo, base, teto) {
         } else {
             valor = base * 0.22 - 2241.13;
         } 
-	} else {
+	} else if (periodo == 14) { //2022
 		if (base <=  1212.00) { //salario minimo
             valor = 0.075 * base;
         } else if (base <=  2427.35 ) {
@@ -185,6 +185,24 @@ function calcPSS(periodo, base, teto) {
         } else if (base <=  24273.58) { 
             valor = base * 0.165 - 441.99;
         } else if (base <=  47333.46) { 
+            valor = base * 0.19 - 1048.83;
+        } else {
+            valor = base * 0.22 - 2468,84;
+        } 
+	} else { //2023
+		if (base <=  1302.00) { //salario minimo
+            valor = 0.075 * base;
+        } else if (base <=  2571.29 ) {
+            valor = base * 0.09 - 18.18;
+        } else if (base <=  3856.94) {
+            valor = base * 0.12 - 91;
+        } else if (base <=  7507.49) { //teto
+            valor = base * 0.14 - 163.82;
+        } else if (base <=  12856.50) { 
+            valor = base * 0.145 - 199.26;
+        } else if (base <=  25712.99) { 
+            valor = base * 0.165 - 441.99;
+        } else if (base <=  50140.33) { 
             valor = base * 0.19 - 1048.83;
         } else {
             valor = base * 0.22 - 2468,84;
@@ -417,10 +435,10 @@ function calcSalario(form) {
     } else if (periodo == 7) {
         ftstep = 1.038;
         base = 1263.54;
-    } else if (periodo > 7 && periodo < 15) {
+    } else if (periodo > 7 && periodo < 16) {
         ftstep = 1.039;
         base = 1326.72;
-    } else {
+    } else { //aumento em 2023?
 		ftstep = 1.039;
         base = 1326.72 * 1.05;
 	}
@@ -534,22 +552,24 @@ function calcSalario(form) {
     var bruto = remuneracao + saude + alimentacao + transporte +
         creche + fungrat + cargodir + noturno + ferias + decter;
     var basepss = remuneracao; //vencimento + urp + qualificacao;
-    var tetopss = 4663.75
+    var tetopss = 4663.75;
 	
     if (periodo == 6 || periodo == 7) {
-        tetopss = 5189.82
+        tetopss = 5189.82;
     } else if (periodo == 8) {
-        tetopss = 5531.31
+        tetopss = 5531.31;
     } else if (periodo == 9) {
-        tetopss = 5645.81
+        tetopss = 5645.81;
     } else if (periodo == 10) {
-	    tetopss = 5839.45	
+	    tetopss = 5839.45;	
 	} else if (periodo == 11 || periodo == 12) {
-		tetopss = 6101.06
+		tetopss = 6101.06;
 	}	else if (periodo == 13) {
-        tetopss = 6433.57
-    } else {
-		tetopss = 7087.23
+        tetopss = 6433.57;
+    } else if (periodo == 14) {
+		tetopss = 7087.23;
+	} else {
+		tetopss = 7507.49;
 	}
 	
     if (form.pssfgcd.checked) {		
