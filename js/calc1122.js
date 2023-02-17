@@ -193,19 +193,19 @@ function calcPSS(periodo, base, teto) {
 		if (base <=  1302.00) { //salario minimo
             valor = 0.075 * base;
         } else if (base <=  2571.29 ) {
-            valor = base * 0.09 - 18.18;
+            valor = base * 0.09 - 19.53;
         } else if (base <=  3856.94) {
-            valor = base * 0.12 - 91;
+            valor = base * 0.12 - 96.67;
         } else if (base <=  7507.49) { //teto
-            valor = base * 0.14 - 163.82;
+            valor = base * 0.14 - 173.81;
         } else if (base <=  12856.50) { 
-            valor = base * 0.145 - 199.26;
+            valor = base * 0.145 - 211.35;
         } else if (base <=  25712.99) { 
-            valor = base * 0.165 - 441.99;
+            valor = base * 0.165 - 468.48;
         } else if (base <=  50140.33) { 
-            valor = base * 0.19 - 1048.83;
+            valor = base * 0.19 - 1111.30;
         } else {
-            valor = base * 0.22 - 2468,84;
+            valor = base * 0.22 - 2615.51;
         } 
 	}
 	return Math.floor(valor * 100) / 100;
@@ -403,6 +403,18 @@ function valorCD(CD, periodo) {
     return valor;
 }
 
+function valorAlim(periodo) {
+	var alimentacao = 0;
+    if (periodo < 6) {
+        alimentacao = 373;
+    } else if (periodo < 16) {
+        alimentacao = 458;
+    } else {
+		alimentacao = 658;
+	}
+	return alimentacao;
+}
+
 function nocd(form) {
     if (form.ddFG.value != 0) {
         form.ddCD.value = 0
@@ -438,9 +450,9 @@ function calcSalario(form) {
     } else if (periodo > 7 && periodo < 16) {
         ftstep = 1.039;
         base = 1326.72;
-    } else { //aumento em 2023?
+    } else { //aumento em 2023
 		ftstep = 1.039;
-        base = 1326.72 * 1.05;
+        base = 1326.72 * 1.078;
 	}
     if (form.medico.checked) {
         base = base * 2;
@@ -460,13 +472,9 @@ function calcSalario(form) {
     // Fixando o cálculo do venciento pela tabela, considerando que os benefícios são baseados no vencimento, e não no CD. O valor de 100% entra abaixo em 'cargodir', subtraindo-se o vencimento. 
 
     var anuenio = (form.numAnuenio.value / 100) * vencimento
+	
+	var alimentacao = (form.alim.checked) ? valorAlim(periodo) : 0;
 
-    var alimentacao = 0;
-    if (periodo < 6) {
-        alimentacao = (form.alim.checked) ? 373 : 0;
-    } else {
-        alimentacao = (form.alim.checked) ? 458 : 0;
-    }
     if (ftcarga == 0.5) {
         alimentacao = alimentacao / 2;
     }
