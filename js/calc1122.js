@@ -450,13 +450,7 @@ function calcSalario(form) {
     } else if (periodo > 7 && periodo < 16) {
         ftstep = 1.039;
         base = 1326.72;
-    } else if (periodo == 16) { //aumentos em 2023
-		ftstep = 1.039;
-        base = 1326.72 * 1.078;
-	} else if (periodo == 17) { 
-		ftstep = 1.039;
-        base = 1326.72 * 1.085;
-	} else { 
+	} else { //aumentos em maio/2023
 		ftstep = 1.039;
         base = 1326.72 * 1.09;
 	}
