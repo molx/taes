@@ -115,7 +115,7 @@ function valorIRRF(base, periodo) {
         } else {
             aliquota = base * 0.275 - 826.15;
         }
-    } else { //Abril 2015 pra frente
+    } else if (periodo < 16) { //Abril 2015 pra frente
         if (base <= 1903.98) {
             aliquota = 0;
         } else if (base <= 2826.65) {
@@ -126,6 +126,18 @@ function valorIRRF(base, periodo) {
             aliquota = base * 0.225 - 636.13;
         } else {
             aliquota = base * 0.275 - 869.36;
+        }
+    } else {
+        if (base <= 2500) {
+            aliquota = 0;
+        } else if (base < 3200) {
+            aliquota = base * 0.075 - 187.50;
+        } else if (base < 4250) {
+            aliquota = base * 0.15 -  427.50;
+        } else if (base < 5300) {
+            aliquota = base * 0.225 - 746.25;
+        } else {
+            aliquota = base * 0.275 - 1011.25;
         }
     }
     return Math.floor(aliquota * 100) / 100;
