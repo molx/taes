@@ -128,16 +128,16 @@ function valorIRRF(base, periodo) {
             aliquota = base * 0.275 - 869.36;
         }
     } else {
-        if (base <= 2500) {
+        if (base <= 2112) {
             aliquota = 0;
-        } else if (base < 3200) {
-            aliquota = base * 0.075 - 187.50;
-        } else if (base < 4250) {
-            aliquota = base * 0.15 -  427.50;
-        } else if (base < 5300) {
-            aliquota = base * 0.225 - 746.25;
+        } else if (base <= 2826.65) {
+            aliquota = base * 0.075 - 158.40;
+        } else if (base <= 3751.05) {
+            aliquota = base * 0.15 - 370.40;
+        } else if (base <= 4664.68) {
+            aliquota = base * 0.225 - 651.73;
         } else {
-            aliquota = base * 0.275 - 1011.25;
+            aliquota = base * 0.275 - 884.96;
         }
     }
     return Math.floor(aliquota * 100) / 100;
@@ -646,10 +646,20 @@ function calcSalario(form) {
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value,
         periodo);
 
-    //Eu chutei que CD 60% nao incidia IR, mas pelo FB falaram que incide.
+    //Eu considerei que CD 60% nao incidia IR, mas pelo FB falaram que incide.
     //Caso não incida basta remover de baseirrf. Quando é 100%, cargodir = 0
-    var baseirrf = vencimento + urp + qualificacao + ftinsa * vencimento +
-        fungrat + cargodir - valorpss - aliqfunp - reducaoDepsIRRF;
+	
+	var rendTributavel = vencimento + urp + qualificacao + ftinsa * vencimento +
+        fungrat + cargodir;
+	
+	var descontosIrrf = valorpss + aliqfunp + reducaoDepsIRRF;
+	
+    var baseirrf = rendTributavel - descontosIrrf;
+	
+	if (periodo > 16 && descontosIrrf < 528) {
+		baseirrf = rendTributavel - 528;
+	}
+		
     var aliqirrf = valorIRRF(baseirrf, periodo);
 
     var desc_13 = (form.decter.checked && form.decter_par.value == "2") ? aliqirrf + valorpss + aliqfunp : 0;
