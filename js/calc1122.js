@@ -469,7 +469,7 @@ function calcSalario(form) {
         base = 1326.72;
 	} else { //aumentos em maio/2023
 		ftstep = 1.039;
-        base = 1326.72 * 1.09;
+        base = 1446.12;
 	}
 
     if (form.medico.checked) {
