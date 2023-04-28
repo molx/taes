@@ -394,6 +394,8 @@ function valorCD(CD, periodo) {
     var CD2017 = Array(0, 12309.21, 10289.74, 8077.92, 5866.10);
     var CD2018 = Array(0, 12893.89, 10778.5, 8461.62, 6144.74);
     var CD2019 = Array(0, 13474.12, 11263.53, 8842.29, 6421.26);
+	var CD2023 = Array(0, 14686.79, 12277.25, 9638.21, 6999.17);
+	
     var valor = 0;
     if (periodo == 1) { //Placeholder para atualizações futuras, não está retroativo
         // até 2013
@@ -410,13 +412,15 @@ function valorCD(CD, periodo) {
     } else if (periodo == 8) {
         //até 12/2017
         valor = CD2017[CD]
-    } else if (periodo == 9){
+    } else if (periodo == 9) {
         //A partir de 2018
         valor = CD2018[CD]        
-    } else {
+    } else if (periodo < 16) {
         //A partir de 2019
         valor = CD2019[CD]        
-    }
+    } else {
+		valor = CD2023[CD];
+	}
     return valor;
 }
 
