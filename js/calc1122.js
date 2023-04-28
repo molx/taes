@@ -355,6 +355,8 @@ function valorFG(FG, periodo) {
         154.20, 98.34, 72.74, 59.02);
     var FG2019 = Array(0, 975.51, 656.29, 532.07, 270.83, 219.76,
         161.14, 101.77, 76.02, 61.67);
+	var FG2023 = Arrau(0, 1063.31, 715.35, 579.96, 270.83, 219.76,
+		161.14, 102.77, 76.02, 61.67);
 
     var valor = 0;
     if (periodo == 1) {
@@ -373,9 +375,12 @@ function valorFG(FG, periodo) {
     } else if (periodo == 9) {
         //a partir de 2018        
         valor = FG2018[FG];
-    } else if (periodo >= 10) {
+    } else if (periodo < 16) {
         //a partir de 2019
         valor = FG2019[FG];
+	} else {
+		//a partir de maio/2023
+		valor = FG2023[FG];
     }
     return valor;
 }
