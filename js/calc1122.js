@@ -653,6 +653,10 @@ function calcSalario(form) {
     }
 	
 	var aliqFunpFacul = parseInt(form.numFunpFacul.value);
+	
+	if (isNaN(aliqFunpFacul)) {
+		aliqFunpFacul = 0;
+	}
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value,
         periodo);
