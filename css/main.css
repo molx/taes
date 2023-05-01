@@ -364,6 +364,7 @@ ol {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	max-width: 100%;
 }
 
 .fb_iframe_widget_lift {
