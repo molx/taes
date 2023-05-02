@@ -2,7 +2,7 @@ var liq1 = 0;
 var liq2 = 0;
 
 function updateQuali(form, classs) {
-    var alloptions = Array("Mínima do Cargo", "Fundamental Completo",
+    var alloptions = Array("Exigência Mínima", "Fundamental Completo",
         "Médio Completo", "Médio Técnico", "Graduação Completa",
         "Especialização", "Mestrado", "Doutorado");
     var allvalues = Array(0, 1, 2, 3, 4, 5, 6, 7);
@@ -535,7 +535,7 @@ function calcSalario(form) {
 		} else if (form.ddSindTipo.value == "rem") {
 			sindicato = remuneracao * 0.01;
 		} else { //form.ddSindTipo.value == "cat"
-			sindicato = Math.floor(0.01 * base * (Math.pow(ftstep, parseFloat(form.ddClasse.value) - 1)) *
+			sindicato = Math.round(0.01 * base * Math.pow(ftstep, parseInt(form.ddClasse.value) - 1) *
 				ftcarga * 100) / 100;
 		}
 	}
@@ -612,7 +612,7 @@ function calcSalario(form) {
 	
 	var valorpss = calcPSS(periodo, basepss, tetopss);	
     
-    var aliqfunp = 0
+    var aliqfunp = 0;
 
     if (form.funp_ad.value == "sim") {
         if (basepss == tetopss) { //Só pode ser ativo normal quem entrou depois de 02/2013 e recebe acima do teto da previdência
@@ -620,7 +620,8 @@ function calcSalario(form) {
 			if (form.pssfgcd.checked) {		
 				basefunp += fungrat + cargodir;
 			}
-            aliqfunp = Math.round(basefunp * form.ddFunp.value * 100) / 100;
+            aliqfunp = Math.round(basefunp * parseFloat(form.ddFunp.value) * 100) / 100;
+			console.log(aliqfunp);
             if (form.name == "myform") {
                 document.getElementById("funp_plano_norm1").checked =
                     true;
@@ -676,12 +677,19 @@ function calcSalario(form) {
 	}
 		
     var aliqirrf = valorIRRF(baseirrf, periodo);
+	
 
     var desc_13 = (form.decter.checked && form.decter_par.value == "2") ? aliqirrf + valorpss + aliqfunp + aliqFunpFacul: 0;
 	
 	var descontos = Math.round((aliqirrf + valorpss + aliqfunp + aliqFunpFacul +
         desc_13 + sindicato + aliqirrfferias + parseFloat(form.numOutros.value)) * 100) / 100;	
-	
+
+	//console.log((aliqirrf + valorpss + aliqfunp + aliqFunpFacul +
+        //desc_13 + sindicato + aliqirrfferias) * 100);
+	console.log(typeof(sindicato));
+	console.log(aliqfunp);
+	//console.log(aliqirrf + valorpss + aliqfunp + aliqFunpFacul);
+	//console.log(desc_13 + sindicato + aliqirrfferias + parseFloat(form.numOutros.value))
     var salario = bruto - descontos;
     if (form.name == "myform") {
         liq1 = salario;
