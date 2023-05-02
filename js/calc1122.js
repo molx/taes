@@ -562,7 +562,7 @@ function calcSalario(form) {
         valorSaude(basesaude, parseInt(form.ddIdadeDep2.value, 10),
             periodo) +
         valorSaude(basesaude, parseInt(form.ddIdadeDep3.value, 10),
-            periodo) :
+            periodo) * form.Dep3Qtd.value :
         0;
 
 	var basecreche = vencimento + urp + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio;
@@ -745,7 +745,8 @@ function inverterform(tipo) {
             form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked,
             form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked,
             form1.decter_par.value, form1.ddSindTipo.value, 0,//form1.pss_aliq.value, 
-            form1.numOutros.value, form1.numURP.value, form1.numFunpFacul.value);
+            form1.numOutros.value, form1.numURP.value, form1.numFunpFacul.value,
+			form1.Dep3Qtd.value);
 
         var values2 = Array(form2.ddClasse.value, form2.ddProg.value,
             form2.ddFG.value, form2.ddNivel.value, form2.ddCargaH
@@ -761,7 +762,8 @@ function inverterform(tipo) {
             form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked,
             form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked,
             form2.decter_par.value, form2.ddSindTipo.value, 0,//form2.pss_aliq.value, 
-            form2.numOutros.value, form2.numURP.value, form2.numFunpFacul.value);
+            form2.numOutros.value, form2.numURP.value, form2.numFunpFacul.value,
+			form2.Dep3Qtd.value);
 
     } else if (tipo == "cima") {
 
@@ -779,7 +781,8 @@ function inverterform(tipo) {
             form2.ddIdadeDep3.value, form2.ddCD.value, form2.rdCD[0].checked,
             form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked,
             form2.decter_par.value, form2.ddSindTipo.value, 0,//form2.pss_aliq.value, 
-            form2.numOutros.value, form2.numURP.value, form2.numFunpFacul.value);
+            form2.numOutros.value, form2.numURP.value, form2.numFunpFacul.value,
+			form2.Dep3Qtd.value);
 
         var values1 = values2;
 
@@ -799,7 +802,8 @@ function inverterform(tipo) {
             form1.ddIdadeDep3.value, form1.ddCD.value, form1.rdCD[0].checked,
             form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked,
             form1.decter_par.value, form1.ddSindTipo.value, 0,//form1.pss_aliq.value,
-            form1.numOutros.value, form1.numURP.value, form1.numFunpFacul.value);
+            form1.numOutros.value, form1.numURP.value, form1.numFunpFacul.value,
+			form1.Dep3Qtd.value);
 
         var values2 = values1;
     }
@@ -842,6 +846,7 @@ function inverterform(tipo) {
     form1.numOutros.value = values2[35]
 	form1.numURP.value = values2[36]
 	form1.numFunpFacul.value = values2[37]
+	form1.Dep3Qtd.value = values2[38]
 
     form2.ddClasse.value = values1[0]
     form2.ddProg.value = values1[1]
@@ -881,6 +886,7 @@ function inverterform(tipo) {
     form2.numOutros.value = values1[35]
 	form2.numURP.value = values1[36]
 	form2.numFunpFacul.value = values1[37]
+	form2.Dep3Qtd.value = values2[38]
 
     updateQuali(form1, values2[0])
     updateQuali(form2, values1[0])

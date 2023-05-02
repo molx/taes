@@ -28,7 +28,7 @@
 			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			  crossorigin="anonymous"></script>
 		<script src="js/main.js"></script>
-		<script src="js/compressed.js"></script>
+		<script src="js/calc1122.js"></script>
 		<script type="text/javascript" src="js/nhpup_1.1.js"></script>
 		<script>if(location.protocol != "file:") {
 		(function(d, s, id) {
@@ -479,8 +479,8 @@
 										59+ anos
 									</option>
 								</select>
-								Dependente 2:
-								<select name="ddIdadeDep2" id="ddIdadeDep21" onchange="calcSalario(this.form)" style="width: 70px;">
+								<span style="margin-left:6px;">Dependente 2:</span>
+								<select name="ddIdadeDep2" id="ddIdadeDep21" onchange="calcSalario(this.form)" style="width:70px;">
 									<option value="1000" selected>
 										Não
 									</option>
@@ -515,7 +515,7 @@
 										59+ anos
 									</option>
 								</select>
-								Dependente 3:
+								<span style="margin-left:6px;">Dependente 3+:</span>
 								<select name="ddIdadeDep3" id="ddIdadeDep31" onchange="calcSalario(this.form)" style="width: 70px;">
 									<option value="1000" selected>
 										Não
@@ -550,7 +550,10 @@
 									<option value="9">
 										59+ anos
 									</option>
-								</select>
+								</select>x
+								<input type="number" name="Dep3Qtd" min="1" max="9" step="1" value="1"
+									style="width:20px;" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form);"
+									onKeyUp="calcSalario(this.form);">
 							</div>
 							<hr class="hrsaude">
 							<div>
@@ -1183,7 +1186,7 @@
 										59+ anos
 									</option>
 								</select>
-								Dependente 2:
+								<span style="margin-left:6px;">Dependente 2:</span>
 								<select name="ddIdadeDep2" id="ddIdadeDep22" onchange="calcSalario(this.form)" style="width: 70px;">
 									<option value="1000" selected>
 										Não
@@ -1219,7 +1222,7 @@
 										59+ anos
 									</option>
 								</select>
-								Dependente 3:
+								<span style="margin-left:6px;">Dependente 3+:</span>
 								<select name="ddIdadeDep3" id="ddIdadeDep32" onchange="calcSalario(this.form)" style="width: 70px;">
 									<option value="1000" selected>
 										Não
@@ -1254,7 +1257,10 @@
 									<option value="9">
 										59+ anos
 									</option>
-								</select>
+								</select>x
+								<input type="number" name="Dep3Qtd" min="1" max="9" step="1" value="1"
+									style="width:20px;" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form);"
+									onKeyUp="calcSalario(this.form);">
 							</div>
 							<hr class="hrsaude">
 							<div>
