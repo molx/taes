@@ -579,8 +579,8 @@ function calcSalario(form) {
 
     var decter = form.decter.checked ? (remuneracao + fungrat + cargodir) / 2 : 0
 
-    var bruto = remuneracao + saude + alimentacao + transporte +
-        creche + fungrat + cargodir + noturno + ferias + decter;
+    var bruto = Math.round((remuneracao + saude + alimentacao + transporte +
+        creche + fungrat + cargodir + noturno + ferias + decter) * 100) / 100;
     var basepss = remuneracao; //vencimento + urp + qualificacao;
     var tetopss = 4663.75;
 	
@@ -620,7 +620,7 @@ function calcSalario(form) {
 			if (form.pssfgcd.checked) {		
 				basefunp += fungrat + cargodir;
 			}
-            aliqfunp = basefunp * form.ddFunp.value;
+            aliqfunp = Math.round(basefunp * form.ddFunp.value * 100) / 100;
             if (form.name == "myform") {
                 document.getElementById("funp_plano_norm1").checked =
                     true;
@@ -678,9 +678,11 @@ function calcSalario(form) {
     var aliqirrf = valorIRRF(baseirrf, periodo);
 
     var desc_13 = (form.decter.checked && form.decter_par.value == "2") ? aliqirrf + valorpss + aliqfunp + aliqFunpFacul: 0;
-
-    var salario = Math.round((bruto - aliqirrf - valorpss - aliqfunp - aliqFunpFacul -
-        desc_13 - sindicato - aliqirrfferias) * 100) / 100 - form.numOutros.value;
+	
+	var descontos = Math.round((aliqirrf + valorpss + aliqfunp + aliqFunpFacul +
+        desc_13 + sindicato + aliqirrfferias + parseFloat(form.numOutros.value)) * 100) / 100;	
+	
+    var salario = bruto - descontos;
     if (form.name == "myform") {
         liq1 = salario;
     } else {
@@ -705,7 +707,7 @@ function calcSalario(form) {
     form.txURP.value = formatValor(Math.round(urp * 100) / 100);
     form.txbIRRF.value = formatValor(Math.round(baseirrf * 100) / 100);
     form.txbINSS.value = formatValor(Math.round(basepss * 100) / 100);
-    form.txdesconto.value = formatValor(Math.round((bruto - salario) * 100) / 100);
+    form.txdesconto.value = formatValor(descontos);
     form.txSindicato.value = formatValor(Math.round(sindicato * 100) /
         100);
     form.txQualif.value = formatValor(Math.round(qualificacao * 100) /
