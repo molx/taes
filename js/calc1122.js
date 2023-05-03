@@ -636,7 +636,7 @@ function calcSalario(form) {
                     true;
             }
         } else {
-            aliqfunp = form.numFunpAlt.value
+            aliqfunp = parseInt(form.numFunpAlt.value);
             if (form.name == "myform") {
                 document.getElementById("funp_plano_alt1").checked =
                     true;
