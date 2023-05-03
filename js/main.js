@@ -45,6 +45,24 @@ $(document).ready(function() {
         $(".tab-content2").not(tab).css("display", "none");
         $(tab).fadeIn();
     });	
+
+	$(".tabs-menu3 a").click(function(event) {
+        event.preventDefault();
+        $(this).parent().addClass("current");
+        $(this).parent().siblings().removeClass("current");
+        var tab = $(this).attr("href");
+        $(".tab-content3").not(tab).css("display", "none");
+        $(tab).fadeIn();
+    });	
+
+	$(".tabs-menu4 a").click(function(event) {
+        event.preventDefault();
+        $(this).parent().addClass("current");
+        $(this).parent().siblings().removeClass("current");
+        var tab = $(this).attr("href");
+        $(".tab-content4").not(tab).css("display", "none");
+        $(tab).fadeIn();
+    });	
 	
 	loadStorage();
 });

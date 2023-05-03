@@ -180,46 +180,6 @@ textarea {
 	clear: both;
 }
 
-.divdata {
-	/*float:left;    */
-	display: inline-block;
-	/*margin: 0 auto;*/
-	vertical-align: top;
-	text-align: left;
-	max-width: 600px;
-}
-
-.divresults {
-	padding: 0 5px;
-	max-width: 390px;
-	text-align: left;
-	overflow: auto;
-	margin: 31px 0 0 0;
-	border: 1px solid black;
-	min-height: 261px;
-	background-color: #FCFCFC;
-	box-shadow: 0px 2px 2px #6f6f6f;
-	display: inline-block;
-}
-
-.divresults > div {
-	
-	display: inline-block;
-	line-height: 2em;
-}
-
-.divresults_col {
-	margin-left: 0;
-	float: left;
-	/*margin-top: 20px;*/
-}
-
-.divresults_2 {
-	margin-left: 10px;
-	float: right;
-	/*margin-top: 20px;*/
-}
-
 #ddQuali {
 	resize: none;
 	width: 200px;

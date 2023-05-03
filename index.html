@@ -28,7 +28,7 @@
 			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			  crossorigin="anonymous"></script>
 		<script src="js/main.js"></script>
-		<script src="js/compressed.js"></script>
+		<script src="js/calc1122.js"></script>
 		<script type="text/javascript" src="js/nhpup_1.1.js"></script>
 		<script>if(location.protocol != "file:") {
 		(function(d, s, id) {
@@ -705,60 +705,76 @@
 					</div>
 				</div>
 				<div class="divresults">
-					<div class="divresults_col" style="width: 190px;">
-						<div>
-							<span onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
-							Vencimento:
-							<input type="text" name="txVB" value="0" readonly>
-							</span>
+					<ul class="tabs-menu tabs-menu3">
+						<li class="current"><a href="#tab-resumo1">Resumo</a></li>
+						<li><a href="#tab-detail1">Detalhamento</a></li>
+					</ul>
+					<div class="tabresults">
+						<div class="tab-content3 tab-resumo" id="tab-resumo1">
+							<div class="divresults_col" style="float:left;">
+								<div>
+									<span onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
+									Vencimento:
+									<input type="text" name="txVB" value="0" readonly>
+									</span>
+								</div>
+								<div>
+									Bruto:
+									<input type="text" name="txBruto" value="0" readonly>
+								</div>
+								
+								<div>
+									PSS:
+									<input type="text" name="txInss" value="0" readonly>
+								</div>
+								<div>
+									IRRF:
+									<input type="text" name="txIrrf" value="0" readonly>
+								</div>
+								<div>
+									IRRF Férias:
+									<input type="text" name="txIrrfFerias" value="0" readonly>
+								</div>
+								<div>
+									Líquido:
+									<input type="text" name="txResult" value="0" readonly>
+								</div>
+							</div>
+							<div class="divresults_col">
+								<div onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
+									Incentivo:
+									<input type="text" name="txQualif" value="0" readonly>
+								</div>	
+								<div>
+									URP:
+									<input type="text" name="txURP" value="0" readonly>
+								</div>
+								<div>
+									Base PSS:
+									<input type="text" name="txbINSS" value="0" readonly>
+								</div>
+								<div>
+									Base IRRF:
+									<input type="text" name="txbIRRF" value="0" readonly>
+								</div>
+								
+								<div>
+									Desconto 13º:
+									<input type="text" name="txDesc13" value="0" readonly>
+								</div>						
+								<div>
+									Descontos:
+									<input type="text" name="txdesconto" value="0" readonly>
+								</div>
+							</div>
 						</div>
-						<div>
-							Bruto:
-							<input type="text" name="txBruto" value="0" readonly>
-						</div>
-						
-						<div>
-							PSS:
-							<input type="text" name="txInss" value="0" readonly>
-						</div>
-						<div>
-							IRRF:
-							<input type="text" name="txIrrf" value="0" readonly>
-						</div>
-						<div>
-							IRRF Férias:
-							<input type="text" name="txIrrfFerias" value="0" readonly>
-						</div>
-						<div>
-							Líquido:
-							<input type="text" name="txResult" value="0" readonly>
-						</div>
-					</div>
-					<div class="divresults_col">
-						<div onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
-							Incentivo:
-							<input type="text" name="txQualif" value="0" readonly>
-						</div>	
-						<div>
-							URP:
-							<input type="text" name="txURP" value="0" readonly>
-						</div>
-						<div>
-							Base PSS:
-							<input type="text" name="txbINSS" value="0" readonly>
-						</div>
-						<div>
-							Base IRRF:
-							<input type="text" name="txbIRRF" value="0" readonly>
-						</div>
-						
-						<div>
-							Desconto 13º:
-							<input type="text" name="txDesc13" value="0" readonly>
-						</div>						
-						<div>
-							Descontos:
-							<input type="text" name="txdesconto" value="0" readonly>
+						<div class="tab-content3 tab-details" id="tab-detail1">
+							<h4>Rendimentos</h4>
+							<div class="tabdetails-info" id="tabdetails-rend-1"></div>
+							<h4>Descontos</h4>
+							<div class="tabdetails-info" id="tabdetails-desc-1"></div>
+							<h4>Informações Adicionais</h4>
+							<div class="tabdetails-info" id="tabdetails-outros-1"></div>
 						</div>
 					</div>
 				</div>
@@ -775,7 +791,7 @@
 		</script>
 		<div id="div_botoes">
 			<p style="margin: auto;">
-				<span style="margin: 0 30px;display: inline-block;" onclick="inverterform('baixo')"><img src="img/setabaixo.jpg" style="width: 18px; height: 18px;">Copiar para baixo </span>
+				<span style="margin: 0 30px;display: 'inline-block;" onclick="inverterform('baixo')"><img src="img/setabaixo.jpg" style="width: 18px; height: 18px;">Copiar para baixo </span>
 				<span style="margin: 0 30px;display: inline-block;" onclick="inverterform('cima')"><img src="img/setacima.jpg" style="width: 18px; height: 18px;">Copiar para cima </span>
 				<span style="margin: 0 30px;display: inline-block;" onClick="inverterform('inverter')"> <img src="img/setainv.jpg" style="width: 36px; height: 18px;">Inveter</span>
 			</p>
@@ -1413,60 +1429,76 @@
 					</div>
 				</div>
 				<div class="divresults">
-					<div class="divresults_col" style="width: 190px;">
-						<div>
-							<span onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
-							Vencimento:
-							<input type="text" name="txVB" value="0" readonly>
-							</span>
+					<ul class="tabs-menu tabs-menu4">
+						<li class="current"><a href="#tab-resumo2">Resumo</a></li>
+						<li><a href="#tab-detail2">Detalhamento</a></li>
+					</ul>
+					<div class="tabresults">
+						<div class="tab-content4 tab-resumo" id="tab-resumo2">
+							<div class="divresults_col" style="float:left;">
+								<div>
+									<span onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
+									Vencimento:
+									<input type="text" name="txVB" value="0" readonly>
+									</span>
+								</div>
+								<div>
+									Bruto:
+									<input type="text" name="txBruto" value="0" readonly>
+								</div>
+								
+								<div>
+									PSS:
+									<input type="text" name="txInss" value="0" readonly>
+								</div>
+								<div>
+									IRRF:
+									<input type="text" name="txIrrf" value="0" readonly>
+								</div>
+								<div>
+									IRRF Férias:
+									<input type="text" name="txIrrfFerias" value="0" readonly>
+								</div>
+								<div>
+									Líquido:
+									<input type="text" name="txResult" value="0" readonly>
+								</div>
+							</div>
+							<div class="divresults_col">
+								<div onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
+									Incentivo:
+									<input type="text" name="txQualif" value="0" readonly>
+								</div>	
+								<div>
+									URP:
+									<input type="text" name="txURP" value="0" readonly>
+								</div>
+								<div>
+									Base PSS:
+									<input type="text" name="txbINSS" value="0" readonly>
+								</div>
+								<div>
+									Base IRRF:
+									<input type="text" name="txbIRRF" value="0" readonly>
+								</div>
+								
+								<div>
+									Desconto 13º:
+									<input type="text" name="txDesc13" value="0" readonly>
+								</div>						
+								<div>
+									Descontos:
+									<input type="text" name="txdesconto" value="0" readonly>
+								</div>
+							</div>
 						</div>
-						<div>
-							Bruto:
-							<input type="text" name="txBruto" value="0" readonly>
-						</div>
-						
-						<div>
-							PSS:
-							<input type="text" name="txInss" value="0" readonly>
-						</div>
-						<div>
-							IRRF:
-							<input type="text" name="txIrrf" value="0" readonly>
-						</div>
-						<div>
-							IRRF Férias:
-							<input type="text" name="txIrrfFerias" value="0" readonly>
-						</div>
-						<div>
-							Líquido:
-							<input type="text" name="txResult" value="0" readonly>
-						</div>
-					</div>
-					<div class="divresults_col">
-						<div onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
-							Incentivo:
-							<input type="text" name="txQualif" value="0" readonly>
-						</div>	
-						<div>
-							URP:
-							<input type="text" name="txURP" value="0" readonly>
-						</div>
-						<div>
-							Base PSS:
-							<input type="text" name="txbINSS" value="0" readonly>
-						</div>
-						<div>
-							Base IRRF:
-							<input type="text" name="txbIRRF" value="0" readonly>
-						</div>
-						
-						<div>
-							Desconto 13º:
-							<input type="text" name="txDesc13" value="0" readonly>
-						</div>						
-						<div>
-							Descontos:
-							<input type="text" name="txdesconto" value="0" readonly>
+						<div class="tab-content4 tab-details" id="tab-detail2">
+							<h4>Rendimentos</h4>
+							<div class="tabdetails-info" id="tabdetails-rend-2"></div>
+							<h4>Descontos</h4>
+							<div class="tabdetails-info" id="tabdetails-desc-2"></div>
+							<h4>Informações Adicionais</h4>
+							<div class="tabdetails-info" id="tabdetails-outros-2"></div>
 						</div>
 					</div>
 				</div>

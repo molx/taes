@@ -77,6 +77,7 @@ function validateGD2(form) {
 
 function formatValor(valor) {
     var intRegex = /^\d+$/;
+    valor = Math.round(valor * 100) / 100;
     if (valor === 0) {
         return "R$ 0,00";
     } else if (intRegex.test(valor)) {
@@ -232,7 +233,7 @@ function calcPSS(periodo, base, teto) {
             valor = base * 0.145 - 211.62;
         } else if (base <=   25712.99) { 
             valor = base * 0.165 - 468.75;
-        } else if (base <=   50.140.33) { 
+        } else if (base <=   50140.33) { 
             valor = base * 0.19 - 1111.57;
         } else {
             valor = base * 0.22 - 2615.78;
@@ -639,7 +640,6 @@ function calcSalario(form) {
 				basefunp += fungrat + cargodir;
 			}
             aliqfunp = Math.round(basefunp * parseFloat(form.ddFunp.value) * 100) / 100;
-			console.log(aliqfunp);
             if (form.name == "myform") {
                 document.getElementById("funp_plano_norm1").checked =
                     true;
@@ -686,28 +686,24 @@ function calcSalario(form) {
 	var rendTributavel = vencimento + urp + qualificacao + ftinsa * vencimento +
         fungrat + cargodir;
 	
-	var descontosIrrf = valorpss + aliqfunp + aliqFunpFacul + reducaoDepsIRRF;
+	var deducoesIrrf = valorpss + aliqfunp + aliqFunpFacul + reducaoDepsIRRF;
 		
-    var baseirrf = rendTributavel - descontosIrrf;
+    var baseirrf = rendTributavel - deducoesIrrf;
 	
-	if (periodo > 16 && descontosIrrf < 528) {
-		baseirrf = rendTributavel - 528;
+	if (periodo >= 16 && deducoesIrrf < 528) {
+        deducoesIrrf = 528;
+		baseirrf = rendTributavel - deducoesIrrf;
 	}
 		
     var aliqirrf = valorIRRF(baseirrf, periodo);
-	
 
     var desc_13 = (form.decter.checked && form.decter_par.value == "2") ? aliqirrf + valorpss + aliqfunp + aliqFunpFacul: 0;
 	
-	var descontos = Math.round((aliqirrf + valorpss + aliqfunp + aliqFunpFacul +
-        desc_13 + sindicato + aliqirrfferias + parseFloat(form.numOutros.value)) * 100) / 100;	
+    var outrosdescontos = parseFloat(form.numOutros.value);
 
-	//console.log((aliqirrf + valorpss + aliqfunp + aliqFunpFacul +
-        //desc_13 + sindicato + aliqirrfferias) * 100);
-	console.log(typeof(sindicato));
-	console.log(aliqfunp);
-	//console.log(aliqirrf + valorpss + aliqfunp + aliqFunpFacul);
-	//console.log(desc_13 + sindicato + aliqirrfferias + parseFloat(form.numOutros.value))
+	var descontos = Math.round((aliqirrf + valorpss + aliqfunp + aliqFunpFacul +
+        desc_13 + sindicato + aliqirrfferias + outrosdescontos) * 100) / 100;	
+
     var salario = bruto - descontos;
     if (form.name == "myform") {
         liq1 = salario;
@@ -748,9 +744,53 @@ function calcSalario(form) {
     form.txDecter.value = formatValor(Math.round(decter * 100) / 100);
     form.txDesc13.value = formatValor(Math.round(desc_13 * 100) / 100);
 
+    //Display info on Detailed Results
+    var formid = 1;
+    if (form.name == "myform") {
+        $('#tabdetails-rend-1').empty();    
+        $('#tabdetails-desc-1').empty();
+        $('#tabdetails-outros-1').empty();
+    } else {
+        $('#tabdetails-rend-2').empty();    
+        $('#tabdetails-desc-2').empty();
+        $('#tabdetails-outros-2').empty();
+        formid = 2;
+    }
+
+    addDetailValue("#tabdetails-rend", formid, "VB", vencimento);
+    addDetailValue("#tabdetails-rend", formid, "VA", alimentacao);
+    if(transporte > 0) addDetailValue("#tabdetails-rend", formid, "VT", transporte);
+    if(creche > 0) addDetailValue("#tabdetails-rend", formid, "Pré-escolar", creche);
+    if(noturno > 0) addDetailValue("#tabdetails-rend", formid, "Ad. Noturno", noturno);
+    if(urp > 0) addDetailValue("#tabdetails-rend", formid, "URP", urp);
+    if(ftpg > 0) addDetailValue("#tabdetails-rend", formid, "IQ", vencimento * ftpg);
+    if(fungrat > 0) addDetailValue("#tabdetails-rend", formid, "FG", fungrat);
+    if(cargodir > 0) addDetailValue("#tabdetails-rend", formid, "CD", cargodir);
+    if(anuenio > 0) addDetailValue("#tabdetails-rend", formid, "Anuênio", anuenio);
+    if(ftinsa > 0) addDetailValue("#tabdetails-rend", formid, "Insalubridade", ftinsa * vencimento);
+    if(saude > 0) addDetailValue("#tabdetails-rend", formid, "Saúde Sup.", saude);
+    
+    addDetailValue("#tabdetails-desc", formid, "PSS", valorpss);
+    addDetailValue("#tabdetails-desc", formid, "IR", aliqirrf);
+    if(aliqfunp > 0) addDetailValue("#tabdetails-desc", formid, "Funpresp", aliqfunp);
+    if(aliqFunpFacul > 0) addDetailValue("#tabdetails-desc", formid, "Funpresp-facultativo", aliqFunpFacul);
+    if(sindicato > 0) addDetailValue("#tabdetails-desc", formid, "Sindicato", sindicato);
+    if(outrosdescontos > 0) addDetailValue("#tabdetails-desc", formid, "Outros", outrosdescontos);
+
+    addDetailValue("#tabdetails-outros", formid, "Bruto", bruto);
+    addDetailValue("#tabdetails-outros", formid, "Descontos", descontos);
+    addDetailValue("#tabdetails-outros", formid, "Líquido", salario);
+    addDetailValue("#tabdetails-outros", formid, "Base PSS", basepss);
+    addDetailValue("#tabdetails-outros", formid, "Base IR", baseirrf);
+    addDetailValue("#tabdetails-outros", formid, "Deduções IR", deducoesIrrf);
 
     //cdorfg(form);
 	saveStorage();
+}
+
+function addDetailValue(parent, form, name, value) {
+    var newEl = "<div>" + name + ": " + formatValor(value) + "</div>";
+    $(parent + "-" + form).append(newEl);
 }
 
 function inverterform(tipo) {
