@@ -504,7 +504,7 @@ function calcSalario(form) {
 
     //    if (form.ddCD.value == 0 || form.rdCD[0].checked) {
     //      //Se não houver CD ou se for 60%, o vencimento é calculado pela tabela normalmente
-    var vencimento = Math.floor(base * (Math.pow(ftstep, ftvb)) *
+    var vencimento = Math.ceil(base * (Math.pow(ftstep, ftvb)) *
         ftcarga * 100) / 100;
     //    } else {
     //      //Se o CD for 100% então o vencimento é o valor do CD
