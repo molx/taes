@@ -341,13 +341,13 @@ ol {
 }
 
 
-/* .side-ad {
-	background-color: black;
-	height: 400px;
-	width: 120px;
+.side-ad {
+	/* background-color: black; */
+	min-height: 400px;
+	min-width: 120px;
 	/* position: fixed;
 	display: block; */
-} */
+}
 
 .left-ad {
 	margin-left: -200px;
