@@ -140,13 +140,17 @@ textarea {
 
 .titleHolder {
 	text-align:center;
+	position: relative;
 }
 
 .mainTitle {
 	margin: 0 auto;
 	border-bottom: 1px solid #505050;
-	display: inline-block;
-	clear: both;
+	/* display: inline-block; */
+	/* clear: both; */
+	position: absolute;
+	width: 180px;
+	left: calc(50% - 90px);
 }
 
 .fb-page {
@@ -159,8 +163,9 @@ textarea {
 	position: relative;
 	top: 20px;
 	margin-right: 5px;
-	width: 350px;
-	display: inline-block;
+	/* width: 350px; */
+	/* display: inline-block; */
+	float: right;
 }
 .cbajuda > div {
 	float: right;
@@ -502,6 +507,7 @@ ol {
 	.titleHolder {
 		max-width: auto;
 		margin: 0 auto;
+		height: 80px;
 	}
 	
 	.mainTitle {		
