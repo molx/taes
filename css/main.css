@@ -343,8 +343,8 @@ ol {
 
 .side-ad {
 	/* background-color: black; */
-	min-height: 400px;
-	min-width: 120px;
+	height: 500px;
+	width: 150px;
 	/* position: fixed;
 	display: block; */
 }
