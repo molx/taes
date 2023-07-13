@@ -495,9 +495,10 @@ function calcSalario(form) {
         base = 1446.12;
 	}
 
-    if (form.medico.checked) {
+    if (form.ddCargo.value == "1") {
         base = base * 2;
-    }
+    } 
+
     var ftvb = parseFloat(form.ddClasse.value) + parseFloat(form.ddNivel
         .value) + parseFloat(form.ddProg.value) - 3;
     var ftcarga = form.ddCargaH.value;
@@ -544,8 +545,28 @@ function calcSalario(form) {
 		form.numURP.disabled = true;
 	}
     var qualificacao = ftpg * vencimento
+
+    var diffPisoEnf = 0;    
+    if (form.ddCargo.value == "2") {
+        var piso = 4750;
+        if (form.ddClasse.value == "11") {
+            piso = piso * 0.50 * ((40 * form.ddCargaH.value) / 44);
+            //50% nivel C, corrigindo carga horaria
+        } else if (form.ddClasse.value == "17") {
+            piso = piso * 0.70 * ((40 * form.ddCargaH.value) / 44);
+            //70% nivel D, corrigindo carga horaria
+        } else if (form.ddClasse.value == "11") {
+            piso = piso * 1.00 * ((40 * form.ddCargaH.value) / 44);
+            //100% nivel E, corrigindo carga horaria
+        } else {
+            piso = 0;
+        }
+        diffPisoEnf = piso - vencimento;
+        if (diffPisoEnf < 0) diffPisoEnf = 0;
+    }
+
     var remuneracao = vencimento + urp + qualificacao + Math.floor(
-        ftinsa * vencimento * 100) / 100 + anuenio;
+        ftinsa * vencimento * 100) / 100 + anuenio + diffPisoEnf;
 
 	var sindicato = 0;
 	if (form.sindicato.checked) {
@@ -769,6 +790,7 @@ function calcSalario(form) {
     if(anuenio > 0) addDetailValue("#tabdetails-rend", formid, "Anuênio", anuenio);
     if(ftinsa > 0) addDetailValue("#tabdetails-rend", formid, "Insalubridade", ftinsa * vencimento);
     if(saude > 0) addDetailValue("#tabdetails-rend", formid, "Saúde Sup.", saude);
+    if(diffPisoEnf > 0) addDetailValue("#tabdetails-rend", formid, "Dif. Piso Enf.", diffPisoEnf);
     
     addDetailValue("#tabdetails-desc", formid, "PSS", valorpss);
     addDetailValue("#tabdetails-desc", formid, "IR", aliqirrf);
@@ -814,7 +836,7 @@ function inverterform(tipo) {
             form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked,
             form1.decter_par.value, form1.ddSindTipo.value, 0,//form1.pss_aliq.value, 
             form1.numOutros.value, form1.numURP.value, form1.numFunpFacul.value,
-			form1.Dep3Qtd.value);
+			form1.Dep3Qtd.value, form1.ddCargo.value);
 
         var values2 = Array(form2.ddClasse.value, form2.ddProg.value,
             form2.ddFG.value, form2.ddNivel.value, form2.ddCargaH
@@ -831,7 +853,7 @@ function inverterform(tipo) {
             form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked,
             form2.decter_par.value, form2.ddSindTipo.value, 0,//form2.pss_aliq.value, 
             form2.numOutros.value, form2.numURP.value, form2.numFunpFacul.value,
-			form2.Dep3Qtd.value);
+			form2.Dep3Qtd.value, form2.ddCargo.value);
 
     } else if (tipo == "cima") {
 
@@ -850,7 +872,7 @@ function inverterform(tipo) {
             form2.rdCD[1].checked, form2.ferias.checked, form2.decter.checked,
             form2.decter_par.value, form2.ddSindTipo.value, 0,//form2.pss_aliq.value, 
             form2.numOutros.value, form2.numURP.value, form2.numFunpFacul.value,
-			form2.Dep3Qtd.value);
+			form2.Dep3Qtd.value, form2.ddCargo.value);
 
         var values1 = values2;
 
@@ -871,7 +893,7 @@ function inverterform(tipo) {
             form1.rdCD[1].checked, form1.ferias.checked, form1.decter.checked,
             form1.decter_par.value, form1.ddSindTipo.value, 0,//form1.pss_aliq.value,
             form1.numOutros.value, form1.numURP.value, form1.numFunpFacul.value,
-			form1.Dep3Qtd.value);
+			form1.Dep3Qtd.value, form1.ddCargo.value);
 
         var values2 = values1;
     }
@@ -915,6 +937,7 @@ function inverterform(tipo) {
 	form1.numURP.value = values2[36]
 	form1.numFunpFacul.value = values2[37]
 	form1.Dep3Qtd.value = values2[38]
+    form1.ddCargo.value = values2[39]
 
     form2.ddClasse.value = values1[0]
     form2.ddProg.value = values1[1]
@@ -954,7 +977,8 @@ function inverterform(tipo) {
     form2.numOutros.value = values1[35]
 	form2.numURP.value = values1[36]
 	form2.numFunpFacul.value = values1[37]
-	form2.Dep3Qtd.value = values2[38]
+	form2.Dep3Qtd.value = values1[38]
+    form2.ddCargo.value = values1[39]
 
     updateQuali(form1, values2[0])
     updateQuali(form2, values1[0])

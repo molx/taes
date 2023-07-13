@@ -28,7 +28,7 @@
 			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			  crossorigin="anonymous"></script>
 		<script src="js/main.js"></script>
-		<script src="js/calc1122.js"></script>
+		<script src="js/compressed.js"></script>
 		<script type="text/javascript" src="js/nhpup_1.1.js"></script>
 		<script>if(location.protocol != "file:") {
 		(function(d, s, id) {
@@ -139,7 +139,7 @@
 						<div id="tab-carreira1" class="tab-content tab-content1">
 							<div>
 								<span onmouseover="nhpup.popup('Vários valores dependem do período do salário. Selecione o período em que o salário seria recebido, independente de seu ingresso na IFES. Esta opção tem maior chance de erros para períodos anteriores ao atual.');">
-									Período do pagamento: 
+									Período: 
 									<select name="ddAno" id="ddAno1" onchange="calcSalario(this.form)">
 										<!--<option value="1">
 											Até 12/2013
@@ -236,7 +236,7 @@
 							</div>
 							<div>
 								<span onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
-									Progressão:                                        
+									Padrão:                                        
 									<select name="ddNivel" id="ddNivel1" onchange="calcSalario(this.form)">
 										<option value="1" selected>
 											1
@@ -288,12 +288,6 @@
 										</option>
 									</select>
 								</span>
-							</div>
-							<div>
-								<span onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
-								<input type="checkbox" name="medico" id="medico1" id="medico1" value="medico" onClick="calcSalario(this.form)">
-								Médico/Veterinário                                        
-								</span>	
 							</div>
 							<div>
 								<span onmouseover="nhpup.popup('O adicional por Função Gratificada é pago a servidores que exercem cargos de chefia.');">
@@ -380,13 +374,29 @@
 									</option>-->
 								</select>
 							</div>
-							<div>
+							<div style="margin-left: 20px;">
 								<span onmouseover="nhpup.popup('O Adicional por Tempo de Serviço é calculado como 5% por cada período de 5 anos. Ele foi revogado em 1999, mas se mantém para aqueles que o recebiam na época.')">
 								Anuênio:</span> 
 								<input type="number" name="numAnuenio" id="numAnuenio1" min="0" max="35" step="1" value="0"
 									style="width: 35px;" onClick="calcSalario(this.form)" onKeyPress="validateGD1(event, this.form);"
 									onKeyUp="validateGD2(this.form);">
 								%
+							</div>
+							<div style="margin-left: 20px;">
+								<span onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
+									Cargo:
+									<select name="ddCargo" id="ddCargo1" onchange="calcSalario(this.form)" style="width:150px;">
+										<option value="0" selected>
+											Comum
+										</option>
+										<option value="1">
+											Médico/Veterinário
+										</option>
+										<option value="2">
+											Enfermagem
+										</option>
+									</select>          
+								</span>	
 							</div>
 							<div>
 								Qualificação:
@@ -862,7 +872,7 @@
 						<div id="tab-carreira2" class="tab-content tab-content2">
 							<div>
 								<span onmouseover="nhpup.popup('Vários valores dependem do período do salário. Selecione o período em que o salário seria recebido, independente de seu ingresso na IFES. Esta opção tem maior chance de erros para períodos anteriores ao atual.');">
-									Período do pagamento: 
+									Período: 
 									<select name="ddAno" id="ddAno2" onchange="calcSalario(this.form)">
 										<!--<option value="1">
 											Até 12/2013
@@ -959,7 +969,7 @@
 							</div>
 							<div>
 								<span onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
-									Progressão:                                        
+									Padrão:                                        
 									<select name="ddNivel" id="ddNivel2" onchange="calcSalario(this.form)">
 										<option value="1" selected>
 											1
@@ -1010,12 +1020,6 @@
 											16
 										</option>
 									</select>
-								</span>
-							</div>
-							<div>
-								<span onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
-								<input type="checkbox" name="medico" id="medico2" value="medico" onClick="calcSalario(this.form)">
-								Médico/Veterinário                                        
 								</span>
 							</div>
 							<div>
@@ -1103,13 +1107,29 @@
 									</option>-->
 								</select>
 							</div>
-							<div>
+							<div style="margin-left: 20px;">
 								<span onmouseover="nhpup.popup('O Adicional por Tempo de Serviço é calculado como 5% por cada período de 5 anos. Ele foi revogado em 1999, mas se mantém para aqueles que o recebiam na época.')">
 								Anuênio:</span> 
 								<input type="number" name="numAnuenio" id="numAnuenio2" min="0" max="35" step="1" value="0"
 									style="width: 35px;" onClick="calcSalario(this.form)" onKeyPress="calcSalario(this.form);"
 									onKeyUp="calcSalario(this.form);">
 								%
+							</div>
+							<div style="margin-left: 20px;">
+								<span onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
+									Cargo:
+									<select name="ddCargo" id="ddCargo2" onchange="calcSalario(this.form)" style="width:150px;">
+										<option value="0" selected>
+											Comum
+										</option>
+										<option value="1">
+											Médico/Veterinário
+										</option>
+										<option value="2">
+											Enfermagem
+										</option>
+									</select>                                        
+								</span>
 							</div>
 							<div>
 								Qualificação:
