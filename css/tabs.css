@@ -20,7 +20,7 @@ ul {
     line-height: 30px;
     float: left;
     margin-right: 10px;
-    margin-bottom: -2px;
+    margin-bottom: -1px;
     background-color: #DDDDDD;
     border-top: 1px solid black;
     border-right: 1px solid black;
@@ -33,7 +33,7 @@ ul {
 }
 
 .tabs-menu li.current {
-    height: 31px;
+    height: 30px;
     position: relative;
     background-color: #fcfcfc;
     border-bottom: 1px solid #fcfcfc;
