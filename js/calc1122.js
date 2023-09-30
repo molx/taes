@@ -528,12 +528,15 @@ function calcSalario(form) {
     /*var urp = (form.removeurp.checked) ? vencimento * 0.2605 * (1 +
         ftpg) : 0;*/
 	var urp = 0;	
+    $('form[name="' + form.name + '"] span[name="numURPview"]').css('visibility', 'hidden');
+    //form.numURPview.style.visibility = "hidden";
 	if (form.ddURP.value == 1) {
 		/* Na verdade o valor foi totalmente congelado, não só a tabela
 		//Calcula a URP usando a tabela até Julho 2016, periodo = 6;
 		var vencURP = Math.floor(1197.67 * (Math.pow(1.038, ftvb)) * ftcarga * 100) / 100;		
 		urp = vencURP * 0.2605 * (1 + ftpg);
 		*/
+        $('form[name="' + form.name + '"] span[name="numURPview"]').css('visibility', 'visible');
 		if (form.numURP.disabled) {
 			form.numURP.disabled = false;
 		}				
@@ -731,6 +734,11 @@ function calcSalario(form) {
     } else {
         liq2 = salario;
     }
+    //Toggle URP input visibility
+
+
+
+    //Print results after each calculation
     document.getElementById("diffLiqAbs").value = formatValor(Math.abs(
         Math.round((liq1 - liq2) * 100) / 100));
     document.getElementById("diffLiqPor").value = Math.round(100 *

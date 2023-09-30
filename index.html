@@ -437,19 +437,20 @@
 							<div>
 								<span onmouseover="nhpup.popup('A URP é um adicional recebido em algumas IFES. É um assunto polêmico que está aguardando julgamento no STF, com tendência de que seja removida dos servidores. Marque esta opção caso você receba URP. Veja o menu Carreira para mais informações.');">
 								<!--<input type="checkbox" name="removeurp" value="removeURP" onClick="calcSalario(this.form)">-->
-								URP:
-								<select name="ddURP" id="ddURP1" onchange="calcSalario(this.form)">
-									<option value="0" selected>
-										Não
-									</option>
-									<option value="1">
-										Congelada
-									</option>
-									<option value="2">
-										Variável
-									</option>									
-								</select>
-								R$<input type="number" name="numURP" id="numURP2" min="0" max="10000" step="0.01" value="0" style="width:80px" onClick="calcSalario(this.form)" onKeyUp="calcSalario(this.form);" disabled>
+									URP:
+									<select name="ddURP" id="ddURP1" onchange="calcSalario(this.form)">
+										<option value="0" selected>
+											Não
+										</option>
+										<option value="1">
+											Congelada
+										</option>
+										<option value="2">
+											Variável
+										</option>									
+									</select>
+									<span name="numURPview">R$<input type="number" name="numURP" id="numURP1" min="0" max="10000" step="0.01" value="0" style="width:80px" onClick="calcSalario(this.form)" onKeyUp="calcSalario(this.form);" disabled>
+									</span>
 								</span>
 							</div>
 							<div>
@@ -1182,7 +1183,7 @@
 										Variável
 									</option>									
 								</select>
-								R$<input type="number" name="numURP" id="numURP1" min="0" max="10000" step="0.01" value="0" style="width:80px" onkeyup="calcSalario(this.form)" onclick="calcSalario(this.form)" disabled>
+								<span name="numURPview">R$<input type="number" name="numURP" id="numURP2" min="0" max="10000" step="0.01" value="0" style="width:80px" onClick="calcSalario(this.form)" onKeyUp="calcSalario(this.form);" disabled>
 								</span>			
 							</div>
 							<div>							
