@@ -566,7 +566,10 @@ function calcSalario(form) {
         if (diffPisoEnf < 0) diffPisoEnf = 0;
     }
 
-    var remuneracao = vencimento + urp + qualificacao + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + diffPisoEnf;
+    var outrosRendTrib = parseFloat(form.numOutrosRendTrib.value);
+    var outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value);
+
+    var remuneracao = vencimento + urp + qualificacao + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + diffPisoEnf + outrosRendTrib;
 
     var sindicato = 0;
     if (form.sindicato.checked) {
@@ -618,7 +621,7 @@ function calcSalario(form) {
 
     var decter = form.decter.checked ? (remuneracao + fungrat + cargodir) / 2 : 0;
 
-    var bruto = Math.round((remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + decter) * 100) / 100;
+    var bruto = Math.round((remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + decter + outrosRendTrib + outrosRendIsnt) * 100) / 100;
     var basepss = remuneracao; //vencimento + urp + qualificacao;
     var tetopss = 4663.75;
 
@@ -695,7 +698,7 @@ function calcSalario(form) {
     //Eu considerei que CD 60% nao incidia IR, mas pelo FB falaram que incide.
     //Caso não incida basta remover de baseirrf. Quando é 100%, cargodir = 0
 
-    var rendTributavel = vencimento + urp + qualificacao + ftinsa * vencimento + fungrat + cargodir;
+    var rendTributavel = vencimento + urp + qualificacao + ftinsa * vencimento + fungrat + cargodir + outrosRendTrib;
 
     var deducoesIrrf = valorpss + aliqfunp + aliqFunpFacul + reducaoDepsIRRF;
 
@@ -846,7 +849,9 @@ function inverterform(tipo) {
             form1.numURP.value,
             form1.numFunpFacul.value,
             form1.Dep3Qtd.value,
-            form1.ddCargo.value
+            form1.ddCargo.value,
+            form1.numOutrosRendIsnt.value,
+            form1.numOutrosRendTrib.value
         );
 
         var values2 = Array(
@@ -889,7 +894,9 @@ function inverterform(tipo) {
             form2.numURP.value,
             form2.numFunpFacul.value,
             form2.Dep3Qtd.value,
-            form2.ddCargo.value
+            form2.ddCargo.value,
+            form2.numOutrosRendIsnt.value,
+            form2.numOutrosRendTrib.value
         );
     } else if (tipo == "cima") {
         var values2 = Array(
@@ -932,7 +939,9 @@ function inverterform(tipo) {
             form2.numURP.value,
             form2.numFunpFacul.value,
             form2.Dep3Qtd.value,
-            form2.ddCargo.value
+            form2.ddCargo.value,
+            form2.numOutrosRendIsnt.value,
+            form2.numOutrosRendTrib.value
         );
 
         var values1 = values2;
@@ -977,7 +986,9 @@ function inverterform(tipo) {
             form1.numURP.value,
             form1.numFunpFacul.value,
             form1.Dep3Qtd.value,
-            form1.ddCargo.value
+            form1.ddCargo.value,
+            form1.numOutrosRendIsnt.value,
+            form1.numOutrosRendTrib.value
         );
 
         var values2 = values1;
@@ -1023,6 +1034,8 @@ function inverterform(tipo) {
     form1.numFunpFacul.value = values2[37];
     form1.Dep3Qtd.value = values2[38];
     form1.ddCargo.value = values2[39];
+    form1.numOutrosRendIsnt.value = values2[40];
+    form1.numOutrosRendTrib.value = values2[41];
 
     form2.ddClasse.value = values1[0];
     form2.ddProg.value = values1[1];
@@ -1064,6 +1077,8 @@ function inverterform(tipo) {
     form2.numFunpFacul.value = values1[37];
     form2.Dep3Qtd.value = values1[38];
     form2.ddCargo.value = values1[39];
+    form2.numOutrosRendIsnt.value = values2[40];
+    form2.numOutrosRendTrib.value = values2[41];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
