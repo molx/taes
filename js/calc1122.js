@@ -140,7 +140,7 @@ function valorIRRF(base, periodo) {
         } else {
             aliquota = base * 0.275 - 884.96;
         }
-    }
+    } 
     return Math.floor(aliquota * 100) / 100;
 }
 
@@ -490,28 +490,49 @@ function calcSalario(form) {
     } else if (periodo > 7 && periodo < 16) {
         ftstep = 1.039;
         base = 1326.72;
-    } else {
+    } else if (periodo < 17) {
         //aumentos em maio/2023
         ftstep = 1.039;
         base = 1446.12;
+    } else if (periodo == 17) {
+        //Proposta Fasubra 2023 AB CD E plenaria
+        //Piso 3 SM, Step 5%
+        ftstep = 1.05;
+        base = 3960;
+    } else if (periodo == 18) {
+        //Proposta Fasubra 2023 AB CD E sem reajuste
+        //Piso 3 SM, Step 5%
+        ftstep = 1.039;
+        base = 1822.77;
+    } else if (periodo == 19) {
+        //Proposta Fasubra 2023 AB CD E +15%
+        //Piso 3 SM, Step 3.9%
+        ftstep = 1.039;
+        base = 1822.77 * 1.15;
     }
 
     if (form.ddCargo.value == "1") {
         base = base * 2;
     }
 
-    var ftvb = parseFloat(form.ddClasse.value) + parseFloat(form.ddNivel.value) + parseFloat(form.ddProg.value) - 3;
+    var classeOffset = parseFloat(form.ddClasse.value);
+    var nivelMerito = parseFloat(form.ddNivel.value);
+    var nivelCap = parseFloat(form.ddProg.value);
+
+    var ftvb = classeOffset + nivelMerito + nivelCap - 3;
     var ftcarga = form.ddCargaH.value;
 
-    //    if (form.ddCD.value == 0 || form.rdCD[0].checked) {
-    //      //Se não houver CD ou se for 60%, o vencimento é calculado pela tabela normalmente
     var vencimento = Math.ceil(base * Math.pow(ftstep, ftvb) * ftcarga * 100) / 100;
-    //    } else {
-    //      //Se o CD for 100% então o vencimento é o valor do CD
-    //      var vencimento = valorCD(form.ddCD.value,periodo);
-    //    }
-    // Fixando o cálculo do venciento pela tabela, considerando que os benefícios são baseados no vencimento, e não no CD. O valor de 100% entra abaixo em 'cargodir', subtraindo-se o vencimento.
 
+    if (periodo >= 17) {        
+        var frac = 1;
+        ftvb = nivelMerito + nivelCap - 2;
+        //if (classeOffset == 1 || classeOffset == 6) frac = 0.4; //niveis AB
+        if (classeOffset == 11 || classeOffset == 17) frac = 0.6 / 0.4; //niveis CD
+        if (classeOffset == 31) frac = 1 / 0.4
+        vencimento = Math.ceil(base * Math.pow(ftstep, ftvb) * ftcarga * 100 * frac) / 100;
+    }
+   
     var anuenio = (form.numAnuenio.value / 100) * vencimento;
 
     var alimentacao = form.alim.checked ? valorAlim(periodo) : 0;
