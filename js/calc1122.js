@@ -654,7 +654,7 @@ function calcSalario(form) {
 
     var decter = form.decter.checked ? (remuneracao + fungrat + cargodir) / 2 : 0;
 
-    var bruto = Math.round((remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + decter + outrosRendTrib + outrosRendIsnt) * 100) / 100;
+    var bruto = Math.round((remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + decter + outrosRendIsnt) * 100) / 100;
     var basepss = remuneracao; //vencimento + urp + qualificacao;
     var tetopss = 4663.75;
 
