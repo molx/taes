@@ -468,6 +468,11 @@ function nofg(form) {
 }
 
 function calcSalario(form) {
+    if (form.name == "myform") {
+        document.getElementById("numProposta1").disabled = true;
+    } else if (form.name == "myform2") {
+        document.getElementById("numProposta2").disabled = true;
+    }
     var periodo = parseInt(form.ddAno.value, 10);
     if (periodo == 1) {
         ftstep = 1.036;
@@ -505,10 +510,17 @@ function calcSalario(form) {
         ftstep = 1.039;
         base = 1822.77;
     } else if (periodo == 19) {
+        //Ajusta o estado do campo reajuste de acordo com periodo
+        if (form.name == "myform") {
+            document.getElementById("numProposta1").disabled = false;
+        } else if (form.name == "myform2") {
+            document.getElementById("numProposta2").disabled = false;
+        }
+        var reajuste = parseInt(form.numProposta.value, 10);    
         //Proposta Fasubra 2023 AB CD E +15%
         //Piso 3 SM, Step 3.9%
         ftstep = 1.039;
-        base = 1822.77 * 1.15;
+        base = 1822.77 * (1 + (reajuste / 100));
     }
 
     if (form.ddCargo.value == "1") {
@@ -872,7 +884,8 @@ function inverterform(tipo) {
             form1.Dep3Qtd.value,
             form1.ddCargo.value,
             form1.numOutrosRendIsnt.value,
-            form1.numOutrosRendTrib.value
+            form1.numOutrosRendTrib.value,
+            form1.numProposta.value
         );
 
         var values2 = Array(
@@ -917,7 +930,8 @@ function inverterform(tipo) {
             form2.Dep3Qtd.value,
             form2.ddCargo.value,
             form2.numOutrosRendIsnt.value,
-            form2.numOutrosRendTrib.value
+            form2.numOutrosRendTrib.value,
+            form2.numProposta.value
         );
     } else if (tipo == "cima") {
         var values2 = Array(
@@ -962,7 +976,8 @@ function inverterform(tipo) {
             form2.Dep3Qtd.value,
             form2.ddCargo.value,
             form2.numOutrosRendIsnt.value,
-            form2.numOutrosRendTrib.value
+            form2.numOutrosRendTrib.value,
+            form2.numProposta.value
         );
 
         var values1 = values2;
@@ -1009,7 +1024,8 @@ function inverterform(tipo) {
             form1.Dep3Qtd.value,
             form1.ddCargo.value,
             form1.numOutrosRendIsnt.value,
-            form1.numOutrosRendTrib.value
+            form1.numOutrosRendTrib.value,
+            form1.numProposta.value
         );
 
         var values2 = values1;
@@ -1057,6 +1073,7 @@ function inverterform(tipo) {
     form1.ddCargo.value = values2[39];
     form1.numOutrosRendIsnt.value = values2[40];
     form1.numOutrosRendTrib.value = values2[41];
+    form1.numProposta.value = values2[42];
 
     form2.ddClasse.value = values1[0];
     form2.ddProg.value = values1[1];
@@ -1098,8 +1115,9 @@ function inverterform(tipo) {
     form2.numFunpFacul.value = values1[37];
     form2.Dep3Qtd.value = values1[38];
     form2.ddCargo.value = values1[39];
-    form2.numOutrosRendIsnt.value = values2[40];
-    form2.numOutrosRendTrib.value = values2[41];
+    form2.numOutrosRendIsnt.value = values1[40];
+    form2.numOutrosRendTrib.value = values1[41];
+    form2.numProposta.value = values1[42];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
