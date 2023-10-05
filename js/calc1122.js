@@ -30,7 +30,7 @@ function updateQuali(form, classs) {
         // Add to the end of the existing options
         form.ddQuali.options[form.ddQuali.length] = option;
     }
-    if (newvalues.includes(parseInt(curValue))) {
+    if (newvalues.includes(parseInt(curValue, 10))) {
         form.ddQuali.value = curValue;
     }
     calcSalario(form);
@@ -612,7 +612,7 @@ function calcSalario(form) {
             sindicato = remuneracao * 0.01;
         } else {
             //form.ddSindTipo.value == "cat"
-            sindicato = Math.round(0.01 * base * Math.pow(ftstep, parseInt(form.ddClasse.value) - 1) * ftcarga * 100) / 100;
+            sindicato = Math.round(0.01 * base * Math.pow(ftstep, parseInt(form.ddClasse.value, 10) - 1) * ftcarga * 100) / 100;
         }
     }
 
@@ -707,7 +707,7 @@ function calcSalario(form) {
                 document.getElementById("numFunpAlt2").disabled = true;
             }
         } else {
-            aliqfunp = parseInt(form.numFunpAlt.value);
+            aliqfunp = parseInt(form.numFunpAlt.value, 10);
             if (form.name == "myform") {
                 document.getElementById("funp_plano_alt1").checked = true;
                 document.getElementById("ddFunp1").disabled = true;
