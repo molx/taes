@@ -720,11 +720,7 @@ function calcSalario(form) {
         }
     }
 
-    var aliqFunpFacul = parseInt(form.numFunpFacul.value) || 0;
-
-    if (isNaN(aliqFunpFacul)) {
-        aliqFunpFacul = 0;
-    }
+    var aliqFunpFacul = parseFloat(form.numFunpFacul.value) || 0;
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
