@@ -571,7 +571,7 @@ function calcSalario(form) {
         if (form.numURP.disabled) {
             form.numURP.disabled = false;
         }
-        urp = parseFloat(form.numURP.value);
+        urp = parseFloat(form.numURP.value) | 0;
     } else if (form.ddURP.value == 2) {
         form.numURP.disabled = true;
         urp = vencimento * 0.2605 * (1 + ftpg);
@@ -599,8 +599,8 @@ function calcSalario(form) {
         if (diffPisoEnf < 0) diffPisoEnf = 0;
     }
 
-    var outrosRendTrib = parseFloat(form.numOutrosRendTrib.value);
-    var outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value);
+    var outrosRendTrib = parseFloat(form.numOutrosRendTrib.value) | 0;
+    var outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) | 0;
 
     var remuneracao = vencimento + urp + qualificacao + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + diffPisoEnf + outrosRendTrib;
 
@@ -720,7 +720,7 @@ function calcSalario(form) {
         }
     }
 
-    var aliqFunpFacul = parseInt(form.numFunpFacul.value);
+    var aliqFunpFacul = parseInt(form.numFunpFacul.value) | 0;
 
     if (isNaN(aliqFunpFacul)) {
         aliqFunpFacul = 0;
@@ -746,7 +746,7 @@ function calcSalario(form) {
 
     var desc_13 = form.decter.checked && form.decter_par.value == "2" ? aliqirrf + valorpss + aliqfunp + aliqFunpFacul : 0;
 
-    var outrosdescontos = parseFloat(form.numOutros.value);
+    var outrosdescontos = parseFloat(form.numOutros.value) | 0;
 
     var descontos = Math.round((aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + outrosdescontos) * 100) / 100;
 
