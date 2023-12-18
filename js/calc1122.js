@@ -320,8 +320,10 @@ function valorSaude(bruto, ftidade, periodo) {
         ftbruto = 7;
     }
     var ftAjuste = 1;
-    if (periodo >= 6) {
+    if (periodo >= 6 && periodo < 17) {
         ftAjuste = 1.22618;
+    } else {
+        ftAjuste = 1.22618 * 1.51;
     }
     if (ftidade == 1000) {
         return 0;
@@ -332,8 +334,10 @@ function valorSaude(bruto, ftidade, periodo) {
 
 function valorCreche(rem, periodo, n) {
     var teto = 95;
-    if (periodo >= 6) {
+    if (periodo < 17) {
         teto = 321;
+    } else {
+        teto = 485.90;
     }
     var desc = 0;
     if (rem < 6200.8) {
@@ -449,8 +453,10 @@ function valorAlim(periodo) {
         alimentacao = 373;
     } else if (periodo < 16) {
         alimentacao = 458;
-    } else {
+    } else if (periodo < 17) {
         alimentacao = 658;
+    } else  {
+        alimentacao = 1000;
     }
     return alimentacao;
 }
@@ -495,21 +501,21 @@ function calcSalario(form) {
     } else if (periodo > 7 && periodo < 16) {
         ftstep = 1.039;
         base = 1326.72;
-    } else if (periodo < 17) {
+    } else if (periodo < 18) {
         //aumentos em maio/2023
         ftstep = 1.039;
         base = 1446.12;
-    } else if (periodo == 17) {
+    } else if (periodo == 100) {
         //Proposta Fasubra 2023 AB CD E plenaria
         //Piso 3 SM, Step 5%
         ftstep = 1.05;
         base = 3960;
-    } else if (periodo == 18) {
+    } else if (periodo == 101) {
         //Proposta Fasubra 2023 AB CD E sem reajuste
         //Piso 3 SM, Step 5%
         ftstep = 1.039;
         base = 1822.77;
-    } else if (periodo == 19) {
+    } else if (periodo == 102) {
         //Ajusta o estado do campo reajuste de acordo com periodo
         if (form.name == "myform") {
             document.getElementById("numProposta1").disabled = false;
@@ -536,7 +542,8 @@ function calcSalario(form) {
 
     var vencimento = Math.ceil(base * Math.pow(ftstep, ftvb) * ftcarga * 100) / 100;
 
-    if (periodo >= 17) {        
+    if (periodo >= 100) {        
+        //Propostas Fasubra
         var frac = 1;
         ftvb = nivelMerito + nivelCap - 2;
         //if (classeOffset == 1 || classeOffset == 6) frac = 0.4; //niveis AB
