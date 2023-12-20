@@ -323,7 +323,7 @@ function valorSaude(bruto, ftidade, periodo) {
     if (periodo >= 6 && periodo < 17) {
         ftAjuste = 1.22618;
     } else {
-        ftAjuste = 1.22618 * 1.51;
+        ftAjuste = 1.22618 * 1.5106;
     }
     if (ftidade == 1000) {
         return 0;
