@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Gerador de Matriz do PCCTAE</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+  <h1>Gerador de Matriz do PCCTAE</h1>
+  <div style="display:flex;">
+    <div style="border-right:1px solid;">
+      <div>
+        <label class="inputLabel" for="valorReferencia">Piso da matriz (R$):</label>
+        <input class="" style="width: 80px;margin-right:2em;" type="number" id="valorReferencia" step="0.01"
+          value="1446.12">
+        <label class="inputLabel" for="step">Step (%):</label>
+        <input class="numInput" type="number" id="step" step="0.01" value="3.9">
+      </div>
+      <div>
+        <label class="inputLabel" for="maxNiveis">Níveis de progressão por mérito:</label>
+        <input class="numInput" type="number" id="maxNiveis" value="16">
+        <label class="inputLabel" for="numNiveisCapacitacao">Níveis de Capacitação:</label>
+        <input class="numInput" type="number" id="numNiveisCapacitacao" value="4" max="10" min="1">
+        <label class="inputLabel" for="numNiveisClassificacao">Níveis de Classificação:</label>
+        <input class="numInput" type="number" id="numNiveisClassificacao" value="5" max="10" min="2">
+      </div>
+      <div id="divOffsets">
+        <label class="inputLabel" for="offsetNiveisB" id="offsetNiveisBlab">P-B:</label>
+        <input class="numInput" type="number" id="offsetNiveisB" value="6">
+        <label class="inputLabel" for="offsetNiveisC" id="offsetNiveisClab">P-C:</label>
+        <input class="numInput" type="number" id="offsetNiveisC" value="11">
+        <label class="inputLabel" for="offsetNiveisD" id="offsetNiveisDlab">P-D:</label>
+        <input class="numInput" type="number" id="offsetNiveisD" value="17">
+        <label class="inputLabel" for="offsetNiveisE" id="offsetNiveisElab">P-E:</label>
+        <input class="numInput" type="number" id="offsetNiveisE" value="31">
+        <!-- -->
+        <label class="inputLabel" for="offsetNiveisF" id="offsetNiveisFlab" style="display: none;">P-F:</label>
+        <input class="numInput" type="number" id="offsetNiveisF" value="0" style="display: none;">
+        <label class="inputLabel" for="offsetNiveisG" id="offsetNiveisGlab" style="display: none;">P-G:</label>
+        <input class="numInput" type="number" id="offsetNiveisG" value="0" style="display: none;">
+        <label class="inputLabel" for="offsetNiveisH" id="offsetNiveisHlab" style="display: none;">P-H:</label>
+        <input class="numInput" type="number" id="offsetNiveisH" value="0" style="display: none;">
+        <label class="inputLabel" for="offsetNiveisI" id="offsetNiveisIlab" style="display: none;">P-I:</label>
+        <input class="numInput" type="number" id="offsetNiveisI" value="0" style="display: none;">
+        <label class="inputLabel" for="offsetNiveisJ" id="offsetNiveisJlab" style="display: none;">P-J:</label>
+        <input class="numInput" type="number" id="offsetNiveisJ" value="0" style="display: none;">
+      </div>
+    </div>
+    <div style="margin-left: 1em;">
+      <div class="divInfo">
+        <table id="tabelaPisoTeto"></table>
+      </div>
+      <div class="divInfo">
+        <table id="tabelaCorr"></table>
+      </div>
+    </div>
+  </div>
+  <table id="tabelaCorpo">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+  <script src="script.js"></script>
+</body>
+
+</html>
