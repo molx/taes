@@ -50,3 +50,13 @@ label {
 #tabelaPisoTeto td, #tabelaCorr td {
   padding: 1px 5px 0 5px;
 }
+
+.inputGroup {
+  display: inline-block;
+}  
+
+@media (max-width: 900px) {
+  .inputGroup {
+    display: block;
+  }  
+}
