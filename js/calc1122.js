@@ -340,16 +340,30 @@ function valorCreche(rem, periodo, n) {
         teto = 485.90;
     }
     var desc = 0;
-    if (rem < 6200.8) {
-        desc = 0.05;
-    } else if (rem < 12401.6) {
-        desc = 0.1;
-    } else if (rem < 18602.4) {
-        desc = 0.15;
-    } else if (rem < 24803.2) {
-        desc = 0.2;
+    if (periodo < 9) {        
+        if (rem < 6200.8) {
+            desc = 0.05;
+        } else if (rem < 12401.6) {
+            desc = 0.1;
+        } else if (rem < 18602.4) {
+            desc = 0.15;
+        } else if (rem < 24803.2) {
+            desc = 0.2;
+        } else {
+            desc = 0.25;
+        }
     } else {
-        desc = 0.25;
+        if (rem < 6888.05) {
+            desc = 0.05;
+        } else if (rem <= 13776.10) {
+            desc = 0.1;
+        } else if (rem <= 20664.15) {
+            desc = 0.15;
+        } else if (rem <= 27552.20) {
+            desc = 0.2;
+        } else {
+            desc = 0.25;
+        }
     }
     return teto * (1 - desc) * n;
 }
