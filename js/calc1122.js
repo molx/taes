@@ -232,7 +232,7 @@ function calcPSS(periodo, base, teto) {
         } else {
             valor = base * 0.22 - 2615.51;
         }
-    } else {
+    } else if (periodo < 17) {
         if (base <= 1320.0) {
             //salario minimo
             valor = 0.075 * base;
@@ -251,6 +251,26 @@ function calcPSS(periodo, base, teto) {
             valor = base * 0.19 - 1111.57;
         } else {
             valor = base * 0.22 - 2615.78;
+        }
+    } else {
+        if (base <= 1412.00) {
+            //salario minimo
+            valor = 0.075 * base;
+        } else if (base <= 2666.68) {
+            valor = base * 0.09 - 21.18;
+        } else if (base <= 4000.03) {
+            valor = base * 0.12 - 101.18;
+        } else if (base <= 7786.02) {
+            //teto
+            valor = base * 0.14 - 181.18;
+        } else if (base <= 13333.48) {
+            valor = base * 0.145 - 220.11;
+        } else if (base <= 26666.94) {
+            valor = base * 0.165 - 486.78;
+        } else if (base <= 52000.54) {
+            valor = base * 0.19 - 1153.46;
+        } else {
+            valor = base * 0.22 - 2713.47;
         }
     }
     return Math.floor(valor * 100) / 100;
@@ -320,7 +340,7 @@ function valorSaude(bruto, ftidade, periodo) {
         ftbruto = 7;
     }
     var ftAjuste = 1;
-    if (periodo >= 6 && periodo < 17) {
+    if (periodo >= 6 && periodo < 18) {
         ftAjuste = 1.22618;
     } else {
         ftAjuste = 1.22618 * 1.5106;
@@ -334,7 +354,7 @@ function valorSaude(bruto, ftidade, periodo) {
 
 function valorCreche(rem, periodo, n) {
     var teto = 95;
-    if (periodo < 17) {
+    if (periodo < 18) {
         teto = 321;
     } else {
         teto = 485.90;
@@ -467,7 +487,7 @@ function valorAlim(periodo) {
         alimentacao = 373;
     } else if (periodo < 16) {
         alimentacao = 458;
-    } else if (periodo < 17) {
+    } else if (periodo < 18) {
         alimentacao = 658;
     } else  {
         alimentacao = 1000;
@@ -693,8 +713,10 @@ function calcSalario(form) {
         tetopss = 6433.57;
     } else if (periodo == 14) {
         tetopss = 7087.23;
-    } else {
+    } else if (periodo < 17) {
         tetopss = 7507.49;
+    } else {
+        tetopss = 7786.02;
     }
 
     if (form.pssfgcd.checked) {
