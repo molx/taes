@@ -719,8 +719,15 @@ function calcSalario(form) {
         tetopss = 7786.02;
     }
 
+    //Checa quais opcionais deverão entrar na base do PSS
     if (form.pssfgcd.checked) {
         basepss += fungrat + cargodir;
+    }
+    if (form.pssrisco.checked) {
+        basepss += ftinsa * vencimento;
+    }
+    if (form.pssnoturno.checked) {
+        basepss += noturno;
     }
 
     if (form.novopss.value == "rpc" && basepss > tetopss) {
@@ -736,8 +743,14 @@ function calcSalario(form) {
         if (basepss == tetopss) {
             //Só pode ser ativo normal quem entrou depois de 02/2013 e recebe acima do teto da previdência
             var basefunp = vencimento + urp + qualificacao - tetopss;
-            if (form.pssfgcd.checked) {
+            if (form.rpcfgcd.checked) {
                 basefunp += fungrat + cargodir;
+            }
+            if (form.rpcrisco.checked) {
+                basefunp += ftinsa * vencimento;
+            }
+            if (form.rpcnoturno.checked) {
+                basefunp += noturno;
             }
             aliqfunp = Math.round(basefunp * parseFloat(form.ddFunp.value) * 100) / 100;
             if (form.name == "myform") {
@@ -766,9 +779,6 @@ function calcSalario(form) {
     var aliqFunpFacul = parseFloat(form.numFunpFacul.value) || 0;
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
-
-    //Eu considerei que CD 60% nao incidia IR, mas pelo FB falaram que incide.
-    //Caso não incida basta remover de baseirrf. Quando é 100%, cargodir = 0
 
     var rendTributavel = vencimento + urp + qualificacao + ftinsa * vencimento + fungrat + cargodir + outrosRendTrib;
 
@@ -926,7 +936,13 @@ function inverterform(tipo) {
             form1.ddCargo.value,
             form1.numOutrosRendIsnt.value,
             form1.numOutrosRendTrib.value,
-            form1.numProposta.value
+            form1.numProposta.value,
+            form1.pssfgcd.checked,
+            form1.pssrisco.checked,
+            form1.pssnoturno.checked,
+            form1.rpcfgcd.checked,
+            form1.rpcrisco.checked,
+            form1.rpcnoturno.checked
         );
 
         var values2 = Array(
@@ -972,7 +988,13 @@ function inverterform(tipo) {
             form2.ddCargo.value,
             form2.numOutrosRendIsnt.value,
             form2.numOutrosRendTrib.value,
-            form2.numProposta.value
+            form2.numProposta.value,
+            form2.pssfgcd.checked,
+            form2.pssrisco.checked,
+            form2.pssnoturno.checked,
+            form2.rpcfgcd.checked,
+            form2.rpcrisco.checked,
+            form2.rpcnoturno.checked
         );
     } else if (tipo == "cima") {
         var values2 = Array(
@@ -1018,7 +1040,13 @@ function inverterform(tipo) {
             form2.ddCargo.value,
             form2.numOutrosRendIsnt.value,
             form2.numOutrosRendTrib.value,
-            form2.numProposta.value
+            form2.numProposta.value,
+            form2.pssfgcd.checked,
+            form2.pssrisco.checked,
+            form2.pssnoturno.checked,
+            form2.rpcfgcd.checked,
+            form2.rpcrisco.checked,
+            form2.rpcnoturno.checked
         );
 
         var values1 = values2;
@@ -1066,7 +1094,13 @@ function inverterform(tipo) {
             form1.ddCargo.value,
             form1.numOutrosRendIsnt.value,
             form1.numOutrosRendTrib.value,
-            form1.numProposta.value
+            form1.numProposta.value,
+            form1.pssfgcd.checked,
+            form1.pssrisco.checked,
+            form1.pssnoturno.checked,
+            form1.rpcfgcd.checked,
+            form1.rpcrisco.checked,
+            form1.rpcnoturno.checked
         );
 
         var values2 = values1;
@@ -1115,6 +1149,14 @@ function inverterform(tipo) {
     form1.numOutrosRendIsnt.value = values2[40];
     form1.numOutrosRendTrib.value = values2[41];
     form1.numProposta.value = values2[42];
+    form1.pssfgcd.checked = values2[43];
+    form1.pssrisco.checked = values2[44];
+    form1.pssnoturno.checked = values2[45];
+    form1.rpcfgcd.checked = values2[44];
+    form1.rpcrisco.checked = values2[45];
+    form1.rpcnoturno.checked = values2[46];
+
+    ///////////////////////////////////
 
     form2.ddClasse.value = values1[0];
     form2.ddProg.value = values1[1];
@@ -1159,6 +1201,12 @@ function inverterform(tipo) {
     form2.numOutrosRendIsnt.value = values1[40];
     form2.numOutrosRendTrib.value = values1[41];
     form2.numProposta.value = values1[42];
+    form2.pssfgcd.checked = values1[43];
+    form2.pssrisco.checked = values1[44];
+    form2.pssnoturno.checked = values1[45];
+    form2.rpcfgcd.checked = values1[44];
+    form2.rpcrisco.checked = values1[45];
+    form2.rpcnoturno.checked = values1[46];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
