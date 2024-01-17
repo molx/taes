@@ -648,3 +648,10 @@ ul {
 	font-weight: normal;
 	text-decoration: underline;
 }
+
+.novolink::after {
+	content:'NOVO!';
+	font-size: 50%;
+    vertical-align: super;
+    font-weight: bold;
+}
