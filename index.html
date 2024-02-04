@@ -316,6 +316,26 @@
                                 </span>
                             </div>
                             <div>
+                                <span>Carga horária:</span>
+                                <select name="ddCargaH" id="ddCargaH1" onchange="calcSalario(this.form);">
+                                    <option value="1" selected>
+                                        40 horas
+                                    </option>
+                                    <option value="0.75">
+                                        30 horas
+                                    </option>
+                                    <option value="0.5">
+                                        20 horas
+                                    </option>
+                                    <!--<option value="0.5625">
+                                            20 horas (PDV)
+                                            </option>
+                                            <option value="0.8125">
+                                            30 horas (PDV)
+                                            </option>-->
+                                </select>
+                            </div>
+                            <div>
                                 <span
                                     onmouseover="nhpup.popup('O adicional por Função Gratificada é pago a servidores que exercem cargos de chefia.');">
                                     FG:
@@ -384,26 +404,6 @@
                                         onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />100%
                                     <input type="text" name="txCD" value="R$ 0,00" readonly />
                                 </span>
-                            </div>
-                            <div>
-                                <span>Carga horária:</span>
-                                <select name="ddCargaH" id="ddCargaH1" onchange="calcSalario(this.form);">
-                                    <option value="1" selected>
-                                        40 horas
-                                    </option>
-                                    <option value="0.75">
-                                        30 horas
-                                    </option>
-                                    <option value="0.5">
-                                        20 horas
-                                    </option>
-                                    <!--<option value="0.5625">
-                                            20 horas (PDV)
-                                            </option>
-                                            <option value="0.8125">
-                                            30 horas (PDV)
-                                            </option>-->
-                                </select>
                             </div>
                             <div>
                                 <span
@@ -536,7 +536,7 @@
                                     onmouseover="nhpup.popup('O reembolso por contrato de Plano de Saúde particular segue uma tabela definida pelo Governo Federal e depende do salário bruto e da idade do servidor.');">
                                     <input type="checkbox" name="saude" id="saude1" value="Saude"
                                         onClick="calcSalario(this.form);" />
-                                    Saúde suplementar - Idade do servidor:
+                                    Saúde suplementar <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Assistência_à_saúde_suplementar" target="_blank"></a> - Idade do servidor:
                                     <select name="ddIdade" id="ddIdade1" onchange="calcSalario(this.form);">
                                         <option value="0">
                                             0-18 anos
@@ -695,7 +695,7 @@
                                     onmouseover="nhpup.popup('O valor do transporte é calculado com base no gasto diário do servidor (arredondado para cima em steps de R$ 0,2). Caso receba auxílio-alimentação, valores referentes a saída para almoço não devem ser considerados. Além disso, o valor sofre um desconto de 6% do vencimento proporcional a 22 dias.');">
                                     <input type="checkbox" name="trans" id="trans1" value="Trans"
                                         onClick="calcSalario(this.form);" />
-                                    Transporte - Gasto Diário: R$
+                                    Transporte <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Auxílio-transporte" target="_blank"></a> - Gasto diário: R$
                                     <input type="number" name="gastoTrans" id="gastoTrans1" min="2" max="99" step="0.2"
                                         value="8" style="width: 50px;" onClick="calcSalario(this.form);"
                                         onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
@@ -706,7 +706,7 @@
                             <div>
                                 <span>
                                     <input type="checkbox" name="alim" value="Alim" onClick="calcSalario(this.form);"
-                                        checked /> Alimentação:
+                                        checked /> Alimentação <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Auxílio-alimentação" target="_blank"></a>:
                                     <input style="width: 75px;" type="text" name="txAlim" id="txAlim1" value="R$ 373,00"
                                         readonly />
                                 </span>
@@ -737,7 +737,7 @@
                             <div>
                                 <span
                                     onmouseover="nhpup.popup('Para o cálculo correto, preencha com o valor das horas trabalhadas. A calculadora leva em conta a conversão da hora pelo fator de 52,5 minutos automaticamente.');">
-                                    Noturno (h/mês):
+                                    Noturno <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Adicional noturno" target="_blank"></a> (h/mês):
                                     <input type="number" name="noturno" id="noturno1" min="0" max="240" step="0.1"
                                         value="0" style="width: 48px;" onClick="calcSalario(this.form);"
                                         onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
@@ -746,7 +746,7 @@
                             </div>                          
                             <div>
                                 <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form);">  -->
-                                Auxílio pré-escolar - Nº:
+                                Auxílio pré-escolar <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Auxílio_pré-escolar" target="_blank"></a> - Nº:
                                 <input type="number" name="numCreche" id="numCreche1" min="0" max="10" step="1"
                                     value="0" style="width: 30px;" onClick="calcSalario(this.form);"
                                     onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
@@ -766,14 +766,13 @@
                                 <span
                                     onmouseover="nhpup.popup('O 13º salário é pago em duas parcelas, sendo a primeira em junho e a segunda em dezembro. Na primeira parcela nenhum imposto ou contribuição é descontado, sendo o ajuste feito na segunda parcela, pois o valor final do 13º salário é igual ao salário do mês de dezembro.');">
                                     <input type="checkbox" name="decter" id="decter1" value="decter"
-                                        onClick="calcSalario(this.form);" /> 13º Salário:
-                                    <input style="width: 85px;" type="text" name="txDecter" id="txDecter"
-                                        value="R$ 0,00" readonly />
-                                    Parcela:
+                                        onClick="calcSalario(this.form);" /> 13º Salário -  Parcela:
                                     <input type="radio" name="decter_par" id="decter_par11" value="1"
                                         onClick="calcSalario(this.form);" checked />1ª
                                     <input type="radio" name="decter_par" id="decter_par21" value="2"
                                         onClick="calcSalario(this.form);" />2ª
+                                    <input style="width: 85px;" type="text" name="txDecter" id="txDecter"
+                                        value="R$ 0,00" readonly />
                                 </span>
                             </div>
                         </div>
@@ -1173,6 +1172,26 @@
                                 </span>
                             </div>
                             <div>
+                                <span>Carga horária:</span>
+                                <select name="ddCargaH" id="ddCargaH" onchange="calcSalario(this.form);">
+                                    <option value="1" selected>
+                                        40 horas
+                                    </option>
+                                    <option value="0.75">
+                                        30 horas
+                                    </option>
+                                    <option value="0.5">
+                                        20 horas
+                                    </option>
+                                    <!--<option value="0.5625">
+                                            20 horas (PDV)
+                                            </option>
+                                            <option value="0.8125">
+                                            30 horas (PDV)
+                                            </option>-->
+                                </select>
+                            </div>
+                            <div>
                                 <span>
                                     FG:
                                     <select name="ddFG" id="ddFG2" onchange="nocd(this.form);calcSalario(this.form);">
@@ -1240,26 +1259,6 @@
                                         onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />100%
                                     <input type="text" name="txCD" value="R$ 0,00" readonly />
                                 </span>
-                            </div>
-                            <div>
-                                <span>Carga horária:</span>
-                                <select name="ddCargaH" id="ddCargaH" onchange="calcSalario(this.form);">
-                                    <option value="1" selected>
-                                        40 horas
-                                    </option>
-                                    <option value="0.75">
-                                        30 horas
-                                    </option>
-                                    <option value="0.5">
-                                        20 horas
-                                    </option>
-                                    <!--<option value="0.5625">
-                                            20 horas (PDV)
-                                            </option>
-                                            <option value="0.8125">
-                                            30 horas (PDV)
-                                            </option>-->
-                                </select>
                             </div>
                             <div>
                                 <span
@@ -1392,7 +1391,7 @@
                                     onmouseover="nhpup.popup('O reembolso por contrato de Plano de Saúde particular segue uma tabela definida pelo Governo Federal e depende do salário bruto e da idade do servidor.');">
                                     <input type="checkbox" name="saude" id="saude2" value="Saude"
                                         onClick="calcSalario(this.form);" />
-                                    Saúde suplementar - Idade do servidor:
+                                    Saúde suplementar <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Assistência_à_saúde_suplementar" target="_blank"></a> - Idade do servidor:
                                     <select name="ddIdade" id="ddIdade2" onchange="calcSalario(this.form);">
                                         <option value="0">
                                             0-18 anos
@@ -1551,7 +1550,7 @@
                                     onmouseover="nhpup.popup('O valor do transporte é calculado com base no gasto diário do servidor (arredondado para cima em steps de R$ 0,2). Caso receba auxílio-alimentação, valores referentes a saída para almoço não devem ser considerados. Além disso, o valor sofre um desconto de 6% do vencimento proporcional a 22 dias.');">
                                     <input type="checkbox" name="trans" id="trans2" value="Trans"
                                         onClick="calcSalario(this.form);" />
-                                    Transporte - Gasto Diário: R$
+                                    Transporte <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Auxílio-transporte" target="_blank"></a> - Gasto diário: R$
                                     <input type="number" name="gastoTrans" id="gastoTrans2" min="2" max="99" step="0.2"
                                         value="8" style="width: 50px;" onClick="calcSalario(this.form);"
                                         onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
@@ -1562,7 +1561,7 @@
                             <div>
                                 <span>
                                     <input type="checkbox" name="alim" value="Alim" onClick="calcSalario(this.form);"
-                                        checked /> Alimentação:
+                                        checked /> Alimentação <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Auxílio-alimentação" target="_blank"></a>:
                                     <input type="text" style="width: 75px;" name="txAlim" id="txAlim2" value="R$ 373,00"
                                         readonly />
                                 </span>
@@ -1593,7 +1592,7 @@
                             <div>
                                 <span
                                     onmouseover="nhpup.popup('Para o cálculo correto, preencha com o valor das horas trabalhadas. A calculadora leva em conta a conversão da hora pelo fator de 52,5 minutos automaticamente.');">
-                                    Noturno (h/mês):
+                                    Noturno <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Adicional noturno" target="_blank"></a> (h/mês):
                                     <input type="number" name="noturno" id="noturno2" min="0" max="240" step="0.1"
                                         value="0" style="width: 48px;" onClick="calcSalario(this.form);"
                                         onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
@@ -1602,7 +1601,7 @@
                             </div>
                             <div>
                                 <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form);">  -->
-                                Auxílio pré-escolar - Nº:
+                                Auxílio pré-escolar <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Auxílio_pré-escolar" target="_blank"></a> - Nº:
                                 <input type="number" name="numCreche" id="numCreche2" min="0" max="10" step="1"
                                     value="0" style="width: 30px;" onClick="calcSalario(this.form);"
                                     onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
@@ -1621,14 +1620,13 @@
                                 <span
                                     onmouseover="nhpup.popup('O 13º salário é pago em duas parcelas, sendo a primeira em junho e a segunda em dezembro. Na primeira parcela nenhum imposto ou contribuição é descontado, sendo o ajuste feito na segunda parcela, pois o valor final do 13º salário é igual ao salário do mês de dezembro.');">
                                     <input type="checkbox" name="decter" id="decter2" value="decter"
-                                        onClick="calcSalario(this.form);" /> 13º Salário:
-                                    <input style="width: 85px;" type="text" name="txDecter" id="txDecter2"
-                                        value="R$ 0,00" readonly />
-                                    Parcela:
+                                        onClick="calcSalario(this.form);" /> 13º Salário - Parcela:
                                     <input type="radio" name="decter_par" id="decter_par12" value="1"
                                         onClick="calcSalario(this.form);" checked />1ª
                                     <input type="radio" name="decter_par" id="decter_par22" value="2"
                                         onClick="calcSalario(this.form);" />2ª
+                                    <input style="width: 85px;" type="text" name="txDecter" id="txDecter2"
+                                        value="R$ 0,00" readonly />
                                 </span>
                             </div>
                         </div>

@@ -541,10 +541,11 @@ ul {
 .tab-content {
     padding: 5px;
     display: none;
+	font-size: 0.95em;
 }
 
 .tab-content div  {
-  margin-top: 0.6em;
+  margin-top: 0.8em;
   display: inline-block;
   margin-right:10px;
 }
@@ -654,4 +655,12 @@ ul {
 	font-size: 50%;
     vertical-align: super;
     font-weight: bold;
+}
+
+.wiki-icon {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    background-image: url(../img/wiki.png);
+    background-size: 14px;
 }
