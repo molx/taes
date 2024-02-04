@@ -505,6 +505,30 @@
                                     <input type="text" name="txDepIRRF" value="R$ 0,00" readonly />
                                 </span>
                             </div>
+                            <div>
+                                <span
+                                    onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. As principais formas de cálculo são 1% do seu VB e 1% do menor VB da categoria.')">
+                                    <!--<input type="checkbox" name="sindicato" id="sindicato1" value=""
+                                        onClick="calcSalario(this.form);" /> -->
+                                    Sindicato:                                    
+                                    <select name="ddSindTipo" id="ddSindTipo1" onchange="calcSalario(this.form);"
+                                        style="width: 110px;">
+                                        <option value="nao" selected>
+                                            Não filiado
+                                        </option>
+                                        <option value="vb">
+                                            1% VB
+                                        </option>
+                                        <option value="rem">
+                                            1% Rem.
+                                        </option>
+                                        <option value="cat">
+                                            1% Cat.
+                                        </option>
+                                    </select>
+                                    <input type="text" name="txSindicato" value="R$ 0,00" readonly />
+                                </span>
+                            </div>
                         </div>
                         <div id="tab-ad1" class="tab-content tab-content1">
                             <div>
@@ -691,7 +715,7 @@
                             <div>
                                 <span>Adic. de risco:</span>
                                 <select name="ddInsa" id="ddInsa1" onchange="calcSalario(this.form);"
-                                    style="width: 90px;">
+                                    style="width: 120px;">
                                     <option value="0" selected>
                                         Nenhum
                                     </option>
@@ -708,36 +732,7 @@
                                         Peric. (10%)
                                     </option>
                                 </select>
-                                <input type="text" name="txInsa" value="R$ 0,00" readonly />
-                            </div>
-                            <div>
-                                <span
-                                    onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. As principais formas de cálculo são 1% do seu VB e 1% do menor VB da categoria.')">
-                                    <input type="checkbox" name="sindicato" id="sindicato1" value=""
-                                        onClick="calcSalario(this.form);" />
-                                    Sindicato:
-                                    <input type="text" name="txSindicato" value="R$ 0,00" readonly />
-                                    <select name="ddSindTipo" id="ddSindTipo1" onchange="calcSalario(this.form);"
-                                        style="width: 90px;">
-                                        <option value="vb" selected>
-                                            1% VB
-                                        </option>
-                                        <option value="rem">
-                                            1% Rem.
-                                        </option>
-                                        <option value="cat">
-                                            1% Cat.
-                                        </option>
-                                    </select>
-                                </span>
-                            </div>
-                            <div>
-                                <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form);">  -->
-                                Auxílio pré-escolar. Nº:
-                                <input type="number" name="numCreche" id="numCreche1" min="0" max="10" step="1"
-                                    value="0" style="width: 30px;" onClick="calcSalario(this.form);"
-                                    onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
-                                <input type="text" name="txCreche" value="R$ 0,00" readonly />
+                                <input type="text" name="txInsa" style="width:72px"  value="R$ 0,00" readonly />
                             </div>
                             <div>
                                 <span
@@ -746,8 +741,18 @@
                                     <input type="number" name="noturno" id="noturno1" min="0" max="240" step="0.1"
                                         value="0" style="width: 48px;" onClick="calcSalario(this.form);"
                                         onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
-                                    <input type="text" name="txNoturno" value="R$ 0,00" readonly />
+                                    <input type="text" name="txNoturno" style="width:72px" value="R$ 0,00" readonly />
                                 </span>
+                            </div>                          
+                            <div>
+                                <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form);">  -->
+                                Auxílio pré-escolar - Nº:
+                                <input type="number" name="numCreche" id="numCreche1" min="0" max="10" step="1"
+                                    value="0" style="width: 30px;" onClick="calcSalario(this.form);"
+                                    onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
+                                <input type="checkbox" name="crechecota" onClick="calcSalario(this.form);" checked>Cota-parte
+                                <input type="text" name="txCreche" value="R$ 0,00" readonly />
+                                
                             </div>
                             <div>
                                 <span>
@@ -1356,6 +1361,30 @@
                                     <input type="text" name="txDepIRRF" value="R$ 0,00" readonly />
                                 </span>
                             </div>
+                            <div>
+                                <span
+                                    onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. As principais formas de cálculo são 1% do seu VB e 1% do menor VB da categoria.')">
+                                    <!--<input type="checkbox" name="sindicato" id="sindicato2" value=""
+                                        onClick="calcSalario(this.form);" /> -->
+                                    Sindicato:                                    
+                                    <select name="ddSindTipo" id="ddSindTipo2" onchange="calcSalario(this.form);"
+                                        style="width: 110px;">
+                                        <option value="nao" selected>
+                                            Não filiado
+                                        </option>
+                                        <option value="vb">
+                                            1% VB
+                                        </option>
+                                        <option value="rem">
+                                            1% Rem.
+                                        </option>
+                                        <option value="cat">
+                                            1% Cat.
+                                        </option>
+                                    </select>
+                                    <input type="text" name="txSindicato" value="R$ 0,00" readonly />
+                                </span>
+                            </div>
                         </div>
                         <div id="tab-ad2" class="tab-content tab-content2">
                             <div>
@@ -1542,7 +1571,7 @@
                             <div>
                                 <span>Adic. de risco:</span>
                                 <select name="ddInsa" id="ddInsa2" onchange="calcSalario(this.form);"
-                                    style="width: 90px;">
+                                    style="width: 120px;">
                                     <option value="0" selected>
                                         Nenhum
                                     </option>
@@ -1559,36 +1588,7 @@
                                         Peric. (10%)
                                     </option>
                                 </select>
-                                <input type="text" name="txInsa" value="R$ 0,00" readonly />
-                            </div>
-                            <div>
-                                <span
-                                    onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. As principais formas de cálculo são 1% do seu VB e 1% do menor VB da categoria.')">
-                                    <input type="checkbox" name="sindicato" id="sindicato2" value=""
-                                        onClick="calcSalario(this.form);" />
-                                    Sindicato:
-                                    <input type="text" name="txSindicato" value="R$ 0,00" readonly />
-                                    <select name="ddSindTipo" id="ddSindTipo2" onchange="calcSalario(this.form);"
-                                        style="width: 90px;">
-                                        <option value="vb" selected>
-                                            1% VB
-                                        </option>
-                                        <option value="rem">
-                                            1% Rem.
-                                        </option>
-                                        <option value="cat">
-                                            1% Cat.
-                                        </option>
-                                    </select>
-                                </span>
-                            </div>
-                            <div>
-                                <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form);">  -->
-                                Auxílio pré-escolar. Nº:
-                                <input type="number" name="numCreche" id="numCreche2" min="0" max="10" step="1"
-                                    value="0" style="width: 30px;" onClick="calcSalario(this.form);"
-                                    onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
-                                <input type="text" name="txCreche" value="R$ 0,00" readonly />
+                                <input type="text" name="txInsa" style="width:72px" value="R$ 0,00" readonly />
                             </div>
                             <div>
                                 <span
@@ -1597,8 +1597,17 @@
                                     <input type="number" name="noturno" id="noturno2" min="0" max="240" step="0.1"
                                         value="0" style="width: 48px;" onClick="calcSalario(this.form);"
                                         onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
-                                    <input type="text" name="txNoturno" value="R$ 0,00" readonly />
+                                    <input type="text" name="txNoturno" style="width:72px" value="R$ 0,00" readonly />
                                 </span>
+                            </div>
+                            <div>
+                                <!-- <input type="checkbox" name="creche" value="0" onClick="calcSalario(this.form);">  -->
+                                Auxílio pré-escolar - Nº:
+                                <input type="number" name="numCreche" id="numCreche2" min="0" max="10" step="1"
+                                    value="0" style="width: 30px;" onClick="calcSalario(this.form);"
+                                    onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
+                                    <input type="checkbox" name="crechecota" onClick="calcSalario(this.form);" checked>Cota-parte
+                                <input type="text" name="txCreche" value="R$ 0,00" readonly />
                             </div>
                             <div>
                                 <span>

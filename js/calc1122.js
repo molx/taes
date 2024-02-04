@@ -352,7 +352,7 @@ function valorSaude(bruto, ftidade, periodo) {
     }
 }
 
-function valorCreche(rem, periodo, n) {
+function valorCreche(rem, periodo, n, cota) {
     var teto = 95;
     if (periodo < 18) {
         teto = 321;
@@ -385,7 +385,11 @@ function valorCreche(rem, periodo, n) {
             desc = 0.25;
         }
     }
-    return teto * (1 - desc) * n;
+    if (cota) {
+        return teto * (1 - desc) * n;
+    } else {
+        return teto * n;
+    }
 }
 
 function valorTransporte(vencimento, gasto) {
@@ -646,7 +650,7 @@ function calcSalario(form) {
     var remuneracao = vencimento + urp + qualificacao + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + diffPisoEnf + outrosRendTrib;
 
     var sindicato = 0;
-    if (form.sindicato.checked) {
+    if (form.ddSindTipo.value != "nao") {
         if (form.ddSindTipo.value == "vb") {
             sindicato = vencimento * 0.01;
         } else if (form.ddSindTipo.value == "rem") {
@@ -683,7 +687,7 @@ function calcSalario(form) {
 
     var basecreche = vencimento + urp + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio;
     //basecreche aparentemente não leva em consideração o Incentivo à Qualificação - outros a ver
-    var creche = valorCreche(basecreche, periodo, form.numCreche.value);
+    var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
 
     if (form.ferias.checked) {
         var ferias = (remuneracao + fungrat + cargodir) / 3;
