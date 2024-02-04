@@ -913,7 +913,7 @@ function inverterform(tipo) {
             form1.alim.checked,
             form1.ddInsa.value,
             form1.numCreche.value,
-            form1.sindicato.checked,
+            0, //form1.sindicato.checked,
             form1.areaquali[0].checked,
             form1.areaquali[1].checked,
             form1.novopss.value,
@@ -946,7 +946,8 @@ function inverterform(tipo) {
             form1.pssnoturno.checked,
             form1.rpcfgcd.checked,
             form1.rpcrisco.checked,
-            form1.rpcnoturno.checked
+            form1.rpcnoturno.checked,
+            form1.crechecota.checked
         );
 
         var values2 = Array(
@@ -965,7 +966,7 @@ function inverterform(tipo) {
             form2.alim.checked,
             form2.ddInsa.value,
             form2.numCreche.value,
-            form2.sindicato.checked,
+            0, //form2.sindicato.checked,
             form2.areaquali[0].checked,
             form2.areaquali[1].checked,
             form2.novopss.value,
@@ -998,7 +999,8 @@ function inverterform(tipo) {
             form2.pssnoturno.checked,
             form2.rpcfgcd.checked,
             form2.rpcrisco.checked,
-            form2.rpcnoturno.checked
+            form2.rpcnoturno.checked,
+            form2.crechecota.checked
         );
     } else if (tipo == "cima") {
         var values2 = Array(
@@ -1017,7 +1019,7 @@ function inverterform(tipo) {
             form2.alim.checked,
             form2.ddInsa.value,
             form2.numCreche.value,
-            form2.sindicato.checked,
+            0, //form2.sindicato.checked,
             form2.areaquali[0].checked,
             form2.areaquali[1].checked,
             form2.novopss.value,
@@ -1050,7 +1052,8 @@ function inverterform(tipo) {
             form2.pssnoturno.checked,
             form2.rpcfgcd.checked,
             form2.rpcrisco.checked,
-            form2.rpcnoturno.checked
+            form2.rpcnoturno.checked,
+            form2.crechecota.checked
         );
 
         var values1 = values2;
@@ -1071,7 +1074,7 @@ function inverterform(tipo) {
             form1.alim.checked,
             form1.ddInsa.value,
             form1.numCreche.value,
-            form1.sindicato.checked,
+            0, //form1.sindicato.checked,
             form1.areaquali[0].checked,
             form1.areaquali[1].checked,
             form1.novopss.value,
@@ -1104,7 +1107,8 @@ function inverterform(tipo) {
             form1.pssnoturno.checked,
             form1.rpcfgcd.checked,
             form1.rpcrisco.checked,
-            form1.rpcnoturno.checked
+            form1.rpcnoturno.checked,
+            form1.crechecota.checked
         );
 
         var values2 = values1;
@@ -1125,7 +1129,7 @@ function inverterform(tipo) {
     form1.alim.checked = values2[12];
     form1.ddInsa.value = values2[13];
     form1.numCreche.value = values2[14];
-    form1.sindicato.checked = values2[15];
+    //form1.sindicato.checked = values2[15];
     form1.areaquali[0].checked = values2[16];
     form1.areaquali[1].checked = values2[17];
     form1.novopss.value = values2[18];
@@ -1144,7 +1148,7 @@ function inverterform(tipo) {
     form1.decter.checked = values2[31];
     form1.decter_par.value = values2[32];
     form1.ddSindTipo.value = values2[33];
-    //form1.pss_aliq.value = values2[34]
+    //form1.pss_aliq.value = values2[34];
     form1.numOutros.value = values2[35];
     form1.numURP.value = values2[36];
     form1.numFunpFacul.value = values2[37];
@@ -1156,9 +1160,10 @@ function inverterform(tipo) {
     form1.pssfgcd.checked = values2[43];
     form1.pssrisco.checked = values2[44];
     form1.pssnoturno.checked = values2[45];
-    form1.rpcfgcd.checked = values2[44];
-    form1.rpcrisco.checked = values2[45];
-    form1.rpcnoturno.checked = values2[46];
+    form1.rpcfgcd.checked = values2[46];
+    form1.rpcrisco.checked = values2[47];
+    form1.rpcnoturno.checked = values2[48];
+    form1.crechecota.checked = values2[49];
 
     ///////////////////////////////////
 
@@ -1177,7 +1182,7 @@ function inverterform(tipo) {
     form2.alim.checked = values1[12];
     form2.ddInsa.value = values1[13];
     form2.numCreche.value = values1[14];
-    form2.sindicato.checked = values1[15];
+    //form2.sindicato.checked = values1[15];
     form2.areaquali[0].checked = values1[16];
     form2.areaquali[1].checked = values1[17];
     form2.novopss.value = values1[18];
@@ -1208,9 +1213,10 @@ function inverterform(tipo) {
     form2.pssfgcd.checked = values1[43];
     form2.pssrisco.checked = values1[44];
     form2.pssnoturno.checked = values1[45];
-    form2.rpcfgcd.checked = values1[44];
-    form2.rpcrisco.checked = values1[45];
-    form2.rpcnoturno.checked = values1[46];
+    form2.rpcfgcd.checked = values1[46];
+    form2.rpcrisco.checked = values1[47];
+    form2.rpcnoturno.checked = values1[48];
+    form2.crechecota.checked = values1[49];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
