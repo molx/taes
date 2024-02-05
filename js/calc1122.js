@@ -517,7 +517,9 @@ function calcSalario(form) {
     } else if (form.name == "myform2") {
         document.getElementById("numProposta2").disabled = true;
     }
-    var periodo = parseInt(form.ddAno.value, 10);
+    var periodo = parseInt(form.ddAno.value, 10),
+    base = 1086.32,
+    ftstep = 1.036;
     if (periodo == 1) {
         ftstep = 1.036;
         base = 1086.32;
