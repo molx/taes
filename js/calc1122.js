@@ -541,11 +541,13 @@ function calcSalario(form) {
     } else if (periodo > 7 && periodo < 16) {
         ftstep = 1.039;
         base = 1326.72;
-    } else if (periodo < 18) {
+    } else {
         //aumentos em maio/2023
         ftstep = 1.039;
         base = 1446.12;
-    } else if (periodo == 100) {
+    } 
+    // Situações especiais
+    if (periodo == 100) {
         //Proposta Fasubra 2023 AB CD E plenaria
         //Piso 3 SM, Step 5%
         ftstep = 1.05;
