@@ -128,7 +128,7 @@ function valorIRRF(base, periodo) {
         } else {
             aliquota = base * 0.275 - 869.36;
         }
-    } else {
+    } else if (periodo < 17) {
         if (base <= 2112) {
             aliquota = 0;
         } else if (base <= 2826.65) {
@@ -140,7 +140,19 @@ function valorIRRF(base, periodo) {
         } else {
             aliquota = base * 0.275 - 884.96;
         }
-    } 
+    }  else {
+        if (base <= 2259.20) {
+            aliquota = 0;
+        } else if (base <= 2826.65) {
+            aliquota = base * 0.075 - 169.44;
+        } else if (base <= 3751.05) {
+            aliquota = base * 0.15 - 381.44;
+        } else if (base <= 4664.68) {
+            aliquota = base * 0.225 - 662.77;
+        } else {
+            aliquota = base * 0.275 - 896.00;
+        }
+    }
     return Math.floor(aliquota * 100) / 100;
 }
 
@@ -794,9 +806,10 @@ function calcSalario(form) {
 
     var baseirrf = rendTributavel - deducoesIrrf;
 
-    if (periodo >= 16 && deducoesIrrf < 528) {
-        deducoesIrrf = 528;
-        baseirrf = rendTributavel - deducoesIrrf;
+    if (periodo == 16 && deducoesIrrf < 528) {
+        baseirrf = rendTributavel - 528;
+    } else if (periodo > 16 && deducoesIrrf < 564.80) {
+        baseirrf = rendTributavel - 564.80;
     }
 
     var aliqirrf = valorIRRF(baseirrf, periodo);
