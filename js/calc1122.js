@@ -531,7 +531,7 @@ function calcSalario(form) {
     }
     var periodo = parseInt(form.ddAno.value, 10),
     base = 1086.32,
-    ftstep = 1.036;
+    ftstep = 1.039;
     if (periodo == 1) {
         ftstep = 1.036;
         base = 1086.32;
@@ -550,14 +550,16 @@ function calcSalario(form) {
     } else if (periodo == 7) {
         ftstep = 1.038;
         base = 1263.54;
-    } else if (periodo > 7 && periodo < 16) {
-        ftstep = 1.039;
+    } else if (periodo > 7 && periodo < 16) {        
         base = 1326.72;
-    } else {
-        //aumentos em maio/2023
-        ftstep = 1.039;
+    } else if (periodo < 19) {
+        //aumentos em maio/2023        
         base = 1446.12;
-    } 
+    } else if (periodo < 20) {
+        base = 1446.12 * 1.045;
+    } else {
+        base = 1446.12 * 1.045 * 1.045;
+    }    
     // Situações especiais
     if (periodo == 100) {
         //Proposta Fasubra 2023 AB CD E plenaria
