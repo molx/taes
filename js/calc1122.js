@@ -429,6 +429,8 @@ function valorFG(FG, periodo) {
     var FG2018 = Array(0, 933.5, 628.03, 509.16, 259.17, 210.29, 154.2, 98.34, 72.74, 59.02);
     var FG2019 = Array(0, 975.51, 656.29, 532.07, 270.83, 219.76, 161.14, 101.77, 76.02, 61.67);
     var FG2023 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67);
+    var FG2025 = Array(0, 1063.31 * 1.045, 715.35 * 1.045, 579.96 * 1.045, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67);
+    var FG2026 = Array(0, 1063.31 * 1.045 * 1.045, 715.35 * 1.045 * 1.045, 579.96 * 1.045 * 1.045, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67);
 
     var valor = 0;
     if (periodo == 1) {
@@ -450,9 +452,15 @@ function valorFG(FG, periodo) {
     } else if (periodo < 16) {
         //a partir de 2019
         valor = FG2019[FG];
-    } else {
+    } else if (periodo < 19) {
         //a partir de maio/2023
         valor = FG2023[FG];
+    } else if (periodo < 20) {
+        //a partir de maio/2025
+        valor = FG2025[FG];
+    } else {
+        //a partir de maio/2026
+        valor = FG2026[FG];
     }
     return valor;
 }
@@ -467,6 +475,8 @@ function valorCD(CD, periodo) {
     var CD2018 = Array(0, 12893.89, 10778.5, 8461.62, 6144.74);
     var CD2019 = Array(0, 13474.12, 11263.53, 8842.29, 6421.26);
     var CD2023 = Array(0, 14686.79, 12277.25, 9638.21, 6999.17);
+    var CD2025 = Array(0, 14686.79 * 1.045, 12277.25 * 1.045, 9638.21 * 1.045, 6999.17 * 1.045);
+    var CD2026 = Array(0, 14686.79 * 1.045 * 1.045, 12277.25 * 1.045 * 1.045, 9638.21 * 1.045 * 1.045, 6999.17 * 1.045 * 1.045);
 
     var valor = 0;
     if (periodo == 1) {
@@ -491,9 +501,16 @@ function valorCD(CD, periodo) {
     } else if (periodo < 16) {
         //A partir de 2019
         valor = CD2019[CD];
-    } else {
+    } else if (periodo < 19) {
+        //a partir de maio/2023
         valor = CD2023[CD];
-    }
+    } else if (periodo < 20) {
+        //a partir de maio/2025
+        valor = CD2025[CD];
+    } else {
+        //a partir de maio/2026
+        valor = CD2026[CD];
+    } 
     return valor;
 }
 
