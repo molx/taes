@@ -52,6 +52,10 @@ select {
 	font-size: 0.95em;
 }
 
+.output-value {
+	font-weight: bold;
+}
+
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i

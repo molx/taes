@@ -74,17 +74,17 @@ function validateGD2(form) {
 }
 
 function formatValor(valor) {
-    var intRegex = /^\d+$/;
-    valor = Math.round(valor * 100) / 100;
-    if (valor === 0) {
-        return "R$ 0,00";
-    } else if (intRegex.test(valor)) {
-        return "R$ " + valor + ",00";
-    } else if (intRegex.test(valor * 10)) {
-        return "R$ " + valor.toString().replace(".", ",") + "0";
-    } else {
-        return "R$ " + valor.toString().replace(".", ",");
-    }
+    //var intRegex = /^\d+$/;
+    return "R$ " + valor.toFixed(2).replace(".", ",");
+    // if (valor === 0) {
+    //     return "R$ 0,00";
+    // } else if (intRegex.test(valor)) {
+    //     return "R$ " + valor + ",00";
+    // } else if (intRegex.test(valor * 10)) {
+    //     return "R$ " + valor.toString().replace(".", ",") + "0";
+    // } else {
+    //     return "R$ " + valor.toString().replace(".", ",");
+    // }
 }
 
 function valorIRRF(base, periodo) {
@@ -734,7 +734,7 @@ function calcSalario(form) {
 
     var decter = form.decter.checked ? (remuneracao + fungrat + cargodir) / 2 : 0;
 
-    var bruto = Math.round((remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + decter + outrosRendIsnt) * 100) / 100;
+    var bruto = remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + decter + outrosRendIsnt;
     var basepss = remuneracao; //vencimento + urp + qualificacao;
     var tetopss = 4663.75;
 
@@ -791,7 +791,7 @@ function calcSalario(form) {
             if (form.rpcnoturno.checked) {
                 basefunp += noturno;
             }
-            aliqfunp = Math.round(basefunp * parseFloat(form.ddFunp.value) * 100) / 100;
+            aliqfunp = basefunp * parseFloat(form.ddFunp.value);
             if (form.name == "myform") {
                 document.getElementById("funp_plano_norm1").checked = true;
                 document.getElementById("ddFunp1").disabled = false;
@@ -837,7 +837,7 @@ function calcSalario(form) {
 
     var outrosdescontos = parseFloat(form.numOutros.value) || 0;
 
-    var descontos = Math.round((aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + outrosdescontos) * 100) / 100;
+    var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + outrosdescontos;
 
     var salario = bruto - descontos;
     if (form.name == "myform") {
@@ -848,33 +848,35 @@ function calcSalario(form) {
     //Toggle URP input visibility
 
     //Print results after each calculation
-    document.getElementById("diffLiqAbs").value = formatValor(Math.abs(Math.round((liq1 - liq2) * 100) / 100));
-    document.getElementById("diffLiqPor").value = Math.round((100 * liq2) / liq1) + "%";
+    var diffLiqs = (liq2 - liq1);
+    document.getElementById("diffLiqAbs").innerHTML = formatValor(diffLiqs);
+    document.getElementById("diffLiqPct").innerHTML = (100 * diffLiqs / liq1).toFixed(2).replace(".", ",") + "%";
+    document.getElementById("diffLiqPor").innerHTML = ((100 * liq2) / liq1).toFixed(0) + "%";
     form.txVB.value = formatValor(vencimento);
     form.txResult.value = formatValor(salario);
-    form.txInsa.value = formatValor(Math.floor(ftinsa * vencimento * 100) / 100);
-    form.txInss.value = formatValor(Math.round(valorpss * 100) / 100);
-    form.txBruto.value = formatValor(Math.round(bruto * 100) / 100);
-    form.txIrrf.value = formatValor(Math.round(aliqirrf * 100) / 100);
+    form.txInsa.value = formatValor(ftinsa * vencimento);
+    form.txInss.value = formatValor(valorpss);
+    form.txBruto.value = formatValor(bruto);
+    form.txIrrf.value = formatValor(aliqirrf);
     form.txSaude.value = formatValor(saude);
-    form.txTrans.value = formatValor(Math.round(transporte * 100) / 100);
+    form.txTrans.value = formatValor(transporte);
     form.txAlim.value = formatValor(alimentacao);
-    form.txCreche.value = formatValor(Math.round(creche * 100) / 100);
-    form.txURP.value = formatValor(Math.round(urp * 100) / 100);
-    form.txbIRRF.value = formatValor(Math.round(baseirrf * 100) / 100);
-    form.txbINSS.value = formatValor(Math.round(basepss * 100) / 100);
+    form.txCreche.value = formatValor(creche);
+    form.txURP.value = formatValor(urp);
+    form.txbIRRF.value = formatValor(baseirrf);
+    form.txbINSS.value = formatValor(basepss);
     form.txdesconto.value = formatValor(descontos);
-    form.txSindicato.value = formatValor(Math.round(sindicato * 100) / 100);
-    form.txQualif.value = formatValor(Math.round(qualificacao * 100) / 100);
-    form.txFunp.value = formatValor(Math.round(aliqfunp * 100) / 100);
+    form.txSindicato.value = formatValor(sindicato);
+    form.txQualif.value = formatValor(qualificacao);
+    form.txFunp.value = formatValor(aliqfunp);
     form.txDepIRRF.value = formatValor(reducaoDepsIRRF);
     form.txFG.value = formatValor(fungrat);
-    form.txCD.value = form.rdCD[0].checked ? formatValor(Math.round(cargodir * 100) / 100) : formatValor(valorCD(form.ddCD.value, periodo));
-    form.txNoturno.value = formatValor(Math.round(noturno * 100) / 100);
-    form.txFerias.value = formatValor(Math.round(ferias * 100) / 100);
-    form.txIrrfFerias.value = formatValor(Math.round(aliqirrfferias * 100) / 100);
-    form.txDecter.value = formatValor(Math.round(decter * 100) / 100);
-    form.txDesc13.value = formatValor(Math.round(desc_13 * 100) / 100);
+    form.txCD.value = form.rdCD[0].checked ? formatValor(cargodir) : formatValor(valorCD(form.ddCD.value, periodo));
+    form.txNoturno.value = formatValor(noturno);
+    form.txFerias.value = formatValor(ferias);
+    form.txIrrfFerias.value = formatValor(aliqirrfferias);
+    form.txDecter.value = formatValor(decter);
+    form.txDesc13.value = formatValor(desc_13);
 
     //Display info on Detailed Results
     var formid = 1;
