@@ -539,7 +539,7 @@ ul {
 }
 
 .tab-content {
-    padding: 5px;
+    padding: 0 5px;
     display: none;
 	font-size: 0.95em;
 }
