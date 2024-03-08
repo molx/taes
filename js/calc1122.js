@@ -735,7 +735,9 @@ function calcSalario(form) {
     var decter = form.decter.checked ? (remuneracao + fungrat + cargodir) / 2 : 0;
 
     var bruto = remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + decter + outrosRendIsnt;
-    var basepss = remuneracao; //vencimento + urp + qualificacao;
+
+    //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
+    var basepss = vencimento + urp + qualificacao + anuenio + diffPisoEnf + outrosRendTrib;
     var tetopss = 4663.75;
 
     if (periodo == 6 || periodo == 7) {
