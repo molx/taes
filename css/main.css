@@ -607,6 +607,10 @@ ul {
 	max-width: 390px;
 }
 
+.divresults_col label {
+	display: block;
+}
+
 .tabresults {
 	padding: 0 5px;
 	max-width: 390px;
