@@ -734,8 +734,6 @@ function calcSalario(form) {
 
     var decter = form.decter.checked ? (remuneracao + fungrat + cargodir) / 2 : 0;
 
-    var bruto = remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + decter + outrosRendIsnt;
-
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
     var basepss = vencimento + urp + qualificacao + anuenio + diffPisoEnf + outrosRendTrib;
     var tetopss = 4663.75;
@@ -777,6 +775,8 @@ function calcSalario(form) {
     }
 
     var valorpss = calcPSS(periodo, basepss, tetopss);
+    var abonoperm = 0;
+    if (form.novopss.value == "rpps" && form.abonoperm.checked) abonoperm = valorpss;
 
     var aliqfunp = 0;
 
@@ -840,6 +840,8 @@ function calcSalario(form) {
     var outrosdescontos = parseFloat(form.numOutros.value) || 0;
 
     var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + outrosdescontos;
+
+    var bruto = remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + decter + outrosRendIsnt + abonoperm;
 
     var salario = bruto - descontos;
     if (form.name == "myform") {
@@ -908,6 +910,7 @@ function calcSalario(form) {
     if (diffPisoEnf > 0) addDetailValue("#tabdetails-rend", formid, "Dif. Piso Enf.", diffPisoEnf);
     if (outrosRendIsnt > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Isen.", outrosRendIsnt);
     if (outrosRendTrib > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Trib.", outrosRendTrib);
+    if (abonoperm > 0) addDetailValue("#tabdetails-rend", formid, "Abono Perm.", abonoperm);
 
     addDetailValue("#tabdetails-desc", formid, "PSS", valorpss);
     addDetailValue("#tabdetails-desc", formid, "IR", aliqirrf);
@@ -922,6 +925,7 @@ function calcSalario(form) {
     addDetailValue("#tabdetails-outros", formid, "Base PSS", basepss);
     addDetailValue("#tabdetails-outros", formid, "Base IR", baseirrf);
     addDetailValue("#tabdetails-outros", formid, "Deduções IR", deducoesIrrf);
+
 
     //cdorfg(form);
     saveStorage();
