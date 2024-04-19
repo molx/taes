@@ -28,7 +28,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-    <script src="js/compressed.js"></script>
+    <script src="js/calc1122.js"></script>
     <script type="text/javascript" src="js/nhpup_1.1.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0242087922176548"
         crossorigin="anonymous"></script>
@@ -186,7 +186,7 @@
                                         </option>
                                         <option value="15">
                                             Entre 01/2023 e 04/2023
-                                        </option>
+                                        </option>-->
                                         <option value="16">
                                             Entre 05/2023 e 12/2023
                                         </option>
@@ -200,7 +200,7 @@
                                             Entre 05/2025 e 04/2026 (+4,5%)
                                         </option>
                                         <option value="20">
-                                            A partir de 05/2026 (+4,5%)
+                                            A partir de 05/2026 (proposta MGI)
                                         </option>
                                         <option value="100">
                                             PROPOSTA Fasubra (plenária)
@@ -230,19 +230,19 @@
                                     Classe:
                                     <select name="ddClasse" id="ddClasse1"
                                         onchange="updateQuali(this.form, this.form.ddClasse.value);">
-                                        <option value="1" selected>
+                                        <option value="0" selected>
                                             A
                                         </option>
-                                        <option value="6">
+                                        <option value="1">
                                             B
                                         </option>
-                                        <option value="11">
+                                        <option value="2">
                                             C
                                         </option>
-                                        <option value="17">
+                                        <option value="3">
                                             D
                                         </option>
-                                        <option value="31">
+                                        <option value="4">
                                             E
                                         </option>
                                     </select>
@@ -252,7 +252,7 @@
                                 <label
                                     onmouseover="nhpup.popup('A Progressão por capacitação profissional varia em 4 níveis e pode ser obtida pela realização de cursos.');">
                                     Nível:
-                                    <select name="ddProg" id="ddProg1" onchange="calcSalario(this.form);">
+                                    <select name="ddProg" id="ddProg1" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
                                             I
                                         </option>
@@ -272,7 +272,7 @@
                                 <label
                                     onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
                                     Padrão:
-                                    <select name="ddNivel" id="ddNivel1" onchange="calcSalario(this.form);">
+                                    <select name="ddNivel" id="ddNivel1" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
                                             1
                                         </option>
@@ -320,6 +320,70 @@
                                         </option>
                                         <option value="16">
                                             16
+                                        </option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div>
+                                <label>                                    
+                                    Padrão:
+                                    <select name="ddPadrao" id="ddPadrao1" onchange="atualizaPnew(this.form);">
+                                        <option value="1" selected>
+                                            1
+                                        </option>
+                                        <option value="2">
+                                            2
+                                        </option>
+                                        <option value="3">
+                                            3
+                                        </option>
+                                        <option value="4">
+                                            4
+                                        </option>
+                                        <option value="5">
+                                            5
+                                        </option>
+                                        <option value="6">
+                                            6
+                                        </option>
+                                        <option value="7">
+                                            7
+                                        </option>
+                                        <option value="8">
+                                            8
+                                        </option>
+                                        <option value="9">
+                                            9
+                                        </option>
+                                        <option value="10">
+                                            10
+                                        </option>
+                                        <option value="11">
+                                            11
+                                        </option>
+                                        <option value="12">
+                                            12
+                                        </option>
+                                        <option value="13">
+                                            13
+                                        </option>
+                                        <option value="14">
+                                            14
+                                        </option>
+                                        <option value="15">
+                                            15
+                                        </option>
+                                        <option value="16">
+                                            16
+                                        </option>
+                                        <option value="17">
+                                            17
+                                        </option>
+                                        <option value="18">
+                                            18
+                                        </option>
+                                        <option value="19">
+                                            19
                                         </option>
                                     </select>
                                 </label>
@@ -451,39 +515,28 @@
                                             Exigência Mínima
                                         </option>
                                         <option value="1">
-                                            Fundamental Completo
+                                            RSC-I/Fundamental Completo
                                         </option>
                                         <option value="2">
-                                            Médio Completo
+                                            RSC-II/Médio Completo
                                         </option>
                                         <option value="3">
-                                            Médio Técnico
+                                            RSC-II/Médio Técnico
                                         </option>
                                         <option value="4">
-                                            Graduação Completa
+                                            RSC-III/Superior
                                         </option>
                                         <option value="5">
-                                            Especialização
+                                            RSC-IV/Especialização
                                         </option>
                                         <option value="6">
-                                            Mestrado
+                                            RSC-V/Mestrado
                                         </option>
                                         <option value="7">
-                                            Doutorado
+                                            RSC-VI/Doutorado
                                         </option>
                                     </select>
-                                </label>
-                                <label
-                                    onmouseover="nhpup.popup('O valor do incentivo à qualificação depende se os estudos foram em área diretamente relacionada ao cargo ou não.');">
-                                    <input type="radio" name="areaquali" id="areaquali12" value="qualid"
-                                        onClick="calcSalario(this.form);" checked />
-                                    Direta
-                                    <input type="radio" name="areaquali" id="areaquali22" value="qualii"
-                                        onClick="calcSalario(this.form);" />
-                                    Indireta <a class="wiki-icon"
-                                        href="https://wiki.taes.com.br/wiki/Ambiente_organizacional"
-                                        target="_blank"></a>
-                                </label>
+                                </label>                                
                             </div>
                             <div>
                                 <label
@@ -973,7 +1026,7 @@
                             <div class="divresults_col">
                                 <label
                                     onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
-                                    Incentivo:
+                                    IQ/RSC:
                                     <input type="text" name="txQualif" value="0" readonly />
                                 </label>
                                 <label>
@@ -1090,7 +1143,7 @@
                                         </option>
                                         <option value="15">
                                             Entre 01/2023 e 04/2023
-                                        </option>
+                                        </option>-->
                                         <option value="16">
                                             Entre 05/2023 e 12/2023
                                         </option>
@@ -1098,13 +1151,13 @@
                                             Entre 01/2024 e 04/2024
                                         </option>
                                         <option value="18">
-                                            Entre 05/2024 e 04/2025 (auxílios)
+                                            Entre 06/2024 e 04/2025 (auxílios)
                                         </option>
                                         <!--<option value="19">
                                             Entre 05/2025 e 04/2026 (+4,5%)
                                         </option>
                                         <option value="20">
-                                            A partir de 05/2026 (+4,5%)
+                                            A partir de 05/2026 (proposta MGI)
                                         </option>
                                         <!--<option value="100">
                                             PROPOSTA Fasubra (plenária)
@@ -1134,19 +1187,19 @@
                                     Classe:
                                     <select name="ddClasse" id="ddClasse2"
                                         onchange="updateQuali(this.form, this.form.ddClasse.value);">
-                                        <option value="1" selected>
+                                        <option value="0" selected>
                                             A
                                         </option>
-                                        <option value="6">
+                                        <option value="1">
                                             B
                                         </option>
-                                        <option value="11">
+                                        <option value="2">
                                             C
                                         </option>
-                                        <option value="17">
+                                        <option value="3">
                                             D
                                         </option>
-                                        <option value="31">
+                                        <option value="4">
                                             E
                                         </option>
                                     </select>
@@ -1156,7 +1209,7 @@
                                 <label
                                     onmouseover="nhpup.popup('A Progressão por capacitação profissional varia em 4 níveis e pode ser obtida pela realização de cursos.');">
                                     Nível:
-                                    <select name="ddProg" id="ddProg2" onchange="calcSalario(this.form);">
+                                    <select name="ddProg" id="ddProg2" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
                                             I
                                         </option>
@@ -1176,7 +1229,7 @@
                                 <label
                                     onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
                                     Padrão:
-                                    <select name="ddNivel" id="ddNivel2" onchange="calcSalario(this.form);">
+                                    <select name="ddNivel" id="ddNivel2" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
                                             1
                                         </option>
@@ -1224,6 +1277,70 @@
                                         </option>
                                         <option value="16">
                                             16
+                                        </option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div>
+                                <label>                                    
+                                    Padrão:
+                                    <select name="ddPadrao" id="ddPadrao2" onchange="atualizaPnew(this.form);">
+                                        <option value="1" selected>
+                                            1
+                                        </option>
+                                        <option value="2">
+                                            2
+                                        </option>
+                                        <option value="3">
+                                            3
+                                        </option>
+                                        <option value="4">
+                                            4
+                                        </option>
+                                        <option value="5">
+                                            5
+                                        </option>
+                                        <option value="6">
+                                            6
+                                        </option>
+                                        <option value="7">
+                                            7
+                                        </option>
+                                        <option value="8">
+                                            8
+                                        </option>
+                                        <option value="9">
+                                            9
+                                        </option>
+                                        <option value="10">
+                                            10
+                                        </option>
+                                        <option value="11">
+                                            11
+                                        </option>
+                                        <option value="12">
+                                            12
+                                        </option>
+                                        <option value="13">
+                                            13
+                                        </option>
+                                        <option value="14">
+                                            14
+                                        </option>
+                                        <option value="15">
+                                            15
+                                        </option>
+                                        <option value="16">
+                                            16
+                                        </option>
+                                        <option value="17">
+                                            17
+                                        </option>
+                                        <option value="18">
+                                            18
+                                        </option>
+                                        <option value="19">
+                                            19
                                         </option>
                                     </select>
                                 </label>
@@ -1356,39 +1473,28 @@
                                             Exigência Mínima
                                         </option>
                                         <option value="1">
-                                            Fundamental Completo
+                                            RSC-I/Fundamental Completo
                                         </option>
                                         <option value="2">
-                                            Médio Completo
+                                            RSC-II/Médio Completo
                                         </option>
                                         <option value="3">
-                                            Médio Técnico
+                                            RSC-II/Médio Técnico
                                         </option>
                                         <option value="4">
-                                            Graduação Completa
+                                            RSC-III/Superior
                                         </option>
                                         <option value="5">
-                                            Especialização
+                                            RSC-IV/Especialização
                                         </option>
                                         <option value="6">
-                                            Mestrado
+                                            RSC-V/Mestrado
                                         </option>
                                         <option value="7">
-                                            Doutorado
+                                            RSC-VI/Doutorado
                                         </option>
                                     </select>
-                                </label>
-                                <label
-                                    onmouseover="nhpup.popup('O valor do incentivo à qualificação depende se os estudos foram em área diretamente relacionada ao cargo ou não.');">
-                                    <input type="radio" name="areaquali" id="areaquali11" value="qualid"
-                                        onClick="calcSalario(this.form);" checked />
-                                    Direta
-                                    <input type="radio" name="areaquali" id="areaquali21" value="qualii"
-                                        onClick="calcSalario(this.form);" />
-                                    Indireta <a class="wiki-icon"
-                                        href="https://wiki.taes.com.br/wiki/Ambiente_organizacional"
-                                        target="_blank"></a>
-                                </label>
+                                </label>                                
                             </div>
                             <div>
                                 <label
@@ -1877,7 +1983,7 @@
                             <div class="divresults_col">
                                 <label
                                     onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
-                                    Incentivo:
+                                    IQ/RSC:
                                     <input type="text" name="txQualif" value="0" readonly />
                                 </label>
                                 <label>
