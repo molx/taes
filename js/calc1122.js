@@ -670,7 +670,7 @@ function calcSalario(form) {
             $('#ddPadrao2').parent().parent().show();
         }
         nivelMerito = parseInt(form.ddPadrao.value);
-        correlacoes = [0.40, 0.40, 0.60, 0.60, 1];
+        correlacoes = [0.35, 0.40, 0.50, 0.60, 1];
     } 
     
     var correl = correlacoes[parseInt(form.ddClasse.value)];
@@ -857,6 +857,7 @@ function calcSalario(form) {
             if (form.rpcnoturno.checked) {
                 basefunp += noturno;
             }
+            console.log(basefunp)
             aliqfunp = basefunp * parseFloat(form.ddFunp.value);
             if (form.name == "myform") {
                 document.getElementById("funp_plano_norm1").checked = true;
