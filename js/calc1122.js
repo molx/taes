@@ -2,7 +2,7 @@ var liq1 = 0;
 var liq2 = 0;
 
 function updateQuali(form, classs) {
-    var alloptions = Array("Exigência Mínima", "RSC-I/Fundamental Completo", "RSC-II/Médio Completo", "RSC-II/Médio Técnico", "RSC-III/Superior", "RSC-IV/Especialização", "RSC-V/Mestrado", "RSC-VI/Doutorado");
+    var alloptions = Array("Exigência Mínima", "Fundamental Completo", "Médio Completo", "Médio Técnico", "Superior", "Especialização", "Mestrado", "Doutorado");
     var allvalues = Array(0, 1, 2, 3, 4, 5, 6, 7);
     var newoptions = Array();
     var newvalues = Array();
@@ -612,10 +612,10 @@ function calcSalario(form) {
     var periodo = parseInt(form.ddAno.value, 10),
     base = 4556.92,
     ftstep = 1.039;
-    if (periodo > 18) {
-        base = 4556.92 * 1.045;
+    if (periodo  == 19) {
+        base = 4556.92 * 1.09;
     } else if (periodo >= 20) {
-        base = 4556.92 * 1.045 * 1.045;
+        base = 4556.92 * 1.09 * 1.035;
     }    
     // Situações especiais (considerando referência no A e não no E, como acima)
     // if (periodo == 100) {
