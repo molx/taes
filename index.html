@@ -506,9 +506,9 @@
                                     </select>
                                 </label>
                             </div>
-                            <div>
+                            <div style="display:block;">
                                 <label>
-                                    Qualificação:
+                                    IQ:
                                     <select name="ddQuali" id="ddQuali1" onchange="calcSalario(this.form);"
                                         style="width: 200px;">
                                         <option value="0" selected>
@@ -536,7 +536,19 @@
                                             Doutorado
                                         </option>
                                     </select>
-                                </label>                                
+                                </label>
+                                <label
+                                    onmouseover="nhpup.popup('O valor do incentivo à qualificação depende se os estudos foram em área diretamente relacionada ao cargo ou não.');">
+                                    Área:&nbsp;
+                                    <input type="radio" name="areaquali" id="areaquali11" value="qualid"
+                                        onClick="calcSalario(this.form);" checked />
+                                    Direta
+                                    <input type="radio" name="areaquali" id="areaquali21" value="qualii"
+                                        onClick="calcSalario(this.form);" />
+                                    Indireta <a class="wiki-icon"
+                                        href="https://wiki.taes.com.br/wiki/Ambiente_organizacional"
+                                        target="_blank"></a>
+                                </label>                       
                             </div>
                             <div>
                                 <label
@@ -1464,9 +1476,9 @@
                                     </select>
                                 </label>
                             </div>
-                            <div>
+                            <div style="display:block;">
                                 <label>
-                                    Qualificação:
+                                    IQ:
                                     <select name="ddQuali" id="ddQuali2" onchange="calcSalario(this.form);"
                                         style="width: 200px;">
                                         <option value="0" selected>
@@ -1494,7 +1506,19 @@
                                             Doutorado
                                         </option>
                                     </select>
-                                </label>                                
+                                </label>      
+                                <label
+                                    onmouseover="nhpup.popup('O valor do incentivo à qualificação depende se os estudos foram em área diretamente relacionada ao cargo ou não.');">
+                                    Área:&nbsp;
+                                    <input type="radio" name="areaquali" id="areaquali12" value="qualid"
+                                        onClick="calcSalario(this.form);" checked />
+                                    Direta
+                                    <input type="radio" name="areaquali" id="areaquali22" value="qualii"
+                                        onClick="calcSalario(this.form);" />
+                                    Indireta <a class="wiki-icon"
+                                        href="https://wiki.taes.com.br/wiki/Ambiente_organizacional"
+                                        target="_blank"></a>
+                                </label>                          
                             </div>
                             <div>
                                 <label
