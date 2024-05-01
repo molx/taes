@@ -784,7 +784,7 @@ function calcSalario(form) {
     }
     var basesaude = remuneracao + fungrat + cargodir;
     var saude = form.saude.checked
-        ? valorSaude(basesaude, parseF(form.ddIdade.value, 10), periodo) +
+        ? valorSaude(basesaude, parseInt(form.ddIdade.value, 10), periodo) +
           valorSaude(basesaude, parseInt(form.ddIdadeDep1.value, 10), periodo) +
           valorSaude(basesaude, parseInt(form.ddIdadeDep2.value, 10), periodo) +
           valorSaude(basesaude, parseInt(form.ddIdadeDep3.value, 10), periodo) * form.Dep3Qtd.value
