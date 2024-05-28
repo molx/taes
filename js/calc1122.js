@@ -685,6 +685,8 @@ function calcSalario(form) {
 
     var vencimento = correl * Math.ceil(base * Math.pow(ftstep, ftvb) * ftcarga * 100) / 100;
 
+    console.log(vencimento);
+
     // if (periodo >= 100) {        
     //     //Propostas Fasubra
     //     var frac = 1;
