@@ -26,7 +26,6 @@ function loadStorage() {
 	});
 }
 
-
 $(document).ready(function() {
     $(".tabs-menu1 a").click(function(event) {
         event.preventDefault();
@@ -63,7 +62,26 @@ $(document).ready(function() {
         $(".tab-content4").not(tab).css("display", "none");
         $(tab).fadeIn();
     });	
-	
+
+
+
+    $('#showrepos1').hover(
+        function() {
+            $('#repostable1').fadeIn(200);
+        },
+        function() {
+            $('#repostable1').fadeOut(200);
+        }
+    );
+    $('#showrepos2').hover(
+        function() {
+            $('#repostable2').fadeIn(200);
+        },
+        function() {
+            $('#repostable2').fadeOut(200);
+        }
+    );
+
 	loadStorage();
 });
 
