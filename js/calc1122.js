@@ -614,8 +614,10 @@ function calcSalario(form) {
     ftstep = 1.039;
     if (periodo  == 19) {
         base = 4556.92 * 1.09;
+        ftstep = 1.040;
     } else if (periodo >= 20) {
         base = 4556.92 * 1.09 * 1.05;
+        ftstep = 1.041;
     }    
     // Situações especiais (considerando referência no A e não no E, como acima)
     // if (periodo == 100) {
@@ -676,7 +678,7 @@ function calcSalario(form) {
             $('#ddPadrao2').parent().parent().show();
         }
         nivelMerito = parseInt(form.ddPadrao.value);
-        correlacoes = [0.35, 0.40, 0.50, 0.61, 1];
+        correlacoes = [0.36, 0.40, 0.50, 0.61, 1];
     } 
     
     var correl = correlacoes[parseInt(form.ddClasse.value)];
