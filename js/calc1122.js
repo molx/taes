@@ -404,7 +404,7 @@ function valorCreche(rem, periodo, n, cota) {
     if (periodo < 18) {
         teto = 321;
     } else {
-        teto = 485.90;
+        teto = 484.90;
     }
     var desc = 0;
     if (periodo < 9) {        
