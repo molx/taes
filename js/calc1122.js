@@ -729,7 +729,7 @@ function calcSalario(form) {
         urp = parseFloat(form.numURP.value) || 0;
     } else if (form.ddURP.value == 2) {
         form.numURP.disabled = true;
-        urp = vencimento * 0.2605 * (1 + ftpg);
+        urp = (vencimento + vencimento * ftpg + anuenio) * 0.2605;
     } else {
         form.numURP.disabled = true;
     }
