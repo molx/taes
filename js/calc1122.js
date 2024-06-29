@@ -610,9 +610,12 @@ function calcSalario(form) {
         $('#numProposta2').parent().css('visibility','hidden');
     }
     var periodo = parseInt(form.ddAno.value, 10),
-    base = 4556.92,
+    base = 4180.66,
     ftstep = 1.039;
-    if (periodo  == 19) {
+
+    if (periodo > 15 && periodo < 19) {
+        base = 4556.92;
+    }else if (periodo  == 19) {
         base = 4556.92 * 1.09;
         ftstep = 1.040;
     } else if (periodo >= 20) {
@@ -752,9 +755,10 @@ function calcSalario(form) {
     }
 
     var outrosRendTrib = parseFloat(form.numOutrosRendTrib.value) || 0;
+    var outrosRendTribIR = parseFloat(form.numOutrosRendTribIR.value) || 0;
     var outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
-    var remuneracao = vencimento + urp + qualificacao + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + diffPisoEnf + outrosRendTrib;
+    var remuneracao = vencimento + urp + qualificacao + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribIR;
 
     var sindicato = 0;
     if (form.ddSindTipo.value != "nao") {
@@ -893,7 +897,7 @@ function calcSalario(form) {
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
-    var rendTributavel = vencimento + urp + qualificacao + anuenio + ftinsa * vencimento + fungrat + cargodir + outrosRendTrib;
+    var rendTributavel = vencimento + urp + qualificacao + anuenio + ftinsa * vencimento + fungrat + cargodir + outrosRendTrib + outrosRendTribIR;
 
     var deducoesIrrf = valorpss + aliqfunp + aliqFunpFacul + reducaoDepsIRRF;
 
