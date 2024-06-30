@@ -1069,6 +1069,7 @@ function inverterform(tipo) {
             form1.rpcnoturno.checked,
             form1.crechecota.checked,
             form1.ddPadrao.value,
+            form1.numOutrosRendTribIR.value
         );
 
         var values2 = Array(
@@ -1123,6 +1124,7 @@ function inverterform(tipo) {
             form2.rpcnoturno.checked,
             form2.crechecota.checked,
             form2.ddPadrao.value,
+            form2.numOutrosRendTribIR.value
         );
     } else if (tipo == "cima") {
         var values2 = Array(
@@ -1177,6 +1179,7 @@ function inverterform(tipo) {
             form2.rpcnoturno.checked,
             form2.crechecota.checked,
             form2.ddPadrao.value,
+            form2.numOutrosRendTribIR.value
         );
 
         var values1 = values2;
@@ -1233,6 +1236,7 @@ function inverterform(tipo) {
             form1.rpcnoturno.checked,
             form1.crechecota.checked,
             form1.ddPadrao.value,
+            form1.numOutrosRendTribIR.value
         );
 
         var values2 = values1;
@@ -1289,6 +1293,7 @@ function inverterform(tipo) {
     form1.rpcnoturno.checked = values2[48];
     form1.crechecota.checked = values2[49];
     form1.ddPadrao.value = values2[50];
+    form1.numOutrosRendTribIR.value = values2[51];
 
     ///////////////////////////////////
 
@@ -1343,6 +1348,7 @@ function inverterform(tipo) {
     form2.rpcnoturno.checked = values1[48];
     form2.crechecota.checked = values1[49];
     form2.ddPadrao.value = values1[50];
+    form2.numOutrosRendTribIR.value = values1[51];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
