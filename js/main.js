@@ -13,6 +13,8 @@ function saveStorage() {
 			}
 		});
 	});
+    localStorage.setItem('rdTAE', $('#rdTAE').prop("checked"));
+    localStorage.setItem('rdMF', $('#rdMF').prop("checked"));
 }
 
 function loadStorage() {

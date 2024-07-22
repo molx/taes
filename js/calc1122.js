@@ -8,7 +8,10 @@ function updateQuali(form, classs) {
     var newvalues = Array();
     var curValue = form.ddQuali.value;
     var classe = parseFloat(classs);
-    if (classe <= 3) {
+    if ($("#rdMF").is(":checked")) {
+        newoptions = ["Nenhum", "Aperfeiçoamento", "Especialização", "Mestrado", "Doutorado"];
+        newvalues = [0, 4, 5, 6, 7];
+    } else if (classe <= 3) {
         newoptions = alloptions;
         newvalues = allvalues;
     } else if (classe == 3) {
@@ -24,10 +27,7 @@ function updateQuali(form, classs) {
     }
     while (form.ddQuali.options.length) form.ddQuali.options[0] = null;
     for (i = 0; i < newoptions.length; i++) {
-        // Create a new drop down option with the
-        // display text and value from arr
         option = new Option(newoptions[i], newvalues[i]);
-        // Add to the end of the existing options
         form.ddQuali.options[form.ddQuali.length] = option;
     }
     if (newvalues.includes(parseInt(curValue, 10))) {
@@ -36,9 +36,11 @@ function updateQuali(form, classs) {
     calcSalario(form);
 }
 
-function calcfatorpg(i, areadireta = true) {
+function calcfatorpg(i, areadireta = true, carreiraMS = false) {
     var pesos = Array();
-    if (areadireta) {
+    if (carreiraMS) {
+        pesos = [0, 0, 0, 0, 0.1, 0.2, 0.50, 1.15];
+    } else if (areadireta) {
         pesos = Array(0, 0.1, 0.15, 0.2, 0.25, 0.3, 0.52, 0.75);
     } else {
         pesos = Array(0, 0, 0, 0.1, 0.15, 0.2, 0.35, 0.5);
@@ -59,9 +61,56 @@ function firstload() {
     //     padrao1.appendChild(opt1);
     //     padrao2.appendChild(opt2);
     // }
-    updateQuali(myform, 1);
-    updateQuali(myform2, 1);
+    // updateQuali(myform, 1);
+    // updateQuali(myform2, 1);
+    atualizaCarreira();
 }
+
+function atualizaCarreira() {
+    var carreiraMS = $("#rdMF").is(":checked");
+    if (!carreiraMS) {
+        //Atualiza campos em comun
+        $('.labelIQRT').html("IQ");
+        $('.labelch').html("Carga horária");
+        $('.labelfg').html("FG");
+        $('[name^=ddCargaH]').val(1);        
+        $("[name^=ddCargaH] option[value='0']").remove();
+        $('[name^=ddCargaH] option').eq(1).before(new Option("30 horas", "0.75"));
+        $("[name^=ddFG] option[value='10']").remove();
+
+        //Mostra campos específicos de TAEs:
+        $('.inpt_TAE').parent().parent().show();
+        $('#areaquali11').parent().show();
+        $('#areaquali12').parent().show();
+
+        //Esconde campos específicos de docentes
+        $('.inpt_MF').parent().parent().hide();
+    } else {
+        //Atualiza campos em comun
+        $('.labelIQRT').html("RT");
+        $('.labelch').html("Regime");
+        $('.labelfg').html("FG/FCC");
+        $('[name^=ddCargaH]').prepend(new Option("DE", "0"))
+        $("[name^=ddCargaH] option[value='0.75']").remove();
+        $("[name^=ddCargaH]").val("0");
+        $('[name^=ddFG] option').eq(0).after(new Option("FCC", "10"));
+
+        //Esconde campos específicos de TAEs:
+        $('.inpt_TAE').parent().parent().hide();
+        $('#areaquali11').parent().hide();
+        $('#areaquali12').parent().hide();
+
+        //Mostra campos específicos de docentes
+        $('.inpt_MF').parent().parent().show();
+
+        
+    }
+
+    updateQuali(myform, 1, carreiraMS);
+    updateQuali(myform2, 1, carreiraMS);
+    calcSalario(myform);
+    calcSalario(myform2);
+};
 
 function validateGD1(evt, form) {
     var theEvent = evt || window.event;
@@ -456,17 +505,18 @@ function valorTransporte(vencimento, gasto) {
 }
 
 function valorFG(FG, periodo) {
-    var FG2013 = Array(0, 777.26, 522.9, 423.94, 215.78, 175.09, 128.4, 81.89, 60.57, 49.15);
-    var FG2014 = Array(0, 790.75, 531.99, 431.3, 219.54, 187.14, 130.63, 83.31, 61.61, 50.0);
-    var FG2015 = Array(0, 804.49, 541.23, 438.79, 223.35, 181.23, 132.89, 84.75, 62.69, 50.86);
-    var FG2016 = Array(0, 848.74, 571.0, 462.92, 235.63, 191.2, 140.2, 89.41, 66.14, 53.66);
-    var FG2017 = Array(0, 891.17, 599.55, 486.07, 247.42, 200.76, 147.21, 93.88, 69.44, 56.34);
-    var FG2018 = Array(0, 933.5, 628.03, 509.16, 259.17, 210.29, 154.2, 98.34, 72.74, 59.02);
-    var FG2019 = Array(0, 975.51, 656.29, 532.07, 270.83, 219.76, 161.14, 101.77, 76.02, 61.67);
-    var FG2023 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67);
-    var FG2025 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67);
-    var FG2026 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67);
-
+    //FG 1-9 + FCC;
+    var FG2013 = Array(0, 777.26, 522.9, 423.94, 215.78, 175.09, 128.4, 81.89, 60.57, 49.15, 1071.67);
+    var FG2014 = Array(0, 790.75, 531.99, 431.3, 219.54, 187.14, 130.63, 83.31, 61.61, 50.0, 1071.67);
+    var FG2015 = Array(0, 804.49, 541.23, 438.79, 223.35, 181.23, 132.89, 84.75, 62.69, 50.86, 1071.67);
+    var FG2016 = Array(0, 848.74, 571.0, 462.92, 235.63, 191.2, 140.2, 89.41, 66.14, 53.66, 1071.67);
+    var FG2017 = Array(0, 891.17, 599.55, 486.07, 247.42, 200.76, 147.21, 93.88, 69.44, 56.34, 1071.67);
+    var FG2018 = Array(0, 933.5, 628.03, 509.16, 259.17, 210.29, 154.2, 98.34, 72.74, 59.02, 1071.67);
+    var FG2019 = Array(0, 975.51, 656.29, 532.07, 270.83, 219.76, 161.14, 101.77, 76.02, 61.67, 1071.67);
+    var FG2023 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67, 1071.67);
+    var FG2025 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67, 1071.67);
+    var FG2026 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67, 1071.67);
+    
     var valor = 0;
     if (periodo == 1) {
         valor = FG2013[FG];
@@ -602,6 +652,8 @@ function atualizaPnew(form) {
 
 
 function calcSalario(form) {
+    var carreiraMS = false;
+    if ($("#rdMF").is(":checked")) carreiraMS = true;
     if (form.name == "myform") {
         $('#numProposta1').parent().css('visibility','hidden');
         //document.getElementById("numProposta1").disabled = true;
@@ -656,7 +708,7 @@ function calcSalario(form) {
         p = 1,
         correlacoes = [0.317346, 0.384249, 0.465255, 0.585305, 1];
 
-    if (periodo < 19) {
+    if (periodo < 19 && !carreiraMS) {
         if (form.name == "myform") {
             $('#ddNivel1, #ddProg1').parent().parent().show();
             $('#areaquali11').parent().show();
@@ -668,7 +720,7 @@ function calcSalario(form) {
         }
         nivelMerito = parseInt(form.ddNivel.value);
         nivelCap = parseInt(form.ddProg.value);        
-    } else {
+    } else if (!carreiraMS) {
         if (form.name == "myform") {
             $('#ddNivel1, #ddProg1').parent().parent().hide();
             $('#areaquali11').parent().hide();
@@ -690,6 +742,33 @@ function calcSalario(form) {
 
     var vencimento = correl * Math.ceil(base * Math.pow(ftstep, ftvb) * ftcarga * 100) / 100;
 
+    //Docentes
+
+    if (carreiraMS) {        
+        if (ftcarga == 1) { //40h
+            ftcarga = 0.7; //a referencia é no DE, 40h recebe 70%, 20h 50%
+        } else if(ftcarga == 0) { //DE
+            ftcarga = 1; //
+        }
+        base = 4875.18;
+        var steps_mf = [0, 0.05, 0.055, 0.05, 0.055, 0.04, 0.04, 0.04, 0.25, 0.04, 0.04, 0.04, 0.1];
+        if (periodo < 19) {
+            base = 4875.18; //mantem o default, podia deixar vazio
+        } else if (periodo < 20) {
+            base = 6180.86; //Aumento de 9% mais aglutinacao dos niveis iniciais
+            steps_mf = [0, 0, 0, 0, 0.055, 0.045, 0.045, 0.045, 0.235, 0.045, 0.045, 0.045, 0.1];
+        } else { //periodo == 20
+            base = 6180.86 * 1.035;
+            steps_mf = [0, 0, 0, 0, 0.06, 0.05, 0.05, 0.05, 0.225, 0.05, 0.05, 0.05, 0.1];
+        }
+        var padrao = parseInt(form.mf_ddClasse.value);
+        vencimento = base;
+        for (i = 0; i < padrao + 1; i++) {
+            vencimento = vencimento * (1 + steps_mf[i]);            
+        }
+        vencimento = vencimento * ftcarga;
+    }
+
     // if (periodo >= 100) {        
     //     //Propostas Fasubra
     //     var frac = 1;
@@ -710,7 +789,7 @@ function calcSalario(form) {
 
     var transporte = form.trans.checked ? valorTransporte(vencimento, form.gastoTrans.value) : 0;
     var ftinsa = form.ddInsa.value;
-    var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked);
+    var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked, carreiraMS);
     /*var urp = (form.removeurp.checked) ? vencimento * 0.2605 * (1 +
         ftpg) : 0;*/
     var urp = 0;
@@ -761,14 +840,15 @@ function calcSalario(form) {
     var remuneracao = vencimento + urp + qualificacao + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribIR;
 
     var sindicato = 0;
+    var sindaliq = parseFloat(form.sindaliq.value) / 100;
     if (form.ddSindTipo.value != "nao") {
         if (form.ddSindTipo.value == "vb") {
-            sindicato = vencimento * 0.01;
+            sindicato = vencimento * sindaliq;
         } else if (form.ddSindTipo.value == "rem") {
-            sindicato = remuneracao * 0.01;
+            sindicato = remuneracao * sindaliq;
         } else {
             //form.ddSindTipo.value == "cat" 
-            sindicato = Math.round(0.01 * correl * Math.ceil(base * Math.pow(ftstep, ftvb)) * ftcarga * 100) / 100;
+            sindicato = Math.round(sindaliq * correl * Math.ceil(base * Math.pow(ftstep, ftvb)) * ftcarga * 100) / 100;
         }
     }
 
@@ -1071,6 +1151,8 @@ function inverterform(tipo) {
             form1.ddPadrao.value,
             form1.numOutrosRendTribIR.value,
             form1.abonoperm.checked,
+            form1.sindaliq.value,
+            form1.mf_ddClasse.value
         );
 
         var values2 = Array(
@@ -1127,6 +1209,8 @@ function inverterform(tipo) {
             form2.ddPadrao.value,
             form2.numOutrosRendTribIR.value,
             form2.abonoperm.checked,
+            form2.sindaliq.value,
+            form2.mf_ddClasse.value
         );
     } else if (tipo == "cima") {
         var values2 = Array(
@@ -1183,6 +1267,8 @@ function inverterform(tipo) {
             form2.ddPadrao.value,
             form2.numOutrosRendTribIR.value,
             form2.abonoperm.checked,
+            form2.sindaliq.value,
+            form2.mf_ddClasse.value
         );
 
         var values1 = values2;
@@ -1241,6 +1327,8 @@ function inverterform(tipo) {
             form1.ddPadrao.value,
             form1.numOutrosRendTribIR.value,
             form1.abonoperm.checked,
+            form1.sindaliq.value,
+            form1.mf_ddClasse.value
         );
 
         var values2 = values1;
@@ -1299,6 +1387,9 @@ function inverterform(tipo) {
     form1.ddPadrao.value = values2[50];
     form1.numOutrosRendTribIR.value = values2[51];
     form1.abonoperm.checked = values2[52];
+    form1.sindaliq.value = values2[53];
+    form1.mf_ddClasse.value = values2[54];
+
 
     ///////////////////////////////////
 
@@ -1355,6 +1446,8 @@ function inverterform(tipo) {
     form2.ddPadrao.value = values1[50];
     form2.numOutrosRendTribIR.value = values1[51];
     form2.abonoperm.checked = values1[52];
+    form2.sindaliq.value = values1[53];
+    form2.mf_ddClasse.value = values1[54];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);

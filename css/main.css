@@ -165,7 +165,7 @@ textarea {
 	float: right;
 }
 .cbajuda > div {
-	float: right;
+	/*float: right;*/
 }
 
 #maindiv,
@@ -343,6 +343,9 @@ ol {
 	line-height: 0;
 }
 
+.break-after:after { 
+	content: '\A'; white-space:pre;
+}
 
 .side-ad {
 	/* background-color: black; */

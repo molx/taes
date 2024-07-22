@@ -111,8 +111,18 @@
                 </h1>
             </div>
             <div class="cbajuda">
-                <div><input type="checkbox" name="ajuda" id="checkajuda" value="Ajuda" /> Mostrar ajuda</div>
-            </div>
+                <!--<div><input type="checkbox" name="ajuda" id="checkajuda" value="Ajuda" /> Mostrar ajuda</div>-->
+                <div>
+                    <input type="radio" name="rdCarreira" id="rdTAE" value="TAE"
+                            onClick="atualizaCarreira();" onKeyPress="atualizaCarreira();"
+                            onKeyDown="atualizaCarreira();" onKeyUp="atualizaCarreira();" checked />
+                        TAE
+                    <input type="radio" name="rdCarreira" id="rdMF" value="MF" style="margin-left:1em;"
+                        onClick="atualizaCarreira();" onKeyPress="atualizaCarreira();"
+                        onKeyDown="atualizaCarreira();" onKeyUp="atualizaCarreira();" />
+                        MF
+                </div>
+            </div>            
         </div>
         <!-- <div class="callout">
             <big>ATENÇÃO!</big><br />
@@ -228,7 +238,7 @@
                                 <label
                                     onmouseover="nhpup.popup('A classe é definida pela exigência de escolaridade do cargo.');">
                                     Classe:
-                                    <select name="ddClasse" id="ddClasse1"
+                                    <select name="ddClasse" id="ddClasse1" class="inpt_TAE"
                                         onchange="updateQuali(this.form, this.form.ddClasse.value);">
                                         <option value="0" selected>
                                             A
@@ -248,11 +258,57 @@
                                     </select>
                                 </label>
                             </div>
+                            <div style="display:none;">
+                                <label>
+                                    Classe:
+                                    <select name="mf_ddClasse" id="mf_ddClasse1" class="inpt_MF" onchange="calcSalario(this.form);">
+                                        <option value="0" selected>
+                                            Auxiliar - 1
+                                        </option>
+                                        <option value="1">
+                                            Auxiliar - 2
+                                        </option>
+                                        <option value="2">
+                                            Assistente - 1
+                                        </option>
+                                        <option value="3">
+                                            Assistente - 2
+                                        </option>
+                                        <option value="4">
+                                            Adjunto - 1
+                                        </option>
+                                        <option value="5">
+                                            Adjunto - 2
+                                        </option>
+                                        <option value="6">
+                                            Adjunto - 3
+                                        </option>
+                                        <option value="7">
+                                            Adjunto - 4
+                                        </option>
+                                        <option value="8">
+                                            Associado - 1
+                                        </option>
+                                        <option value="9">
+                                            Associado - 2
+                                        </option>
+                                        <option value="10">
+                                            Associado - 3
+                                        </option>
+                                        <option value="11">
+                                            Associado - 4
+                                        </option>
+                                        <option value="12">
+                                            Titular
+                                        </option>
+                                    </select>
+                                </label>
+                            </div>
                             <div>
                                 <label
                                     onmouseover="nhpup.popup('A Progressão por capacitação profissional varia em 4 níveis e pode ser obtida pela realização de cursos.');">
                                     Nível:
-                                    <select name="ddProg" id="ddProg1" onchange="atualizaPold(this.form);">
+                                    <select name="ddProg" id="ddProg1" class="inpt_TAE" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
                                             I
                                         </option>
@@ -272,7 +328,7 @@
                                 <label
                                     onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
                                     Padrão:
-                                    <select name="ddNivel" id="ddNivel1" onchange="atualizaPold(this.form);">
+                                    <select name="ddNivel" id="ddNivel1" class="inpt_TAE" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
                                             1
                                         </option>
@@ -327,7 +383,7 @@
                             <div>
                                 <label>                                    
                                     Padrão:
-                                    <select name="ddPadrao" id="ddPadrao1" onchange="atualizaPnew(this.form);">
+                                    <select name="ddPadrao" id="ddPadrao1" class="inpt_TAE" onchange="atualizaPnew(this.form);">
                                         <option value="1" selected>
                                             1
                                         </option>
@@ -391,7 +447,7 @@
                                 <div id ="repostable1" style="position:absolute;transform: translateY(-50%); margin-left: 5px;display: none;"><img src="/img/repos.png"></div>
                             </div>
                             <div>
-                                <label>Carga horária:
+                                <label><span class="labelch">Carga horária</span>:
                                     <select name="ddCargaH" id="ddCargaH1" onchange="calcSalario(this.form);">
                                         <option value="1" selected>
                                             40 horas
@@ -409,11 +465,11 @@
                                             30 horas (PDV)
                                             </option>-->
                                     </select></label>
-                            </div>
+                            </div><br>
                             <div>
                                 <label
                                     onmouseover="nhpup.popup('O adicional por Função Gratificada é pago a servidores que exercem cargos de chefia.');">
-                                    FG:
+                                    <span class="labelfg">FG</span>:
                                     <select name="ddFG" id="ddFG1" onchange="nocd(this.form);calcSalario(this.form);">
                                         <option value="0" selected>
                                             Não
@@ -494,7 +550,7 @@
                                 <label
                                     onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
                                     Cargo:
-                                    <select name="ddCargo" id="ddCargo1" onchange="calcSalario(this.form);"
+                                    <select name="ddCargo" id="ddCargo1" class="inpt_TAE" onchange="calcSalario(this.form);"
                                         style="width: 150px;">
                                         <option value="0" selected>
                                             Comum
@@ -510,7 +566,7 @@
                             </div>
                             <div style="display:block;">
                                 <label>
-                                    IQ:
+                                    <span class="labelIQRT">IQ</span>:
                                     <select name="ddQuali" id="ddQuali1" onchange="calcSalario(this.form);"
                                         style="width: 200px;">
                                         <option value="0" selected>
@@ -591,20 +647,24 @@
                                     <!--<input type="checkbox" name="sindicato" id="sindicato1" value=""
                                         onClick="calcSalario(this.form);" /> -->
                                     Sindicato:
+                                    <input type="number" id="sindaliq1" name="sindaliq" min="0.1" max="2.0" step="0.1" value="1.0"
+                                            style="width: 36px;" onClick="calcSalario(this.form);"
+                                            onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
+                                    %
                                     <select name="ddSindTipo" id="ddSindTipo1" onchange="calcSalario(this.form);"
                                         style="width: 110px;">
                                         <option value="nao" selected>
                                             Não filiado
                                         </option>
                                         <option value="vb">
-                                            1% VB
+                                            VB
                                         </option>
                                         <option value="rem">
-                                            1% Rem.
+                                            Rem.
                                         </option>
-                                        <option value="cat">
+                                        <!--<option value="cat">
                                             1% Cat.
-                                        </option>
+                                        </option>-->
                                     </select>
                                     <input type="text" name="txSindicato" value="R$ 0,00" readonly />
                                 </label>
@@ -1048,7 +1108,7 @@
                             <div class="divresults_col">
                                 <label
                                     onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
-                                    IQ:
+                                    <span class="labelIQRT">IQ</span>:
                                     <input type="text" name="txQualif" value="0" readonly />
                                 </label>
                                 <label>
@@ -1207,7 +1267,7 @@
                                 <label
                                     onmouseover="nhpup.popup('A classe é definida pela exigência de escolaridade do cargo.');">
                                     Classe:
-                                    <select name="ddClasse" id="ddClasse2"
+                                    <select name="ddClasse" id="ddClasse2" class="inpt_TAE"
                                         onchange="updateQuali(this.form, this.form.ddClasse.value);">
                                         <option value="0" selected>
                                             A
@@ -1227,11 +1287,57 @@
                                     </select>
                                 </label>
                             </div>
+                            <div style="display:none;">
+                                <label>
+                                    Classe:
+                                    <select name="mf_ddClasse" id="mf_ddClasse2" class="inpt_MF" onchange="calcSalario(this.form);">
+                                        <option value="0" selected>
+                                            Auxiliar - 1
+                                        </option>
+                                        <option value="1">
+                                            Auxiliar - 2
+                                        </option>
+                                        <option value="2">
+                                            Assistente - 1
+                                        </option>
+                                        <option value="3">
+                                            Assistente - 2
+                                        </option>
+                                        <option value="4">
+                                            Adjunto - 1
+                                        </option>
+                                        <option value="5">
+                                            Adjunto - 2
+                                        </option>
+                                        <option value="6">
+                                            Adjunto - 3
+                                        </option>
+                                        <option value="7">
+                                            Adjunto - 4
+                                        </option>
+                                        <option value="8">
+                                            Associado - 1
+                                        </option>
+                                        <option value="9">
+                                            Associado - 2
+                                        </option>
+                                        <option value="10">
+                                            Associado - 3
+                                        </option>
+                                        <option value="11">
+                                            Associado - 4
+                                        </option>
+                                        <option value="12">
+                                            Titular
+                                        </option>
+                                    </select>
+                                </label>
+                            </div>
                             <div>
                                 <label
                                     onmouseover="nhpup.popup('A Progressão por capacitação profissional varia em 4 níveis e pode ser obtida pela realização de cursos.');">
                                     Nível:
-                                    <select name="ddProg" id="ddProg2" onchange="atualizaPold(this.form);">
+                                    <select name="ddProg" id="ddProg2" class="inpt_TAE" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
                                             I
                                         </option>
@@ -1251,7 +1357,7 @@
                                 <label
                                     onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
                                     Padrão:
-                                    <select name="ddNivel" id="ddNivel2" onchange="atualizaPold(this.form);">
+                                    <select name="ddNivel" id="ddNivel2" class="inpt_TAE" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
                                             1
                                         </option>
@@ -1306,7 +1412,7 @@
                             <div>
                                 <label>                                    
                                     Padrão:
-                                    <select name="ddPadrao" id="ddPadrao2" onchange="atualizaPnew(this.form);">
+                                    <select name="ddPadrao" id="ddPadrao2" class="inpt_TAE" onchange="atualizaPnew(this.form);">
                                         <option value="1" selected>
                                             1
                                         </option>
@@ -1370,7 +1476,7 @@
                                 <div id ="repostable2" style="position:absolute;transform: translateY(-50%); margin-left: 5px;display: none;"><img src="/img/repos.png"></div>
                             </div>
                             <div>
-                                <label>Carga horária:
+                                <label><span class="labelch">Carga horária</span>:
                                     <select name="ddCargaH" id="ddCargaH" onchange="calcSalario(this.form);">
                                         <option value="1" selected>
                                             40 horas
@@ -1389,10 +1495,10 @@
                                             </option>-->
                                     </select>
                                 </label>
-                            </div>
+                            </div><br>
                             <div>
                                 <label>
-                                    FG:
+                                    <span class="labelfg">FG</span>:
                                     <select name="ddFG" id="ddFG2" onchange="nocd(this.form);calcSalario(this.form);">
                                         <option value="0" selected>
                                             Não
@@ -1474,7 +1580,7 @@
                                 <label
                                     onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
                                     Cargo:
-                                    <select name="ddCargo" id="ddCargo2" onchange="calcSalario(this.form);"
+                                    <select name="ddCargo" id="ddCargo2" class="inpt_TAE" onchange="calcSalario(this.form);"
                                         style="width: 150px;">
                                         <option value="0" selected>
                                             Comum
@@ -1490,7 +1596,7 @@
                             </div>
                             <div style="display:block;">
                                 <label>
-                                    IQ:
+                                    <span class="labelIQRT">IQ</span>:
                                     <select name="ddQuali" id="ddQuali2" onchange="calcSalario(this.form);"
                                         style="width: 200px;">
                                         <option value="0" selected>
@@ -1571,20 +1677,24 @@
                                     <!--<input type="checkbox" name="sindicato" id="sindicato2" value=""
                                         onClick="calcSalario(this.form);" /> -->
                                     Sindicato:
+                                    <input type="number" id="sindaliq2" name="sindaliq" min="0.1" max="2" step="0.1" value="1"
+                                            style="width: 36px;" onClick="calcSalario(this.form);"
+                                            onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
+                                    %
                                     <select name="ddSindTipo" id="ddSindTipo2" onchange="calcSalario(this.form);"
                                         style="width: 110px;">
                                         <option value="nao" selected>
                                             Não filiado
                                         </option>
                                         <option value="vb">
-                                            1% VB
+                                            VB
                                         </option>
                                         <option value="rem">
-                                            1% Rem.
+                                            Rem.
                                         </option>
-                                        <option value="cat">
+                                        <!--<option value="cat">
                                             1% Cat.
-                                        </option>
+                                        </option>-->
                                     </select>
                                     <input type="text" name="txSindicato" value="R$ 0,00" readonly />
                                 </label>
@@ -2027,7 +2137,7 @@
                             <div class="divresults_col">
                                 <label
                                     onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
-                                    IQ:
+                                    <span class="labelIQRT">IQ</span>:
                                     <input type="text" name="txQualif" value="0" readonly />
                                 </label>
                                 <label>
