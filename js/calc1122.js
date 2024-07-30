@@ -652,8 +652,8 @@ function atualizaPnew(form) {
 
 
 function calcSalario(form) {
-    var carreiraMS = false;
-    if ($("#rdMF").is(":checked")) carreiraMS = true;
+    var carreiraMF = false;
+    if ($("#rdMF").is(":checked")) carreiraMF = true;
     if (form.name == "myform") {
         $('#numProposta1').parent().css('visibility','hidden');
         //document.getElementById("numProposta1").disabled = true;
@@ -708,7 +708,7 @@ function calcSalario(form) {
         p = 1,
         correlacoes = [0.317346, 0.384249, 0.465255, 0.585305, 1];
 
-    if (periodo < 19 && !carreiraMS) {
+    if (periodo < 19 && !carreiraMF) {
         if (form.name == "myform") {
             $('#ddNivel1, #ddProg1').parent().parent().show();
             $('#areaquali11').parent().show();
@@ -720,7 +720,7 @@ function calcSalario(form) {
         }
         nivelMerito = parseInt(form.ddNivel.value);
         nivelCap = parseInt(form.ddProg.value);        
-    } else if (!carreiraMS) {
+    } else if (!carreiraMF) {
         if (form.name == "myform") {
             $('#ddNivel1, #ddProg1').parent().parent().hide();
             $('#areaquali11').parent().hide();
@@ -744,7 +744,7 @@ function calcSalario(form) {
 
     //Docentes
 
-    if (carreiraMS) {        
+    if (carreiraMF) {        
         if (ftcarga == 1) { //40h
             ftcarga = 0.7; //a referencia é no DE, 40h recebe 70%, 20h 50%
         } else if(ftcarga == 0) { //DE
@@ -789,7 +789,7 @@ function calcSalario(form) {
 
     var transporte = form.trans.checked ? valorTransporte(vencimento, form.gastoTrans.value) : 0;
     var ftinsa = form.ddInsa.value;
-    var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked, carreiraMS);
+    var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked, carreiraMF);
     /*var urp = (form.removeurp.checked) ? vencimento * 0.2605 * (1 +
         ftpg) : 0;*/
     var urp = 0;
@@ -842,10 +842,12 @@ function calcSalario(form) {
     var sindicato = 0;
     var sindaliq = parseFloat(form.sindaliq.value) / 100;
     if (form.ddSindTipo.value != "nao") {
+        var basesind = remuneracao;
+        if (carreiraMF) basesind -= urp; //ADUnB não cobra sobre a URP
         if (form.ddSindTipo.value == "vb") {
             sindicato = vencimento * sindaliq;
         } else if (form.ddSindTipo.value == "rem") {
-            sindicato = remuneracao * sindaliq;
+            sindicato = basesind * sindaliq;
         } else {
             //form.ddSindTipo.value == "cat" 
             sindicato = Math.round(sindaliq * correl * Math.ceil(base * Math.pow(ftstep, ftvb)) * ftcarga * 100) / 100;
