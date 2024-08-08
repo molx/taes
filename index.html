@@ -28,7 +28,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-    <script src="js/calc1122.js"></script>
+    <script src="js/compressed.js"></script>
     <script type="text/javascript" src="js/nhpup_1.1.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0242087922176548"
         crossorigin="anonymous"></script>
@@ -196,7 +196,7 @@
                                         </option>
                                         <option value="15">
                                             Entre 01/2023 e 04/2023
-                                        </option>-->
+                                        </option>
                                         <option value="16">
                                             Entre 05/2023 e 12/2023
                                         </option>
@@ -1067,6 +1067,11 @@
                                     value="0" style="width: 80px;" onKeyPress="calcSalario(this.form);"
                                     onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);"
                                     onClick="calcSalario(this.form);" />
+                                <input type="number" name="numOutrosPct" id="numOutrosPct1" min="0"
+                                    max="50" step="1" value="0" style="width: 40px; margin-left: 40px;"
+                                    onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
+                                    onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" /> %      
+                                <input type="text" name="txDescPct" value="R$ 0,00" readonly />
                             </div>
                         </div>
                     </div>
@@ -2096,6 +2101,11 @@
                                     value="0" style="width: 80px;" onKeyPress="calcSalario(this.form);"
                                     onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);"
                                     onClick="calcSalario(this.form);" />
+                                <input type="number" name="numOutrosPct" id="numOutrosPct2" min="0"
+                                    max="50" step="1" value="0" style="width: 40px; margin-left: 40px;"
+                                    onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
+                                    onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" /> %     
+                                <input type="text" name="txDescPct" value="R$ 0,00" readonly />
                             </div>
                         </div>
                     </div>

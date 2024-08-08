@@ -997,7 +997,9 @@ function calcSalario(form) {
 
     var outrosdescontos = parseFloat(form.numOutros.value) || 0;
 
-    var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + outrosdescontos;
+    var outrosdescontospct = ((parseInt(form.numOutrosPct.value) || 0) / 100 ) * remuneracao;
+
+    var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + outrosdescontos + outrosdescontospct;
 
     var bruto = remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + decter + outrosRendIsnt + abonoperm;
 
@@ -1039,6 +1041,7 @@ function calcSalario(form) {
     form.txIrrfFerias.value = formatValor(aliqirrfferias);
     form.txDecter.value = formatValor(decter);
     form.txDesc13.value = formatValor(desc_13);
+    form.txDescPct.value = formatValor(outrosdescontospct);
 
     //Display info on Detailed Results
     var formid = 1;
@@ -1154,7 +1157,8 @@ function inverterform(tipo) {
             form1.numOutrosRendTribIR.value,
             form1.abonoperm.checked,
             form1.sindaliq.value,
-            form1.mf_ddClasse.value
+            form1.mf_ddClasse.value,
+            form1.numOutrosPct.value,
         );
 
         var values2 = Array(
@@ -1212,7 +1216,8 @@ function inverterform(tipo) {
             form2.numOutrosRendTribIR.value,
             form2.abonoperm.checked,
             form2.sindaliq.value,
-            form2.mf_ddClasse.value
+            form2.mf_ddClasse.value,
+            form2.numOutrosPct.value,
         );
     } else if (tipo == "cima") {
         var values2 = Array(
@@ -1270,7 +1275,8 @@ function inverterform(tipo) {
             form2.numOutrosRendTribIR.value,
             form2.abonoperm.checked,
             form2.sindaliq.value,
-            form2.mf_ddClasse.value
+            form2.mf_ddClasse.value,
+            form2.numOutrosPct.value,
         );
 
         var values1 = values2;
@@ -1330,7 +1336,8 @@ function inverterform(tipo) {
             form1.numOutrosRendTribIR.value,
             form1.abonoperm.checked,
             form1.sindaliq.value,
-            form1.mf_ddClasse.value
+            form1.mf_ddClasse.value,
+            form1.numOutrosPct.value,
         );
 
         var values2 = values1;
@@ -1391,6 +1398,7 @@ function inverterform(tipo) {
     form1.abonoperm.checked = values2[52];
     form1.sindaliq.value = values2[53];
     form1.mf_ddClasse.value = values2[54];
+    form1.numOutrosPct.value = values2[55];
 
 
     ///////////////////////////////////
@@ -1450,6 +1458,7 @@ function inverterform(tipo) {
     form2.abonoperm.checked = values1[52];
     form2.sindaliq.value = values1[53];
     form2.mf_ddClasse.value = values1[54];
+    form2.numOutrosPct.value = values1[55];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
