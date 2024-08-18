@@ -135,17 +135,7 @@ function validateGD2(form) {
 }
 
 function formatValor(valor) {
-    //var intRegex = /^\d+$/;
-    return "R$ " + valor.toFixed(2).replace(".", ",");
-    // if (valor === 0) {
-    //     return "R$ 0,00";
-    // } else if (intRegex.test(valor)) {
-    //     return "R$ " + valor + ",00";
-    // } else if (intRegex.test(valor * 10)) {
-    //     return "R$ " + valor.toString().replace(".", ",") + "0";
-    // } else {
-    //     return "R$ " + valor.toString().replace(".", ",");
-    // }
+    return "R$ " + valor.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 function valorIRRF(base, periodo) {
@@ -1069,16 +1059,23 @@ function calcSalario(form) {
     if (ftinsa > 0) addDetailValue("#tabdetails-rend", formid, "Insalubridade", ftinsa * vencimento);
     if (saude > 0) addDetailValue("#tabdetails-rend", formid, "Saúde Sup.", saude);
     if (diffPisoEnf > 0) addDetailValue("#tabdetails-rend", formid, "Dif. Piso Enf.", diffPisoEnf);
-    if (outrosRendIsnt > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Isen.", outrosRendIsnt);
-    if (outrosRendTrib > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Trib.", outrosRendTrib);
+    if (outrosRendIsnt > 0) addDetailValue("#tabdetails-rend", formid, "Outros Isen.", outrosRendIsnt);
+    if (outrosRendTrib > 0) addDetailValue("#tabdetails-rend", formid, "Outros Trib.", outrosRendTrib);
+    if (outrosRendTribIR > 0) addDetailValue("#tabdetails-rend", formid, "Outros Trib.", outrosRendTribIR);
     if (abonoperm > 0) addDetailValue("#tabdetails-rend", formid, "Abono Perm.", abonoperm);
+    if (ferias > 0) addDetailValue("#tabdetails-rend", formid, "1/3 Férias", ferias);
+    if (decter > 0) addDetailValue("#tabdetails-rend", formid, "13º", decter);
+    
 
     addDetailValue("#tabdetails-desc", formid, "PSS", valorpss);
     addDetailValue("#tabdetails-desc", formid, "IR", aliqirrf);
+    if (aliqirrfferias > 0) addDetailValue("#tabdetails-desc", formid, "IR Férias", aliqirrfferias);
+    if (desc_13 > 0) addDetailValue("#tabdetails-desc", formid, "IR+PSS 13º", desc_13);
     if (aliqfunp > 0) addDetailValue("#tabdetails-desc", formid, "Funpresp", aliqfunp);
     if (aliqFunpFacul > 0) addDetailValue("#tabdetails-desc", formid, "Funpresp-facultativo", aliqFunpFacul);
-    if (sindicato > 0) addDetailValue("#tabdetails-desc", formid, "Sindicato", sindicato);
+    if (sindicato > 0) addDetailValue("#tabdetails-desc", formid, "Sindicato", sindicato);    
     if (outrosdescontos > 0) addDetailValue("#tabdetails-desc", formid, "Outros", outrosdescontos);
+    if (outrosdescontospct > 0) addDetailValue("#tabdetails-desc", formid, "Outros (%)", outrosdescontospct);    
 
     addDetailValue("#tabdetails-outros", formid, "Bruto", bruto);
     addDetailValue("#tabdetails-outros", formid, "Descontos", descontos);
@@ -1093,7 +1090,7 @@ function calcSalario(form) {
 }
 
 function addDetailValue(parent, form, name, value) {
-    var newEl = "<div>" + name + ": " + formatValor(value) + "</div>";
+    var newEl = '<div><span style="font-weight:bold;">' + name + '</span>: ' + formatValor(value) + '</div>';
     $(parent + "-" + form).append(newEl);
 }
 
