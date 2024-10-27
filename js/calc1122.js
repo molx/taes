@@ -36,9 +36,9 @@ function updateQuali(form, classs) {
     calcSalario(form);
 }
 
-function calcfatorpg(i, areadireta = true, carreiraMS = false) {
+function calcfatorpg(i, areadireta = true, docente = false) {
     var pesos = Array();
-    if (carreiraMS) {
+    if (docente) {
         pesos = [0, 0, 0, 0, 0.1, 0.2, 0.50, 1.15];
     } else if (areadireta) {
         pesos = Array(0, 0.1, 0.15, 0.2, 0.25, 0.3, 0.52, 0.75);
@@ -67,8 +67,8 @@ function firstload() {
 }
 
 function atualizaCarreira() {
-    var carreiraMS = $("#rdMF").is(":checked");
-    if (!carreiraMS) {
+    var carreiraMF = $("#rdMF").is(":checked");
+    if (!carreiraMF) {
         //Atualiza campos em comun
         $('.labelIQRT').html("IQ");
         $('.labelch').html("Carga horária");
@@ -106,8 +106,8 @@ function atualizaCarreira() {
         
     }
 
-    updateQuali(myform, 1, carreiraMS);
-    updateQuali(myform2, 1, carreiraMS);
+    updateQuali(myform, 1, carreiraMF);
+    updateQuali(myform2, 1, carreiraMF);
     calcSalario(myform);
     calcSalario(myform2);
 };
@@ -1052,7 +1052,7 @@ function calcSalario(form) {
     if (creche > 0) addDetailValue("#tabdetails-rend", formid, "Pré-escolar", creche);
     if (noturno > 0) addDetailValue("#tabdetails-rend", formid, "Ad. Noturno", noturno);
     if (urp > 0) addDetailValue("#tabdetails-rend", formid, "URP", urp);
-    if (ftpg > 0) addDetailValue("#tabdetails-rend", formid, "IQ", vencimento * ftpg);
+    if (ftpg > 0) addDetailValue("#tabdetails-rend", formid, (carreiraMF ? "RT" : "IQ"), vencimento * ftpg);
     if (fungrat > 0) addDetailValue("#tabdetails-rend", formid, "FG", fungrat);
     if (cargodir > 0) addDetailValue("#tabdetails-rend", formid, "CD", cargodir);
     if (anuenio > 0) addDetailValue("#tabdetails-rend", formid, "Anuênio", anuenio);
