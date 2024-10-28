@@ -8,7 +8,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-69BHTXW8RH');
     </script>
     <meta name="google-site-verification" content="H8pNplduoGqN7y_l3C6x-KmyIFN88WcaWOGr34FxF70" />
@@ -914,6 +913,25 @@
                                     <input type="checkbox" name="ferias" id="ferias1" value="ferias"
                                         onClick="calcSalario(this.form);" /> 1/3 de Férias:
                                     <input style="width: 85px;" type="text" name="txFerias" id="txFerias1"
+                                        value="R$ 0,00" readonly />
+                                </label>
+                            </div>
+                            <div>
+                                <label>                                    
+                                    Adiantamento:
+                                    <select name="ddAdiant" id="ddAdiant1" onchange="calcSalario(this.form);"
+                                        style="width: 70px;">
+                                        <option value="0" selected>
+                                            Não
+                                        </option>
+                                        <option value="1">
+                                            +70%
+                                        </option>
+                                        <option value="2">
+                                            -70%
+                                        </option>
+                                    </select>
+                                    <input style="width: 85px;" type="text" name="txAdiant" id="txAdiant1"
                                         value="R$ 0,00" readonly />
                                 </label>
                             </div>
@@ -1946,6 +1964,25 @@
                                     <input type="checkbox" name="ferias" id="ferias2" value="ferias"
                                         onClick="calcSalario(this.form);" /> 1/3 de Férias:
                                     <input style="width: 85px;" type="text" name="txFerias" id="txFerias2"
+                                        value="R$ 0,00" readonly />
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    Adiantamento:
+                                    <select name="ddAdiant" id="ddAdiant2" onchange="calcSalario(this.form);"
+                                        style="width: 70px;">
+                                        <option value="0" selected>
+                                            Não
+                                        </option>
+                                        <option value="1">
+                                            +70%
+                                        </option>
+                                        <option value="2">
+                                            -70%
+                                        </option>
+                                    </select>
+                                    <input style="width: 85px;" type="text" name="txAdiant" id="txAdiant2"
                                         value="R$ 0,00" readonly />
                                 </label>
                             </div>

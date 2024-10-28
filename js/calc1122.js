@@ -789,7 +789,6 @@ function calcSalario(form) {
     var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked, carreiraMF, ftcarga);
     /*var urp = (form.removeurp.checked) ? vencimento * 0.2605 * (1 +
         ftpg) : 0;*/
-    console.log(ftpg);
     var urp = 0;
     $('form[name="' + form.name + '"] label[name="numURPview"]').css("visibility", "hidden");
     //form.numURPview.style.visibility = "hidden";
@@ -879,13 +878,25 @@ function calcSalario(form) {
     var basecreche = vencimento + urp + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio;
     //basecreche aparentemente não leva em consideração o Incentivo à Qualificação - outros a ver
     var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
-
+    
+    var ferias = 0;
+    var aliqirrfferias = 0;
+    var adiantamento = 0;
+    var aliqirrfadiant = 0;
+    var descAdiant = 0;
     if (form.ferias.checked) {
-        var ferias = (remuneracao + fungrat + cargodir) / 3;
-        var aliqirrfferias = valorIRRF(ferias, periodo);
+        ferias = (remuneracao + fungrat + cargodir) / 3;
+        aliqirrfferias = valorIRRF(ferias, periodo);
+        //$('form[name="' + form.name + '"] input[name="adiantamento"]').prop('disabled', false);
     } else {
-        var ferias = 0;
-        var aliqirrfferias = 0;
+        //$('form[name="' + form.name + '"] input[name="adiantamento"]').prop('disabled', true);
+    }
+
+    if (form.ddAdiant.value == "1") {
+        adiantamento = (remuneracao + fungrat + cargodir) * 0.7;
+        aliqirrfadiant = valorIRRF(adiantamento, periodo);
+    } else if (form.ddAdiant.value == "2") {
+        descAdiant = (remuneracao + fungrat + cargodir) * 0.7 - valorIRRF((remuneracao + fungrat + cargodir) * 0.7, periodo);
     }
 
     var decter = form.decter.checked ? (remuneracao + fungrat + cargodir) / 2 : 0;
@@ -997,9 +1008,9 @@ function calcSalario(form) {
 
     var outrosdescontospct = ((parseInt(form.numOutrosPct.value) || 0) / 100 ) * remuneracao;
 
-    var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + outrosdescontos + outrosdescontospct;
+    var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + aliqirrfadiant + descAdiant + outrosdescontos + outrosdescontospct;
 
-    var bruto = remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + decter + outrosRendIsnt + abonoperm;
+    var bruto = remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
 
     var salario = bruto - descontos;
     if (form.name == "myform") {
@@ -1036,6 +1047,7 @@ function calcSalario(form) {
     form.txCD.value = form.rdCD[0].checked ? formatValor(cargodir) : formatValor(valorCD(form.ddCD.value, periodo));
     form.txNoturno.value = formatValor(noturno);
     form.txFerias.value = formatValor(ferias);
+    form.txAdiant.value = formatValor(adiantamento - descAdiant);
     form.txIrrfFerias.value = formatValor(aliqirrfferias);
     form.txDecter.value = formatValor(decter);
     form.txDesc13.value = formatValor(desc_13);
@@ -1072,12 +1084,15 @@ function calcSalario(form) {
     if (outrosRendTribIR > 0) addDetailValue("#tabdetails-rend", formid, "Outros Trib.", outrosRendTribIR);
     if (abonoperm > 0) addDetailValue("#tabdetails-rend", formid, "Abono Perm.", abonoperm);
     if (ferias > 0) addDetailValue("#tabdetails-rend", formid, "1/3 Férias", ferias);
+    if (adiantamento > 0) addDetailValue("#tabdetails-rend", formid, "Adiantamento", adiantamento);
     if (decter > 0) addDetailValue("#tabdetails-rend", formid, "13º", decter);
     
 
     addDetailValue("#tabdetails-desc", formid, "PSS", valorpss);
     addDetailValue("#tabdetails-desc", formid, "IR", aliqirrf);
     if (aliqirrfferias > 0) addDetailValue("#tabdetails-desc", formid, "IR Férias", aliqirrfferias);
+    if (aliqirrfadiant > 0) addDetailValue("#tabdetails-desc", formid, "IR Adiant.", aliqirrfadiant);
+    if (descAdiant > 0) addDetailValue("#tabdetails-desc", formid, "Adiantamento", descAdiant);    
     if (desc_13 > 0) addDetailValue("#tabdetails-desc", formid, "IR+PSS 13º", desc_13);
     if (aliqfunp > 0) addDetailValue("#tabdetails-desc", formid, "Funpresp", aliqfunp);
     if (aliqFunpFacul > 0) addDetailValue("#tabdetails-desc", formid, "Funpresp-facultativo", aliqFunpFacul);
@@ -1164,6 +1179,7 @@ function inverterform(tipo) {
             form1.sindaliq.value,
             form1.mf_ddClasse.value,
             form1.numOutrosPct.value,
+            form1.ddAdiant.value,
         );
 
         var values2 = Array(
@@ -1223,6 +1239,7 @@ function inverterform(tipo) {
             form2.sindaliq.value,
             form2.mf_ddClasse.value,
             form2.numOutrosPct.value,
+            form2.ddAdiant.value,
         );
     } else if (tipo == "cima") {
         var values2 = Array(
@@ -1282,6 +1299,7 @@ function inverterform(tipo) {
             form2.sindaliq.value,
             form2.mf_ddClasse.value,
             form2.numOutrosPct.value,
+            form2.ddAdiant.value,
         );
 
         var values1 = values2;
@@ -1343,6 +1361,7 @@ function inverterform(tipo) {
             form1.sindaliq.value,
             form1.mf_ddClasse.value,
             form1.numOutrosPct.value,
+            form1.ddAdiant.value,
         );
 
         var values2 = values1;
@@ -1404,7 +1423,7 @@ function inverterform(tipo) {
     form1.sindaliq.value = values2[53];
     form1.mf_ddClasse.value = values2[54];
     form1.numOutrosPct.value = values2[55];
-
+    form1.ddAdiant.value = values2[56];
 
     ///////////////////////////////////
 
@@ -1464,6 +1483,7 @@ function inverterform(tipo) {
     form2.sindaliq.value = values1[53];
     form2.mf_ddClasse.value = values1[54];
     form2.numOutrosPct.value = values1[55];
+    form2.ddAdiant.value = values1[56];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
