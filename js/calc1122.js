@@ -1117,379 +1117,52 @@ function addDetailValue(parent, form, name, value) {
     $(parent + "-" + form).append(newEl);
 }
 
+function fillform(form, data) {
+    for (const [key, value] of Object.entries(data)) {
+        if (typeof(value) == 'boolean') {
+            form[key].checked = value;
+        } else { 
+            form[key].value = value;
+        }
+    }
+}
+
 function inverterform(tipo) {
     var form1 = document.forms["myform"];
     var form2 = document.forms["myform2"];
 
+    var fields = {myform: {}, myform2: {}};
+    var frms = ['myform', 'myform2'];
+    $.each(frms, function(i, v) {
+        $('form[name="' + v + '"] *').filter(':input').each(function(i, inp){
+            if ($(inp).attr("id")) {
+                var ptype = $(inp).prop("type");
+                var prop = {};
+                if (ptype && ptype == "checkbox") {
+                    prop = {[$(inp).attr("name")]: $(inp).prop("checked")};
+                } else if (ptype && ptype == "radio") {
+                    if ($(inp).prop("checked")) {
+                        prop = {[$(inp).attr("name")]: $(inp).val()};
+                    }
+                } else {
+                    prop = {[$(inp).attr("name")]: $(inp).val()};
+                }
+                fields[v] = Object.assign(fields[v], prop);
+            }
+        });
+    });
+    //console.log(fields);
     if (tipo == "inverter") {
-        var values1 = Array(
-            form1.ddClasse.value,
-            form1.ddProg.value,
-            form1.ddFG.value,
-            form1.ddNivel.value,
-            form1.ddCargaH.value,
-            form1.ddAno.value,
-            form1.ddQuali.value,
-            form1.saude.checked,
-            form1.ddIdade.value,
-            form1.ddURP.value,
-            form1.trans.checked,
-            form1.gastoTrans.value,
-            form1.alim.checked,
-            form1.ddInsa.value,
-            form1.numCreche.value,
-            0, //form1.sindicato.checked,
-            form1.areaquali[0].checked,
-            form1.areaquali[1].checked,
-            form1.novopss.value,
-            form1.ddFunp.value,
-            form1.numAnuenio.value,
-            form1.funp_ad.value,
-            form1.numFunpAlt.value,
-            form1.numDepIRRF.value,
-            form1.ddIdadeDep1.value,
-            form1.ddIdadeDep2.value,
-            form1.ddIdadeDep3.value,
-            form1.ddCD.value,
-            form1.rdCD[0].checked,
-            form1.rdCD[1].checked,
-            form1.ferias.checked,
-            form1.decter.checked,
-            form1.decter_par.value,
-            form1.ddSindTipo.value,
-            0, //form1.pss_aliq.value,
-            form1.numOutros.value,
-            form1.numURP.value,
-            form1.numFunpFacul.value,
-            form1.Dep3Qtd.value,
-            form1.ddCargo.value,
-            form1.numOutrosRendIsnt.value,
-            form1.numOutrosRendTrib.value,
-            form1.numProposta.value,
-            form1.pssfgcd.checked,
-            form1.pssrisco.checked,
-            form1.pssnoturno.checked,
-            form1.rpcfgcd.checked,
-            form1.rpcrisco.checked,
-            form1.rpcnoturno.checked,
-            form1.crechecota.checked,
-            form1.ddPadrao.value,
-            form1.numOutrosRendTribIR.value,
-            form1.abonoperm.checked,
-            form1.sindaliq.value,
-            form1.mf_ddClasse.value,
-            form1.numOutrosPct.value,
-            form1.ddAdiant.value,
-        );
-
-        var values2 = Array(
-            form2.ddClasse.value,
-            form2.ddProg.value,
-            form2.ddFG.value,
-            form2.ddNivel.value,
-            form2.ddCargaH.value,
-            form2.ddAno.value,
-            form2.ddQuali.value,
-            form2.saude.checked,
-            form2.ddIdade.value,
-            form2.ddURP.value,
-            form2.trans.checked,
-            form2.gastoTrans.value,
-            form2.alim.checked,
-            form2.ddInsa.value,
-            form2.numCreche.value,
-            0, //form2.sindicato.checked,
-            form2.areaquali[0].checked,
-            form2.areaquali[1].checked,
-            form2.novopss.value,
-            form2.ddFunp.value,
-            form2.numAnuenio.value,
-            form2.funp_ad.value,
-            form2.numFunpAlt.value,
-            form2.numDepIRRF.value,
-            form2.ddIdadeDep1.value,
-            form2.ddIdadeDep2.value,
-            form2.ddIdadeDep3.value,
-            form2.ddCD.value,
-            form2.rdCD[0].checked,
-            form2.rdCD[1].checked,
-            form2.ferias.checked,
-            form2.decter.checked,
-            form2.decter_par.value,
-            form2.ddSindTipo.value,
-            0, //form2.pss_aliq.value,
-            form2.numOutros.value,
-            form2.numURP.value,
-            form2.numFunpFacul.value,
-            form2.Dep3Qtd.value,
-            form2.ddCargo.value,
-            form2.numOutrosRendIsnt.value,
-            form2.numOutrosRendTrib.value,
-            form2.numProposta.value,
-            form2.pssfgcd.checked,
-            form2.pssrisco.checked,
-            form2.pssnoturno.checked,
-            form2.rpcfgcd.checked,
-            form2.rpcrisco.checked,
-            form2.rpcnoturno.checked,
-            form2.crechecota.checked,
-            form2.ddPadrao.value,
-            form2.numOutrosRendTribIR.value,
-            form2.abonoperm.checked,
-            form2.sindaliq.value,
-            form2.mf_ddClasse.value,
-            form2.numOutrosPct.value,
-            form2.ddAdiant.value,
-        );
+        fillform(form1, fields.myform2);
+        fillform(form2, fields.myform);
     } else if (tipo == "cima") {
-        var values2 = Array(
-            form2.ddClasse.value,
-            form2.ddProg.value,
-            form2.ddFG.value,
-            form2.ddNivel.value,
-            form2.ddCargaH.value,
-            form2.ddAno.value,
-            form2.ddQuali.value,
-            form2.saude.checked,
-            form2.ddIdade.value,
-            form2.ddURP.value,
-            form2.trans.checked,
-            form2.gastoTrans.value,
-            form2.alim.checked,
-            form2.ddInsa.value,
-            form2.numCreche.value,
-            0, //form2.sindicato.checked,
-            form2.areaquali[0].checked,
-            form2.areaquali[1].checked,
-            form2.novopss.value,
-            form2.ddFunp.value,
-            form2.numAnuenio.value,
-            form2.funp_ad.value,
-            form2.numFunpAlt.value,
-            form2.numDepIRRF.value,
-            form2.ddIdadeDep1.value,
-            form2.ddIdadeDep2.value,
-            form2.ddIdadeDep3.value,
-            form2.ddCD.value,
-            form2.rdCD[0].checked,
-            form2.rdCD[1].checked,
-            form2.ferias.checked,
-            form2.decter.checked,
-            form2.decter_par.value,
-            form2.ddSindTipo.value,
-            0, //form2.pss_aliq.value,
-            form2.numOutros.value,
-            form2.numURP.value,
-            form2.numFunpFacul.value,
-            form2.Dep3Qtd.value,
-            form2.ddCargo.value,
-            form2.numOutrosRendIsnt.value,
-            form2.numOutrosRendTrib.value,
-            form2.numProposta.value,
-            form2.pssfgcd.checked,
-            form2.pssrisco.checked,
-            form2.pssnoturno.checked,
-            form2.rpcfgcd.checked,
-            form2.rpcrisco.checked,
-            form2.rpcnoturno.checked,
-            form2.crechecota.checked,
-            form2.ddPadrao.value,
-            form2.numOutrosRendTribIR.value,
-            form2.abonoperm.checked,
-            form2.sindaliq.value,
-            form2.mf_ddClasse.value,
-            form2.numOutrosPct.value,
-            form2.ddAdiant.value,
-        );
-
-        var values1 = values2;
+        fillform(form1, fields.myform2);
     } else {
-        var values1 = Array(
-            form1.ddClasse.value,
-            form1.ddProg.value,
-            form1.ddFG.value,
-            form1.ddNivel.value,
-            form1.ddCargaH.value,
-            form1.ddAno.value,
-            form1.ddQuali.value,
-            form1.saude.checked,
-            form1.ddIdade.value,
-            form1.ddURP.value,
-            form1.trans.checked,
-            form1.gastoTrans.value,
-            form1.alim.checked,
-            form1.ddInsa.value,
-            form1.numCreche.value,
-            0, //form1.sindicato.checked,
-            form1.areaquali[0].checked,
-            form1.areaquali[1].checked,
-            form1.novopss.value,
-            form1.ddFunp.value,
-            form1.numAnuenio.value,
-            form1.funp_ad.value,
-            form1.numFunpAlt.value,
-            form1.numDepIRRF.value,
-            form1.ddIdadeDep1.value,
-            form1.ddIdadeDep2.value,
-            form1.ddIdadeDep3.value,
-            form1.ddCD.value,
-            form1.rdCD[0].checked,
-            form1.rdCD[1].checked,
-            form1.ferias.checked,
-            form1.decter.checked,
-            form1.decter_par.value,
-            form1.ddSindTipo.value,
-            0, //form1.pss_aliq.value,
-            form1.numOutros.value,
-            form1.numURP.value,
-            form1.numFunpFacul.value,
-            form1.Dep3Qtd.value,
-            form1.ddCargo.value,
-            form1.numOutrosRendIsnt.value,
-            form1.numOutrosRendTrib.value,
-            form1.numProposta.value,
-            form1.pssfgcd.checked,
-            form1.pssrisco.checked,
-            form1.pssnoturno.checked,
-            form1.rpcfgcd.checked,
-            form1.rpcrisco.checked,
-            form1.rpcnoturno.checked,
-            form1.crechecota.checked,
-            form1.ddPadrao.value,
-            form1.numOutrosRendTribIR.value,
-            form1.abonoperm.checked,
-            form1.sindaliq.value,
-            form1.mf_ddClasse.value,
-            form1.numOutrosPct.value,
-            form1.ddAdiant.value,
-        );
-
-        var values2 = values1;
+        fillform(form2, fields.myform);
     }
 
-    form1.ddClasse.value = values2[0];
-    form1.ddProg.value = values2[1];
-    form1.ddFG.value = values2[2];
-    form1.ddNivel.value = values2[3];
-    form1.ddCargaH.value = values2[4];
-    form1.ddAno.value = values2[5];
-
-    form1.saude.checked = values2[7];
-    form1.ddIdade.value = values2[8];
-    form1.ddURP.value = values2[9];
-    form1.trans.checked = values2[10];
-    form1.gastoTrans.value = values2[11];
-    form1.alim.checked = values2[12];
-    form1.ddInsa.value = values2[13];
-    form1.numCreche.value = values2[14];
-    //form1.sindicato.checked = values2[15];
-    form1.areaquali[0].checked = values2[16];
-    form1.areaquali[1].checked = values2[17];
-    form1.novopss.value = values2[18];
-    form1.ddFunp.value = values2[19];
-    form1.numAnuenio.value = values2[20];
-    form1.funp_ad.value = values2[21];
-    form1.numFunpAlt.value = values2[22];
-    form1.numDepIRRF.value = values2[23];
-    form1.ddIdadeDep1.value = values2[24];
-    form1.ddIdadeDep2.value = values2[25];
-    form1.ddIdadeDep3.value = values2[26];
-    form1.ddCD.value = values2[27];
-    form1.rdCD[0].checked = values2[28];
-    form1.rdCD[1].checked = values2[29];
-    form1.ferias.checked = values2[30];
-    form1.decter.checked = values2[31];
-    form1.decter_par.value = values2[32];
-    form1.ddSindTipo.value = values2[33];
-    //form1.pss_aliq.value = values2[34];
-    form1.numOutros.value = values2[35];
-    form1.numURP.value = values2[36];
-    form1.numFunpFacul.value = values2[37];
-    form1.Dep3Qtd.value = values2[38];
-    form1.ddCargo.value = values2[39];
-    form1.numOutrosRendIsnt.value = values2[40];
-    form1.numOutrosRendTrib.value = values2[41];
-    form1.numProposta.value = values2[42];
-    form1.pssfgcd.checked = values2[43];
-    form1.pssrisco.checked = values2[44];
-    form1.pssnoturno.checked = values2[45];
-    form1.rpcfgcd.checked = values2[46];
-    form1.rpcrisco.checked = values2[47];
-    form1.rpcnoturno.checked = values2[48];
-    form1.crechecota.checked = values2[49];
-    form1.ddPadrao.value = values2[50];
-    form1.numOutrosRendTribIR.value = values2[51];
-    form1.abonoperm.checked = values2[52];
-    form1.sindaliq.value = values2[53];
-    form1.mf_ddClasse.value = values2[54];
-    form1.numOutrosPct.value = values2[55];
-    form1.ddAdiant.value = values2[56];
-
-    ///////////////////////////////////
-
-    form2.ddClasse.value = values1[0];
-    form2.ddProg.value = values1[1];
-    form2.ddFG.value = values1[2];
-    form2.ddNivel.value = values1[3];
-    form2.ddCargaH.value = values1[4];
-    form2.ddAno.value = values1[5];
-
-    form2.saude.checked = values1[7];
-    form2.ddIdade.value = values1[8];
-    form2.ddURP.value = values1[9];
-    form2.trans.checked = values1[10];
-    form2.gastoTrans.value = values1[11];
-    form2.alim.checked = values1[12];
-    form2.ddInsa.value = values1[13];
-    form2.numCreche.value = values1[14];
-    //form2.sindicato.checked = values1[15];
-    form2.areaquali[0].checked = values1[16];
-    form2.areaquali[1].checked = values1[17];
-    form2.novopss.value = values1[18];
-    form2.ddFunp.value = values1[19];
-    form2.numAnuenio.value = values1[20];
-    form2.funp_ad.value = values1[21];
-    form2.numFunpAlt.value = values1[22];
-    form2.numDepIRRF.value = values1[23];
-    form2.ddIdadeDep1.value = values1[24];
-    form2.ddIdadeDep2.value = values1[25];
-    form2.ddIdadeDep3.value = values1[26];
-    form2.ddCD.value = values1[27];
-    form2.rdCD[0].checked = values1[28];
-    form2.rdCD[1].checked = values1[29];
-    form2.ferias.checked = values1[30];
-    form2.decter.checked = values1[31];
-    form2.decter_par.value = values1[32];
-    form2.ddSindTipo.value = values1[33];
-    //form2.pss_aliq.value = values1[34]
-    form2.numOutros.value = values1[35];
-    form2.numURP.value = values1[36];
-    form2.numFunpFacul.value = values1[37];
-    form2.Dep3Qtd.value = values1[38];
-    form2.ddCargo.value = values1[39];
-    form2.numOutrosRendIsnt.value = values1[40];
-    form2.numOutrosRendTrib.value = values1[41];
-    form2.numProposta.value = values1[42];
-    form2.pssfgcd.checked = values1[43];
-    form2.pssrisco.checked = values1[44];
-    form2.pssnoturno.checked = values1[45];
-    form2.rpcfgcd.checked = values1[46];
-    form2.rpcrisco.checked = values1[47];
-    form2.rpcnoturno.checked = values1[48];
-    form2.crechecota.checked = values1[49];
-    form2.ddPadrao.value = values1[50];
-    form2.numOutrosRendTribIR.value = values1[51];
-    form2.abonoperm.checked = values1[52];
-    form2.sindaliq.value = values1[53];
-    form2.mf_ddClasse.value = values1[54];
-    form2.numOutrosPct.value = values1[55];
-    form2.ddAdiant.value = values1[56];
-
-    updateQuali(form1, values2[0]);
-    updateQuali(form2, values1[0]);
-
-    form1.ddQuali.value = values2[6];
-    form2.ddQuali.value = values1[6];
+    updateQuali(form1, form1.ddClasse.value);
+    updateQuali(form2, form2.ddClasse.value);
 
     calcSalario(form1);
     calcSalario(form2);
