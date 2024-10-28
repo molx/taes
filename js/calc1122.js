@@ -36,10 +36,17 @@ function updateQuali(form, classs) {
     calcSalario(form);
 }
 
-function calcfatorpg(i, areadireta = true, docente = false) {
+function calcfatorpg(i, areadireta = true, docente = false, ch = 1) {
+    //Para docentes, carga horária altera o % da RT 
     var pesos = Array();
     if (docente) {
-        pesos = [0, 0, 0, 0, 0.1, 0.2, 0.50, 1.15];
+        if (ch == 0.5) { //20h
+            pesos = [0, 0, 0, 0, 0.05, 0.1, 0.25, 0.575];
+        } else if (ch == 0.7) { //40h
+            pesos = [0, 0, 0, 0, 0.075, 0.15, 0.375, 0.8625];
+        } else { //DE
+            pesos = [0, 0, 0, 0, 0.1, 0.2, 0.50, 1.15];
+        }
     } else if (areadireta) {
         pesos = Array(0, 0.1, 0.15, 0.2, 0.25, 0.3, 0.52, 0.75);
     } else {
@@ -734,7 +741,7 @@ function calcSalario(form) {
 
     //Docentes
 
-    if (carreiraMF) {        
+    if (carreiraMF) {
         if (ftcarga == 1) { //40h
             ftcarga = 0.7; //a referencia é no DE, 40h recebe 70%, 20h 50%
         } else if(ftcarga == 0) { //DE
@@ -779,9 +786,10 @@ function calcSalario(form) {
 
     var transporte = form.trans.checked ? valorTransporte(vencimento, form.gastoTrans.value) : 0;
     var ftinsa = form.ddInsa.value;
-    var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked, carreiraMF);
+    var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked, carreiraMF, ftcarga);
     /*var urp = (form.removeurp.checked) ? vencimento * 0.2605 * (1 +
         ftpg) : 0;*/
+    console.log(ftpg);
     var urp = 0;
     $('form[name="' + form.name + '"] label[name="numURPview"]').css("visibility", "hidden");
     //form.numURPview.style.visibility = "hidden";
