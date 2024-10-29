@@ -879,28 +879,6 @@ function calcSalario(form) {
     //basecreche aparentemente não leva em consideração o Incentivo à Qualificação - outros a ver
     var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
     
-    var ferias = 0;
-    var aliqirrfferias = 0;
-    var adiantamento = 0;
-    var aliqirrfadiant = 0;
-    var descAdiant = 0;
-    if (form.ferias.checked) {
-        ferias = (remuneracao + fungrat + cargodir) / 3;
-        aliqirrfferias = valorIRRF(ferias, periodo);
-        //$('form[name="' + form.name + '"] input[name="adiantamento"]').prop('disabled', false);
-    } else {
-        //$('form[name="' + form.name + '"] input[name="adiantamento"]').prop('disabled', true);
-    }
-
-    if (form.ddAdiant.value == "1") {
-        adiantamento = (remuneracao + fungrat + cargodir) * 0.7;
-        aliqirrfadiant = valorIRRF(adiantamento, periodo);
-    } else if (form.ddAdiant.value == "2") {
-        descAdiant = (remuneracao + fungrat + cargodir) * 0.7 - valorIRRF((remuneracao + fungrat + cargodir) * 0.7, periodo);
-    }
-
-    var decter = form.decter.checked ? (remuneracao + fungrat + cargodir) / 2 : 0;
-
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
     var basepss = vencimento + urp + qualificacao + anuenio + diffPisoEnf + outrosRendTrib;
     var tetopss = 4663.75;
@@ -924,6 +902,29 @@ function calcSalario(form) {
     } else {
         tetopss = 7786.02;
     }
+
+    var ferias = 0;
+    var aliqirrfferias = 0;
+    var adiantamento = 0;
+    var adiantPct = (parseInt(form.numAdiant.value) / 30) * 0.7;
+    var aliqirrfadiant = 0;
+    var aliqpssadiant = 0;
+    var descAdiant = 0;
+    if (form.ferias.checked) {
+        ferias = (remuneracao + fungrat + cargodir) / 3;
+        aliqirrfferias = valorIRRF(ferias, periodo);
+    } 
+
+    if (adiantPct > 0 && !form.adiantRest.checked) {
+        adiantamento = (remuneracao + fungrat + cargodir) * adiantPct;
+        aliqirrfadiant = valorIRRF(adiantamento, periodo);
+        aliqpssadiant = calcPSS(periodo, adiantamento, tetopss);
+    } else if (adiantPct > 0 && form.adiantRest.checked) {
+        var tempAdiant = (remuneracao + fungrat + cargodir) * adiantPct;
+        descAdiant = tempAdiant - valorIRRF(tempAdiant, periodo) - calcPSS(periodo, tempAdiant, tetopss);
+    }
+
+    var decter = form.decter.checked ? (remuneracao + fungrat + cargodir) / 2 : 0;
 
     //Checa quais opcionais deverão entrar na base do PSS
     if (form.pssfgcd.checked) {
@@ -1008,7 +1009,7 @@ function calcSalario(form) {
 
     var outrosdescontospct = ((parseInt(form.numOutrosPct.value) || 0) / 100 ) * remuneracao;
 
-    var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + aliqirrfadiant + descAdiant + outrosdescontos + outrosdescontospct;
+    var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + aliqirrfadiant + aliqpssadiant + descAdiant + outrosdescontos + outrosdescontospct;
 
     var bruto = remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
 
@@ -1092,6 +1093,7 @@ function calcSalario(form) {
     addDetailValue("#tabdetails-desc", formid, "IR", aliqirrf);
     if (aliqirrfferias > 0) addDetailValue("#tabdetails-desc", formid, "IR Férias", aliqirrfferias);
     if (aliqirrfadiant > 0) addDetailValue("#tabdetails-desc", formid, "IR Adiant.", aliqirrfadiant);
+    if (aliqpssadiant > 0) addDetailValue("#tabdetails-desc", formid, "PSS Adiant.", aliqpssadiant);
     if (descAdiant > 0) addDetailValue("#tabdetails-desc", formid, "Adiantamento", descAdiant);    
     if (desc_13 > 0) addDetailValue("#tabdetails-desc", formid, "IR+PSS 13º", desc_13);
     if (aliqfunp > 0) addDetailValue("#tabdetails-desc", formid, "Funpresp", aliqfunp);
