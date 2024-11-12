@@ -924,7 +924,17 @@ function calcSalario(form) {
         descAdiant = tempAdiant - valorIRRF(tempAdiant, periodo) - calcPSS(periodo, tempAdiant, tetopss);
     }
 
-    var decter = form.decter.checked ? (remuneracao + fungrat + cargodir) / 2 : 0;
+    var decter = 0;
+    
+    if (form.decter.checked) {
+        if(form.decter_par.value == "1") {
+            //Primeira parcela, metade do bruto mas sem descontos
+            decter = (remuneracao + fungrat + cargodir) / 2;
+        } else {
+            //Segunda parcela, bruto mas serao calculados descontos
+            decter = remuneracao + fungrat + cargodir;
+        }
+    }
 
     //Checa quais opcionais deverão entrar na base do PSS
     if (form.pssfgcd.checked) {
@@ -1003,7 +1013,7 @@ function calcSalario(form) {
 
     var aliqirrf = valorIRRF(baseirrf, periodo);
 
-    var desc_13 = form.decter.checked && form.decter_par.value == "2" ? aliqirrf + valorpss + aliqfunp + aliqFunpFacul : 0;
+    var desc_13 = form.decter.checked && form.decter_par.value == "2" ? aliqirrf + valorpss + aliqfunp + aliqFunpFacul + decter/2 : 0;
 
     var outrosdescontos = parseFloat(form.numOutros.value) || 0;
 
