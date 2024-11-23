@@ -917,21 +917,14 @@
                             </div>
                             <div>
                                 <label>                                    
-                                    Adiantamento:
-                                    <select name="ddAdiant" id="ddAdiant1" onchange="calcSalario(this.form);"
-                                        style="width: 70px;">
-                                        <option value="0" selected>
-                                            Não
-                                        </option>
-                                        <option value="1">
-                                            +70%
-                                        </option>
-                                        <option value="2">
-                                            -70%
-                                        </option>
-                                    </select>
+                                    Adiantamento (dias):
+                                    <input type="number" name="numAdiant" id="numAdiant1" min="0" max="30" step="1"
+                                    value="0" style="width: 30px;" onClick="calcSalario(this.form);"
+                                    onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />                                    
                                     <input style="width: 85px;" type="text" name="txAdiant" id="txAdiant1"
                                         value="R$ 0,00" readonly />
+                                    <input type="checkbox" name="adiantRest" id="adiantRest1" value="0"
+                                        onClick="calcSalario(this.form);" /> Restituição
                                 </label>
                             </div>
                             <div>
@@ -1967,22 +1960,15 @@
                                 </label>
                             </div>
                             <div>
-                                <label>
-                                    Adiantamento:
-                                    <select name="ddAdiant" id="ddAdiant2" onchange="calcSalario(this.form);"
-                                        style="width: 70px;">
-                                        <option value="0" selected>
-                                            Não
-                                        </option>
-                                        <option value="1">
-                                            +70%
-                                        </option>
-                                        <option value="2">
-                                            -70%
-                                        </option>
-                                    </select>
-                                    <input style="width: 85px;" type="text" name="txAdiant" id="txAdiant2"
+                                <label>                                    
+                                    Adiantamento (dias):
+                                    <input type="number" name="numAdiant" id="numAdiant1" min="0" max="30" step="1"
+                                    value="0" style="width: 30px;" onClick="calcSalario(this.form);"
+                                    onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
+                                    <input style="width: 85px;" type="text" name="txAdiant" id="txAdiant1"
                                         value="R$ 0,00" readonly />
+                                    <input type="checkbox" name="adiantRest" id="adiantRest1" value="0"
+                                        onClick="calcSalario(this.form);" /> Restituição
                                 </label>
                             </div>
                             <div>
