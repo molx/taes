@@ -546,7 +546,7 @@ ul {
 }
 
 .tab-content {
-    padding: 0 5px;
+    padding: 0 5px 5px 5px;
     display: none;
 	font-size: 0.95em;
 }
@@ -564,9 +564,10 @@ ul {
  display: block;   
 }
 
+/* Removido pois causava problemas no tamanho da vw em mobile 
 .tab-content3, .tab-content4 {
     width: 380px;
-}
+} */
 
 .tab-details {
     display: none;
@@ -606,6 +607,7 @@ ul {
 	vertical-align: top;
 	text-align: left;
 	max-width: 600px;
+	margin-bottom: 0.5em;	
 }
 
 .divresults {

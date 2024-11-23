@@ -21,8 +21,7 @@
     <link rel="canonical" href="https://taes.com.br" />
     <link rel="icon" type="image/png" href="favicon.ico">
     <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <!--<link rel="stylesheet" href="css/tabs.css" />-->
+    <link rel="stylesheet" href="css/main.css" />    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -224,7 +223,7 @@
                                 </label>
                                 <!--<small><a href="carreira.html#extrap" target="_blank">detalhes sobre a extrapolação</a></small>-->
                             </div>
-                            <div>
+                            <div style="display: none;">
                                 <label>
                                     Reajuste:
                                     <input disabled type="number" name="numProposta" id="numProposta1" min="0" max="200"
@@ -535,7 +534,7 @@
                                     <input type="text" name="txCD" value="R$ 0,00" readonly />
                                 </label>
                             </div>
-                            <div>
+                            <div style="margin-right: 20px;">
                                 <label
                                     onmouseover="nhpup.popup('O Adicional por Tempo de Serviço é calculado como 5% por cada período de 5 anos. Ele foi revogado em 1999, mas se mantém para aqueles que o recebiam na época.')">
                                     Anuênio:
@@ -545,7 +544,7 @@
                                     onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
                                 %
                             </div>
-                            <div style="margin-left: 20px;">
+                            <div>
                                 <label
                                     onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
                                     Cargo:
@@ -958,12 +957,12 @@
                                             Regime da previdência:
                                         </label>
                                         <br />
-                                        <label
+                                        <label style="margin-right: 20px;"
                                             onmouseover="nhpup.popup('Para servidores que ingressaram até 02/2013, o PSS é cobrado como 11% sobre a remuneração total.');">
                                             <input type="radio" name="novopss" id="novopss11" value="rpps"
                                                 onClick="calcSalario(this.form);" /> Regime Próprio (RPPS)
                                         </label>
-                                        <label style="margin-left: 20px;"><input type="checkbox" name="abonoperm"
+                                        <label><input type="checkbox" name="abonoperm"
                                                 id="abonoperm1" onClick="calcSalario(this.form);" /> Abono
                                             permanência</label><br>
                                         <label
@@ -1277,7 +1276,7 @@
                                 </label>
                                 <!--<small><a href="carreira.html#extrap" target="_blank">detalhes sobre a extrapolação</a></small>-->
                             </div>
-                            <div>
+                            <div style="display: none;">
                                 <label>
                                     Reajuste:
                                     <input disabled type="number" name="numProposta" id="numProposta2" min="0" max="200"
@@ -1588,7 +1587,7 @@
                                     <input type="text" name="txCD" value="R$ 0,00" readonly />
                                 </label>
                             </div>
-                            <div>
+                            <div style="margin-right: 20px;">
                                 <label
                                     onmouseover="nhpup.popup('O Adicional por Tempo de Serviço é calculado como 5% por cada período de 5 anos. Ele foi revogado em 1999, mas se mantém para aqueles que o recebiam na época.')">
                                     Anuênio:
@@ -1599,7 +1598,7 @@
                                         onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
                                     %</label>
                             </div>
-                            <div style="margin-left: 20px;">
+                            <div>
                                 <label
                                     onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
                                     Cargo:
@@ -2009,12 +2008,12 @@
                                             Regime da previdência:
                                         </label>
                                         <br />
-                                        <label
+                                        <label style="margin-right: 20px;"
                                             onmouseover="nhpup.popup('Para servidores que ingressaram até 02/2013, o PSS é cobrado como 11% sobre a remuneração total.');">
                                             <input type="radio" name="novopss" id="novopss12" value="rpps"
                                                 onClick="calcSalario(this.form);" /> Regime Próprio (RPPS)
                                         </label>
-                                        <label style="margin-left: 20px;"><input type="checkbox" name="abonoperm"
+                                        <label><input type="checkbox" name="abonoperm"
                                                 id="abonoperm2" onClick="calcSalario(this.form);" /> Abono
                                             permanência</label><br>
                                         <label
