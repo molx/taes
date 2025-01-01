@@ -664,11 +664,11 @@ function calcSalario(form) {
 
     if (periodo > 15 && periodo < 19) {
         base = 4556.92;
-    }else if (periodo  == 19) {
-        base = 4556.92 * 1.09;
+    } else if (periodo  == 19) {
+        base = 4967.04;
         ftstep = 1.040;
     } else if (periodo >= 20) {
-        base = 4556.92 * 1.09 * 1.05;
+        base = 5215.39;
         ftstep = 1.041;
     }    
     // Situações especiais (considerando referência no A e não no E, como acima)
@@ -696,8 +696,17 @@ function calcSalario(form) {
     //     base = 1822.77 * (1 + (reajuste / 100));
     // }
 
-    if (form.ddCargo.value == "1") {
-        base = base * 2;
+    if (form.ddCargo.value == "1") { 
+        //Médicos na MP 1.286 não estão mais 2x
+        //Os reajustes foram 2x 4.5% e step fixado em 3.9 (vs 9% + 5% e steps 4% e 4.1%)
+        ftstep = 1.039;
+        if (periodo > 15 && periodo < 19) {
+            base = 4556.92;
+        } else if (periodo  == 19) {
+            base = 4761.98;
+        } else if (periodo >= 20) {
+            base = 4976.27;
+        }    
     }
 
     var nivelMerito = 1,
