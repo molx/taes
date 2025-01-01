@@ -511,8 +511,8 @@ function valorFG(FG, periodo) {
     var FG2018 = Array(0, 933.5, 628.03, 509.16, 259.17, 210.29, 154.2, 98.34, 72.74, 59.02, 1071.67);
     var FG2019 = Array(0, 975.51, 656.29, 532.07, 270.83, 219.76, 161.14, 101.77, 76.02, 61.67, 1071.67);
     var FG2023 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67, 1071.67);
-    var FG2025 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67, 1071.67);
-    var FG2026 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67, 1071.67);
+    var FG2025 = Array(0, 1159.01, 779.73, 632.16, 295.2, 239.54, 175.64, 112.02, 82.86, 67.22, 1168.12);
+    var FG2026 = Array(0, 1263.32, 849.91, 689.05, 321.77, 261.1, 191.45, 122.1, 90.32, 73.27, 1273.25);
     
     var valor = 0;
     if (periodo == 1) {
@@ -538,10 +538,10 @@ function valorFG(FG, periodo) {
         //a partir de maio/2023
         valor = FG2023[FG];
     } else if (periodo < 20) {
-        //a partir de maio/2025
+        //a partir de janeiro/2025
         valor = FG2025[FG];
     } else {
-        //a partir de maio/2026
+        //a partir de abril/2026 (as FGs na verdade mudam já em Janeiro)
         valor = FG2026[FG];
     }
     return valor;
@@ -557,8 +557,8 @@ function valorCD(CD, periodo) {
     var CD2018 = Array(0, 12893.89, 10778.5, 8461.62, 6144.74);
     var CD2019 = Array(0, 13474.12, 11263.53, 8842.29, 6421.26);
     var CD2023 = Array(0, 14686.79, 12277.25, 9638.21, 6999.17);
-    var CD2025 = Array(0, 14686.79, 12277.25, 9638.21, 6999.17);
-    var CD2026 = Array(0, 14686.79, 12277.25, 9638.21, 6999.17);
+    var CD2025 = Array(0, 18064.75, 14364.38, 11276.71, 7629.10);
+    var CD2026 = Array(0, 22219.64, 16806.33, 12291.61, 8315.71);
 
     var valor = 0;
     if (periodo == 1) {
@@ -587,10 +587,10 @@ function valorCD(CD, periodo) {
         //a partir de maio/2023
         valor = CD2023[CD];
     } else if (periodo < 20) {
-        //a partir de maio/2025
+        //a partir de janeiro/2025
         valor = CD2025[CD];
     } else {
-        //a partir de maio/2026
+       //a partir de abril/2026 (as FGs na verdade mudam já em Janeiro)
         valor = CD2026[CD];
     } 
     return valor;
