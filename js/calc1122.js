@@ -322,7 +322,7 @@ function calcPSS(periodo, base, teto) {
         } else {
             valor = base * 0.22 - 2615.78;
         }
-    } else {
+    } else if (periodo < 19) { //2024
         if (base <= 1412.00) {
             //salario minimo
             valor = 0.075 * base;
@@ -341,6 +341,26 @@ function calcPSS(periodo, base, teto) {
             valor = base * 0.19 - 1153.46;
         } else {
             valor = base * 0.22 - 2713.47;
+        }
+    } else { //2025
+        if (base <= 1518.00) {
+            //salario minimo
+            valor = 0.075 * base;
+        } else if (base <= 2793.88) {
+            valor = base * 0.09 - 22.77;
+        } else if (base <= 4190.83) {
+            valor = base * 0.12 - 106.59;
+        } else if (base <= 8157.41) {
+            //teto
+            valor = base * 0.14 - 190.40;
+        } else if (base <= 13969.49) {
+            valor = base * 0.145 - 231.19;
+        } else if (base <= 27938.95) {
+            valor = base * 0.165 - 510.58;
+        } else if (base <= 54480.97) {
+            valor = base * 0.19 - 1209.05;
+        } else {
+            valor = base * 0.22 - 2843.48;
         }
     }
     return Math.floor(valor * 100) / 100;
@@ -908,8 +928,10 @@ function calcSalario(form) {
         tetopss = 7087.23;
     } else if (periodo < 17) {
         tetopss = 7507.49;
-    } else {
+    } else if (periodo < 19) {
         tetopss = 7786.02;
+    } else {
+        tetopss = 8157.41;
     }
 
     var ferias = 0;
