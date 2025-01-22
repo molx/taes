@@ -721,11 +721,11 @@ function calcSalario(form) {
         //Os reajustes foram 2x 4.5% e step fixado em 3.9 (vs 9% + 5% e steps 4% e 4.1%)
         ftstep = 1.039;
         if (periodo > 15 && periodo < 19) {
-            base = 4556.92;
+            base = 9113.85;
         } else if (periodo  == 19) {
-            base = 4761.98;
+            base = 9523.46;
         } else if (periodo >= 20) {
-            base = 4976.27;
+            base = 9952.54;
         }    
     }
 
