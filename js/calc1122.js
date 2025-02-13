@@ -1077,7 +1077,7 @@ function calcSalario(form) {
     form.txTrans.value = formatValor(transporte);
     form.txAlim.value = formatValor(alimentacao);
     form.txCreche.value = formatValor(creche);
-    form.txURP.value = formatValor(urp);
+    //form.txURP.value = formatValor(urp);
     form.txbIRRF.value = formatValor(baseirrf);
     form.txbINSS.value = formatValor(basepss);
     form.txdesconto.value = formatValor(descontos);
@@ -1090,10 +1090,14 @@ function calcSalario(form) {
     form.txNoturno.value = formatValor(noturno);
     form.txFerias.value = formatValor(ferias);
     form.txAdiant.value = formatValor(adiantamento - descAdiant);
-    form.txIrrfFerias.value = formatValor(aliqirrfferias);
+    //form.txIrrfFerias.value = formatValor(aliqirrfferias);
     form.txDecter.value = formatValor(decter);
-    form.txDesc13.value = formatValor(desc_13);
+    form.tx13.value = formatValor(decter);
+    //form.txDesc13.value = formatValor(desc_13);
+
     form.txDescPct.value = formatValor(outrosdescontospct);
+    form.txFunc.value = formatValor(fungrat + cargodir);
+    form.txFeriasR.value = formatValor(ferias);
 
     //Display info on Detailed Results
     var formid = 1;

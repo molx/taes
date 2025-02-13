@@ -92,17 +92,19 @@
             </script>
         </div>
         <div class="titleHolder">
-            <div id="fb-root"></div>
-            <script async defer crossorigin="anonymous"
-                src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v18.0&appId=236772623333172"
-                nonce="7g2k0MxD"></script>
-            <div class="fb-page" data-href="https://www.facebook.com/SimuladorTAE" data-tabs="" data-width="450"
-                data-height="70" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true"
-                data-show-facepile="false">
-                <blockquote cite="https://www.facebook.com/SimuladorTAE" class="fb-xfbml-parse-ignore"><a
-                        href="https://www.facebook.com/SimuladorTAE">Simulador de Salário dos TAE das IFE</a>
-                </blockquote>
-            </div>
+            <!-- <div class="fb-banner">
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous"
+                    src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v18.0&appId=236772623333172"
+                    nonce="7g2k0MxD"></script>
+                <div class="fb-page" data-href="https://www.facebook.com/SimuladorTAE" data-tabs="" data-width="320"
+                    data-height="70" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true"
+                    data-show-facepile="false">
+                    <blockquote cite="https://www.facebook.com/SimuladorTAE" class="fb-xfbml-parse-ignore"><a
+                            href="https://www.facebook.com/SimuladorTAE">Simulador de Salário dos TAE das IFE</a>
+                    </blockquote>
+                </div>
+            </div> -->
             <div class="mainTitle">
                 <h1>
                     Calculadora
@@ -836,7 +838,7 @@
                                 </label>
                             </div>
                             <hr class="hrsaude" />
-                            <div>
+                            <div style="margin-top: 0;">
                                 <label
                                     onmouseover="nhpup.popup('O valor do transporte é calculado com base no gasto diário do servidor (arredondado para cima em steps de R$ 0,2). Caso receba auxílio-alimentação, valores referentes a saída para almoço não devem ser considerados. Além disso, o valor sofre um desconto de 6% do vencimento proporcional a 22 dias.');">
                                     <input type="checkbox" name="trans" id="trans1" value="Trans"
@@ -851,7 +853,7 @@
                                         readonly />
                                 </label>
                             </div>
-                            <div>
+                            <div style="margin-top: 0;">
                                 <label>
                                     <input type="checkbox" name="alim" value="Alim" id="alim1" onClick="calcSalario(this.form);"
                                         checked /> Alimentação <a class="wiki-icon"
@@ -1094,14 +1096,17 @@
                     <div class="tabresults">
                         <div class="tab-content3 tab-resumo" id="tab-resumo1">
                             <div class="divresults_col" style="float: left;">
-                                <label
-                                    onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
-                                    Vencimento:
-                                    <input type="text" name="txVB" value="0" readonly />
-                                </label>
                                 <label>
                                     Bruto:
                                     <input type="text" name="txBruto" value="0" readonly />
+                                </label>
+                                <label>
+                                    VB:
+                                    <input type="text" name="txVB" value="0" readonly />
+                                </label>
+                                <label>
+                                    <span class="labelIQRT">IQ</span>:
+                                    <input type="text" name="txQualif" value="0" readonly />
                                 </label>
                                 <label>
                                     PSS:
@@ -1112,23 +1117,26 @@
                                     <input type="text" name="txIrrf" value="0" readonly />
                                 </label>
                                 <label>
-                                    IRRF Férias:
-                                    <input type="text" name="txIrrfFerias" value="0" readonly />
-                                </label>
+                                    Ferias:
+                                    <input type="text" name="txFeriasR" value="0" readonly />
+                                </label>                                
+                            </div>
+                            <div class="divresults_col">                                
+                                <!-- <label>
+                                    URP:
+                                    <input type="text" name="txURP" value="0" readonly />
+                                </label> -->
                                 <label>
                                     Líquido:
                                     <input type="text" name="txResult" value="0" readonly />
                                 </label>
-                            </div>
-                            <div class="divresults_col">
-                                <label
-                                    onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
-                                    <span class="labelIQRT">IQ</span>:
-                                    <input type="text" name="txQualif" value="0" readonly />
+                                <label>
+                                    Descontos:
+                                    <input type="text" name="txdesconto" value="0" readonly />
                                 </label>
                                 <label>
-                                    URP:
-                                    <input type="text" name="txURP" value="0" readonly />
+                                    Função:
+                                    <input type="text" name="txFunc" value="0" readonly />
                                 </label>
                                 <label>
                                     Base PSS:
@@ -1139,12 +1147,8 @@
                                     <input type="text" name="txbIRRF" value="0" readonly />
                                 </label>
                                 <label>
-                                    Desconto 13º:
-                                    <input type="text" name="txDesc13" value="0" readonly />
-                                </label>
-                                <label>
-                                    Descontos:
-                                    <input type="text" name="txdesconto" value="0" readonly />
+                                    13º:
+                                    <input type="text" name="tx13" value="0" readonly />
                                 </label>
                             </div>
                         </div>
@@ -1882,7 +1886,7 @@
                                 </label>
                             </div>
                             <hr class="hrsaude" />
-                            <div>
+                            <div style="margin-top: 0;">
                                 <label
                                     onmouseover="nhpup.popup('O valor do transporte é calculado com base no gasto diário do servidor (arredondado para cima em steps de R$ 0,2). Caso receba auxílio-alimentação, valores referentes a saída para almoço não devem ser considerados. Além disso, o valor sofre um desconto de 6% do vencimento proporcional a 22 dias.');">
                                     <input type="checkbox" name="trans" id="trans2" value="Trans"
@@ -1897,7 +1901,7 @@
                                         readonly />
                                 </label>
                             </div>
-                            <div>
+                            <div style="margin-top: 0;">
                                 <label>
                                     <input type="checkbox" name="alim" value="Alim" id="alim2" onClick="calcSalario(this.form);"
                                         checked /> Alimentação <a class="wiki-icon"
@@ -2140,14 +2144,17 @@
                     <div class="tabresults">
                         <div class="tab-content4 tab-resumo" id="tab-resumo2">
                             <div class="divresults_col" style="float: left;">
-                                    <label
-                                        onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
-                                        Vencimento:
-                                        <input type="text" name="txVB" value="0" readonly />
-                                    </label>
                                 <label>
                                     Bruto:
                                     <input type="text" name="txBruto" value="0" readonly />
+                                </label>
+                                <label>
+                                    VB:
+                                    <input type="text" name="txVB" value="0" readonly />
+                                </label>
+                                <label>
+                                    <span class="labelIQRT">IQ</span>:
+                                    <input type="text" name="txQualif" value="0" readonly />
                                 </label>
                                 <label>
                                     PSS:
@@ -2158,23 +2165,26 @@
                                     <input type="text" name="txIrrf" value="0" readonly />
                                 </label>
                                 <label>
-                                    IRRF Férias:
-                                    <input type="text" name="txIrrfFerias" value="0" readonly />
-                                </label>
+                                    Ferias:
+                                    <input type="text" name="txFeriasR" value="0" readonly />
+                                </label>                                
+                            </div>
+                            <div class="divresults_col">                                
+                                <!-- <label>
+                                    URP:
+                                    <input type="text" name="txURP" value="0" readonly />
+                                </label> -->
                                 <label>
                                     Líquido:
                                     <input type="text" name="txResult" value="0" readonly />
                                 </label>
-                            </div>
-                            <div class="divresults_col">
-                                <label
-                                    onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
-                                    <span class="labelIQRT">IQ</span>:
-                                    <input type="text" name="txQualif" value="0" readonly />
+                                <label>
+                                    Descontos:
+                                    <input type="text" name="txdesconto" value="0" readonly />
                                 </label>
                                 <label>
-                                    URP:
-                                    <input type="text" name="txURP" value="0" readonly />
+                                    Função:
+                                    <input type="text" name="txFunc" value="0" readonly />
                                 </label>
                                 <label>
                                     Base PSS:
@@ -2185,12 +2195,8 @@
                                     <input type="text" name="txbIRRF" value="0" readonly />
                                 </label>
                                 <label>
-                                    Desconto 13º:
-                                    <input type="text" name="txDesc13" value="0" readonly />
-                                </label>
-                                <label>
-                                    Descontos:
-                                    <input type="text" name="txdesconto" value="0" readonly />
+                                    13º:
+                                    <input type="text" name="tx13" value="0" readonly />
                                 </label>
                             </div>
                         </div>
