@@ -609,9 +609,16 @@ ul {
 	.cbajuda > div {
 		float: none;
 	}
+
+	.divresults {
+		display: block;
+		margin: 0 auto;
+		max-width: 320px;
+	}
+
 	.tabresults {
 		width: 100%;
-		max-width: 320px;
+		/* max-width: 320px; */
 	}
 	.tab-resumo {
 		font-size: 85%;
