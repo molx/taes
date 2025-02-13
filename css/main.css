@@ -505,7 +505,6 @@ ul {
 }
 
 .tabresults {
-	padding: 0 5px;
 	width: 390px;
 	text-align: left;
 	overflow: hidden auto;
@@ -519,7 +518,7 @@ ul {
 .tab-resumo {
     display: flex;
     line-height: 2em;
-	padding: 1em 0;
+	padding: 1em 5px;
 }
 
 .tab-resumo > div {
