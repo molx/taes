@@ -505,15 +505,15 @@ function valorCreche(rem, periodo, n, cota) {
     }
 }
 
-function valorTransporte(vencimento, gasto) {
+function valorTransporte(vencimento, gasto, dias) {
     var auxilio = 0;
-    var gastodiaro = 0;
+    var gastodiario = 0;
     if (isNaN(gasto) || gasto < 0) {
         gastodiario = 0;
     } else {
         gastodiario = Math.ceil((gasto - 1) / 0.2) * 0.2 + 1;
     }
-    auxilio = gastodiario * 22 - vencimento * 0.06 * (22 / 30);
+    auxilio = gastodiario * dias - vencimento * 0.06 * (22 / 30);
     if (auxilio < 0) {
         return 0;
     } else {
@@ -813,7 +813,7 @@ function calcSalario(form) {
         alimentacao = alimentacao / 2;
     }
 
-    var transporte = form.trans.checked ? valorTransporte(vencimento, form.gastoTrans.value) : 0;
+    var transporte = form.trans.checked ? valorTransporte(vencimento, form.gastoTrans.value, form.diasTrans.value) : 0;
     var ftinsa = form.ddInsa.value;
     var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked, carreiraMF, ftcarga);
     /*var urp = (form.removeurp.checked) ? vencimento * 0.2605 * (1 +
