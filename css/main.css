@@ -523,7 +523,7 @@ ul {
 .tab-resumo {
     display: flex;
     line-height: 1.5em;	
-	padding: 1em 5px;
+	padding: 0 5px;
 }
 
 /* .tab-resumo > div {
