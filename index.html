@@ -26,8 +26,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-    <script src="js/calc1122.js"></script>
-    <script type="text/javascript" src="js/nhpup_1.1.js"></script>
+    <script src="js/compressed.js"></script>
+    <!--<script type="text/javascript" src="js/nhpup_1.1.js"></script>-->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0242087922176548"
         crossorigin="anonymous"></script>
 </head>
@@ -148,8 +148,7 @@
                     <div class="tab">
                         <div id="tab-carreira1" class="tab-content tab-content1">
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Vários valores dependem do período do salário. Selecione o período em que o salário seria recebido, independente de seu ingresso na IFE. Esta opção tem maior chance de erros para períodos anteriores ao atual.');">
+                                <label>
                                     Período:
                                     <select name="ddAno" id="ddAno1" onchange="calcSalario(this.form);">
                                         <!--<option value="1">
@@ -235,8 +234,7 @@
                                 </label>
                             </div><br>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('A classe é definida pela exigência de escolaridade do cargo.');">
+                                <label>
                                     Classe:
                                     <select name="ddClasse" id="ddClasse1" class="inpt_TAE"
                                         onchange="updateQuali(this.form, this.form.ddClasse.value);">
@@ -305,8 +303,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('A Progressão por capacitação profissional varia em 4 níveis e pode ser obtida pela realização de cursos.');">
+                                <label>
                                     Nível:
                                     <select name="ddProg" id="ddProg1" class="inpt_TAE" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
@@ -325,8 +322,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
+                                <label>
                                     Padrão:
                                     <select name="ddNivel" id="ddNivel1" class="inpt_TAE" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
@@ -467,8 +463,7 @@
                                     </select></label>
                             </div><br>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('O adicional por Função Gratificada é pago a servidores que exercem cargos de chefia.');">
+                                <label>
                                     <span class="labelfg">FG</span>:
                                     <select name="ddFG" id="ddFG1" onchange="nocd(this.form);calcSalario(this.form);">
                                         <option value="0" selected>
@@ -506,8 +501,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('O ocupante de Cargo de Direção pode receber o valor integral como substituto à remuneração ou como adicional, no valor de 60% do valor integral.');">
+                                <label>
                                     CD:
                                     <select name="ddCD" id="ddCD1" onchange="nofg(this.form);calcSalario(this.form);">
                                         <option value="0" selected>
@@ -537,8 +531,7 @@
                                 </label>
                             </div>
                             <div style="margin-right: 20px;">
-                                <label
-                                    onmouseover="nhpup.popup('O Adicional por Tempo de Serviço é calculado como 5% por cada período de 5 anos. Ele foi revogado em 1999, mas se mantém para aqueles que o recebiam na época.')">
+                                <label>
                                     Anuênio:
                                 </label>
                                 <input type="number" name="numAnuenio" id="numAnuenio1" min="0" max="35" step="1"
@@ -547,8 +540,7 @@
                                 %
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
+                                <label>
                                     Cargo:
                                     <select name="ddCargo" id="ddCargo1" class="inpt_TAE" onchange="calcSalario(this.form);"
                                         style="width: 150px;">
@@ -595,8 +587,7 @@
                                         </option>
                                     </select>
                                 </label>
-                                <label
-                                    onmouseover="nhpup.popup('O valor do incentivo à qualificação depende se os estudos foram em área diretamente relacionada ao cargo ou não.');">
+                                <label>
                                     Área:&nbsp;
                                     <input type="radio" name="areaquali" id="areaquali11" value="qualid"
                                         onClick="calcSalario(this.form);" checked />
@@ -609,8 +600,7 @@
                                 </label>                       
                             </div>                            
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
+                                <label>
                                     Nº de dep. IR:
                                     <input type="number" name="numDepIRRF" id="numDepIRRF1" min="0" max="20" step="1"
                                         value="0" style="width: 35px;" onClick="calcSalario(this.form);"
@@ -619,8 +609,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. As principais formas de cálculo são 1% do seu VB e 1% do menor VB da categoria.')">
+                                <label>
                                     <!--<input type="checkbox" name="sindicato" id="sindicato1" value=""
                                         onClick="calcSalario(this.form);" /> -->
                                     Sindicato:
@@ -649,8 +638,7 @@
                         </div>
                         <div id="tab-ad1" class="tab-content tab-content1">
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('O reembolso por contrato de Plano de Saúde particular segue uma tabela definida pelo Governo Federal e depende do salário bruto e da idade do servidor.');">
+                                <label>
                                     <input type="checkbox" name="saude" id="saude1" value="Saude"
                                         onClick="calcSalario(this.form);" />
                                     Saúde suplementar <a class="wiki-icon"
@@ -857,8 +845,7 @@
                                 <input type="text" name="txInsa" style="width:72px" value="R$ 0,00" readonly />
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Para o cálculo correto, preencha com o valor das horas trabalhadas. A calculadora leva em conta a conversão da hora pelo fator de 52,5 minutos automaticamente.');">
+                                <label>
                                     Noturno <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Adicional noturno"
                                         target="_blank"></a> (h/mês):
                                     <input type="number" name="noturno" id="noturno1" min="0" max="240" step="0.1"
@@ -900,8 +887,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('O 13º salário é pago em duas parcelas, sendo a primeira em junho e a segunda em dezembro. Na primeira parcela nenhum imposto ou contribuição é descontado, sendo o ajuste feito na segunda parcela, pois o valor final do 13º salário é igual ao salário do mês de dezembro.');">
+                                <label>
                                     <input type="checkbox" name="decter" id="decter1" value="decter"
                                         onClick="calcSalario(this.form);" /> 13º Salário - Parcela:
                                     <input type="radio" name="decter_par" id="decter_par11" value="1"
@@ -927,29 +913,25 @@
                             <div style="display:grid;grid-template-columns: 2fr 1fr;margin-top: 0;">
                                 <div style="margin-top: 0;">
                                     <div>
-                                        <label
-                                            onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013 ou migraram para o RPC, existe um teto no valor base da previdência. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">
+                                        <label>
                                             Regime da previdência:
                                         </label>
                                         <br />
-                                        <label style="margin-right: 20px;"
-                                            onmouseover="nhpup.popup('Para servidores que ingressaram até 02/2013, o PSS é cobrado como 11% sobre a remuneração total.');">
+                                        <label style="margin-right: 20px;">
                                             <input type="radio" name="novopss" id="novopss11" value="rpps"
                                                 onClick="calcSalario(this.form);" /> Regime Próprio (RPPS)
                                         </label>
                                         <label><input type="checkbox" name="abonoperm"
                                                 id="abonoperm1" onClick="calcSalario(this.form);" /> Abono
                                             permanência</label><br>
-                                        <label
-                                            onmouseover="nhpup.popup('Para os servidores que entraram a partir 02/2013 ou fizeram a migração, o PSS é cobrado como 11% sobre o teto do PSS.');">
+                                        <label>
                                             <input type="radio" name="novopss" id="novopss21" value="rpc"
                                                 onClick="calcSalario(this.form);" checked /> Regime Complementar (RPC)
                                         </label>
                                         <br />
                                     </div>
                                     <div>
-                                        <label
-                                            onmouseover="nhpup.popup('Selecione Sim e então defina a alíquota ou a participação, caso tenha aderido à Funpresp.');">
+                                        <label>
                                             Funpresp:</label>
                                         <input type="text" name="txFunp" id="txFunp1" value="R$ 0,00" readonly />
                                     </div>
@@ -965,8 +947,7 @@
                                     <div>
                                         <input type="radio" id="funp_plano_norm1" name="funp_plano" value="normal"
                                             onClick="calcSalario(this.form);" disabled />
-                                        <label
-                                            onmouseover="nhpup.popup('Caso tenha aderido à Funpresp na modalidade ativo normal, a contribuição pode ser feita em uma das três alíquotas disponíveis.');">
+                                        <label>
                                             Ativo normal. Alíquota:
 
                                             <select id="ddFunp1" name="ddFunp" onchange="calcSalario(this.form);">
@@ -1001,8 +982,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <span
-                                        onmouseover="nhpup.popup('A contribuição sobre os valores recebidos a título de gratificações e adicionais é opcional, e a opção deve ser realizada no SouGov.');">Incluir
+                                    <span>Incluir
                                         na base do PSS:</span><br />
                                     <label><input type="checkbox" name="pssfgcd" id="pssfgcd2" value="PSSfgcd"
                                             onClick="calcSalario(this.form);" />FG/CD</label><br>
@@ -1011,8 +991,7 @@
                                     <label><input type="checkbox" name="pssnoturno" id="pssnoturno2" value="PSSnoturno"
                                             onClick="calcSalario(this.form);" />Adic. noturno</label>
                                     <br><br>
-                                    <span
-                                        onmouseover="nhpup.popup('A contribuição sobre os valores recebidos a título de gratificações e adicionais é opcional, e a opção deve ser realizada no SouGov.');">Incluir
+                                    <span>Incluir
                                         na base do RPC:</span><br />
                                     <label><input type="checkbox" name="rpcfgcd" id="rpcfgcd2" value="RPCfgcd"
                                             onClick="calcSalario(this.form);" />FG/CD</label><br>
@@ -1169,8 +1148,7 @@
                     <div class="tab">
                         <div id="tab-carreira2" class="tab-content tab-content2">
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Vários valores dependem do período do salário. Selecione o período em que o salário seria recebido, independente de seu ingresso na IFE. Esta opção tem maior chance de erros para períodos anteriores ao atual.');">
+                                <label>
                                     Período:
                                     <select name="ddAno" id="ddAno2" onchange="calcSalario(this.form);">
                                         <!--<option value="1">
@@ -1257,7 +1235,6 @@
                             </div><br>
                             <div>
                                 <label
-                                    onmouseover="nhpup.popup('A classe é definida pela exigência de escolaridade do cargo.');">
                                     Classe:
                                     <select name="ddClasse" id="ddClasse2" class="inpt_TAE"
                                         onchange="updateQuali(this.form, this.form.ddClasse.value);">
@@ -1326,8 +1303,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('A Progressão por capacitação profissional varia em 4 níveis e pode ser obtida pela realização de cursos.');">
+                                <label>
                                     Nível:
                                     <select name="ddProg" id="ddProg2" class="inpt_TAE" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
@@ -1346,8 +1322,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
+                                <label>
                                     Padrão:
                                     <select name="ddNivel" id="ddNivel2" class="inpt_TAE" onchange="atualizaPold(this.form);">
                                         <option value="1" selected>
@@ -1527,8 +1502,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('O ocupante de Cargo de Direção pode receber o valor integral como substituto à remuneração ou como adicional, no valor de 60% do valor integral.');">
+                                <label>
                                     CD:
                                     <select name="ddCD" id="ddCD2" onchange="nofg(this.form);calcSalario(this.form);">
                                         <option value="0" selected>
@@ -1558,8 +1532,7 @@
                                 </label>
                             </div>
                             <div style="margin-right: 20px;">
-                                <label
-                                    onmouseover="nhpup.popup('O Adicional por Tempo de Serviço é calculado como 5% por cada período de 5 anos. Ele foi revogado em 1999, mas se mantém para aqueles que o recebiam na época.')">
+                                <label>
                                     Anuênio:
                                 </label>
                                 <label>
@@ -1569,8 +1542,7 @@
                                     %</label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Os médicos e veterinários possuem matriz salarial diferente no PCCTAE. Sua matriz é igual à matriz do nível E de 40 horas, multiplicada por 2.');">
+                                <label>
                                     Cargo:
                                     <select name="ddCargo" id="ddCargo2" class="inpt_TAE" onchange="calcSalario(this.form);"
                                         style="width: 150px;">
@@ -1617,8 +1589,7 @@
                                         </option>
                                     </select>
                                 </label>      
-                                <label
-                                    onmouseover="nhpup.popup('O valor do incentivo à qualificação depende se os estudos foram em área diretamente relacionada ao cargo ou não.');">
+                                <label>
                                     Área:&nbsp;
                                     <input type="radio" name="areaquali" id="areaquali12" value="qualid"
                                         onClick="calcSalario(this.form);" checked />
@@ -1631,8 +1602,7 @@
                                 </label>                          
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
+                                <label>
                                     Nº de dep. IR:
                                     <input type="number" name="numDepIRRF" id="numDepIRRF2" min="0" max="20" step="1"
                                         value="0" style="width: 35px;" onClick="calcSalario(this.form);"
@@ -1641,8 +1611,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. As principais formas de cálculo são 1% do seu VB e 1% do menor VB da categoria.')">
+                                <label>
                                     <!--<input type="checkbox" name="sindicato" id="sindicato2" value=""
                                         onClick="calcSalario(this.form);" /> -->
                                     Sindicato:
@@ -1671,8 +1640,7 @@
                         </div>
                         <div id="tab-ad2" class="tab-content tab-content2">
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('O reembolso por contrato de Plano de Saúde particular segue uma tabela definida pelo Governo Federal e depende do salário bruto e da idade do servidor.');">
+                                <label>
                                     <input type="checkbox" name="saude" id="saude2" value="Saude"
                                         onClick="calcSalario(this.form);" />
                                     Saúde suplementar <a class="wiki-icon"
@@ -1877,8 +1845,7 @@
                                 <input type="text" name="txInsa" style="width:72px" value="R$ 0,00" readonly />
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Para o cálculo correto, preencha com o valor das horas trabalhadas. A calculadora leva em conta a conversão da hora pelo fator de 52,5 minutos automaticamente.');">
+                                <label>
                                     Noturno <a class="wiki-icon" href="https://wiki.taes.com.br/wiki/Adicional noturno"
                                         target="_blank"></a> (h/mês):
                                     <input type="number" name="noturno" id="noturno2" min="0" max="240" step="0.1"
@@ -1919,8 +1886,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('O 13º salário é pago em duas parcelas, sendo a primeira em junho e a segunda em dezembro. Na primeira parcela nenhum imposto ou contribuição é descontado, sendo o ajuste feito na segunda parcela, pois o valor final do 13º salário é igual ao salário do mês de dezembro.');">
+                                <label>
                                     <input type="checkbox" name="decter" id="decter2" value="decter"
                                         onClick="calcSalario(this.form);" /> 13º Salário - Parcela:
                                     <input type="radio" name="decter_par" id="decter_par12" value="1"
@@ -1946,29 +1912,25 @@
                             <div style="display:grid;grid-template-columns: 2fr 1fr;margin-top: 0;">
                                 <div style="margin-top: 0;">
                                     <div>
-                                        <label
-                                            onmouseover="nhpup.popup('Para os sevidores que ingressaram partir de 02/2013 ou migraram para o RPC, existe um teto no valor base da previdência. Todos podem aderir à previdência complementar do executivo (Funpresp). Veja mais em Carreira.');">
+                                        <label>
                                             Regime da previdência:
                                         </label>
                                         <br />
-                                        <label style="margin-right: 20px;"
-                                            onmouseover="nhpup.popup('Para servidores que ingressaram até 02/2013, o PSS é cobrado como 11% sobre a remuneração total.');">
+                                        <label style="margin-right: 20px;">
                                             <input type="radio" name="novopss" id="novopss12" value="rpps"
                                                 onClick="calcSalario(this.form);" /> Regime Próprio (RPPS)
                                         </label>
                                         <label><input type="checkbox" name="abonoperm"
                                                 id="abonoperm2" onClick="calcSalario(this.form);" /> Abono
                                             permanência</label><br>
-                                        <label
-                                            onmouseover="nhpup.popup('Para os servidores que entraram a partir 02/2013 ou fizeram a migração, o PSS é cobrado como 11% sobre o teto do PSS.');">
+                                        <label>
                                             <input type="radio" name="novopss" id="novopss22" value="rpc"
                                                 onClick="calcSalario(this.form);" checked /> Regime Complementar (RPC)
                                         </label>
                                         <br />
                                     </div>
                                     <div>
-                                        <label
-                                            onmouseover="nhpup.popup('Selecione Sim e então defina a alíquota ou a participação, caso tenha aderido à Funpresp.');">
+                                        <label>
                                             Funpresp:
                                             <input type="text" name="txFunp" id="txFunp2" value="R$ 0,00"
                                                 readonly /></label>
@@ -1985,8 +1947,7 @@
                                     <div>
                                         <input type="radio" id="funp_plano_norm2" name="funp_plano" value="normal"
                                             onClick="calcSalario(this.form);" disabled />
-                                        <label
-                                            onmouseover="nhpup.popup('Caso tenha aderido à Funpresp na modalidade ativo normal, a contribuição pode ser feita em uma das três alíquotas disponíveis.');">
+                                        <label>
                                             Ativo normal. Alíquota:
                                         </label>
                                         <label>
@@ -2024,8 +1985,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <span
-                                        onmouseover="nhpup.popup('A contribuição sobre os valores recebidos a título de gratificações e adicionais é opcional, e a opção deve ser realizada no SouGov.');">Incluir
+                                    <span>Incluir
                                         na base do PSS:</span><br />
                                     <label><input type="checkbox" name="pssfgcd" id="pssfgcd1" value="PSSfgcd"
                                             onClick="calcSalario(this.form);" />FG/CD</label><br>
@@ -2034,8 +1994,7 @@
                                     <label><input type="checkbox" name="pssnoturno" id="pssnoturno1" value="PSSnoturno"
                                             onClick="calcSalario(this.form);" />Adic. noturno</label>
                                     <br><br>
-                                    <span
-                                        onmouseover="nhpup.popup('A contribuição sobre os valores recebidos a título de gratificações e adicionais é opcional, e a opção deve ser realizada no SouGov.');">Incluir
+                                    <span>Incluir
                                         na base do RPC:</span><br />
                                     <label><input type="checkbox" name="rpcfgcd" id="rpcfgcd1" value="RPCfgcd"
                                             onClick="calcSalario(this.form);" />FG/CD</label><br>
