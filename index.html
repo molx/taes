@@ -605,30 +605,7 @@
                                         href="https://wiki.taes.com.br/wiki/Ambiente_organizacional"
                                         target="_blank"></a>
                                 </label>                       
-                            </div>
-                            <div>
-                                <label
-                                    onmouseover="nhpup.popup('A URP é um adicional recebido em algumas IFE. Cada caso tem um histórico um pouco diferente, e frequentemente são alvo de decisões judiciais até hoje. Veja o menu Carreira para mais informações.');">
-                                    <!--<input type="checkbox" name="removeurp" value="removeURP" onClick="calcSalario(this.form);">-->
-                                    URP:
-                                    <select name="ddURP" id="ddURP1" onchange="calcSalario(this.form);">
-                                        <option value="0" selected>
-                                            Não
-                                        </option>
-                                        <option value="1">
-                                            Congelada
-                                        </option>
-                                        <option value="2">
-                                            26,05%
-                                        </option>
-                                    </select>
-                                </label>
-                                <label name="numURPview">
-                                    R$<input type="number" name="numURP" id="numURP1" min="0" max="10000" step="0.01"
-                                        value="0" style="width: 80px;" onClick="calcSalario(this.form);"
-                                        onKeyUp="calcSalario(this.form);" disabled />
-                                </label>
-                            </div>
+                            </div>                            
                             <div>
                                 <label
                                     onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
@@ -1044,19 +1021,17 @@
                         <div id="tab-outros1" class="tab-content tab-content1">
                             <small>Utilize estes campos caso possua outros rendimentos ou descontos em folha, como
                                 empréstimo
-                                consignado, pagamento de aluguel direto no contracheque ou recebimento de GECC.</small>
+                                consignado, recebimento de GECC etc.</small>
                             <h4 style="margin: 0.5em 0 0 0;">Rendimentos</h4>
-                            <div style="display: block; width: 100%;">
+                            <div style="display: block; width: 100%;margin-top:0;">                                
                                 <label for="numOutrosRendTrib1"
-                                    style="display: inline-block;width: 160px;">Tributáveis (com PSS):</label>
+                                    style="display: inline-block;width:150px;">Tributáveis - Com PSS:</label>
                                 R$ <input type="number" name="numOutrosRendTrib" id="numOutrosRendTrib1" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
-                            </div>
-                            <div style="display: block; width: 100%;">
                                 <label for="numOutrosRendTribIR1"
-                                    style="display: inline-block;width: 160px;">Tributáveis (sem PSS):</label>
+                                    style="display: inline-block;margin-left:30px;">Sem PSS:</label>
                                 R$ <input type="number" name="numOutrosRendTribIR" id="numOutrosRendTribIR1" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -1064,15 +1039,15 @@
                             </div>
                             <div style="display: block;">
                                 <label for="numOutrosRendIsnt1"
-                                    style="display: inline-block;width: 160px;">Isentos:</label>
+                                    style="display: inline-block;width: 150px;">Isentos:</label>
                                 R$ <input type="number" name="numOutrosRendIsnt" id="numOutrosRendIsnt1" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                             </div>
                             <h4 style="margin: 0.5em 0 0 0;">Descontos</h4>
-                            <div style="display: block;">
-                                <label for="numOutros1" style="display: inline-block;width: 160px;">Descontos:</label>
+                            <div style="display: block;margin-top:0;">
+                                <label for="numOutros1" style="display: inline-block;width: 150px;">Descontos:</label>
                                 R$ <input type="number" name="numOutros" id="numOutros1" min="0" max="10000" step="0.01"
                                     value="0" style="width: 80px;" onKeyPress="calcSalario(this.form);"
                                     onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);"
@@ -1082,6 +1057,34 @@
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" /> %      
                                 <input type="text" name="txDescPct" value="R$ 0,00" readonly />
+                            </div>
+                            <h4 style="margin: 0.5em 0 0 0;">Decisão Judicial</h4>
+                            <div style="margin-top:0;">
+                                <label>
+                                    Tipo:
+                                    <select name="ddURP" id="ddURP1" onchange="calcSalario(this.form);">
+                                        <option value="0" selected>
+                                            Não
+                                        </option>
+                                        <option value="1">
+                                            Fixa
+                                        </option>
+                                        <option value="2">
+                                            26,05%
+                                        </option>
+                                        <option value="3">
+                                            28,86%
+                                        </option>
+                                        <option value="4">
+                                            47,94%
+                                        </option>
+                                    </select>
+                                </label>
+                                <label name="numURPview">
+                                    R$<input type="number" name="numURP" id="numURP1" min="0" max="10000" step="0.01"
+                                        value="0" style="width: 80px;" onClick="calcSalario(this.form);"
+                                        onKeyUp="calcSalario(this.form);" disabled />
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -1093,59 +1096,28 @@
                     </ul>
                     <div class="tabresults">
                         <div class="tab-content3 tab-resumo" id="tab-resumo1">
-                            <div class="divresults_col" style="float: left;">
-                                <label
-                                    onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
-                                    Vencimento:
-                                    <input type="text" name="txVB" value="0" readonly />
-                                </label>
-                                <label>
-                                    Bruto:
-                                    <input type="text" name="txBruto" value="0" readonly />
-                                </label>
-                                <label>
-                                    PSS:
-                                    <input type="text" name="txInss" value="0" readonly />
-                                </label>
-                                <label>
-                                    IRRF:
-                                    <input type="text" name="txIrrf" value="0" readonly />
-                                </label>
-                                <label>
-                                    IRRF Férias:
-                                    <input type="text" name="txIrrfFerias" value="0" readonly />
-                                </label>
-                                <label>
-                                    Líquido:
-                                    <input type="text" name="txResult" value="0" readonly />
-                                </label>
-                            </div>
                             <div class="divresults_col">
-                                <label
-                                    onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
-                                    <span class="labelIQRT">IQ</span>:
-                                    <input type="text" name="txQualif" value="0" readonly />
-                                </label>
-                                <label>
-                                    URP:
-                                    <input type="text" name="txURP" value="0" readonly />
-                                </label>
-                                <label>
-                                    Base PSS:
-                                    <input type="text" name="txbINSS" value="0" readonly />
-                                </label>
-                                <label>
-                                    Base IRRF:
-                                    <input type="text" name="txbIRRF" value="0" readonly />
-                                </label>
-                                <label>
-                                    Desconto 13º:
-                                    <input type="text" name="txDesc13" value="0" readonly />
-                                </label>
-                                <label>
-                                    Descontos:
-                                    <input type="text" name="txdesconto" value="0" readonly />
-                                </label>
+                                <hr><hr>
+                                <div>Vencimento básico:</div>
+                                <div><input type="text" name="txVB" value="0" readonly /></div>
+                                <div><span class="labelIQRT">IQ</span>:</div>
+                                <div><input type="text" name="txQualif" value="0" readonly /></div>
+                                <div>Rendimento bruto:</div>
+                                <div><input type="text" name="txBruto" value="0" readonly /></div>
+                                <div>Rendimento líquido:</div>
+                                <div><input type="text" name="txResult" value="0" readonly /></div>
+                                <hr><hr>
+                                <div>Contribuição previdência:</div>
+                                <div><input type="text" name="txInss" value="0" readonly /></div>
+                                <div>Imposto de renda:</div>
+                                <div><input type="text" name="txIrrf" value="0" readonly /></div>
+                                <div>Total Descontos:</div>
+                                <div><input type="text" name="txdesconto" value="0" readonly /></div>
+                                <hr><hr>
+                                <div>Base PSS:</div>
+                                <div><input type="text" name="txbINSS" value="0" readonly /></div>
+                                <div>Base IRRF:</div>
+                                <div><input type="text" name="txbIRRF" value="0" readonly /></div>
                             </div>
                         </div>
                         <div class="tab-content3 tab-details" id="tab-detail1">
@@ -1655,29 +1627,6 @@
                             </div>
                             <div>
                                 <label
-                                    onmouseover="nhpup.popup('A URP é um adicional recebido em algumas IFE. Cada caso tem um histórico um pouco diferente, e frequentemente são alvo de decisões judiciais até hoje. Veja o menu Carreira para mais informações.');">
-                                    <!--<input type="checkbox" name="removeurp" value="removeURP" onClick="calcSalario(this.form);">-->
-                                    URP:
-                                    <select name="ddURP" id="ddURP2" onchange="calcSalario(this.form);">
-                                        <option value="0" selected>
-                                            Não
-                                        </option>
-                                        <option value="1">
-                                            Congelada
-                                        </option>
-                                        <option value="2">
-                                            26,05%
-                                        </option>
-                                    </select>
-                                    <span name="numURPview">
-                                        R$<input type="number" name="numURP" id="numURP2" min="0" max="10000"
-                                            step="0.01" value="0" style="width: 80px;" onClick="calcSalario(this.form);"
-                                            onKeyUp="calcSalario(this.form);" disabled />
-                                    </span>
-                                </label>
-                            </div>
-                            <div>
-                                <label
                                     onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
                                     Nº de dep. IR:
                                     <input type="number" name="numDepIRRF" id="numDepIRRF2" min="0" max="20" step="1"
@@ -2091,33 +2040,30 @@
                         </div>
                         <div id="tab-outros2" class="tab-content tab-content2">
                             <small>Utilize estes campos caso possua outros rendimentos ou descontos em folha, como
-                                empréstimo
-                                consignado, pagamento de aluguel direto no contracheque ou recebimento de GECC.</small>
+                                empréstimo consignado, recebimento de GECC etc.</small>
                             <h4 style="margin: 0.5em 0 0 0;">Rendimentos</h4>
-                            <div style="display: block; width: 100%;">
-                                <label for="numOutrosRendTrib2" style="display: inline-block;width: 160px;">Tributáveis:</label>
+                            <div style="display: block; width: 100%;margin-top:0;">
+                                <label for="numOutrosRendTrib2" style="display: inline-block;width: 150px;">Tributáveis - Com PSS:</label>
                                 R$ <input type="number" name="numOutrosRendTrib" id="numOutrosRendTrib2" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
-                                    onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
-                            </div>
-                            <div style="display: block; width: 100%;">
+                                    onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />                            
                                 <label for="numOutrosRendTribIR2"
-                                    style="display: inline-block;width: 160px;">Tributáveis (sem PSS):</label>
+                                    style="display: inline-block;margin-left:30px;">Sem PSS:</label>
                                 R$ <input type="number" name="numOutrosRendTribIR" id="numOutrosRendTribIR2" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                             </div>
                             <div style="display: block;">
-                                <label for="numOutrosRendIsnt2" style="display: inline-block;width: 160px;">Isentos:</label>
+                                <label for="numOutrosRendIsnt2" style="display: inline-block;width: 150px;">Isentos:</label>
                                 R$ <input type="number" name="numOutrosRendIsnt" id="numOutrosRendIsnt2" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                             </div>
                             <h4 style="margin: 0.5em 0 0 0;">Descontos</h4>
-                            <div style="display: block;">
+                            <div style="display: block;margin-top:0;">
                                 <label for="numOutros2" style="display: inline-block;width: 160px;">Descontos:</label>
                                 R$ <input type="number" name="numOutros" id="numOutros2" min="0" max="10000" step="0.01"
                                     value="0" style="width: 80px;" onKeyPress="calcSalario(this.form);"
@@ -2129,6 +2075,36 @@
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" /> %     
                                 <input type="text" name="txDescPct" value="R$ 0,00" readonly />
                             </div>
+                            <h4 style="margin: 0.5em 0 0 0;">Decisão Judicial</h4>
+                            <div style="margin-top:0;">
+                                <label>
+                                    Tipo:
+                                    <select name="ddURP" id="ddURP2" onchange="calcSalario(this.form);">
+                                        <option value="0" selected>
+                                            Não
+                                        </option>
+                                        <option value="1">
+                                            Fixa
+                                        </option>
+                                        <option value="2">
+                                            26,05%
+                                        </option>
+                                        <option value="3">
+                                            28,86%
+                                        </option>
+                                        <option value="4">
+                                            47,94%
+                                        </option>
+                                    </select>
+                                </label>
+                                <label name="numURPview">
+                                    <span name="numURPview">
+                                        R$<input type="number" name="numURP" id="numURP2" min="0" max="10000"
+                                            step="0.01" value="0" style="width: 80px;" onClick="calcSalario(this.form);"
+                                            onKeyUp="calcSalario(this.form);" disabled />
+                                    </span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2139,59 +2115,28 @@
                     </ul>
                     <div class="tabresults">
                         <div class="tab-content4 tab-resumo" id="tab-resumo2">
-                            <div class="divresults_col" style="float: left;">
-                                    <label
-                                        onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
-                                        Vencimento:
-                                        <input type="text" name="txVB" value="0" readonly />
-                                    </label>
-                                <label>
-                                    Bruto:
-                                    <input type="text" name="txBruto" value="0" readonly />
-                                </label>
-                                <label>
-                                    PSS:
-                                    <input type="text" name="txInss" value="0" readonly />
-                                </label>
-                                <label>
-                                    IRRF:
-                                    <input type="text" name="txIrrf" value="0" readonly />
-                                </label>
-                                <label>
-                                    IRRF Férias:
-                                    <input type="text" name="txIrrfFerias" value="0" readonly />
-                                </label>
-                                <label>
-                                    Líquido:
-                                    <input type="text" name="txResult" value="0" readonly />
-                                </label>
-                            </div>
                             <div class="divresults_col">
-                                <label
-                                    onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
-                                    <span class="labelIQRT">IQ</span>:
-                                    <input type="text" name="txQualif" value="0" readonly />
-                                </label>
-                                <label>
-                                    URP:
-                                    <input type="text" name="txURP" value="0" readonly />
-                                </label>
-                                <label>
-                                    Base PSS:
-                                    <input type="text" name="txbINSS" value="0" readonly />
-                                </label>
-                                <label>
-                                    Base IRRF:
-                                    <input type="text" name="txbIRRF" value="0" readonly />
-                                </label>
-                                <label>
-                                    Desconto 13º:
-                                    <input type="text" name="txDesc13" value="0" readonly />
-                                </label>
-                                <label>
-                                    Descontos:
-                                    <input type="text" name="txdesconto" value="0" readonly />
-                                </label>
+                                <hr><hr>
+                                <div>Vencimento básico:</div>
+                                <div><input type="text" name="txVB" value="0" readonly /></div>
+                                <div><span class="labelIQRT">IQ</span>:</div>
+                                <div><input type="text" name="txQualif" value="0" readonly /></div>
+                                <div>Rendimento bruto:</div>
+                                <div><input type="text" name="txBruto" value="0" readonly /></div>
+                                <div>Rendimento líquido:</div>
+                                <div><input type="text" name="txResult" value="0" readonly /></div>
+                                <hr><hr>
+                                <div>Contribuição previdência:</div>
+                                <div><input type="text" name="txInss" value="0" readonly /></div>
+                                <div>Imposto de renda:</div>
+                                <div><input type="text" name="txIrrf" value="0" readonly /></div>
+                                <div>Total Descontos:</div>
+                                <div><input type="text" name="txdesconto" value="0" readonly /></div>
+                                <hr><hr>
+                                <div>Base PSS:</div>
+                                <div><input type="text" name="txbINSS" value="0" readonly /></div>
+                                <div>Base IRRF:</div>
+                                <div><input type="text" name="txbIRRF" value="0" readonly /></div>
                             </div>
                         </div>
                         <div class="tab-content4 tab-details" id="tab-detail2">

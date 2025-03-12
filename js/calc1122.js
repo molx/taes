@@ -835,6 +835,12 @@ function calcSalario(form) {
     } else if (form.ddURP.value == 2) {
         form.numURP.disabled = true;
         urp = (vencimento + vencimento * ftpg + anuenio) * 0.2605;
+    } else if (form.ddURP.value == 3) {
+        form.numURP.disabled = true;
+        urp = (vencimento + vencimento * ftpg + anuenio) * 0.2886;
+    } else if (form.ddURP.value == 4) {
+        form.numURP.disabled = true;
+        urp = (vencimento + vencimento * ftpg + anuenio) * 0.4794;
     } else {
         form.numURP.disabled = true;
     }
@@ -1077,7 +1083,7 @@ function calcSalario(form) {
     form.txTrans.value = formatValor(transporte);
     form.txAlim.value = formatValor(alimentacao);
     form.txCreche.value = formatValor(creche);
-    form.txURP.value = formatValor(urp);
+    //form.txURP.value = formatValor(urp);
     form.txbIRRF.value = formatValor(baseirrf);
     form.txbINSS.value = formatValor(basepss);
     form.txdesconto.value = formatValor(descontos);
@@ -1090,9 +1096,9 @@ function calcSalario(form) {
     form.txNoturno.value = formatValor(noturno);
     form.txFerias.value = formatValor(ferias);
     form.txAdiant.value = formatValor(adiantamento - descAdiant);
-    form.txIrrfFerias.value = formatValor(aliqirrfferias);
+    //form.txIrrfFerias.value = formatValor(aliqirrfferias);
     form.txDecter.value = formatValor(decter);
-    form.txDesc13.value = formatValor(desc_13);
+    //form.txDesc13.value = formatValor(desc_13);
     form.txDescPct.value = formatValor(outrosdescontospct);
 
     //Display info on Detailed Results
@@ -1113,7 +1119,7 @@ function calcSalario(form) {
     if (transporte > 0) addDetailValue("#tabdetails-rend", formid, "VT", transporte);
     if (creche > 0) addDetailValue("#tabdetails-rend", formid, "Pré-escolar", creche);
     if (noturno > 0) addDetailValue("#tabdetails-rend", formid, "Ad. Noturno", noturno);
-    if (urp > 0) addDetailValue("#tabdetails-rend", formid, "URP", urp);
+    if (urp > 0) addDetailValue("#tabdetails-rend", formid, "Dec. Jud.", urp);
     if (ftpg > 0) addDetailValue("#tabdetails-rend", formid, (carreiraMF ? "RT" : "IQ"), vencimento * ftpg);
     if (fungrat > 0) addDetailValue("#tabdetails-rend", formid, "FG", fungrat);
     if (cargodir > 0) addDetailValue("#tabdetails-rend", formid, "CD", cargodir);
