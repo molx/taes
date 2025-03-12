@@ -92,17 +92,19 @@
             </script>
         </div>
         <div class="titleHolder">
-            <div id="fb-root"></div>
-            <script async defer crossorigin="anonymous"
-                src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v18.0&appId=236772623333172"
-                nonce="7g2k0MxD"></script>
-            <div class="fb-page" data-href="https://www.facebook.com/SimuladorTAE" data-tabs="" data-width="450"
-                data-height="70" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true"
-                data-show-facepile="false">
-                <blockquote cite="https://www.facebook.com/SimuladorTAE" class="fb-xfbml-parse-ignore"><a
-                        href="https://www.facebook.com/SimuladorTAE">Simulador de Salário dos TAE das IFE</a>
-                </blockquote>
-            </div>
+            <!-- <div class="fb-banner">
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous"
+                    src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v18.0&appId=236772623333172"
+                    nonce="7g2k0MxD"></script>
+                <div class="fb-page" data-href="https://www.facebook.com/SimuladorTAE" data-tabs="" data-width="320"
+                    data-height="70" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true"
+                    data-show-facepile="false">
+                    <blockquote cite="https://www.facebook.com/SimuladorTAE" class="fb-xfbml-parse-ignore"><a
+                            href="https://www.facebook.com/SimuladorTAE">Simulador de Salário dos TAE das IFE</a>
+                    </blockquote>
+                </div>
+            </div> -->
             <div class="mainTitle">
                 <h1>
                     Calculadora
@@ -261,43 +263,43 @@
                                     Classe:
                                     <select name="mf_ddClasse" id="mf_ddClasse1" class="inpt_MF" onchange="calcSalario(this.form);">
                                         <option value="0" selected>
-                                            Auxiliar - 1
+                                            Auxiliar/A - 1
                                         </option>
                                         <option value="1">
-                                            Auxiliar - 2
+                                            Auxiliar/A - 2
                                         </option>
                                         <option value="2">
-                                            Assistente - 1
+                                            Assistente/A - 1
                                         </option>
                                         <option value="3">
-                                            Assistente - 2
+                                            Assistente/A - 2
                                         </option>
                                         <option value="4">
-                                            Adjunto - 1
+                                            Adjunto/B - 1
                                         </option>
                                         <option value="5">
-                                            Adjunto - 2
+                                            Adjunto/B - 2
                                         </option>
                                         <option value="6">
-                                            Adjunto - 3
+                                            Adjunto/B - 3
                                         </option>
                                         <option value="7">
-                                            Adjunto - 4
+                                            Adjunto/B - 4
                                         </option>
                                         <option value="8">
-                                            Associado - 1
+                                            Associado/C - 1
                                         </option>
                                         <option value="9">
-                                            Associado - 2
+                                            Associado/C - 2
                                         </option>
                                         <option value="10">
-                                            Associado - 3
+                                            Associado/C - 3
                                         </option>
                                         <option value="11">
-                                            Associado - 4
+                                            Associado/C - 4
                                         </option>
                                         <option value="12">
-                                            Titular
+                                            Titular/D
                                         </option>
                                     </select>
                                 </label>
@@ -813,9 +815,8 @@
                                 </label>
                             </div>
                             <hr class="hrsaude" />
-                            <div>
-                                <label
-                                    onmouseover="nhpup.popup('O valor do transporte é calculado com base no gasto diário do servidor (arredondado para cima em steps de R$ 0,2). Caso receba auxílio-alimentação, valores referentes a saída para almoço não devem ser considerados. Além disso, o valor sofre um desconto de 6% do vencimento proporcional a 22 dias.');">
+                            <div style="margin-top: 0;">
+                                <label>
                                     <input type="checkbox" name="trans" id="trans1" value="Trans"
                                         onClick="calcSalario(this.form);" />
                                     Transporte <a class="wiki-icon"
@@ -824,19 +825,13 @@
                                     <input type="number" name="gastoTrans" id="gastoTrans1" min="2" max="99" step="0.2"
                                         value="8" style="width: 50px;" onClick="calcSalario(this.form);"
                                         onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
+                                    Dias: 
+                                    <input type="number" name="diasTrans" id="diasTrans1" min="1" max="22" step="1"
+                                        value="22" style="width: 50px;" onClick="calcSalario(this.form);"
+                                        onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
                                     <input type="text" style="width: 75px;" name="txTrans" id="txTrans1" value="R$ 0,00"
                                         readonly />
                                 </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <input type="checkbox" name="alim" value="Alim" id="alim1" onClick="calcSalario(this.form);"
-                                        checked /> Alimentação <a class="wiki-icon"
-                                        href="https://wiki.taes.com.br/wiki/Auxílio-alimentação" target="_blank"></a>:
-                                    <input style="width: 75px;" type="text" name="txAlim" id="txAlim1" value="R$ 373,00"
-                                        readonly />
-                                </label>
-                                <!--<input type="checkbox" name="insa" value="Insa" onClick="calcSalario(this.form);" style="margin-left: 20px;"> -->
                             </div>
                             <div>
                                 <label>Adic. de risco:
@@ -916,6 +911,16 @@
                                     <input style="width: 85px;" type="text" name="txDecter" id="txDecter"
                                         value="R$ 0,00" readonly />
                                 </label>
+                            </div>
+                            <div style="margin-top: 0;">
+                                <label>
+                                    <input type="checkbox" name="alim" value="Alim" id="alim1" onClick="calcSalario(this.form);"
+                                        checked /> Alimentação <a class="wiki-icon"
+                                        href="https://wiki.taes.com.br/wiki/Auxílio-alimentação" target="_blank"></a>:
+                                    <input style="width: 75px;" type="text" name="txAlim" id="txAlim1" value="R$ 373,00"
+                                        readonly />
+                                </label>
+                                <!--<input type="checkbox" name="insa" value="Insa" onClick="calcSalario(this.form);" style="margin-left: 20px;"> -->
                             </div>
                         </div>
                         <div id="tab-prev1" class="tab-content tab-content1">
@@ -1279,43 +1284,43 @@
                                     Classe:
                                     <select name="mf_ddClasse" id="mf_ddClasse2" class="inpt_MF" onchange="calcSalario(this.form);">
                                         <option value="0" selected>
-                                            Auxiliar - 1
+                                            Auxiliar/A - 1
                                         </option>
                                         <option value="1">
-                                            Auxiliar - 2
+                                            Auxiliar/A - 2
                                         </option>
                                         <option value="2">
-                                            Assistente - 1
+                                            Assistente/A - 1
                                         </option>
                                         <option value="3">
-                                            Assistente - 2
+                                            Assistente/A - 2
                                         </option>
                                         <option value="4">
-                                            Adjunto - 1
+                                            Adjunto/B - 1
                                         </option>
                                         <option value="5">
-                                            Adjunto - 2
+                                            Adjunto/B - 2
                                         </option>
                                         <option value="6">
-                                            Adjunto - 3
+                                            Adjunto/B - 3
                                         </option>
                                         <option value="7">
-                                            Adjunto - 4
+                                            Adjunto/B - 4
                                         </option>
                                         <option value="8">
-                                            Associado - 1
+                                            Associado/C - 1
                                         </option>
                                         <option value="9">
-                                            Associado - 2
+                                            Associado/C - 2
                                         </option>
                                         <option value="10">
-                                            Associado - 3
+                                            Associado/C - 3
                                         </option>
                                         <option value="11">
-                                            Associado - 4
+                                            Associado/C - 4
                                         </option>
                                         <option value="12">
-                                            Titular
+                                            Titular/D
                                         </option>
                                     </select>
                                 </label>
@@ -1831,9 +1836,8 @@
                                 </label>
                             </div>
                             <hr class="hrsaude" />
-                            <div>
-                                <label
-                                    onmouseover="nhpup.popup('O valor do transporte é calculado com base no gasto diário do servidor (arredondado para cima em steps de R$ 0,2). Caso receba auxílio-alimentação, valores referentes a saída para almoço não devem ser considerados. Além disso, o valor sofre um desconto de 6% do vencimento proporcional a 22 dias.');">
+                            <div style="margin-top: 0;">
+                                <label>
                                     <input type="checkbox" name="trans" id="trans2" value="Trans"
                                         onClick="calcSalario(this.form);" />
                                     Transporte <a class="wiki-icon"
@@ -1842,19 +1846,13 @@
                                     <input type="number" name="gastoTrans" id="gastoTrans2" min="2" max="99" step="0.2"
                                         value="8" style="width: 50px;" onClick="calcSalario(this.form);"
                                         onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
+                                    Dias: 
+                                    <input type="number" name="diasTrans" id="diasTrans2" min="1" max="22" step="1"
+                                        value="22" style="width: 50px;" onClick="calcSalario(this.form);"
+                                        onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
                                     <input type="text" style="width: 75px;" name="txTrans" id="txTrans2" value="R$ 0,00"
                                         readonly />
                                 </label>
-                            </div>
-                            <div>
-                                <label>
-                                    <input type="checkbox" name="alim" value="Alim" id="alim2" onClick="calcSalario(this.form);"
-                                        checked /> Alimentação <a class="wiki-icon"
-                                        href="https://wiki.taes.com.br/wiki/Auxílio-alimentação" target="_blank"></a>:
-                                    <input type="text" style="width: 75px;" name="txAlim" id="txAlim2" value="R$ 373,00"
-                                        readonly />
-                                </label>
-                                <!--<input type="checkbox" name="insa" value="Insa" onClick="calcSalario(this.form);" style="margin-left: 20px;"> -->
                             </div>
                             <div>
                                 <label>Adic. de risco:
@@ -1932,6 +1930,16 @@
                                     <input style="width: 85px;" type="text" name="txDecter" id="txDecter2"
                                         value="R$ 0,00" readonly />
                                 </label>
+                            </div>
+                            <div style="margin-top: 0;">
+                                <label>
+                                    <input type="checkbox" name="alim" value="Alim" id="alim2" onClick="calcSalario(this.form);"
+                                        checked /> Alimentação <a class="wiki-icon"
+                                        href="https://wiki.taes.com.br/wiki/Auxílio-alimentação" target="_blank"></a>:
+                                    <input type="text" style="width: 75px;" name="txAlim" id="txAlim2" value="R$ 373,00"
+                                        readonly />
+                                </label>
+                                <!--<input type="checkbox" name="insa" value="Insa" onClick="calcSalario(this.form);" style="margin-left: 20px;"> -->
                             </div>
                         </div>
                         <div id="tab-prev2" class="tab-content tab-content2">
@@ -2177,7 +2185,7 @@
             Clique <a href="sobre.html">aqui</a> para mais detalhes.
             <br />
             <br />
-            <br> Desenvolvido por <a href="http://www.alanmol.com.br" target="_blank">Alan Mól</a> - 2013-2024
+            <br> Desenvolvido por <a href="https://www.alanmol.com.br" target="_blank">Alan Mól</a> - 2013-2025
             <br> Código-fonte disponível no <a href="https://github.com/molx/taes/tree/gh-pages" target="_blank">Github</a> sob licença <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank">GNU AGPL v3</a>
         </div>
     </footer>

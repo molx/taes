@@ -365,125 +365,6 @@ ol {
 	margin-right: -250px;
 }
 
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   Theses examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
-
-@media (max-width: 1800px) {
-	.side-ad {
-		display: none;
-	}
-	
-}
-
-@media (max-width: 800px) {
-	#maindiv2 {
-		margin: 0 auto 0 auto;
-	}
-}
-
-@media (max-width: 1000px) {
-	#maindiv {
-		padding: 0 1em;
-	}
-	
-	.titleHolder {
-		max-width: auto;
-		margin: 0 auto;
-		height: 80px;
-	}
-	
-	.mainTitle {		
-		display: block;
-	}
-
-	.fb-page {
-		float: none;
-	}
-
-	.cbajuda {		
-		top: 0;
-		width: auto;
-	}
-	.cbajuda > div {
-		float: none;
-	}
-
-}
-
-@media print,
-(-o-min-device-pixel-ratio: 5/4),
-(-webkit-min-device-pixel-ratio: 1.25),
-(min-resolution: 120dpi) {
-	/* Style adjustments for high resolution devices */
-}
-
-
-/* ==========================================================================
-   Print styles.
-   Inlined to avoid required HTTP connection: h5bp.com/r
-   ========================================================================== */
-
-@media print {
-	* {
-		background: transparent !important;
-		color: #000 !important;
-		/* Black prints faster: h5bp.com/s */
-		box-shadow: none !important;
-		text-shadow: none !important;
-	}
-	a,
-	a:visited {
-		text-decoration: underline;
-	}
-	a[href]:after {
-		content: " (" attr(href) ")";
-	}
-	abbr[title]:after {
-		content: " (" attr(title) ")";
-	}
-	/*
-     * Don't show links for images, or javascript/internal links
-     */
-	.ir a:after,
-	a[href^="javascript:"]:after,
-	a[href^="#"]:after {
-		content: "";
-	}
-	pre,
-	blockquote {
-		border: 1px solid #999;
-		page-break-inside: avoid;
-	}
-	thead {
-		display: table-header-group;
-		/* h5bp.com/t */
-	}
-	tr,
-	img {
-		page-break-inside: avoid;
-	}
-	img {
-		max-width: 100% !important;
-	}
-	@page {
-		margin: 0.5cm;
-	}
-	p,
-	h2,
-	h3 {
-		orphans: 3;
-		widows: 3;
-	}
-	h2,
-	h3 {
-		page-break-after: avoid;
-	}
-}
-
-
 /** Source: http://jsfiddle.net/syahrasi/us8uc/ */
 .tabs-menu {
     height: 30px;
@@ -522,7 +403,7 @@ ul {
     height: 30px;
     position: relative;
     background-color: #fcfcfc;
-    border-bottom: 1px solid #fcfcfc;
+    /* border-bottom: 1px solid #fcfcfc; */
     z-index: 5;
 }
 
@@ -629,8 +510,7 @@ ul {
 }
 
 .tabresults {
-	padding: 0 5px;
-	max-width: 390px;
+	width: 390px;
 	text-align: left;
 	overflow: hidden auto;
 	/* margin: 31px 0 0 0; */
@@ -643,17 +523,13 @@ ul {
 .tab-resumo {
     display: flex;
     line-height: 1.5em;	
+	padding: 1em 5px;
 }
 
 /* .tab-resumo > div {
     display: inline-block;
 } */
 
-.tabresults_col {
-	margin-left: 0;
-	float: left;
-	/*margin-top: 20px;*/
-}
 
 .tabresults_2 {
 	margin-left: 10px;
@@ -693,4 +569,65 @@ ul {
     display: inline-block;
     background-image: url(../img/wiki.png);
     background-size: 14px;
+}
+
+
+@media (max-width: 1800px) {
+	.side-ad {
+		display: none;
+	}
+	
+}
+
+@media (max-width: 800px) {
+	#maindiv2 {
+		margin: 0 auto 0 auto;
+	}
+}
+
+@media (max-width: 1000px) {
+	#maindiv {
+		padding: 0;
+	}
+	
+	.titleHolder {
+		max-width: auto;
+		margin: 0 auto;
+		/* height: 70px; */
+	}
+	
+	.mainTitle {		
+		display: block;
+		margin: 1em 0;
+	}
+
+	.fb-page {
+		float: none;
+	}
+
+	.cbajuda {		
+		top: 0;
+		width: auto;
+		margin-right: 6%;
+	}
+	.cbajuda > div {
+		float: none;
+	}
+
+	.divresults {
+		display: block;
+		margin: 0 auto;
+		max-width: 320px;
+	}
+
+	.tabresults {
+		width: 100%;
+		/* max-width: 320px; */
+	}
+	.tab-resumo {
+		font-size: 85%;
+	}
+	.divresults_col {
+		width: inherit;
+	}
 }
