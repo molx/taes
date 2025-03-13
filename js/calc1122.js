@@ -78,6 +78,7 @@ function atualizaCarreira() {
     if (!carreiraMF) {
         //Atualiza campos em comun
         $('.labelIQRT').html("IQ");
+        $('.labelIQRT2').html("Incentivo à qualificação");        
         $('.labelch').html("Carga horária");
         $('.labelfg').html("FG");
         $('[name^=ddCargaH]').val(1);        
@@ -95,6 +96,7 @@ function atualizaCarreira() {
     } else {
         //Atualiza campos em comun
         $('.labelIQRT').html("RT");
+        $('.labelIQRT2').html("Retribuição por titulação");  
         $('.labelch').html("Regime");
         $('.labelfg').html("FG/FCC");
         $('[name^=ddCargaH]').prepend(new Option("DE", "0"))
