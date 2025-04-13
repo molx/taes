@@ -1027,13 +1027,21 @@ function calcSalario(form) {
         }
     }
 
+    var outrosdescontos = parseFloat(form.numOutros.value) || 0;
+    var outrosdescontospct = ((parseInt(form.numOutrosPct.value) || 0) / 100 ) * remuneracao;
+
+    var outrosdescontosIsnt = parseFloat(form.numOutrosIsnt.value) || 0;
+    var outrosdescontospctIsnt = ((parseInt(form.numOutrosPctIsnt.value) || 0) / 100 ) * remuneracao;
+
+    var outrosdescsum = outrosdescontos + outrosdescontospct + outrosdescontosIsnt + outrosdescontospctIsnt;
+
     var aliqFunpFacul = parseFloat(form.numFunpFacul.value) || 0;
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
     var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + ftinsa * vencimento + fungrat + cargodir + outrosRendTrib + outrosRendTribIR;
 
-    var deducoesIrrf = valorpss + aliqfunp + aliqFunpFacul + reducaoDepsIRRF;
+    var deducoesIrrf = valorpss + aliqfunp + aliqFunpFacul + reducaoDepsIRRF + outrosdescontosIsnt + outrosdescontospctIsnt;
 
     var baseirrf = rendTributavel - deducoesIrrf;
 
@@ -1047,11 +1055,7 @@ function calcSalario(form) {
 
     var desc_13 = form.decter.checked && form.decter_par.value == "2" ? aliqirrf + valorpss + aliqfunp + aliqFunpFacul + decter/2 : 0;
 
-    var outrosdescontos = parseFloat(form.numOutros.value) || 0;
-
-    var outrosdescontospct = ((parseInt(form.numOutrosPct.value) || 0) / 100 ) * remuneracao;
-
-    var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + aliqirrfadiant + aliqpssadiant + descAdiant + outrosdescontos + outrosdescontospct;
+    var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + aliqirrfadiant + aliqpssadiant + descAdiant + outrosdescsum;
 
     var bruto = remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
 
@@ -1094,6 +1098,7 @@ function calcSalario(form) {
     //form.txDesc13.value = formatValor(desc_13);
     //form.tx13.value = formatValor(decter);
     form.txDescPct.value = formatValor(outrosdescontospct);
+    form.txDescPctIsnt.value = formatValor(outrosdescontospctIsnt);
     //form.txFunc.value = formatValor(fungrat + cargodir);
     //form.txFeriasR.value = formatValor(ferias);
 
