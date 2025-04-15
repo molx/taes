@@ -113,14 +113,27 @@
             <div class="cbajuda">
                 <div style="display: none;"><input type="checkbox" name="ajuda" id="checkajuda" value="Ajuda" /> Mostrar ajuda</div>
                 <div>
-                    <input type="radio" name="rdCarreira" id="rdTAE" value="TAE"
+                    <label>Carreira: 
+                        <select id="selCarreira" onchange="atualizaCarreira();">
+                            <option value="TAE" selected>
+                                TAE
+                            </option>
+                            <option value="MF">
+                                Magistério
+                            </option>
+                            <option value="PGPE" disabled>
+                                PGPE
+                            </option>
+                        </select>
+                </label>
+                    <!-- <input type="radio" name="rdCarreira" id="rdTAE" value="TAE"
                             onClick="atualizaCarreira();" onKeyPress="atualizaCarreira();"
                             onKeyDown="atualizaCarreira();" onKeyUp="atualizaCarreira();" checked />
                         TAE
                     <input type="radio" name="rdCarreira" id="rdMF" value="MF" style="margin-left:1em;"
                         onClick="atualizaCarreira();" onKeyPress="atualizaCarreira();"
                         onKeyDown="atualizaCarreira();" onKeyUp="atualizaCarreira();" />
-                        MF
+                        MF -->
                 </div>
             </div>            
         </div>

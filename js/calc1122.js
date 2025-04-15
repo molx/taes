@@ -8,7 +8,7 @@ function updateQuali(form, classs) {
     var newvalues = Array();
     var curValue = form.ddQuali.value;
     var classe = parseFloat(classs);
-    if ($("#rdMF").is(":checked")) {
+    if ($('#selCarreira').val() == "MF") {
         newoptions = ["Nenhum", "Aperfeiçoamento", "Especialização", "Mestrado", "Doutorado"];
         newvalues = [0, 4, 5, 6, 7];
     } else if (classe <= 3) {
@@ -74,8 +74,11 @@ function firstload() {
 }
 
 function atualizaCarreira() {
-    var carreiraMF = $("#rdMF").is(":checked");
-    if (!carreiraMF) {
+    var carreira = $('#selCarreira').val();
+    var carreiraMF = false;
+    //var carreiraMF = $("#rdMF").is(":checked");
+    if (carreira == "TAE") {
+        carreiraMF = true;
         //Atualiza campos em comun
         $('.labelIQRT').html("IQ");
         $('.labelIQRT2').html("Incentivo à qualificação");        
@@ -111,8 +114,6 @@ function atualizaCarreira() {
 
         //Mostra campos específicos de docentes
         $('.inpt_MF').parent().parent().show();
-
-        
     }
 
     updateQuali(myform, 1, carreiraMF);
@@ -672,7 +673,7 @@ function atualizaPnew(form) {
 
 function calcSalario(form) {
     var carreiraMF = false;
-    if ($("#rdMF").is(":checked")) carreiraMF = true;
+    if ($('#selCarreira').val() == "MF") carreiraMF = true;
     if (form.name == "myform") {
         $('#numProposta1').parent().css('visibility','hidden');
         //document.getElementById("numProposta1").disabled = true;
@@ -769,7 +770,6 @@ function calcSalario(form) {
     var ftcarga = form.ddCargaH.value;
 
     var vencimento = correl * Math.ceil(base * Math.pow(ftstep, ftvb) * ftcarga * 100) / 100;
-
     //Docentes
 
     if (carreiraMF) {
