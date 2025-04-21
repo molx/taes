@@ -74,7 +74,9 @@ function firstload() {
     // }
     // updateQuali(myform, 1);
     // updateQuali(myform2, 1);
-    atualizaCarreira();
+    //atualizaCarreira();
+    calcSalario(myform);
+    calcSalario(myform2);
 }
 
 function atualizaCarreira() {
@@ -171,58 +173,7 @@ function formatValor(valor) {
 
 function valorIRRF(base, periodo) {
     var aliquota = 0;
-    if (periodo == 1) {
-        // Ano 2013
-        if (base < 1710.79) {
-            aliquota = 0;
-        } else if (base < 2563.92) {
-            aliquota = base * 0.075 - 128.31;
-        } else if (base < 3418.6) {
-            aliquota = base * 0.15 - 320.6;
-        } else if (base < 4271.59) {
-            aliquota = base * 0.225 - 577.0;
-        } else {
-            aliquota = base * 0.275 - 790.58;
-        }
-    } else if (periodo <= 4) {
-        //Ano 2014 pra frente
-        if (base <= 1787.77) {
-            aliquota = 0;
-        } else if (base <= 2679.29) {
-            aliquota = base * 0.075 - 134.08;
-        } else if (base <= 3572.43) {
-            aliquota = base * 0.15 - 335.03;
-        } else if (base <= 4463.81) {
-            aliquota = base * 0.225 - 602.96;
-        } else {
-            aliquota = base * 0.275 - 826.15;
-        }
-    } else if (periodo < 16) {
-        //Abril 2015 pra frente
-        if (base <= 1903.98) {
-            aliquota = 0;
-        } else if (base <= 2826.65) {
-            aliquota = base * 0.075 - 142.8;
-        } else if (base <= 3751.05) {
-            aliquota = base * 0.15 - 354.8;
-        } else if (base <= 4664.68) {
-            aliquota = base * 0.225 - 636.13;
-        } else {
-            aliquota = base * 0.275 - 869.36;
-        }
-    } else if (periodo < 17) {
-        if (base <= 2112) {
-            aliquota = 0;
-        } else if (base <= 2826.65) {
-            aliquota = base * 0.075 - 158.4;
-        } else if (base <= 3751.05) {
-            aliquota = base * 0.15 - 370.4;
-        } else if (base <= 4664.68) {
-            aliquota = base * 0.225 - 651.73;
-        } else {
-            aliquota = base * 0.275 - 884.96;
-        }
-    }  else if (periodo < 20) {
+    if (periodo < 202505) {
         if (base <= 2259.20) {
             aliquota = 0;
         } else if (base <= 2826.65) {
@@ -252,113 +203,7 @@ function valorIRRF(base, periodo) {
 
 function calcPSS(periodo, base, teto) {
     var valor = 0;
-    if (periodo < 12) {
-        valor = base * 0.11;
-    } else if (periodo == 12) {
-        //2020
-        if (base <= 1045.0) {
-            //salario minimo
-            valor = 0.075 * base;
-        } else if (base <= 2089.6) {
-            valor = base * 0.09 - 15.68;
-        } else if (base <= 3134.4) {
-            valor = base * 0.12 - 78.36;
-        } else if (base <= 6101.06) {
-            // teto
-            valor = base * 0.14 - 141.05;
-        } else if (base <= 10448.0) {
-            valor = base * 0.145 - 171.56;
-        } else if (base <= 20896.2) {
-            valor = base * 0.165 - 380.52;
-        } else if (base <= 40474.2) {
-            valor = base * 0.19 - 902.92;
-        } else {
-            valor = base * 0.22 - 2117.14;
-        }
-    } else if (periodo == 13) {
-        //2021
-        if (base <= 1100.0) {
-            //salario minimo
-            valor = 0.075 * base;
-        } else if (base <= 2203.48) {
-            valor = base * 0.09 - 16.5;
-        } else if (base <= 3305.22) {
-            valor = base * 0.12 - 82.6;
-        } else if (base <= 6433.57) {
-            //teto
-            valor = base * 0.14 - 148.7;
-        } else if (base <= 11017.42) {
-            valor = base * 0.145 - 180.87;
-        } else if (base <= 22034.83) {
-            valor = base * 0.165 - 401.22;
-        } else if (base <= 42967.92) {
-            valor = base * 0.19 - 952.09;
-        } else {
-            valor = base * 0.22 - 2241.13;
-        }
-    } else if (periodo == 14) {
-        //2022
-        if (base <= 1212.0) {
-            //salario minimo
-            valor = 0.075 * base;
-        } else if (base <= 2427.35) {
-            valor = base * 0.09 - 18.18;
-        } else if (base <= 3641.04) {
-            valor = base * 0.12 - 91;
-        } else if (base <= 7087.23) {
-            //teto
-            valor = base * 0.14 - 163.82;
-        } else if (base <= 12136.8) {
-            valor = base * 0.145 - 199.26;
-        } else if (base <= 24273.58) {
-            valor = base * 0.165 - 441.99;
-        } else if (base <= 47333.46) {
-            valor = base * 0.19 - 1048.83;
-        } else {
-            (valor = base * 0.22 - 2468), 84;
-        }
-    } else if (periodo < 16) {
-        //2023
-        if (base <= 1302.0) {
-            //salario minimo
-            valor = 0.075 * base;
-        } else if (base <= 2571.29) {
-            valor = base * 0.09 - 19.53;
-        } else if (base <= 3856.94) {
-            valor = base * 0.12 - 96.67;
-        } else if (base <= 7507.49) {
-            //teto
-            valor = base * 0.14 - 173.81;
-        } else if (base <= 12856.5) {
-            valor = base * 0.145 - 211.35;
-        } else if (base <= 25712.99) {
-            valor = base * 0.165 - 468.48;
-        } else if (base <= 50140.33) {
-            valor = base * 0.19 - 1111.3;
-        } else {
-            valor = base * 0.22 - 2615.51;
-        }
-    } else if (periodo < 17) {
-        if (base <= 1320.0) {
-            //salario minimo
-            valor = 0.075 * base;
-        } else if (base <= 2571.29) {
-            valor = base * 0.09 - 19.8;
-        } else if (base <= 3856.94) {
-            valor = base * 0.12 - 96.94;
-        } else if (base <= 7507.49) {
-            //teto
-            valor = base * 0.14 - 174.08;
-        } else if (base <= 12856.5) {
-            valor = base * 0.145 - 211.62;
-        } else if (base <= 25712.99) {
-            valor = base * 0.165 - 468.75;
-        } else if (base <= 50140.33) {
-            valor = base * 0.19 - 1111.57;
-        } else {
-            valor = base * 0.22 - 2615.78;
-        }
-    } else if (periodo < 19) { //2024
+    if (periodo < 202501) { //2024
         if (base <= 1412.00) {
             //salario minimo
             valor = 0.075 * base;
@@ -425,13 +270,10 @@ function calcPSS(periodo, base, teto) {
 
 function dependentesIR(deps, periodo) {
     var aliq = 0;
-    if (periodo == 1) {
-        // Ano 2013
-        aliq = deps * 171.97;
-    } else if (periodo <= 4) {
-        //Entre 2014 e 02/2015
-        aliq = deps * 179.71;
+    if (periodo <= 202604) {
+        aliq = deps * 189.59;
     } else {
+        //placeholder
         aliq = deps * 189.59;
     }
     return Math.floor(aliq * 100) / 100;
@@ -440,7 +282,7 @@ function dependentesIR(deps, periodo) {
 function valorSaude(bruto, ftidade, periodo) {
     var tabela = Array(),
     ftbruto = 0;
-    if (periodo < 18) {
+    if (periodo < 202501) {
         tabela[0] = Array(149.52, 156.57, 158.69, 165.04, 169.97, 175.61, 190.03, 193.05, 196.06, 205.63);
         tabela[1] = Array(142.47, 149.52, 151.64, 156.57, 161.51, 167.15, 180.76, 183.63, 186.50, 196.06);
         tabela[2] = Array(135.42, 142.47, 144.59, 149.52, 154.46, 160.10, 171.49, 174.21, 176.94, 186.50);
@@ -466,7 +308,7 @@ function valorSaude(bruto, ftidade, periodo) {
         } else {
             ftbruto = 7;
         }
-    } else if (periodo < 100) {
+    } else {
         tabela = Array();
         tabela[0] = Array(254.18, 266.17, 269.77, 297.07, 305.95, 316.10, 361.06, 366.80, 372.51, 411.26);
         tabela[1] = Array(196.34, 207.65, 211.02, 230.21, 238.60, 248.20, 280.87, 285.34, 289.80, 321.04);
@@ -502,38 +344,19 @@ function valorSaude(bruto, ftidade, periodo) {
 }
 
 function valorCreche(rem, periodo, n, cota) {
-    var teto = 95;
-    if (periodo < 18) {
-        teto = 321;
+    var teto = 484.90;
+    var desc = 0;    
+    if (rem < 6888.05) {
+        desc = 0.05;
+    } else if (rem <= 13776.10) {
+        desc = 0.1;
+    } else if (rem <= 20664.15) {
+        desc = 0.15;
+    } else if (rem <= 27552.20) {
+        desc = 0.2;
     } else {
-        teto = 484.90;
-    }
-    var desc = 0;
-    if (periodo < 9) {        
-        if (rem < 6200.8) {
-            desc = 0.05;
-        } else if (rem < 12401.6) {
-            desc = 0.1;
-        } else if (rem < 18602.4) {
-            desc = 0.15;
-        } else if (rem < 24803.2) {
-            desc = 0.2;
-        } else {
-            desc = 0.25;
-        }
-    } else {
-        if (rem < 6888.05) {
-            desc = 0.05;
-        } else if (rem <= 13776.10) {
-            desc = 0.1;
-        } else if (rem <= 20664.15) {
-            desc = 0.15;
-        } else if (rem <= 27552.20) {
-            desc = 0.2;
-        } else {
-            desc = 0.25;
-        }
-    }
+        desc = 0.25;
+    }    
     if (cota) {
         return teto * (1 - desc) * n;
     } else {
@@ -571,29 +394,10 @@ function valorFG(FG, periodo) {
     var FG2026 = Array(0, 1263.32, 849.91, 689.05, 321.77, 261.1, 191.45, 122.1, 90.32, 73.27, 1273.25);
     
     var valor = 0;
-    if (periodo == 1) {
-        valor = FG2013[FG];
-    } else if (periodo <= 2) {
-        valor = FG2014[FG];
-    } else if (periodo <= 6) {
-        //até 07/2016
-        valor = FG2015[FG];
-    } else if (periodo == 7) {
-        //até 12/2016
-        valor = FG2016[FG];
-    } else if (periodo == 8) {
-        //até 12/2017
-        valor = FG2017[FG];
-    } else if (periodo == 9) {
-        //a partir de 2018
-        valor = FG2018[FG];
-    } else if (periodo < 16) {
-        //a partir de 2019
-        valor = FG2019[FG];
-    } else if (periodo < 19) {
+    if (periodo < 202501) {
         //a partir de maio/2023
         valor = FG2023[FG];
-    } else if (periodo < 21) {
+    } else if (periodo < 202604) {
         //a partir de janeiro/2025
         valor = FG2025[FG];
     } else {
@@ -617,32 +421,10 @@ function valorCD(CD, periodo) {
     var CD2026 = Array(0, 22219.64, 16806.33, 12291.61, 8315.71);
 
     var valor = 0;
-    if (periodo == 1) {
-        //Placeholder para atualizações futuras, não está retroativo
-        // até 2013
-        valor = CD2013[CD];
-    } else if (periodo <= 3) {
-        //até 2014
-        valor = CD2014[CD];
-    } else if (periodo <= 6) {
-        //até 08/2016
-        valor = CD2015[CD];
-    } else if (periodo == 7) {
-        //até 12/2016
-        valor = CD2016[CD];
-    } else if (periodo == 8) {
-        //até 12/2017
-        valor = CD2017[CD];
-    } else if (periodo == 9) {
-        //A partir de 2018
-        valor = CD2018[CD];
-    } else if (periodo < 16) {
-        //A partir de 2019
-        valor = CD2019[CD];
-    } else if (periodo < 19) {
+    if (periodo < 202501) {
         //a partir de maio/2023
         valor = CD2023[CD];
-    } else if (periodo < 21) {
+    } else if (periodo < 202604) {
         //a partir de janeiro/2025
         valor = CD2025[CD];
     } else {
@@ -654,11 +436,7 @@ function valorCD(CD, periodo) {
 
 function valorAlim(periodo) {
     var alimentacao = 0;
-    if (periodo < 6) {
-        alimentacao = 373;
-    } else if (periodo < 16) {
-        alimentacao = 458;
-    } else if (periodo < 18) {
+    if (periodo < 202305) {
         alimentacao = 658;
     } else  {
         alimentacao = 1000;
@@ -715,15 +493,10 @@ function calcSalario(form) {
         $('#numProposta2').parent().css('visibility','hidden');
     }
     var periodo = parseInt(form.ddAno.value, 10),
-    base = 4180.66,
-    ftstep = 1.039;
+    base = 4967.04;
+    ftstep = 1.040;
 
-    if (periodo > 15 && periodo < 19) {
-        base = 4556.92;
-    } else if (periodo  < 21) {
-        base = 4967.04;
-        ftstep = 1.040;
-    } else if (periodo >= 21) {
+    if (periodo >= 202604) {
         base = 5215.39;
         ftstep = 1.041;
     }    
@@ -756,13 +529,10 @@ function calcSalario(form) {
         //Médicos na MP 1.286 não estão mais 2x
         //Os reajustes foram 2x 4.5% e step fixado em 3.9 (vs 9% + 5% e steps 4% e 4.1%)
         ftstep = 1.039;
-        if (periodo > 15 && periodo < 19) {
-            base = 9113.85;
-        } else if (periodo  < 21) {
-            base = 9523.46;
-        } else if (periodo >= 21) {
+        base = 9523.96;
+        if (periodo >= 21) {
             base = 9952.54;
-        }    
+        } 
     }
 
     var nivelMerito = 1,
@@ -770,7 +540,7 @@ function calcSalario(form) {
         p = 1,
         correlacoes = [0.317346, 0.384249, 0.465255, 0.585305, 1];
 
-    if (periodo < 19 && !carreiraMF) {
+    if (periodo < 202501 && !carreiraMF) {
         if (form.name == "myform") {
             //$('#ddNivel1, #ddProg1').parent().parent().show();
             //$('#areaquali11').parent().show();
@@ -811,14 +581,9 @@ function calcSalario(form) {
         } else if(ftcarga == 0) { //DE
             ftcarga = 1; //
         }
-        base = 4875.18;
-        var steps_mf = [0, 0.05, 0.055, 0.05, 0.055, 0.04, 0.04, 0.04, 0.25, 0.04, 0.04, 0.04, 0.1];
-        if (periodo < 19) {
-            base = 4875.18; //mantem o default, podia deixar vazio
-        } else if (periodo < 21) {
-            base = 6180.86; //Aumento de 9% mais aglutinacao dos niveis iniciais
-            steps_mf = [0, 0, 0, 0, 0.055, 0.045, 0.045, 0.045, 0.235, 0.045, 0.045, 0.045, 0.1];
-        } else { //periodo == 21
+        base = 6180.86;
+        var steps_mf = [0, 0, 0, 0, 0.055, 0.045, 0.045, 0.045, 0.235, 0.045, 0.045, 0.045, 0.1];
+        if (periodo >= 202604) { //periodo >= 202604
             base = 6180.86 * 1.035;
             steps_mf = [0, 0, 0, 0, 0.06, 0.05, 0.05, 0.05, 0.225, 0.05, 0.05, 0.05, 0.1];
         }
@@ -947,23 +712,7 @@ function calcSalario(form) {
     var basepss = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib;
     var tetopss = 4663.75;
 
-    if (periodo == 6 || periodo == 7) {
-        tetopss = 5189.82;
-    } else if (periodo == 8) {
-        tetopss = 5531.31;
-    } else if (periodo == 9) {
-        tetopss = 5645.81;
-    } else if (periodo == 10) {
-        tetopss = 5839.45;
-    } else if (periodo == 11 || periodo == 12) {
-        tetopss = 6101.06;
-    } else if (periodo == 13) {
-        tetopss = 6433.57;
-    } else if (periodo == 14) {
-        tetopss = 7087.23;
-    } else if (periodo < 17) {
-        tetopss = 7507.49;
-    } else if (periodo < 19) {
+    if (periodo < 202501) {
         tetopss = 7786.02;
     } else {
         tetopss = 8157.41;
@@ -1079,9 +828,7 @@ function calcSalario(form) {
 
     var baseirrf = rendTributavel - deducoesIrrf;
 
-    if (periodo == 16 && deducoesIrrf < 528) {
-        baseirrf = rendTributavel - 528;
-    } else if (periodo > 16 && deducoesIrrf < 564.80) {
+    if (deducoesIrrf < 564.80) {
         baseirrf = rendTributavel - 564.80;
     }
 
