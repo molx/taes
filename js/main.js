@@ -18,14 +18,35 @@ function saveStorage() {
 }
 
 function loadStorage() {
-	$.each(localStorage, function(key, val) {
-		var ptype = $('#' + key).prop("type");
-		if (ptype && ptype == "radio" || ptype == "checkbox") {
-			$('#' + key).prop("checked", val == 'true');
-		} else {
-			$('#' + key).val(val);
-		}
-	});
+    let params = new URLSearchParams(window.location.search);
+    let compressed = params.get('data');
+    var storage = localStorage;
+    if (compressed) {
+        let decompressed = LZString.decompressFromEncodedURIComponent(compressed);
+        let restoredStorage = JSON.parse(decompressed);
+        Object.entries(restoredStorage).forEach(([key, value]) => {
+            localStorage.setItem(key, value);
+        });
+    } 
+    $.each(localStorage, function(key, val) {
+        var ptype = $('#' + key).prop("type");
+        if (ptype && ptype == "radio" || ptype == "checkbox") {
+            $('#' + key).prop("checked", val == 'true');
+        } else {
+            $('#' + key).val(val);
+        }
+    });    
+}
+
+function exportStorage() {
+    let fullStorage = {};
+    for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        fullStorage[key] = localStorage.getItem(key);
+    }    
+    let compressed = LZString.compressToEncodedURIComponent(JSON.stringify(fullStorage));
+    let data = `${window.location.origin}?data=${compressed}`;
+    console.log(data);
 }
 
 $(document).ready(function() {
@@ -85,6 +106,8 @@ $(document).ready(function() {
     );
 
 	loadStorage();
+    calcSalario(myform);
+    calcSalario(myform2);
 });
 
 

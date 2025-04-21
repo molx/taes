@@ -941,6 +941,7 @@ function calcSalario(form) {
 
     //cdorfg(form);
     saveStorage();
+    exportStorage();
 }
 
 function addDetailValue(parent, form, name, value) {
