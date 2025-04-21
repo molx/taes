@@ -1,0 +1,27 @@
+{
+    "TAE": {
+      "niveis": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+      "nomech": "Carga horária",
+      "labelIQRT": "IQ",
+      "labelIQRT2": "Incentivo à qualificação",
+      "func": ["Não", "FG-1", "FG-2", "FG-3", "FG-4", "FG-5", "FG-6", "FG-7", "FG-8", "FG-9"],
+      "chlab": ["40 horas", "30 horas", "20 horas"],
+      "chval": [1, 0.75, 0.5]
+    },
+    "MF": {
+      "niveis": [
+        "Auxiliar/A - 1", "Auxiliar/A - 2",
+        "Assistente/A - 1", "Assistente/A - 2",
+        "Adjunto/B - 1", "Adjunto/B - 2", "Adjunto/B - 3", "Adjunto/B - 4",
+        "Associado/C - 1", "Associado/C - 2", "Associado/C - 3", "Associado/C - 4",
+        "Titular/D"
+      ],
+      "nomech": "Regime",
+      "labelIQRT": "RT",
+      "labelIQRT2": "Retribuição por titulação",
+      "func": ["Não", "FG-1", "FG-2", "FG-3", "FG-4", "FG-5", "FG-6", "FG-7", "FG-8", "FG-9", "FCC"],
+      "chlab": ["DE", "40 horas", "20 horas"],
+      "chval": [0, 1, 0.5]
+    }
+  }
+  

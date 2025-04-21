@@ -26,7 +26,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-    <script src="js/compressed.js"></script>
+    <script src="js/calc1122.js"></script>
     <!--<script type="text/javascript" src="js/nhpup_1.1.js"></script>-->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0242087922176548"
         crossorigin="anonymous"></script>
@@ -203,7 +203,7 @@
                                         </option>
                                         <option value="13">
                                             Entre 01/2021 e 12/2021
-                                        </option>-->
+                                        </option>
                                         <option value="14">
                                             Entre 01/2022 e 12/2022
                                         </option>
@@ -218,7 +218,7 @@
                                         </option>
                                         <option value="18">
                                             Entre 05/2024 e 12/2024
-                                        </option>
+                                        </option>-->
                                         <option value="19">
                                             Entre 01/2025 e 04/2025
                                         </option>
@@ -273,58 +273,11 @@
                                     </select>
                                 </label>
                             </div>
-                            <div style="display:none;">
-                                <label>
-                                    Classe:
-                                    <select name="mf_ddClasse" id="mf_ddClasse1" class="inpt_MF"
-                                        onchange="calcSalario(this.form);">
-                                        <option value="0" selected>
-                                            Auxiliar/A - 1
-                                        </option>
-                                        <option value="1">
-                                            Auxiliar/A - 2
-                                        </option>
-                                        <option value="2">
-                                            Assistente/A - 1
-                                        </option>
-                                        <option value="3">
-                                            Assistente/A - 2
-                                        </option>
-                                        <option value="4">
-                                            Adjunto/B - 1
-                                        </option>
-                                        <option value="5">
-                                            Adjunto/B - 2
-                                        </option>
-                                        <option value="6">
-                                            Adjunto/B - 3
-                                        </option>
-                                        <option value="7">
-                                            Adjunto/B - 4
-                                        </option>
-                                        <option value="8">
-                                            Associado/C - 1
-                                        </option>
-                                        <option value="9">
-                                            Associado/C - 2
-                                        </option>
-                                        <option value="10">
-                                            Associado/C - 3
-                                        </option>
-                                        <option value="11">
-                                            Associado/C - 4
-                                        </option>
-                                        <option value="12">
-                                            Titular/D
-                                        </option>
-                                    </select>
-                                </label>
-                            </div>
-                            <div>
+                            <!--<div>
                                 <label>
                                     Nível:
                                     <select name="ddProg" id="ddProg1" class="inpt_TAE"
-                                        onchange="atualizaPold(this.form);">
+                                        onchange="calcSalario(this.form);">
                                         <option value="1" selected>
                                             I
                                         </option>
@@ -344,7 +297,7 @@
                                 <label>
                                     Padrão:
                                     <select name="ddNivel" id="ddNivel1" class="inpt_TAE"
-                                        onchange="atualizaPold(this.form);">
+                                        onchange="calcSalario(this.form);">
                                         <option value="1" selected>
                                             1
                                         </option>
@@ -395,12 +348,12 @@
                                         </option>
                                     </select>
                                 </label>
-                            </div>
+                            </div>-->
                             <div>
                                 <label>
                                     Padrão:
-                                    <select name="ddPadrao" id="ddPadrao1" class="inpt_TAE"
-                                        onchange="atualizaPnew(this.form);">
+                                    <select name="ddPadrao" id="ddPadrao1" 
+                                        onchange="calcSalario(this.form);">
                                         <option value="1" selected>
                                             1
                                         </option>
@@ -460,11 +413,11 @@
                                         </option>
                                     </select>
                                 </label>
-                                <span id="showrepos1"
+                                <!--<span id="showrepos1"
                                     style="font-size: smaller;border-bottom: 1px dotted;cursor: pointer;">(reposicionamento)</span>
                                 <div id="repostable1"
                                     style="position:absolute;transform: translateY(-50%); margin-left: 5px;display: none;">
-                                    <img src="/img/repos.png"></div>
+                                    <img src="/img/repos.png"></div>-->
                             </div>
                             <div>
                                 <label><span class="labelch">Carga horária</span>:
@@ -478,17 +431,11 @@
                                         <option value="0.5">
                                             20 horas
                                         </option>
-                                        <!--<option value="0.5625">
-                                            20 horas (PDV)
-                                            </option>
-                                            <option value="0.8125">
-                                            30 horas (PDV)
-                                            </option>-->
                                     </select></label>
                             </div><br>
                             <div>
                                 <label>
-                                    <span class="labelfg">FG</span>:
+                                    <span class="labelfg">Função</span>:
                                     <select name="ddFG" id="ddFG1" onchange="nocd(this.form);calcSalario(this.form);">
                                         <option value="0" selected>
                                             Não
@@ -611,7 +558,7 @@
                                         </option>
                                     </select>
                                 </label>
-                                <label>
+                                <!-- <label>
                                     Área:&nbsp;
                                     <input type="radio" name="areaquali" id="areaquali11" value="qualid"
                                         onClick="calcSalario(this.form);" checked />
@@ -621,7 +568,7 @@
                                     Indireta <a class="wiki-icon"
                                         href="https://wiki.taes.com.br/wiki/Ambiente_organizacional"
                                         target="_blank"></a>
-                                </label>
+                                </label> -->
                             </div>
                             <div>
                                 <label>
@@ -1229,13 +1176,13 @@
                                         </option>
                                         <option value="13">
                                             Entre 01/2021 e 12/2021
-                                        </option>-->
+                                        </option>
                                         <option value="14">
                                             Entre 01/2022 e 12/2022
                                         </option>
                                         <option value="15">
                                             Entre 01/2023 e 04/2023
-                                        </option>-->
+                                        </option>
                                         <option value="16">
                                             Entre 05/2023 e 12/2023
                                         </option>
@@ -1244,7 +1191,7 @@
                                         </option>
                                         <option value="18">
                                             Entre 05/2024 e 12/2024
-                                        </option>
+                                        </option>-->
                                         <option value="19">
                                             Entre 01/2025 e 04/2025
                                         </option>
@@ -1299,58 +1246,11 @@
                                     </select>
                                 </label>
                             </div>
-                            <div style="display:none;">
-                                <label>
-                                    Classe:
-                                    <select name="mf_ddClasse" id="mf_ddClasse2" class="inpt_MF"
-                                        onchange="calcSalario(this.form);">
-                                        <option value="0" selected>
-                                            Auxiliar/A - 1
-                                        </option>
-                                        <option value="1">
-                                            Auxiliar/A - 2
-                                        </option>
-                                        <option value="2">
-                                            Assistente/A - 1
-                                        </option>
-                                        <option value="3">
-                                            Assistente/A - 2
-                                        </option>
-                                        <option value="4">
-                                            Adjunto/B - 1
-                                        </option>
-                                        <option value="5">
-                                            Adjunto/B - 2
-                                        </option>
-                                        <option value="6">
-                                            Adjunto/B - 3
-                                        </option>
-                                        <option value="7">
-                                            Adjunto/B - 4
-                                        </option>
-                                        <option value="8">
-                                            Associado/C - 1
-                                        </option>
-                                        <option value="9">
-                                            Associado/C - 2
-                                        </option>
-                                        <option value="10">
-                                            Associado/C - 3
-                                        </option>
-                                        <option value="11">
-                                            Associado/C - 4
-                                        </option>
-                                        <option value="12">
-                                            Titular/D
-                                        </option>
-                                    </select>
-                                </label>
-                            </div>
-                            <div>
+                            <!--<div>
                                 <label>
                                     Nível:
                                     <select name="ddProg" id="ddProg2" class="inpt_TAE"
-                                        onchange="atualizaPold(this.form);">
+                                        onchange="calcSalario(this.form);">
                                         <option value="1" selected>
                                             I
                                         </option>
@@ -1370,7 +1270,7 @@
                                 <label>
                                     Padrão:
                                     <select name="ddNivel" id="ddNivel2" class="inpt_TAE"
-                                        onchange="atualizaPold(this.form);">
+                                        onchange="calcSalario(this.form);">
                                         <option value="1" selected>
                                             1
                                         </option>
@@ -1421,12 +1321,12 @@
                                         </option>
                                     </select>
                                 </label>
-                            </div>
+                            </div>-->
                             <div>
                                 <label>
                                     Padrão:
-                                    <select name="ddPadrao" id="ddPadrao2" class="inpt_TAE"
-                                        onchange="atualizaPnew(this.form);">
+                                    <select name="ddPadrao" id="ddPadrao2" 
+                                        onchange="calcSalario(this.form);">
                                         <option value="1" selected>
                                             1
                                         </option>
@@ -1486,11 +1386,11 @@
                                         </option>
                                     </select>
                                 </label>
-                                <span id="showrepos2"
+                                <!--<span id="showrepos2"
                                     style="font-size: smaller;border-bottom: 1px dotted;cursor: pointer;">(reposicionamento)</span>
                                 <div id="repostable2"
                                     style="position:absolute;transform: translateY(-50%); margin-left: 5px;display: none;">
-                                    <img src="/img/repos.png"></div>
+                                    <img src="/img/repos.png"></div>-->
                             </div>
                             <div>
                                 <label><span class="labelch">Carga horária</span>:
@@ -1504,18 +1404,12 @@
                                         <option value="0.5">
                                             20 horas
                                         </option>
-                                        <!--<option value="0.5625">
-                                            20 horas (PDV)
-                                            </option>
-                                            <option value="0.8125">
-                                            30 horas (PDV)
-                                            </option>-->
                                     </select>
                                 </label>
                             </div><br>
                             <div>
                                 <label>
-                                    <span class="labelfg">FG</span>:
+                                    <span class="labelfg">Função</span>:
                                     <select name="ddFG" id="ddFG2" onchange="nocd(this.form);calcSalario(this.form);">
                                         <option value="0" selected>
                                             Não
@@ -1639,7 +1533,7 @@
                                         </option>
                                     </select>
                                 </label>
-                                <label>
+                                <!-- <label>
                                     Área:&nbsp;
                                     <input type="radio" name="areaquali" id="areaquali12" value="qualid"
                                         onClick="calcSalario(this.form);" checked />
@@ -1649,7 +1543,7 @@
                                     Indireta <a class="wiki-icon"
                                         href="https://wiki.taes.com.br/wiki/Ambiente_organizacional"
                                         target="_blank"></a>
-                                </label>
+                                </label> -->
                             </div>
                             <div>
                                 <label>

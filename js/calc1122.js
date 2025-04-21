@@ -1,6 +1,10 @@
 var liq1 = 0;
 var liq2 = 0;
 
+$.getJSON('js/carreiras.json', function(data) {
+    infoCarreiras = data;
+});
+
 function updateQuali(form, classs) {
     var alloptions = Array("Exigência Mínima", "Fundamental Completo", "Médio Completo", "Médio Técnico", "Superior", "Especialização", "Mestrado", "Doutorado");
     var allvalues = Array(0, 1, 2, 3, 4, 5, 6, 7);
@@ -77,40 +81,57 @@ function atualizaCarreira() {
     var carreira = $('#selCarreira').val();
     var carreiraMF = false;
     //var carreiraMF = $("#rdMF").is(":checked");
+
+    //Novas regras
+    $('[name^=ddPadrao]').empty();
+    $('select[name="ddPadrao"]').empty().each(function() {
+        infoCarreiras[carreira].niveis.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
+    });
+    $('.labelch').html(infoCarreiras[carreira].nomech);
+    $('.labelIQRT').html(infoCarreiras[carreira].labelIQRT);
+    $('.labelIQRT2').html(infoCarreiras[carreira].labelIQRT2);
+    $('select[name="ddFG"]').empty().each(function() {
+        infoCarreiras[carreira].func.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
+    });
+    $('select[name="ddCargaH"]').empty().each(function() {
+        infoCarreiras[carreira].chlab.forEach((opt, i) => $(this).append(`<option value="${infoCarreiras[carreira].chval[i]}">${opt}</option>`));
+    });
+
     if (carreira == "TAE") {
         carreiraMF = true;
         //Atualiza campos em comun
-        $('.labelIQRT').html("IQ");
-        $('.labelIQRT2').html("Incentivo à qualificação");        
-        $('.labelch').html("Carga horária");
-        $('.labelfg').html("FG");
-        $('[name^=ddCargaH]').val(1);        
-        $("[name^=ddCargaH] option[value='0']").remove();
-        $('[name^=ddCargaH] option').eq(1).before(new Option("30 horas", "0.75"));
-        $("[name^=ddFG] option[value='10']").remove();
+        //$('.labelIQRT').html("IQ");
+        //$('.labelIQRT2').html("Incentivo à qualificação");        
+        //$('.labelch').html("Carga horária");
+        //$('.labelfg').html("FG");
+        // $('[name^=ddCargaH]').val(1);        
+        // $("[name^=ddCargaH] option[value='0']").remove();
+        // $('[name^=ddCargaH] option').eq(1).before(new Option("30 horas", "0.75"));
+        //$("[name^=ddFG] option[value='10']").remove();
 
         //Mostra campos específicos de TAEs:
         $('.inpt_TAE').parent().parent().show();
-        $('#areaquali11').parent().show();
-        $('#areaquali12').parent().show();
+        //$('#areaquali11').parent().show();
+        //$('#areaquali12').parent().show();
 
         //Esconde campos específicos de docentes
         $('.inpt_MF').parent().parent().hide();
+        
     } else {
         //Atualiza campos em comun
-        $('.labelIQRT').html("RT");
-        $('.labelIQRT2').html("Retribuição por titulação");  
-        $('.labelch').html("Regime");
-        $('.labelfg').html("FG/FCC");
-        $('[name^=ddCargaH]').prepend(new Option("DE", "0"))
-        $("[name^=ddCargaH] option[value='0.75']").remove();
-        $("[name^=ddCargaH]").val("0");
-        $('[name^=ddFG] option').eq(0).after(new Option("FCC", "10"));
+        //$('.labelIQRT').html("RT");
+        //$('.labelIQRT2').html("Retribuição por titulação");  
+        
+        //$('.labelfg').html("FG/FCC");
+        // $('[name^=ddCargaH]').prepend(new Option("DE", "0"))
+        // $("[name^=ddCargaH] option[value='0.75']").remove();
+        // $("[name^=ddCargaH]").val("0");
+        //$('[name^=ddFG] option').eq(0).after(new Option("FCC", "10"));
 
         //Esconde campos específicos de TAEs:
         $('.inpt_TAE').parent().parent().hide();
-        $('#areaquali11').parent().hide();
-        $('#areaquali12').parent().hide();
+        //$('#areaquali11').parent().hide();
+        //$('#areaquali12').parent().hide();
 
         //Mostra campos específicos de docentes
         $('.inpt_MF').parent().parent().show();
@@ -751,34 +772,34 @@ function calcSalario(form) {
 
     if (periodo < 19 && !carreiraMF) {
         if (form.name == "myform") {
-            $('#ddNivel1, #ddProg1').parent().parent().show();
-            $('#areaquali11').parent().show();
-            $('#ddPadrao1').parent().parent().hide();
+            //$('#ddNivel1, #ddProg1').parent().parent().show();
+            //$('#areaquali11').parent().show();
+            //$('#ddPadrao1').parent().parent().hide();
         } else {
-            $('#ddNivel2, #ddProg2').parent().parent().show();
-            $('#areaquali12').parent().show();
-            $('#ddPadrao2').parent().parent().hide();
+            //$('#ddNivel2, #ddProg2').parent().parent().show();
+            //$('#areaquali12').parent().show();
+            //$('#ddPadrao2').parent().parent().hide();
         }
         nivelMerito = parseInt(form.ddNivel.value);
         nivelCap = parseInt(form.ddProg.value);        
     } else if (!carreiraMF) {
         if (form.name == "myform") {
-            $('#ddNivel1, #ddProg1').parent().parent().hide();
-            $('#areaquali11').parent().hide();
-            $('#areaquali11').prop('checked', 'checked');
-            $('#ddPadrao1').parent().parent().show();
+            //$('#ddNivel1, #ddProg1').parent().parent().hide();
+            //$('#areaquali11').parent().hide();
+            //$('#areaquali11').prop('checked', 'checked');
+            //$('#ddPadrao1').parent().parent().show();
         } else {
-            $('#ddNivel2, #ddProg2').parent().parent().hide();
-            $('#areaquali12').parent().hide();
-            $('#areaquali12').prop('checked', 'checked');
-            $('#ddPadrao2').parent().parent().show();
+            //$('#ddNivel2, #ddProg2').parent().parent().hide();
+            //$('#areaquali12').parent().hide();
+            //$('#areaquali12').prop('checked', 'checked');
+            //$('#ddPadrao2').parent().parent().show();
         }
         nivelMerito = parseInt(form.ddPadrao.value);
         correlacoes = [0.36, 0.40, 0.50, 0.61, 1];
     } 
     
     var correl = correlacoes[parseInt(form.ddClasse.value)];
-    var ftvb = nivelMerito + nivelCap - 2;
+    var ftvb = nivelMerito;
     var ftcarga = form.ddCargaH.value;
 
     var vencimento = correl * Math.ceil(base * Math.pow(ftstep, ftvb) * ftcarga * 100) / 100;
@@ -801,7 +822,7 @@ function calcSalario(form) {
             base = 6180.86 * 1.035;
             steps_mf = [0, 0, 0, 0, 0.06, 0.05, 0.05, 0.05, 0.225, 0.05, 0.05, 0.05, 0.1];
         }
-        var padrao = parseInt(form.mf_ddClasse.value);
+        var padrao = parseInt(form.ddPadrao.value);
         vencimento = base;
         for (i = 0; i < padrao + 1; i++) {
             vencimento = vencimento * (1 + steps_mf[i]);            
@@ -829,7 +850,8 @@ function calcSalario(form) {
 
     var transporte = form.trans.checked ? valorTransporte(vencimento, form.gastoTrans.value, form.diasTrans.value) : 0;
     var ftinsa = form.ddInsa.value;
-    var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked, carreiraMF, ftcarga);
+    //var ftpg = calcfatorpg(form.ddQuali.value, form.areaquali[0].checked, carreiraMF, ftcarga);
+    var ftpg = calcfatorpg(form.ddQuali.value, true, carreiraMF, ftcarga);
     var jud = 0;
     $('form[name="' + form.name + '"] label[name="numJudview"]').css("visibility", "hidden");
     //form.numJudview.style.visibility = "hidden";
