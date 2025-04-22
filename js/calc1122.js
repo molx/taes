@@ -96,22 +96,33 @@ function atualizaCarreira() {
     $('select[name="ddCargaH"]').empty().each(function() {
         infoCarreiras[carreira].chlab.forEach((opt, i) => $(this).append(`<option value="${infoCarreiras[carreira].chval[i]}">${opt}</option>`));
     });
+    if ( infoCarreiras[carreira].escol) {
+        $('select[name="ddEscol"]').empty().each(function() {
+            infoCarreiras[carreira].escol.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
+        });
+    }
 
     if (carreira == "TAE") {
         //Mostra campos específicos de TAEs:
         $('.inpt_TAE').parent().parent().show();
-
         //Esconde campos específicos de docentes
-        $('.inpt_MF').parent().parent().hide();
-        
+        $('.inpt_noTAE').parent().parent().hide();   
     } else {        
         //Esconde campos específicos de TAEs:
-        $('.inpt_TAE').parent().parent().hide();
-        
+        $('.inpt_TAE').parent().parent().hide();        
         //Mostra campos específicos de docentes
-        $('.inpt_MF').parent().parent().show();
+        $('.inpt_noTAE').parent().parent().show();
     }
-
+    
+    if (infoCarreiras[carreira].nomeGrat) {
+        var gratVals = [0, 50, 80, 100];
+        $('select[name="ddGrat"]').empty().each(function() {
+            gratVals.forEach((opt, i) => $(this).append(`<option value="${opt}">${opt}%</option>`));
+        });
+        $('.inpt_Grat').parent().parent().show();
+    } else {
+        $('.inpt_Grat').parent().parent().hide();
+    }
     updateQuali(myform, 1, carreira == "MF");
     updateQuali(myform2, 1, carreira == "MF");
     calcSalario(myform);
@@ -442,75 +453,43 @@ function calcSalario(form) {
         $('#numProposta2').parent().css('visibility','hidden');
     }
     var periodo = parseInt(form.ddAno.value, 10),
-    stepArray = [],
-    base = 4967.04;
-    for (let date in infoCarreiras[carreira].steps) {
-        if (date > periodo) break;
-        stepArray = infoCarreiras[carreira].steps[date];
-    }
-    //Por segurança, loops separados caso hajam mudanças em vb e step independentes
-    for (let date in infoCarreiras[carreira].basevb) {
-        if (date > periodo) break;
-        base = infoCarreiras[carreira].basevb[date];
-    }
-    
-    //ftstep = 1.040;
-    // if (periodo >= 202604) {
-    //     base = 5215.39;
-    //     //ftstep = 1.041;
-    // }    
+    vbArray = [],
+    padraovb = parseInt(form.ddPadrao.value),
+    correlacoes = [0.36, 0.40, 0.50, 0.61, 1],
+    correl = correlacoes[parseInt(form.ddClasse.value)],
+    ftcarga = form.ddCargaH.value,
+    idxvbs = 0,
+    gratArray = [],
+    gratDesemp = 0;
 
-    // Situações especiais (considerando referência no A e não no E, como acima)
-    // if (periodo == 100) {
-    //     //Proposta Fasubra 2023 AB CD E plenaria
-    //     //Piso 3 SM, Step 5%
-    //     ftstep = 1.05;
-    //     base = 3960;
-    // } else if (periodo == 101) {
-    //     //Proposta Fasubra 2023 AB CD E sem reajuste
-    //     //Piso 3 SM, Step 5%
-    //     ftstep = 1.039;
-    //     base = 1822.77;
-    // } else if (periodo == 102) {
-    //     //Ajusta o estado do campo reajuste de acordo com periodo
-    //     if (form.name == "myform") {
-    //         document.getElementById("numProposta1").disabled = false;
-    //     } else if (form.name == "myform2") {
-    //         document.getElementById("numProposta2").disabled = false;
-    //     }
-    //     var reajuste = parseInt(form.numProposta.value, 10);    
-    //     //Proposta Fasubra 2023 AB CD E +15%
-    //     //Piso 3 SM, Step 3.9%
-    //     ftstep = 1.039;
-    //     base = 1822.77 * (1 + (reajuste / 100));
-    // }
+    if (carreira != "TAE") {
+        correl = 1;
+    } 
+    if (infoCarreiras[carreira].escol) {
+        idxvbs = form.ddEscol.value;
+    }
+
+    for (let date in infoCarreiras[carreira].vbs[idxvbs]) {
+        if (date > periodo) break;
+        vbArray = infoCarreiras[carreira].vbs[idxvbs][date];
+        if (infoCarreiras[carreira].valGrat) {
+            gratArray = infoCarreiras[carreira].valGrat[idxvbs][date];
+            gratDesemp = gratArray[padraovb] * form.ddGrat.value;
+        }
+    }    
 
     if (form.ddCargo.value == "1") { 
         //Médicos na MP 1.286 não estão mais 2x
-        //Os reajustes foram 2x 4.5% e step fixado em 3.9 (vs 9% + 5% e steps 4% e 4.1%)
-        ftstep = 1.039;
-        stepArray = [1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039, 1.039];
-        base = 9523.96;
-        if (periodo >= 21) {
-            base = 9952.54;
-        } 
+        vbArray = [9523.96, 9895.40, 10281.34, 10682.30, 11098.90, 11531.76, 11981.52, 12448.80, 12934.28, 13438.72, 13962.84, 14507.40, 15073.18, 15661.02, 16271.80, 16906.42, 17565.76, 18250.82, 18962.62];
+        if (periodo >= 202604) {
+            vbArray = [9952.54, 10340.70, 10744.00, 11163.00, 11598.36, 12050.68, 12520.68, 13009.00, 13516.32, 14043.46, 14591.16, 15160.24, 15751.48, 16365.76, 17004.04, 17667.20, 18356.22, 19072.10, 19815.94];
+        }
     }
 
-    var padraovb = parseInt(form.ddPadrao.value),
-        correlacoes = [0.36, 0.40, 0.50, 0.61, 1];
-    
-    var correl = correlacoes[parseInt(form.ddClasse.value)];
-    var ftcarga = form.ddCargaH.value;
-
-    var vencimento = base;
-    for (i = 0; i < padraovb + 1; i++) {
-        vencimento = vencimento * stepArray[i];            
-    }
+    var vencimento = vbArray[padraovb];
 
     //Apenas PCCTAE tem vários níveis
-    if (carreira != "TAE") {
-        correl = 1;
-    }
+
     vencimento = vencimento * ftcarga * correl;
     // if (periodo >= 100) {        
     //     //Propostas Fasubra
@@ -579,7 +558,7 @@ function calcSalario(form) {
     var outrosRendTribIR = parseFloat(form.numOutrosRendTribIR.value) || 0;
     var outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
-    var remuneracao = vencimento + jud + qualificacao + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribIR;
+    var remuneracao = vencimento + jud + qualificacao + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribIR + gratDesemp;
 
     var sindicato = 0;
     var sindaliq = parseFloat(form.sindaliq.value) / 100;
@@ -624,7 +603,7 @@ function calcSalario(form) {
     var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
     
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
-    var basepss = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib;
+    var basepss = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + gratDesemp;
     var tetopss = 4663.75;
 
     if (periodo < 202501) {
@@ -737,7 +716,7 @@ function calcSalario(form) {
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
-    var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + ftinsa * vencimento + fungrat + cargodir + outrosRendTrib + outrosRendTribIR;
+    var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + ftinsa * vencimento + fungrat + cargodir + outrosRendTrib + outrosRendTribIR + gratDesemp;
 
     var deducoesIrrf = valorpss + aliqfunp + aliqFunpFacul + reducaoDepsIRRF + outrosdescontosIsnt + outrosdescontospctIsnt;
 
@@ -831,6 +810,9 @@ function calcSalario(form) {
     if (ferias > 0) addDetailValue("#tabdetails-rend", formid, "1/3 Férias", ferias);
     if (adiantamento > 0) addDetailValue("#tabdetails-rend", formid, "Adiantamento", adiantamento);
     if (decter > 0) addDetailValue("#tabdetails-rend", formid, "13º", decter);
+    //
+    if (gratDesemp > 0) addDetailValue("#tabdetails-rend", formid, infoCarreiras[carreira].nomeGrat, gratDesemp);
+    
     
 
     addDetailValue("#tabdetails-desc", formid, "PSS", valorpss);

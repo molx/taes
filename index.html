@@ -124,9 +124,9 @@
                             <option value="MF">
                                 Magistério
                             </option>
-                            <!-- <option value="PGPE" disabled>
+                            <option value="PGPE">
                                 PGPE
-                            </option> -->
+                            </option>
                         </select>
                     </label>
                     <!-- <input type="radio" name="rdCarreira" id="rdTAE" value="TAE"
@@ -218,6 +218,14 @@
                                         <option value="4">
                                             E
                                         </option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div style="display: none;">
+                                <label>
+                                    Nível:
+                                    <select name="ddEscol" id="ddEscol1" class="inpt_noTAE"
+                                        onchange="calcSalario(this.form);">
                                     </select>
                                 </label>
                             </div>
@@ -367,20 +375,15 @@
                                     style="position:absolute;transform: translateY(-50%); margin-left: 5px;display: none;">
                                     <img src="/img/repos.png"></div>-->
                             </div>
-                            <div>
-                                <label><span class="labelch">Carga horária</span>:
-                                    <select name="ddCargaH" id="ddCargaH1" onchange="calcSalario(this.form);">
-                                        <option value="1" selected>
-                                            40 horas
-                                        </option>
-                                        <option value="0.75">
-                                            30 horas
-                                        </option>
-                                        <option value="0.5">
-                                            20 horas
-                                        </option>
-                                    </select></label>
-                            </div><br>
+                            <div style="display: none;">
+                                <label>
+                                    <span class="inpt_Grat">GDPGPE</span>:
+                                    <select name="ddGrat" id="ddGrat1" class="inpt_Grat"
+                                        onchange="calcSalario(this.form);">
+                                    </select>
+                                </label>
+                            </div>
+                            <br>
                             <div>
                                 <label>
                                     <span class="labelfg">Função</span>:
@@ -459,23 +462,20 @@
                                 %
                             </div>
                             <div>
-                                <label>
-                                    Cargo:
-                                    <select name="ddCargo" id="ddCargo1" class="inpt_TAE"
-                                        onchange="calcSalario(this.form);" style="width: 150px;">
-                                        <option value="0" selected>
-                                            Comum
+                                <label><span class="labelch">Carga horária</span>:
+                                    <select name="ddCargaH" id="ddCargaH1" onchange="calcSalario(this.form);">
+                                        <option value="1" selected>
+                                            40 horas
                                         </option>
-                                        <option value="1">
-                                            Médico/Veterinário
+                                        <option value="0.75">
+                                            30 horas
                                         </option>
-                                        <option value="2">
-                                            Enfermagem
+                                        <option value="0.5">
+                                            20 horas
                                         </option>
-                                    </select>
-                                </label>
-                            </div>
-                            <div style="display:block;">
+                                    </select></label>
+                            </div><br>                            
+                            <div>
                                 <label>
                                     <span class="labelIQRT">IQ</span>:
                                     <select name="ddQuali" id="ddQuali1" onchange="calcSalario(this.form);"
@@ -517,6 +517,23 @@
                                         href="https://wiki.taes.com.br/wiki/Ambiente_organizacional"
                                         target="_blank"></a>
                                 </label> -->
+                            </div>
+                            <div>
+                                <label>
+                                    Cargo:
+                                    <select name="ddCargo" id="ddCargo1" class="inpt_TAE"
+                                        onchange="calcSalario(this.form);" style="width: 150px;">
+                                        <option value="0" selected>
+                                            Comum
+                                        </option>
+                                        <option value="1">
+                                            Médico/Veterinário
+                                        </option>
+                                        <option value="2">
+                                            Enfermagem
+                                        </option>
+                                    </select>
+                                </label>
                             </div>
                             <div>
                                 <label>
@@ -1137,6 +1154,14 @@
                                     </select>
                                 </label>
                             </div>
+                            <div style="display: none;">
+                                <label>
+                                    Nível:
+                                    <select name="ddEscol" id="ddEscol2" class="inpt_noTAE"
+                                        onchange="calcSalario(this.form);">
+                                    </select>
+                                </label>
+                            </div>
                             <!--<div>
                                 <label>
                                     Nível:
@@ -1283,21 +1308,15 @@
                                     style="position:absolute;transform: translateY(-50%); margin-left: 5px;display: none;">
                                     <img src="/img/repos.png"></div>-->
                             </div>
-                            <div>
-                                <label><span class="labelch">Carga horária</span>:
-                                    <select name="ddCargaH" id="ddCargaH" onchange="calcSalario(this.form);">
-                                        <option value="1" selected>
-                                            40 horas
-                                        </option>
-                                        <option value="0.75">
-                                            30 horas
-                                        </option>
-                                        <option value="0.5">
-                                            20 horas
-                                        </option>
+                            <div style="display: none;">
+                                <label>
+                                    <span class="inpt_Grat">GDPGPE</span>:
+                                    <select name="ddGrat" id="ddGrat2" class="inpt_Grat"
+                                        onchange="calcSalario(this.form);">
                                     </select>
                                 </label>
-                            </div><br>
+                            </div>
+                            <br>
                             <div>
                                 <label>
                                     <span class="labelfg">Função</span>:
@@ -1377,23 +1396,21 @@
                                     %</label>
                             </div>
                             <div>
-                                <label>
-                                    Cargo:
-                                    <select name="ddCargo" id="ddCargo2" class="inpt_TAE"
-                                        onchange="calcSalario(this.form);" style="width: 150px;">
-                                        <option value="0" selected>
-                                            Comum
+                                <label><span class="labelch">Carga horária</span>:
+                                    <select name="ddCargaH" id="ddCargaH2" onchange="calcSalario(this.form);">
+                                        <option value="1" selected>
+                                            40 horas
                                         </option>
-                                        <option value="1">
-                                            Médico/Veterinário
+                                        <option value="0.75">
+                                            30 horas
                                         </option>
-                                        <option value="2">
-                                            Enfermagem
+                                        <option value="0.5">
+                                            20 horas
                                         </option>
                                     </select>
                                 </label>
-                            </div>
-                            <div style="display:block;">
+                            </div><br>                     
+                            <div>
                                 <label>
                                     <span class="labelIQRT">IQ</span>:
                                     <select name="ddQuali" id="ddQuali2" onchange="calcSalario(this.form);"
@@ -1435,6 +1452,23 @@
                                         href="https://wiki.taes.com.br/wiki/Ambiente_organizacional"
                                         target="_blank"></a>
                                 </label> -->
+                            </div>
+                            <div>
+                                <label>
+                                    Cargo:
+                                    <select name="ddCargo" id="ddCargo2" class="inpt_TAE"
+                                        onchange="calcSalario(this.form);" style="width: 150px;">
+                                        <option value="0" selected>
+                                            Comum
+                                        </option>
+                                        <option value="1">
+                                            Médico/Veterinário
+                                        </option>
+                                        <option value="2">
+                                            Enfermagem
+                                        </option>
+                                    </select>
+                                </label>
                             </div>
                             <div>
                                 <label>
