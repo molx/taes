@@ -3,6 +3,8 @@ var liq2 = 0;
 
 $.getJSON('js/carreiras.json', function(data) {
     infoCarreiras = data;
+    //Espera carregar os dados e executa os cálculos pela 1a vez
+    atualizaCarreira();
 });
 
 function updateQuali(form, classs) {
@@ -125,8 +127,9 @@ function atualizaCarreira() {
     }
     updateQuali(myform, 1, carreira == "MF");
     updateQuali(myform2, 1, carreira == "MF");
-    calcSalario(myform);
-    calcSalario(myform2);
+    //UpdateQuali já chama calcSalario para o form
+    //calcSalario(myform);
+    //calcSalario(myform2);
 };
 
 function validateGD1(evt, form) {

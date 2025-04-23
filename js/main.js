@@ -106,8 +106,9 @@ $(document).ready(function() {
     );
 
 	loadStorage();
-    calcSalario(myform);
-    calcSalario(myform2);
+    //Primeira execução ocorre após o load de carreiras.json
+    // calcSalario(myform);
+    // calcSalario(myform2);
 });
 
 
