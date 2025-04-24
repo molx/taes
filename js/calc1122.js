@@ -348,13 +348,6 @@ function valorTransporte(vencimento, gasto, dias) {
 
 function valorFG(FG, periodo) {
     //FG 1-9 + FCC;
-    var FG2013 = Array(0, 777.26, 522.9, 423.94, 215.78, 175.09, 128.4, 81.89, 60.57, 49.15, 1071.67);
-    var FG2014 = Array(0, 790.75, 531.99, 431.3, 219.54, 187.14, 130.63, 83.31, 61.61, 50.0, 1071.67);
-    var FG2015 = Array(0, 804.49, 541.23, 438.79, 223.35, 181.23, 132.89, 84.75, 62.69, 50.86, 1071.67);
-    var FG2016 = Array(0, 848.74, 571.0, 462.92, 235.63, 191.2, 140.2, 89.41, 66.14, 53.66, 1071.67);
-    var FG2017 = Array(0, 891.17, 599.55, 486.07, 247.42, 200.76, 147.21, 93.88, 69.44, 56.34, 1071.67);
-    var FG2018 = Array(0, 933.5, 628.03, 509.16, 259.17, 210.29, 154.2, 98.34, 72.74, 59.02, 1071.67);
-    var FG2019 = Array(0, 975.51, 656.29, 532.07, 270.83, 219.76, 161.14, 101.77, 76.02, 61.67, 1071.67);
     var FG2023 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67, 1071.67);
     var FG2025 = Array(0, 1159.01, 779.73, 632.16, 295.2, 239.54, 175.64, 112.02, 82.86, 67.22, 1168.12);
     var FG2026 = Array(0, 1263.32, 849.91, 689.05, 321.77, 261.1, 191.45, 122.1, 90.32, 73.27, 1273.25);
@@ -423,12 +416,12 @@ function nofg(form) {
 }
 
 function atualizaPold(form) {
-    var pold = parseInt(form.ddNivel.value),
+    var pold = parseInt(form.ddPadrao.value),
     capold = parseInt(form.ddProg.value);
 
     form.ddPadrao.value = pold + capold - 1;
 
-    calcSalario(form);
+    //calcSalario(form);
 }
 
 function atualizaPnew(form) {
@@ -436,14 +429,14 @@ function atualizaPnew(form) {
     /* Da estrutura nova para a antiga, é impossível saber a posição com certeza. Considera-se Capacitacao = IV sempre, tirando 
     para servidores no começo da carreira, nesse caso considera capacitação = I */
     if (pnew < 5) {
-        form.ddNivel.value = pnew;
+        form.ddPadrao.value = pnew;
         form.ddProg.value = 1;
     } else {
         form.ddProg.value = 4;
-        form.ddNivel.value = pnew - 3;
+        form.ddPadrao.value = pnew - 3;
     }   
 
-    calcSalario(form);
+    //calcSalario(form);
 }
 
 function calcSalario(form) {
@@ -466,8 +459,16 @@ function calcSalario(form) {
     gratDesemp = 0;
 
     if (carreira != "TAE") {
-        correl = 1;
-    } 
+        correl = 1;        
+    } else {
+        //Código para retrocompatibilidade com prog por cap. em 2024
+        if (periodo < 202501) {
+            $('form[name="' + form.name + '"] [name="ddProg"]').parent().parent().show();
+            padraovb = padraovb + parseInt(form.ddProg.value, 10) - 1;
+        } else {
+            $('form[name="' + form.name + '"] [name="ddProg"]').parent().parent().hide();
+        }
+    }
     if (infoCarreiras[carreira].escol) {
         idxvbs = form.ddEscol.value;
     }

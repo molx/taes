@@ -167,6 +167,9 @@
                                 <label>
                                     Período:
                                     <select name="ddAno" id="ddAno1" onchange="calcSalario(this.form);">
+                                        <option value="202405">
+                                            Entre 05/2024 e 12/2024
+                                        </option>
                                         <option value="202501">
                                             Entre 01/2025 e 04/2025
                                         </option>
@@ -224,14 +227,6 @@
                             <div style="display: none;">
                                 <label>
                                     Nível:
-                                    <select name="ddEscol" id="ddEscol1" class="inpt_noTAE"
-                                        onchange="calcSalario(this.form);">
-                                    </select>
-                                </label>
-                            </div>
-                            <!--<div>
-                                <label>
-                                    Nível:
                                     <select name="ddProg" id="ddProg1" class="inpt_TAE"
                                         onchange="calcSalario(this.form);">
                                         <option value="1" selected>
@@ -249,7 +244,15 @@
                                     </select>
                                 </label>
                             </div>
-                            <div>
+                            <div style="display: none;">
+                                <label>
+                                    Nível:
+                                    <select name="ddEscol" id="ddEscol1" class="inpt_noTAE"
+                                        onchange="calcSalario(this.form);">
+                                    </select>
+                                </label>
+                            </div>
+                            <!--<div>
                                 <label>
                                     Padrão:
                                     <select name="ddNivel" id="ddNivel1" class="inpt_TAE"
@@ -1157,14 +1160,6 @@
                             <div style="display: none;">
                                 <label>
                                     Nível:
-                                    <select name="ddEscol" id="ddEscol2" class="inpt_noTAE"
-                                        onchange="calcSalario(this.form);">
-                                    </select>
-                                </label>
-                            </div>
-                            <!--<div>
-                                <label>
-                                    Nível:
                                     <select name="ddProg" id="ddProg2" class="inpt_TAE"
                                         onchange="calcSalario(this.form);">
                                         <option value="1" selected>
@@ -1182,7 +1177,15 @@
                                     </select>
                                 </label>
                             </div>
-                            <div>
+                            <div style="display: none;">
+                                <label>
+                                    Nível:
+                                    <select name="ddEscol" id="ddEscol2" class="inpt_noTAE"
+                                        onchange="calcSalario(this.form);">
+                                    </select>
+                                </label>
+                            </div>
+                            <!--<div>
                                 <label>
                                     Padrão:
                                     <select name="ddNivel" id="ddNivel2" class="inpt_TAE"
