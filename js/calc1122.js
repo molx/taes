@@ -102,22 +102,25 @@ function atualizaCarreira() {
     $('select[name="ddCargaH"]').empty().each(function() {
         infoCarreiras[carreira].chlab.forEach((opt, i) => $(this).append(`<option value="${infoCarreiras[carreira].chval[i]}">${opt}</option>`));
     });
-    if ( infoCarreiras[carreira].escol) {
+    if (infoCarreiras[carreira].escol) {
+        
         $('select[name="ddEscol"]').empty().each(function() {
             infoCarreiras[carreira].escol.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
         });
+    } else {
+        $('select[name="ddEscol"]').parent().parent().hide();
     }
 
     if (carreira == "TAE") {
         //Mostra campos específicos de TAEs:
         $('.inpt_TAE').parent().parent().show();
         //Esconde campos específicos de docentes
-        $('.inpt_noTAE').parent().parent().hide();   
+        //$('.inpt_noTAE').parent().parent().hide();   
     } else {        
         //Esconde campos específicos de TAEs:
         $('.inpt_TAE').parent().parent().hide();        
         //Mostra campos específicos de docentes
-        $('.inpt_noTAE').parent().parent().show();
+        //$('.inpt_noTAE').parent().parent().show();
     }
     
     if (infoCarreiras[carreira].nomeGrat) {
@@ -126,8 +129,19 @@ function atualizaCarreira() {
             gratVals.forEach((opt, i) => $(this).append(`<option value="${opt}">${opt}%</option>`));
         });
         $('.inpt_Grat').parent().parent().show();
+        $('.labelGrat').parent().show();
     } else {
         $('.inpt_Grat').parent().parent().hide();
+        $('.labelGrat').parent().hide();
+    }
+    if (infoCarreiras[carreira].labelIQRT) {
+        $('select[name="ddQuali"]').parent().parent().show();
+        $('.labelIQRT2').parent().show();
+        $('input[name="txQualif"]').parent().show();  
+    } else {
+        $('select[name="ddQuali"]').parent().parent().hide();
+        $('.labelIQRT2').parent().hide();
+        $('input[name="txQualif"]').parent().hide();
     }
     updateQuali(myform, 1, carreira == "MF");
     updateQuali(myform2, 1, carreira == "MF");
@@ -774,6 +788,7 @@ function calcSalario(form) {
     form.txdesconto.value = formatValor(descontos);
     form.txSindicato.value = formatValor(sindicato);
     form.txQualif.value = formatValor(qualificacao);
+    form.txGrat.value = formatValor(gratDesemp);
     form.txFunp.value = formatValor(aliqfunp);
     form.txDepIRRF.value = formatValor(reducaoDepsIRRF);
     form.txFG.value = formatValor(fungrat);
