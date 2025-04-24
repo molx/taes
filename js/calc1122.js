@@ -95,6 +95,10 @@ function atualizaCarreira() {
     $('select[name="ddFG"]').empty().each(function() {
         infoCarreiras[carreira].func.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
     });
+    $('select[name="ddCD"]').empty().each(function() {
+        infoCarreiras[carreira].CD.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
+    });
+    $('.labelCD').html(infoCarreiras[carreira].tipoCD);
     $('select[name="ddCargaH"]').empty().each(function() {
         infoCarreiras[carreira].chlab.forEach((opt, i) => $(this).append(`<option value="${infoCarreiras[carreira].chval[i]}">${opt}</option>`));
     });
@@ -368,13 +372,6 @@ function valorFG(FG, periodo) {
 
 function valorCD(CD, periodo) {
     //var CD2012 = Array(0, 8889.52, 7431.09, 5833.75, 4236.41)
-    var CD2013 = Array(0, 9575.95, 8004.9, 9284.22, 4563.53);
-    var CD2014 = Array(0, 10315.37, 8623.02, 6769.47, 4915.92);
-    var CD2015 = Array(0, 11111.9, 9288.86, 7292.19, 5295.51);
-    var CD2016 = Array(0, 11723.05, 9799.75, 7693.26, 5586.77);
-    var CD2017 = Array(0, 12309.21, 10289.74, 8077.92, 5866.1);
-    var CD2018 = Array(0, 12893.89, 10778.5, 8461.62, 6144.74);
-    var CD2019 = Array(0, 13474.12, 11263.53, 8842.29, 6421.26);
     var CD2023 = Array(0, 14686.79, 12277.25, 9638.21, 6999.17);
     var CD2025 = Array(0, 18064.75, 14364.38, 11276.71, 7629.10);
     var CD2026 = Array(0, 22219.64, 16806.33, 12291.61, 8315.71);
@@ -450,13 +447,16 @@ function calcSalario(form) {
     }
     var periodo = parseInt(form.ddAno.value, 10),
     vbArray = [],
+    fgArray = [],
+    cdArray = [],
+    gratArray = [],
+    gratDesemp = 0;
     padraovb = parseInt(form.ddPadrao.value),
     correlacoes = [0.36, 0.40, 0.50, 0.61, 1],
     correl = correlacoes[parseInt(form.ddClasse.value)],
     ftcarga = form.ddCargaH.value,
-    idxvbs = 0,
-    gratArray = [],
-    gratDesemp = 0;
+    idxvbs = 0;
+    
 
     if (carreira != "TAE") {
         correl = 1;        
@@ -582,17 +582,26 @@ function calcSalario(form) {
     //http://progep.sites.ufms.br/coordenadorias/administracao-de-pessoal/divisao-de-pagamento/adicional-noturno/
     //http://www.progep.ufu.br/procedimento/adicional-noturno
 
-    var fungrat = valorFG(parseInt(form.ddFG.value, 10), periodo);
+    var tipoFG = infoCarreiras[carreira].tipoFG,
+    tipoCD = infoCarreiras[carreira].tipoCD;
+    for (let date in infoCarreiras.funcs) {
+        if (date > periodo) break;
+        fgArray = infoCarreiras.funcs[date][tipoFG];    
+        cdArray = infoCarreiras.funcs[date][tipoCD];
+    } 
+    var fungrat = fgArray[parseInt(form.ddFG.value, 10)],
+    cargodir = cdArray[parseInt(form.ddCD.value, 10)];
+    //var fungrat = valorFG(parseInt(form.ddFG.value, 10), periodo);
 
     if (form.rdCD[0].checked && form.ddCD.value != "0") {
         //60%
-        var cargodir = valorCD(form.ddCD.value, periodo) * 0.6;
+        cargodir = cargodir * 0.6;
     } else if (form.rdCD[1].checked && form.ddCD.value != "0") {
         //100%
-        var cargodir = valorCD(form.ddCD.value, periodo) - vencimento;
+        cargodir = cargodir - vencimento;
         //Subtraindo o vencimento pois ele entra na conta de qualquer jeito, mas é necessário para cálculo de adicionais. O 'cargodir' fica como um adicional da difernça entre o vencimento e o 100% do CD
     } else {
-        var cargodir = 0;
+        cargodir = 0;
     }
     var basesaude = remuneracao + fungrat + cargodir - outrosRendTrib + outrosRendTribIR;
     var saude = form.saude.checked
@@ -768,7 +777,7 @@ function calcSalario(form) {
     form.txFunp.value = formatValor(aliqfunp);
     form.txDepIRRF.value = formatValor(reducaoDepsIRRF);
     form.txFG.value = formatValor(fungrat);
-    form.txCD.value = form.rdCD[0].checked ? formatValor(cargodir) : formatValor(valorCD(form.ddCD.value, periodo));
+    form.txCD.value = form.rdCD[0].checked ? formatValor(cargodir) : formatValor(cdArray[parseInt(form.ddCD.value, 10)]);
     form.txNoturno.value = formatValor(noturno);
     form.txFerias.value = formatValor(ferias);
     form.txAdiant.value = formatValor(adiantamento - descAdiant);
