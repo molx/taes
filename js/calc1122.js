@@ -330,13 +330,13 @@ function valorSaude(bruto, ftidade, periodo) {
 function valorCreche(rem, periodo, n, cota) {
     var teto = 484.90;
     var desc = 0;    
-    if (rem < 6888.05) {
+    if (rem < 7507.95) {
         desc = 0.05;
-    } else if (rem <= 13776.10) {
+    } else if (rem <= 15015.90) {
         desc = 0.1;
-    } else if (rem <= 20664.15) {
+    } else if (rem <= 22523.85) {
         desc = 0.15;
-    } else if (rem <= 27552.20) {
+    } else if (rem <= 30031.80) {
         desc = 0.2;
     } else {
         desc = 0.25;
