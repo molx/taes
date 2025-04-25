@@ -103,10 +103,10 @@ function atualizaCarreira() {
         infoCarreiras[carreira].chlab.forEach((opt, i) => $(this).append(`<option value="${infoCarreiras[carreira].chval[i]}">${opt}</option>`));
     });
     if (infoCarreiras[carreira].escol) {
-        
         $('select[name="ddEscol"]').empty().each(function() {
             infoCarreiras[carreira].escol.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
         });
+        $('select[name="ddEscol"]').parent().parent().show();
     } else {
         $('select[name="ddEscol"]').parent().parent().hide();
     }
