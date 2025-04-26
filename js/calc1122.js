@@ -848,13 +848,15 @@ function calcSalario(form) {
     if (aliqirrfferias > 0) addDetailValue("#tabdetails-desc", formid, "IR Férias", aliqirrfferias);
     if (aliqirrfadiant > 0) addDetailValue("#tabdetails-desc", formid, "IR Adiant.", aliqirrfadiant);
     if (aliqpssadiant > 0) addDetailValue("#tabdetails-desc", formid, "PSS Adiant.", aliqpssadiant);
-    if (descAdiant > 0) addDetailValue("#tabdetails-desc", formid, "Adiantamento", descAdiant);    
+    if (descAdiant > 0) addDetailValue("#tabdetails-desc", formid, "Adiantamento", descAdiant);
     if (desc_13 > 0) addDetailValue("#tabdetails-desc", formid, "IR+PSS 13º", desc_13);
     if (aliqfunp > 0) addDetailValue("#tabdetails-desc", formid, "Funpresp", aliqfunp);
     if (aliqFunpFacul > 0) addDetailValue("#tabdetails-desc", formid, "Funpresp-facultativo", aliqFunpFacul);
-    if (sindicato > 0) addDetailValue("#tabdetails-desc", formid, "Sindicato", sindicato);    
-    if (outrosdescontos > 0) addDetailValue("#tabdetails-desc", formid, "Outros", outrosdescontos);
-    if (outrosdescontospct > 0) addDetailValue("#tabdetails-desc", formid, "Outros (%)", outrosdescontospct);    
+    if (sindicato > 0) addDetailValue("#tabdetails-desc", formid, "Sindicato", sindicato);
+    if (outrosdescontos > 0) addDetailValue("#tabdetails-desc", formid, "Outros Trib.", outrosdescontos);
+    if (outrosdescontospct > 0) addDetailValue("#tabdetails-desc", formid, "Outros Trib.", outrosdescontospct);
+    if (outrosdescontosIsnt > 0) addDetailValue("#tabdetails-desc", formid, "Outros Isen.", outrosdescontosIsnt);
+    if (outrosdescontospctIsnt > 0) addDetailValue("#tabdetails-desc", formid, "Outros Isen.", outrosdescontospctIsnt);
 
     addDetailValue("#tabdetails-outros", formid, "Bruto", bruto);
     addDetailValue("#tabdetails-outros", formid, "Descontos", descontos);
