@@ -479,6 +479,8 @@ function calcSalario(form) {
         if (periodo < 202501) {
             $('form[name="' + form.name + '"] [name="ddProg"]').parent().parent().show();
             padraovb = padraovb + parseInt(form.ddProg.value, 10) - 1;
+            correlacoes = [0.317346, 0.465255, 0.465255, 0.585305, 1];
+            correl = correlacoes[parseInt(form.ddClasse.value)];
         } else {
             $('form[name="' + form.name + '"] [name="ddProg"]').parent().parent().hide();
         }
