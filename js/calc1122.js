@@ -648,6 +648,10 @@ function calcSalario(form) {
     var descAdiant = 0;
     if (form.ferias.checked) {
         ferias = (remuneracao + fungrat + cargodir) / 3;
+        if (carreira == "MF") {
+            //Terço de férias de docentes é calculado sob salário de 45 dias
+            ferias = ferias * 1.5;
+        }
         aliqirrfferias = valorIRRF(ferias, periodo);
     } 
 
