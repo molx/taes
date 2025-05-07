@@ -1,12 +1,6 @@
 var liq1 = 0;
 var liq2 = 0;
 
-$.getJSON('js/carreiras.json', function(data) {
-    infoCarreiras = data;
-    //Espera carregar os dados e executa os cálculos pela 1a vez
-    atualizaCarreira();
-});
-
 function updateQuali(form, classs) {
     var alloptions = Array("Exigência Mínima", "Fundamental Completo", "Médio Completo", "Médio Técnico", "Superior", "Especialização", "Mestrado", "Doutorado");
     var allvalues = Array(0, 1, 2, 3, 4, 5, 6, 7);
@@ -85,10 +79,13 @@ function atualizaCarreira() {
     var carreira = $('#selCarreira').val();
 
     //Novas regras
-    $('[name^=ddPadrao]').empty();
+    //$('[name^=ddPadrao]').empty();
+    var pads = [];
+    $('select[name="ddPadrao"]').each(function(i, x) {pads.push($(x).val())})
     $('select[name="ddPadrao"]').empty().each(function() {
         infoCarreiras[carreira].niveis.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
     });
+    $('select[name="ddPadrao"]').each(function(i, x) {$(x).val(pads[i])});
     $('.labelch').html(infoCarreiras[carreira].nomech);
     $('.labelIQRT').html(infoCarreiras[carreira].labelIQRT);
     $('.labelIQRT2').html(infoCarreiras[carreira].labelIQRT2);
@@ -776,9 +773,9 @@ function calcSalario(form) {
 
     //Print results after each calculation
     var diffLiqs = (liq2 - liq1);
-    document.getElementById("diffLiqAbs").innerHTML = formatValor(diffLiqs);
-    document.getElementById("diffLiqPct").innerHTML = (100 * diffLiqs / liq1).toFixed(2).replace(".", ",") + "%";
-    document.getElementById("diffLiqPor").innerHTML = ((100 * liq2) / liq1).toFixed(0) + "%";
+    $('#diffLiqAbs').html(formatValor(diffLiqs));
+    $('#diffLiqPct').html((100 * diffLiqs / liq1).toFixed(2).replace(".", ",") + "%");
+    $('#diffLiqPor').html(((100 * liq2) / liq1).toFixed(0) + "%");
     form.txVB.value = formatValor(vencimento);
     form.txResult.value = formatValor(salario);
     form.txInsa.value = formatValor(ftinsa * vencimento);

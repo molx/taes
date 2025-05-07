@@ -13,14 +13,13 @@ function saveStorage() {
 			}
 		});
 	});
-    localStorage.setItem('rdTAE', $('#rdTAE').prop("checked"));
-    localStorage.setItem('rdMF', $('#rdMF').prop("checked"));
+    localStorage.setItem('selCarreira', $('#selCarreira').val());
+    //localStorage.setItem('rdMF', $('#rdMF').prop("checked"));
 }
 
 function loadStorage() {
     let params = new URLSearchParams(window.location.search);
     let compressed = params.get('data');
-    var storage = localStorage;
     if (compressed) {
         let decompressed = LZString.decompressFromEncodedURIComponent(compressed);
         let restoredStorage = JSON.parse(decompressed);
@@ -86,8 +85,6 @@ $(document).ready(function() {
         $(tab).fadeIn();
     });	
 
-
-
     $('#showrepos1').hover(
         function() {
             $('#repostable1').fadeIn(200);
@@ -105,7 +102,13 @@ $(document).ready(function() {
         }
     );
 
-	loadStorage();
+	$.getJSON('js/carreiras.json', function(data) {        
+        infoCarreiras = data;
+        //Espera carregar os dados e executa os cálculos pela 1a vez
+        loadStorage();        
+        atualizaCarreira();
+       
+    });
     //Primeira execução ocorre após o load de carreiras.json
     // calcSalario(myform);
     // calcSalario(myform2);
