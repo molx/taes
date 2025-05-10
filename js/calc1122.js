@@ -122,14 +122,14 @@ function atualizaCarreira() {
     
     if (infoCarreiras[carreira].nomeGrat) {
         var gratVals = [0, 50, 80, 100];
-        $('select[name="ddGrat"]').empty().each(function() {
+        $('select[name="ddGratDes"]').empty().each(function() {
             gratVals.forEach((opt, i) => $(this).append(`<option value="${opt}">${opt}%</option>`));
         });
-        $('.inpt_Grat').parent().parent().show();
-        $('.labelGrat').parent().show();
+        $('.inpt_GratDes').parent().parent().show();
+        $('.labelGratDes').parent().show();
     } else {
-        $('.inpt_Grat').parent().parent().hide();
-        $('.labelGrat').parent().hide();
+        $('.inpt_GratDes').parent().parent().hide();
+        $('.labelGratDes').parent().hide();
     }
     if (infoCarreiras[carreira].labelIQRT) {
         $('select[name="ddQuali"]').parent().parent().show();
@@ -263,7 +263,7 @@ function dependentesIR(deps, periodo) {
 function valorSaude(bruto, ftidade, periodo) {
     var tabela = Array(),
     ftbruto = 0;
-    if (periodo < 202501) {
+    if (periodo < 202405) {
         tabela[0] = Array(149.52, 156.57, 158.69, 165.04, 169.97, 175.61, 190.03, 193.05, 196.06, 205.63);
         tabela[1] = Array(142.47, 149.52, 151.64, 156.57, 161.51, 167.15, 180.76, 183.63, 186.50, 196.06);
         tabela[2] = Array(135.42, 142.47, 144.59, 149.52, 154.46, 160.10, 171.49, 174.21, 176.94, 186.50);
@@ -491,7 +491,7 @@ function calcSalario(form) {
         vbArray = infoCarreiras[carreira].vbs[idxvbs][date];
         if (infoCarreiras[carreira].valGrat) {
             gratArray = infoCarreiras[carreira].valGrat[idxvbs][date];
-            gratDesemp = gratArray[padraovb] * form.ddGrat.value;
+            gratDesemp = gratArray[padraovb] * form.ddGratDes.value;
         }
     }    
 
