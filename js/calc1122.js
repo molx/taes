@@ -777,9 +777,10 @@ function calcSalario(form) {
 
     var baseirrf = rendTributavel - deducoesIrrf;
 
-    if (deducoesIrrf < 564.80) {
-        baseirrf = rendTributavel - 564.80;
-    }
+    //Possivel causa de erros no calculo do IR
+    // if (deducoesIrrf < 564.80) {
+    //     baseirrf = rendTributavel - 564.80;
+    // }
 
     var aliqirrf = valorIRRF(baseirrf, periodo);
 
