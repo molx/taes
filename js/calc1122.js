@@ -461,7 +461,10 @@ function calcSalario(form) {
     fgArray = [],
     cdArray = [],
     gratArray = [],
-    gratDesemp = 0;
+    gratDesemp = 0,
+    gratGeneric = 0,
+    gratGenArray = [],
+    gratGenMax = 0;
     padraovb = parseInt(form.ddPadrao.value),
     correlacoes = [0.36, 0.40, 0.50, 0.61, 1],
     correl = correlacoes[parseInt(form.ddClasse.value)],
@@ -484,8 +487,11 @@ function calcSalario(form) {
     }
     if (infoCarreiras[carreira].escol) {
         idxvbs = form.ddEscol.value;
+    } else if (carreira == "TAE" && form.ddClasse.value == "E") {
+        idxvbs = 1 //1 = NS
     }
 
+    
     for (let date in infoCarreiras[carreira].vbs[idxvbs]) {
         if (date > periodo) break;
         vbArray = infoCarreiras[carreira].vbs[idxvbs][date];
@@ -493,7 +499,16 @@ function calcSalario(form) {
             gratArray = infoCarreiras[carreira].valGrat[idxvbs][date];
             gratDesemp = gratArray[padraovb] * form.ddGratDes.value;
         }
-    }    
+    }
+
+    if (form.ddGratGen.value != "0") {
+        for (let date in infoCarreiras.grats[idxvbs]) {
+            if (date > periodo) break;
+            gratGenArray = infoCarreiras.grats[idxvbs][date];
+            gratGeneric = gratGenArray[form.ddGratGen.value];
+            gratGenMax = infoCarreiras.gratsMax[idxvbs][date][form.ddGratGen.value];
+        }
+    }
 
     if (form.ddCargo.value == "1") { 
         //Médicos na MP 1.286 não estão mais 2x
@@ -575,7 +590,12 @@ function calcSalario(form) {
     var outrosRendTribIR = parseFloat(form.numOutrosRendTribIR.value) || 0;
     var outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
-    var remuneracao = vencimento + jud + qualificacao + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribIR + gratDesemp;
+    var remuneracao = vencimento + jud + qualificacao + ftinsa * vencimento + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribIR + gratDesemp + gratGeneric;
+
+    //Checa e limita os valores máximos das gratificacoes que tem limite
+    if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && remuneracao > gratGenMax) {
+        remuneracao = gratGenMax;
+    }
 
     var sindicato = 0;
     var sindaliq = parseFloat(form.sindaliq.value) / 100;
@@ -629,7 +649,7 @@ function calcSalario(form) {
     var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
     
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
-    var basepss = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + gratDesemp;
+    var basepss = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + gratDesemp + gratGeneric;
     var tetopss = 4663.75;
 
     if (periodo < 202501) {
@@ -746,7 +766,12 @@ function calcSalario(form) {
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
-    var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + ftinsa * vencimento + fungrat + cargodir + outrosRendTrib + outrosRendTribIR + gratDesemp;
+    var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + ftinsa * vencimento + fungrat + cargodir + outrosRendTrib + outrosRendTribIR + gratDesemp+ gratGeneric;
+
+    //Checa e limita os valores máximos das gratificacoes que tem limite
+    if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && remuneracao > gratGenMax) {
+        rendTributavel = gratGenMax;
+    }
 
     var deducoesIrrf = valorpss + aliqfunp + aliqFunpFacul + reducaoDepsIRRF + outrosdescontosIsnt + outrosdescontospctIsnt;
 
@@ -791,7 +816,8 @@ function calcSalario(form) {
     form.txdesconto.value = formatValor(descontos);
     form.txSindicato.value = formatValor(sindicato);
     form.txQualif.value = formatValor(qualificacao);
-    form.txGrat.value = formatValor(gratDesemp);
+    form.txGratDes.value = formatValor(gratDesemp);
+    form.txGratGen.value = formatValor(gratGeneric);
     form.txFunp.value = formatValor(aliqfunp);
     form.txDepIRRF.value = formatValor(reducaoDepsIRRF);
     form.txFG.value = formatValor(fungrat);

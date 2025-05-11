@@ -200,7 +200,8 @@
                                         onKeyUp="calcSalario(this.form);" />
                                     %
                                 </label>
-                            </div> --><br>
+                            </div> -->
+                            <br>
                             <div>
                                 <label>
                                     Classe:
@@ -380,8 +381,8 @@
                             </div>
                             <div style="display: none;">
                                 <label>
-                                    <span class="inpt_Grat">GDPGPE/GDPST</span>:
-                                    <select name="ddGrat" id="ddGrat1" class="inpt_Grat"
+                                    <span class="inpt_GratDes">GDPGPE/GDPST</span>:
+                                    <select name="ddGratDes" id="ddGratDes1" class="inpt_GratDes"
                                         onchange="calcSalario(this.form);">
                                     </select>
                                 </label>
@@ -545,6 +546,30 @@
                                         value="0" style="width: 35px;" onClick="calcSalario(this.form);"
                                         onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
                                     <input type="text" name="txDepIRRF" value="R$ 0,00" readonly />
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    Gratificação:
+                                    <select name="ddGratGen" id="ddGratGen1"
+                                        onchange="calcSalario(this.form);">
+                                        <option value="0" selected>
+                                            Não
+                                        </option>
+                                        <option value="1">
+                                            GSISTE-Central
+                                        </option>
+                                        <option value="2">
+                                            GSISTE-Setorial
+                                        </option>
+                                        <option value="3">
+                                            GSISP
+                                        </option>
+                                        <option value="4">
+                                            GIAPU
+                                        </option>
+                                    </select>
+                                    <input type="text" name="txGratGen" value="R$ 0,00" readonly />
                                 </label>
                             </div>
                             <div>
@@ -1035,8 +1060,8 @@
                                 <div><input type="text" name="txVB" value="0" readonly /></div>
                                 <div><span class="labelIQRT2">Incentivo à qualificação</span>:</div>
                                 <div><input type="text" name="txQualif" value="0" readonly /></div>
-                                <div style="display: none;"><span class="labelGrat">GDPGPE/GDPST</span>:</div>
-                                <div style="display: none;"><input class="labelGrat" type="text" name="txGrat" value="0" readonly /></div>
+                                <div style="display: none;"><span class="labelGratDes">GDPGPE/GDPST</span>:</div>
+                                <div style="display: none;"><input class="labelGratDes" type="text" name="txGratDes" value="0" readonly /></div>
                                 <div>Rendimento bruto:</div>
                                 <div><input type="text" name="txBruto" value="0" readonly /></div>
                                 <div>Rendimento líquido:</div>
@@ -1318,8 +1343,8 @@
                             </div>
                             <div style="display: none;">
                                 <label>
-                                    <span class="inpt_Grat">GDPGPE/GDPST</span>:
-                                    <select name="ddGrat" id="ddGrat2" class="inpt_Grat"
+                                    <span class="inpt_GratDes">GDPGPE/GDPST</span>:
+                                    <select name="ddGratDes" id="ddGratDes2" class="inpt_GratDes"
                                         onchange="calcSalario(this.form);">
                                     </select>
                                 </label>
@@ -1485,6 +1510,30 @@
                                         value="0" style="width: 35px;" onClick="calcSalario(this.form);"
                                         onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
                                     <input type="text" name="txDepIRRF" value="R$ 0,00" readonly />
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    Gratificação:
+                                    <select name="ddGratGen" id="ddGratGen2"
+                                        onchange="calcSalario(this.form);">
+                                        <option value="0" selected>
+                                            Não
+                                        </option>
+                                        <option value="1">
+                                            GSISTE-Central
+                                        </option>
+                                        <option value="2">
+                                            GSISTE-Setorial
+                                        </option>
+                                        <option value="3">
+                                            GSISP
+                                        </option>
+                                        <option value="4">
+                                            GIAPU
+                                        </option>
+                                    </select>
+                                    <input type="text" name="txGratGen" value="R$ 0,00" readonly />
                                 </label>
                             </div>
                             <div>
@@ -1978,8 +2027,8 @@
                                 <div><input type="text" name="txVB" value="0" readonly /></div>
                                 <div><span class="labelIQRT2">Incentivo à qualificação</span>:</div>
                                 <div><input type="text" name="txQualif" value="0" readonly /></div>
-                                <div style="display: none;"><span class="labelGrat">GDPGPE/GDPST</span>:</div>
-                                <div style="display: none;"><input class="labelGrat" type="text" name="txGrat" value="0" readonly /></div>
+                                <div style="display: none;"><span class="labelGratDes">GDPGPE/GDPST</span>:</div>
+                                <div style="display: none;"><input class="labelGratDes" type="text" name="txGratDes" value="0" readonly /></div>
                                 <div>Rendimento bruto:</div>
                                 <div><input type="text" name="txBruto" value="0" readonly /></div>
                                 <div>Rendimento líquido:</div>
