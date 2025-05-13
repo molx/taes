@@ -658,20 +658,26 @@ function calcSalario(form) {
         tetopss = 8157.41;
     }
 
-    var ferias = 0;
-    var aliqirrfferias = 0;
-    var adiantamento = 0;
-    var adiantPct = (parseInt(form.numAdiant.value) / 30) * 0.7;
-    var aliqirrfadiant = 0;
-    var aliqpssadiant = 0;
-    var descAdiant = 0;
+    var deducaoSimp = 564.80
+    if (periodo >= 202505) {
+        deducaoSimp = 607.20;
+    }
+
+    var ferias = 0,
+    aliqirrfferias = 0,
+    adiantamento = 0,
+    adiantPct = (parseInt(form.numAdiant.value) / 30) * 0.7,
+    aliqirrfadiant = 0,
+    aliqpssadiant = 0,
+    descAdiant = 0;
+
     if (form.ferias.checked) {
         ferias = (remuneracao + fungrat + cargodir) / 3;
         if (carreira == "MF") {
             //Terço de férias de docentes é calculado sob salário de 45 dias
             ferias = ferias * 1.5;
         }
-        aliqirrfferias = valorIRRF(ferias, periodo);
+        aliqirrfferias = valorIRRF(ferias - deducaoSimp, periodo);
     } 
 
     if (adiantPct > 0 && !form.adiantRest.checked) {
@@ -777,10 +783,12 @@ function calcSalario(form) {
 
     var baseirrf = rendTributavel - deducoesIrrf;
 
-    //Possivel causa de erros no calculo do IR
-    // if (deducoesIrrf < 564.80) {
-    //     baseirrf = rendTributavel - 564.80;
-    // }
+    //Checa se a deducao calculada é menor que o valor da simplificada
+    //Valor da deducao é definido acima para uso em férias também
+
+    if (deducoesIrrf < deducaoSimp) {
+        baseirrf = rendTributavel - deducaoSimp;
+    }
 
     var aliqirrf = valorIRRF(baseirrf, periodo);
 
