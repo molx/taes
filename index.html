@@ -944,22 +944,26 @@
                                 </div>
                                 <div>
                                     <span>Incluir
-                                        na base do PSS:</span><br />
+                                        na base da CPSS:</span><br />
                                     <label><input type="checkbox" name="pssfgcd" id="pssfgcd2" value="PSSfgcd"
-                                            onClick="calcSalario(this.form);" />FG/CD</label><br>
+                                            onClick="calcSalario(this.form);" />FG/CD/FCE/CCE</label><br>
                                     <label><input type="checkbox" name="pssrisco" id="pssrisco2" value="PSSrisco"
                                             onClick="calcSalario(this.form);" />Adic. risco</label><br>
                                     <label><input type="checkbox" name="pssnoturno" id="pssnoturno2" value="PSSnoturno"
-                                            onClick="calcSalario(this.form);" />Adic. noturno</label>
+                                            onClick="calcSalario(this.form);" />Adic. noturno</label><br>
+                                    <label><input type="checkbox" name="pssgrat" id="pssgrat2" value="PSSgrat"
+                                            onClick="calcSalario(this.form);" />Gratificação</label>
                                     <br><br>
                                     <span>Incluir
                                         na base do RPC:</span><br />
                                     <label><input type="checkbox" name="rpcfgcd" id="rpcfgcd2" value="RPCfgcd"
-                                            onClick="calcSalario(this.form);" />FG/CD</label><br>
+                                            onClick="calcSalario(this.form);" />FG/CD/FCE/CCE</label><br>
                                     <label><input type="checkbox" name="rpcrisco" id="rpcrisco2" value="RPCrisco"
                                             onClick="calcSalario(this.form);" />Adic. risco</label><br>
                                     <label><input type="checkbox" name="rpcnoturno" id="rpcnoturno2" value="RPCnoturno"
-                                            onClick="calcSalario(this.form);" />Adic. noturno</label>
+                                            onClick="calcSalario(this.form);" />Adic. noturno</label><br>
+                                    <label><input type="checkbox" name="rpcgrat" id="rpcgrat2" value="RPCgrat"
+                                            onClick="calcSalario(this.form);" />Gratificação</label>
                                 </div>
                             </div>
                         </div>
@@ -969,14 +973,14 @@
                                 consignado, recebimento de GECC etc.</small>
                             <h4 style="margin: 0.4em 0 0 0;">Rendimentos</h4>
                             <div style="display: block; width: 100%;margin-top:0;">
-                                <label for="numOutrosRendTrib1" style="display: inline-block;width:150px;">Tributáveis -
-                                    Com PSS:</label>
+                                <label for="numOutrosRendTrib1" style="display: inline-block;width:160px;">Tributáveis -
+                                    Com CPSS:</label>
                                 R$ <input type="number" name="numOutrosRendTrib" id="numOutrosRendTrib1" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                                 <label for="numOutrosRendTribIR1" style="display: inline-block;margin-left:30px;">Sem
-                                    PSS:</label>
+                                    CPSS:</label>
                                 R$ <input type="number" name="numOutrosRendTribIR" id="numOutrosRendTribIR1" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -984,7 +988,7 @@
                             </div>
                             <div style="display: block;margin-top:0.4em;">
                                 <label for="numOutrosRendIsnt1"
-                                    style="display: inline-block;width: 150px;">Isentos:</label>
+                                    style="display: inline-block;width: 160px;">Isentos:</label>
                                 R$ <input type="number" name="numOutrosRendIsnt" id="numOutrosRendIsnt1" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -992,7 +996,7 @@
                             </div>
                             <h4 style="margin: 0.4em 0 0 0;">Descontos</h4>
                             <div style="display: block;margin-top:0;">
-                                <label for="numOutros1" style="display: inline-block;width: 150px;">Tributáveis:</label>
+                                <label for="numOutros1" style="display: inline-block;width: 160px;">Tributáveis:</label>
                                 R$ <input type="number" name="numOutros" id="numOutros1" min="0" max="10000" step="0.01"
                                     value="0" style="width: 80px;" onKeyPress="calcSalario(this.form);"
                                     onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);"
@@ -1004,7 +1008,7 @@
                                 <input type="text" name="txDescPct" value="R$ 0,00" readonly />
                             </div>
                             <div style="display: block;margin-top:0.4em;">
-                                <label for="numOutrosIsnt1" style="display: inline-block;width: 150px;">Isentos:</label>
+                                <label for="numOutrosIsnt1" style="display: inline-block;width: 160px;">Isentos:</label>
                                 R$ <input type="number" name="numOutrosIsnt" id="numOutrosIsnt1" min="0" max="10000"
                                     step="0.01" value="0" style="width: 80px;" onKeyPress="calcSalario(this.form);"
                                     onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);"
@@ -1076,7 +1080,7 @@
                                 <div><input type="text" name="txdesconto" value="0" readonly /></div>
                                 <hr>
                                 <hr>
-                                <div>Base PSS:</div>
+                                <div>Base CPSS:</div>
                                 <div><input type="text" name="txbINSS" value="0" readonly /></div>
                                 <div>Base IRRF:</div>
                                 <div><input type="text" name="txbIRRF" value="0" readonly /></div>
@@ -1909,22 +1913,26 @@
                                 </div>
                                 <div>
                                     <span>Incluir
-                                        na base do PSS:</span><br />
+                                        na base da C:</span><br />
                                     <label><input type="checkbox" name="pssfgcd" id="pssfgcd1" value="PSSfgcd"
-                                            onClick="calcSalario(this.form);" />FG/CD</label><br>
+                                            onClick="calcSalario(this.form);" />FG/CD/FCE/CCE</label><br>
                                     <label><input type="checkbox" name="pssrisco" id="pssrisco1" value="PSSrisco"
                                             onClick="calcSalario(this.form);" />Adic. risco</label><br>
                                     <label><input type="checkbox" name="pssnoturno" id="pssnoturno1" value="PSSnoturno"
-                                            onClick="calcSalario(this.form);" />Adic. noturno</label>
+                                            onClick="calcSalario(this.form);" />Adic. noturno</label><br>
+                                    <label><input type="checkbox" name="pssgrat" id="pssgrat2" value="PSSrat"
+                                            onClick="calcSalario(this.form);" />Gratificação</label>
                                     <br><br>
                                     <span>Incluir
                                         na base do RPC:</span><br />
                                     <label><input type="checkbox" name="rpcfgcd" id="rpcfgcd1" value="RPCfgcd"
-                                            onClick="calcSalario(this.form);" />FG/CD</label><br>
+                                            onClick="calcSalario(this.form);" />FG/CD/FCE/CCE</label><br>
                                     <label><input type="checkbox" name="rpcrisco" id="rpcrisco1" value="RPCrisco"
                                             onClick="calcSalario(this.form);" />Adic. risco</label><br>
                                     <label><input type="checkbox" name="rpcnoturno" id="rpcnoturno1" value="RPCnoturno"
-                                            onClick="calcSalario(this.form);" />Adic. noturno</label>
+                                            onClick="calcSalario(this.form);" />Adic. noturno</label><br>
+                                    <label><input type="checkbox" name="rpcgrat" id="rpcgrat1" value="RPCgrat"
+                                            onClick="calcSalario(this.form);" />Gratificação</label>
                                 </div>
                             </div>
                         </div>
@@ -1933,14 +1941,14 @@
                                 empréstimo consignado, recebimento de GECC etc.</small>
                             <h4 style="margin: 0.4em 0 0 0;">Rendimentos</h4>
                             <div style="display: block; width: 100%;margin-top:0;">
-                                <label for="numOutrosRendTrib2" style="display: inline-block;width: 150px;">Tributáveis
-                                    - Com PSS:</label>
+                                <label for="numOutrosRendTrib2" style="display: inline-block;width: 160px;">Tributáveis
+                                    - Com CPSS:</label>
                                 R$ <input type="number" name="numOutrosRendTrib" id="numOutrosRendTrib2" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                                 <label for="numOutrosRendTribIR2" style="display: inline-block;margin-left:30px;">Sem
-                                    PSS:</label>
+                                    CPSS:</label>
                                 R$ <input type="number" name="numOutrosRendTribIR" id="numOutrosRendTribIR2" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -1948,7 +1956,7 @@
                             </div>
                             <div style="margin: 0.4em 0 0 0;display: block;">
                                 <label for="numOutrosRendIsnt2"
-                                    style="display: inline-block;width: 150px;">Isentos:</label>
+                                    style="display: inline-block;width: 160px;">Isentos:</label>
                                 R$ <input type="number" name="numOutrosRendIsnt" id="numOutrosRendIsnt2" min="0"
                                     max="20000" step="0.01" value="0" style="width: 80px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -1956,7 +1964,7 @@
                             </div>
                             <h4 style="margin: 0.4em 0 0 0;">Descontos</h4>
                             <div style="display: block;margin-top:0;">
-                                <label for="numOutros2" style="display: inline-block;width: 150px;">Tributáveis:</label>
+                                <label for="numOutros2" style="display: inline-block;width: 160px;">Tributáveis:</label>
                                 R$ <input type="number" name="numOutros" id="numOutros2" min="0" max="10000" step="0.01"
                                     value="0" style="width: 80px;" onKeyPress="calcSalario(this.form);"
                                     onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);"
@@ -1969,7 +1977,7 @@
                             </div>
                             <div style="display: block;margin-top:0.4em;">
                                 <label for="numOutrosIsnt2"
-                                    style="display: inline-block;width: 150px;">Dedutíveis:</label>
+                                    style="display: inline-block;width: 160px;">Dedutíveis:</label>
                                 R$ <input type="number" name="numOutrosIsnt" id="numOutrosIsnt2" min="0" max="10000"
                                     step="0.01" value="0" style="width: 80px;" onKeyPress="calcSalario(this.form);"
                                     onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);"
@@ -2043,7 +2051,7 @@
                                 <div><input type="text" name="txdesconto" value="0" readonly /></div>
                                 <hr>
                                 <hr>
-                                <div>Base PSS:</div>
+                                <div>Base CPSS:</div>
                                 <div><input type="text" name="txbINSS" value="0" readonly /></div>
                                 <div>Base IRRF:</div>
                                 <div><input type="text" name="txbIRRF" value="0" readonly /></div>

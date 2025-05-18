@@ -649,7 +649,7 @@ function calcSalario(form) {
     var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
     
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
-    var basepss = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + gratDesemp + gratGeneric;
+    var basepss = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + gratDesemp;
     var tetopss = 4663.75;
 
     if (periodo < 202501) {
@@ -711,6 +711,9 @@ function calcSalario(form) {
     if (form.pssnoturno.checked) {
         basepss += noturno;
     }
+    if (form.pssgrat.checked) {
+        basepss += gratGeneric;
+    }
 
     if (form.novopss.value == "rpc" && basepss > tetopss) {
         // Se for regime complementar e se for maior que teto.
@@ -726,7 +729,7 @@ function calcSalario(form) {
     if (form.funp_ad.value == "sim") {
         if (basepss == tetopss) {
             //Só pode ser ativo normal quem entrou depois de 02/2013 e recebe acima do teto da previdência
-            var basefunp = vencimento + jud + qualificacao - tetopss;
+            var basefunp = vencimento + gratDesemp + jud + qualificacao - tetopss;
             if (form.rpcfgcd.checked) {
                 basefunp += fungrat + cargodir;
             }
@@ -735,6 +738,9 @@ function calcSalario(form) {
             }
             if (form.rpcnoturno.checked) {
                 basefunp += noturno;
+            }
+            if (form.rpcgrat.checked) {
+                basefunp += gratGeneric;
             }
             aliqfunp = basefunp * parseFloat(form.ddFunp.value);
             if (form.name == "myform") {
@@ -881,13 +887,13 @@ function calcSalario(form) {
     
     
 
-    addDetailValue("#tabdetails-desc", formid, "PSS", valorpss);
+    addDetailValue("#tabdetails-desc", formid, "CPSS", valorpss);
     addDetailValue("#tabdetails-desc", formid, "IR", aliqirrf);
     if (aliqirrfferias > 0) addDetailValue("#tabdetails-desc", formid, "IR Férias", aliqirrfferias);
     if (aliqirrfadiant > 0) addDetailValue("#tabdetails-desc", formid, "IR Adiant.", aliqirrfadiant);
-    if (aliqpssadiant > 0) addDetailValue("#tabdetails-desc", formid, "PSS Adiant.", aliqpssadiant);
+    if (aliqpssadiant > 0) addDetailValue("#tabdetails-desc", formid, "CPSS Adiant.", aliqpssadiant);
     if (descAdiant > 0) addDetailValue("#tabdetails-desc", formid, "Adiantamento", descAdiant);
-    if (desc_13 > 0) addDetailValue("#tabdetails-desc", formid, "IR+PSS 13º", desc_13);
+    if (desc_13 > 0) addDetailValue("#tabdetails-desc", formid, "IR+CPSS 13º", desc_13);
     if (aliqfunp > 0) addDetailValue("#tabdetails-desc", formid, "Funpresp", aliqfunp);
     if (aliqFunpFacul > 0) addDetailValue("#tabdetails-desc", formid, "Funpresp-facultativo", aliqFunpFacul);
     if (sindicato > 0) addDetailValue("#tabdetails-desc", formid, "Sindicato", sindicato);
@@ -899,7 +905,7 @@ function calcSalario(form) {
     addDetailValue("#tabdetails-outros", formid, "Bruto", bruto);
     addDetailValue("#tabdetails-outros", formid, "Descontos", descontos);
     addDetailValue("#tabdetails-outros", formid, "Líquido", salario);
-    addDetailValue("#tabdetails-outros", formid, "Base PSS", basepss);
+    addDetailValue("#tabdetails-outros", formid, "Base CPSS", basepss);
     addDetailValue("#tabdetails-outros", formid, "Base IR", baseirrf);
     addDetailValue("#tabdetails-outros", formid, "Deduções IR", deducoesIrrf);
 
