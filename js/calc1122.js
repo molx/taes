@@ -495,10 +495,7 @@ function calcSalario(form) {
     }
     if (infoCarreiras[carreira].escol) {
         idxvbs = form.ddEscol.value;
-    } else if (carreira == "TAE" && form.ddClasse.value == "E") {
-        idxvbs = 1 //1 = NS
-    }
-
+    } 
     
     for (let date in infoCarreiras[carreira].vbs[idxvbs]) {
         if (date > periodo) break;
@@ -510,11 +507,15 @@ function calcSalario(form) {
     }
 
     if (form.ddGratGen.value != "0") {
-        for (let date in infoCarreiras.grats[idxvbs]) {
+        var idxGratGen = idxvbs;
+        if (carreira == "TAE" && form.ddClasse.value == "4") {
+            idxGratGen = 1 //1 = NS;
+        }
+        for (let date in infoCarreiras.grats[idxGratGen]) {
             if (date > periodo) break;
-            gratGenArray = infoCarreiras.grats[idxvbs][date];
+            gratGenArray = infoCarreiras.grats[idxGratGen][date];
             gratGeneric = gratGenArray[form.ddGratGen.value];
-            gratGenMax = infoCarreiras.gratsMax[idxvbs][date][form.ddGratGen.value];
+            gratGenMax = infoCarreiras.gratsMax[idxGratGen][date][form.ddGratGen.value];
         }
     }
 
