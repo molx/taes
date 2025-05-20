@@ -597,24 +597,6 @@ function calcSalario(form) {
         remuneracao = gratGenMax;
     }
 
-    var sindicato = 0;
-    var sindaliq = parseFloat(form.sindaliq.value) / 100;
-    if (form.ddSindTipo.value != "nao") {
-        var basesind = remuneracao;
-        if (carreira == "MF") basesind -= jud; //ADUnB não cobra sobre a Dec Jud
-        if (form.ddSindTipo.value == "vb") {
-            sindicato = vencimento * sindaliq;
-        } else if (form.ddSindTipo.value == "rem") {
-            sindicato = basesind * sindaliq;
-        } else {            
-            sindicato = 0; //?
-        }
-    }
-
-    var noturno = (remuneracao / (30 * 8 * ftcarga)) * (form.noturno.value * (60 / 52.5)) * 0.25;
-    //http://progep.sites.ufms.br/coordenadorias/administracao-de-pessoal/divisao-de-pagamento/adicional-noturno/
-    //http://www.progep.ufu.br/procedimento/adicional-noturno
-
     var tipoFG = infoCarreiras[carreira].tipoFG,
     tipoCD = infoCarreiras[carreira].tipoCD;
     for (let date in infoCarreiras.funcs) {
@@ -636,6 +618,25 @@ function calcSalario(form) {
     } else {
         cargodir = 0;
     }
+
+    var sindicato = 0;
+    var sindaliq = parseFloat(form.sindaliq.value) / 100;
+    if (form.ddSindTipo.value != "nao") {
+        var basesind = remuneracao + fungrat + cargodir;
+        if (carreira == "MF") basesind -= jud; //ADUnB não cobra sobre a Dec Jud
+        if (form.ddSindTipo.value == "vb") {
+            sindicato = vencimento * sindaliq;
+        } else if (form.ddSindTipo.value == "rem") {
+            sindicato = basesind * sindaliq;
+        } else {            
+            sindicato = 0; //?
+        }
+    }
+
+    var noturno = (remuneracao / (30 * 8 * ftcarga)) * (form.noturno.value * (60 / 52.5)) * 0.25;
+    //http://progep.sites.ufms.br/coordenadorias/administracao-de-pessoal/divisao-de-pagamento/adicional-noturno/
+    //http://www.progep.ufu.br/procedimento/adicional-noturno
+
     var basesaude = remuneracao + fungrat + cargodir - outrosRendTrib + outrosRendTribIR;
     var saude = form.saude.checked
         ? valorSaude(basesaude, parseInt(form.ddIdade.value, 10), periodo) +
