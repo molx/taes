@@ -81,7 +81,7 @@ function atualizaCarreira() {
     //Novas regras
     //$('[name^=ddPadrao]').empty();
     var pads = [];
-    $('select[name="ddPadrao"]').each(function(i, x) {pads.push($(x).val())})
+    $('select[name="ddPadrao"]').each(function(i, x) {pads.push($(x).val())});
     $('select[name="ddPadrao"]').empty().each(function() {
         infoCarreiras[carreira].niveis.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
     });
@@ -89,12 +89,20 @@ function atualizaCarreira() {
     $('.labelch').html(infoCarreiras[carreira].nomech);
     $('.labelIQRT').html(infoCarreiras[carreira].labelIQRT);
     $('.labelIQRT2').html(infoCarreiras[carreira].labelIQRT2);
+
+    var fgv = [],
+    cdv = [];
+    $('select[name="ddFG"]').each(function(i, x) {fgv.push($(x).val())});    
     $('select[name="ddFG"]').empty().each(function() {
         infoCarreiras[carreira].func.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
     });
+    $('select[name="ddFG"]').each(function(i, x) {$(x).val(fgv[i])});
+    $('select[name="ddCD"]').each(function(i, x) {cdv.push($(x).val())});
     $('select[name="ddCD"]').empty().each(function() {
         infoCarreiras[carreira].CD.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
     });
+    $('select[name="ddCD"]').each(function(i, x) {$(x).val(cdv[i])});
+
     $('.labelCD').html(infoCarreiras[carreira].tipoCD);
     $('select[name="ddCargaH"]').empty().each(function() {
         infoCarreiras[carreira].chlab.forEach((opt, i) => $(this).append(`<option value="${infoCarreiras[carreira].chval[i]}">${opt}</option>`));
