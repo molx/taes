@@ -361,7 +361,7 @@ function valorTransporte(vencimento, gasto, dias) {
     } else {
         gastodiario = Math.ceil((gasto - 1) / 0.2) * 0.2 + 1;
     }
-    auxilio = gastodiario * dias - vencimento * 0.06 * (22 / 30);
+    auxilio = (gastodiario - 0.06 * (vencimento / 30)) * dias;
     if (auxilio < 0) {
         return 0;
     } else {
