@@ -18,6 +18,16 @@
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
    <title>Sobre a Calculadora</title>
    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      const email = '&#x63;&#x6F;&#x6E;&#x74;&#x61;&#x74;&#x6F;<span style="display:none;">.nospam</span>&#x40;&#x74;&#x61;&#x65;&#x73;&#x2E;&#x63;&#x6F;&#x6D;&#x2E;&#x62;&#x72';
+      const emailElement = document.getElementById("contactmail");
+      if (emailElement) {
+         emailElement.innerHTML = email;
+      }
+  });
+
+   </script>
 </head>
 
 <body>
@@ -70,7 +80,7 @@
          </ul>
          <p class="pcarreira">
             Caso você tenha alguma sugestão, correção ou comentário a fazer sobre a calculadora, por favor entre em
-            contato pelo endereço <a href="mailto:contato@taes.com.br">contato@taes.com.br</a>. Pode ser que demore
+            contato pelo endereço <span id="contactmail" style="font-weight: bold;"></span>. Pode ser que demore
             algumas semanas para que sua mensagem seja respondida, mas em algum momento será.
          </p>
          <p class="pcarreira">
@@ -86,7 +96,7 @@
          <b>Atenção</b>: Os valores calculados aqui não podem ser considerados 100% corretos devido a possíveis erros
          nos cálculos e mudanças nas fórmulas e nos valores e alíquotas de impostos e gratificações.
          <br> Não me responsabilizo por eventuais diferenças entre a simulação e os valores reais.
-         <br>
+         <br> 
          <br> Desenvolvido por <a href="https://www.alanmol.com.br" target="_blank">Alan Mól</a> - 2013-2025
          <br> Código-fonte disponível no <a href="https://github.com/molx/taes/tree/gh-pages" target="_blank">Github</a> sob licença <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank">GNU AGPL v3</a>
       </div>
