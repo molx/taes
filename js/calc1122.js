@@ -334,14 +334,20 @@ function valorSaude(bruto, ftidade, periodo) {
 
 function valorCreche(rem, periodo, n, cota) {
     var teto = 484.90;
-    var desc = 0;    
-    if (rem < 7507.95) {
+    var desc = 0;
+    var faixas = [7507.95, 15015.90, 22523.85, 30031.80];
+    if (periodo >= 202501 & periodo < 202604) {
+        faixas = [8183.65, 16367.3, 24550.95, 32734.6];
+    } else if(periodo >= 202501) {
+        faixas = [8592.85, 17185.7, 25778.55, 34371.4];
+    }
+    if (rem < faixas[0]) {
         desc = 0.05;
-    } else if (rem <= 15015.90) {
+    } else if (rem <= faixas[1]) {
         desc = 0.1;
-    } else if (rem <= 22523.85) {
+    } else if (rem <= faixas[2]) {
         desc = 0.15;
-    } else if (rem <= 30031.80) {
+    } else if (rem <= faixas[3]) {
         desc = 0.2;
     } else {
         desc = 0.25;
