@@ -660,7 +660,7 @@ function calcSalario(form) {
           valorSaude(basesaude, parseInt(form.ddIdadeDep3.value, 10), periodo) * form.Dep3Qtd.value
         : 0;
 
-    var basecreche = vencimento + jud + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio;
+    var basecreche = vencimento + qualificacao + jud + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + cargodir + fungrat;
     //basecreche aparentemente não leva em consideração o Incentivo à Qualificação - outros a ver
     var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
     
