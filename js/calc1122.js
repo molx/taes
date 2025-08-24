@@ -794,7 +794,8 @@ function calcSalario(form) {
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
-    var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + ftinsa * vencimento + fungrat + cargodir + outrosRendTrib + outrosRendTribIR + gratDesemp+ gratGeneric;
+    var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + ftinsa * vencimento + fungrat + cargodir + 
+    outrosRendTrib + outrosRendTribIR + gratDesemp+ gratGeneric + abonoperm;
 
     //Checa e limita os valores máximos das gratificacoes que tem limite
     if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && remuneracao > gratGenMax) {
