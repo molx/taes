@@ -516,6 +516,8 @@ function calcSalario(form) {
         var idxGratGen = idxvbs;
         if (carreira == "TAE" && form.ddClasse.value == "4") {
             idxGratGen = 1 //1 = NS;
+        } else if(carreira == "MF") {
+            idxGratGen = 1 //1 = NS;
         }
         for (let date in infoCarreiras.grats[idxGratGen]) {
             if (date > periodo) break;
@@ -608,7 +610,7 @@ function calcSalario(form) {
     var remuneracao = vencimento + jud + qualificacao + ftinsa * vencimento + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribIR + gratDesemp + gratGeneric;
 
     //Checa e limita os valores máximos das gratificacoes que tem limite
-    if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && remuneracao > gratGenMax) {
+    if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && vencimento > gratGenMax) {
         remuneracao = gratGenMax;
     }
 
