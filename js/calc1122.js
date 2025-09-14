@@ -90,7 +90,7 @@ function atualizaCarreira() {
     $('.labelIQRT').html(infoCarreiras[carreira].labelIQRT);
     $('.labelIQRT2').html(infoCarreiras[carreira].labelIQRT2);
 
-    var fgv = [],
+    /*var fgv = [],
     cdv = [];
     $('select[name="ddFG"]').each(function(i, x) {fgv.push($(x).val())});    
     $('select[name="ddFG"]').empty().each(function() {
@@ -114,7 +114,10 @@ function atualizaCarreira() {
         $('select[name="ddEscol"]').parent().parent().show();
     } else {
         $('select[name="ddEscol"]').parent().parent().hide();
-    }
+    }*/
+    $('select[name="ddFuncTipo"]').empty().each(function() {
+        infoCarreiras[carreira].funcs.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
+    }).prop('selectedIndex', 0);
 
     if (carreira == "TAE") {
         //Mostra campos específicos de TAEs:
@@ -154,6 +157,29 @@ function atualizaCarreira() {
     //calcSalario(myform);
     //calcSalario(myform2);
 };
+
+function atualizaFunc(form) {
+    var $obj = $(form).find("select[name='ddFuncVal']");
+    var func = $(form).find("select[name='ddFuncTipo'] option:selected").text();
+    var vals = [];
+    if (["Não", "FCC"].includes(func)) {
+        vals = [0,0];
+    } else {
+        for (let date in infoCarreiras.funcs) {        
+            if (date > form.ddAno.value) break;
+            vals = infoCarreiras.funcs[date][func];
+        }
+    }
+    $obj.empty();
+    vals.forEach((opt, i) => $obj.append(`<option value="${i}">${i}</option>`));
+    $obj.find("option:first").remove();
+    if (["CD", "CCE"].includes(func)) {
+        $(form).find("input[name='rdCD']").parent().show();
+    } else {
+        $(form).find("input[name='rdCD']").parent().hide();
+    }
+    calcSalario(form);
+}
 
 function validateGD1(evt, form) {
     var theEvent = evt || window.event;
@@ -375,45 +401,45 @@ function valorTransporte(vencimento, gasto, dias) {
     }
 }
 
-function valorFG(FG, periodo) {
-    //FG 1-9 + FCC;
-    var FG2023 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67, 1071.67);
-    var FG2025 = Array(0, 1159.01, 779.73, 632.16, 295.2, 239.54, 175.64, 112.02, 82.86, 67.22, 1168.12);
-    var FG2026 = Array(0, 1263.32, 849.91, 689.05, 321.77, 261.1, 191.45, 122.1, 90.32, 73.27, 1273.25);
+// function valorFG(FG, periodo) {
+//     //FG 1-9 + FCC;
+//     var FG2023 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67, 1071.67);
+//     var FG2025 = Array(0, 1159.01, 779.73, 632.16, 295.2, 239.54, 175.64, 112.02, 82.86, 67.22, 1168.12);
+//     var FG2026 = Array(0, 1263.32, 849.91, 689.05, 321.77, 261.1, 191.45, 122.1, 90.32, 73.27, 1273.25);
     
-    var valor = 0;
-    if (periodo < 202501) {
-        //a partir de maio/2023
-        valor = FG2023[FG];
-    } else if (periodo < 202604) {
-        //a partir de janeiro/2025
-        valor = FG2025[FG];
-    } else {
-        //a partir de abril/2026 (as FGs na verdade mudam já em Janeiro)
-        valor = FG2026[FG];
-    }
-    return valor;
-}
+//     var valor = 0;
+//     if (periodo < 202501) {
+//         //a partir de maio/2023
+//         valor = FG2023[FG];
+//     } else if (periodo < 202604) {
+//         //a partir de janeiro/2025
+//         valor = FG2025[FG];
+//     } else {
+//         //a partir de abril/2026 (as FGs na verdade mudam já em Janeiro)
+//         valor = FG2026[FG];
+//     }
+//     return valor; 
+// }
 
-function valorCD(CD, periodo) {
-    //var CD2012 = Array(0, 8889.52, 7431.09, 5833.75, 4236.41)
-    var CD2023 = Array(0, 14686.79, 12277.25, 9638.21, 6999.17);
-    var CD2025 = Array(0, 18064.75, 14364.38, 11276.71, 7629.10);
-    var CD2026 = Array(0, 22219.64, 16806.33, 12291.61, 8315.71);
+// function valorCD(CD, periodo) {
+//     //var CD2012 = Array(0, 8889.52, 7431.09, 5833.75, 4236.41)
+//     var CD2023 = Array(0, 14686.79, 12277.25, 9638.21, 6999.17);
+//     var CD2025 = Array(0, 18064.75, 14364.38, 11276.71, 7629.10);
+//     var CD2026 = Array(0, 22219.64, 16806.33, 12291.61, 8315.71);
 
-    var valor = 0;
-    if (periodo < 202501) {
-        //a partir de maio/2023
-        valor = CD2023[CD];
-    } else if (periodo < 202604) {
-        //a partir de janeiro/2025
-        valor = CD2025[CD];
-    } else {
-       //a partir de abril/2026 (as FGs na verdade mudam já em Janeiro)
-        valor = CD2026[CD];
-    } 
-    return valor;
-}
+//     var valor = 0;
+//     if (periodo < 202501) {
+//         //a partir de maio/2023
+//         valor = CD2023[CD];
+//     } else if (periodo < 202604) {
+//         //a partir de janeiro/2025
+//         valor = CD2025[CD];
+//     } else {
+//        //a partir de abril/2026 (as FGs na verdade mudam já em Janeiro)
+//         valor = CD2026[CD];
+//     } 
+//     return valor;
+// }
 
 function valorAlim(periodo) {
     var alimentacao = 0;
@@ -425,17 +451,17 @@ function valorAlim(periodo) {
     return alimentacao;
 }
 
-function nocd(form) {
-    if (form.ddFG.value != 0) {
-        form.ddCD.value = 0;
-    }
-}
+// function nocd(form) {
+//     if (form.ddFG.value != 0) {
+//         form.ddCD.value = 0;
+//     }
+// }
 
-function nofg(form) {
-    if (form.ddCD.value != 0) {
-        form.ddFG.value = 0;
-    }
-}
+// function nofg(form) {
+//     if (form.ddCD.value != 0) {
+//         form.ddFG.value = 0;
+//     }
+// }
 
 function atualizaPold(form) {
     var pold = parseInt(form.ddPadrao.value),
@@ -614,16 +640,15 @@ function calcSalario(form) {
         remuneracao = gratGenMax;
     }
 
-    var tipoFG = infoCarreiras[carreira].tipoFG,
-    tipoCD = infoCarreiras[carreira].tipoCD;
+    /*var tipoFG = infoCarreiras[carreira].tipoFG,
+    //tipoCD = infoCarreiras[carreira].tipoCD;
     for (let date in infoCarreiras.funcs) {
         if (date > periodo) break;
         fgArray = infoCarreiras.funcs[date][tipoFG];    
         cdArray = infoCarreiras.funcs[date][tipoCD];
     } 
     var fungrat = fgArray[parseInt(form.ddFG.value, 10)],
-    cargodir = cdArray[parseInt(form.ddCD.value, 10)];
-    //var fungrat = valorFG(parseInt(form.ddFG.value, 10), periodo);
+    cargodir = cdArray[parseInt(form.ddCD.value, 10)]; 
 
     if (form.rdCD[0].checked && form.ddCD.value != "0") {
         //60%
@@ -634,12 +659,25 @@ function calcSalario(form) {
         //Subtraindo o vencimento pois ele entra na conta de qualquer jeito, mas é necessário para cálculo de adicionais. O 'cargodir' fica como um adicional da difernça entre o vencimento e o 100% do CD
     } else {
         cargodir = 0;
+    } */
+    var funcao = 0,
+    funcNome = $(form).find("select[name='ddFuncTipo'] option:selected").text();
+    for (let date in infoCarreiras.funcs) {        
+        if (date > form.ddAno.value) break;
+        if(funcNome !== "Não") {
+            funcao = infoCarreiras.funcs[date][funcNome][form.ddFuncVal.value];
+        }
     }
+    if (["CD", "CCE"].includes(funcNome) && form.rdCD[0].checked) {
+        funcao = funcao * 0.6;
+    }
+    //var fungrat = 0;
+    //var cargodir = 0;
 
     var sindicato = 0;
     var sindaliq = parseFloat(form.sindaliq.value) / 100;
     if (form.ddSindTipo.value != "nao") {
-        var basesind = remuneracao + fungrat + cargodir;
+        var basesind = remuneracao + funcao;
         if (carreira == "MF") basesind -= jud; //ADUnB não cobra sobre a Dec Jud
         if (form.ddSindTipo.value == "vb") {
             sindicato = vencimento * sindaliq;
@@ -654,7 +692,7 @@ function calcSalario(form) {
     //http://progep.sites.ufms.br/coordenadorias/administracao-de-pessoal/divisao-de-pagamento/adicional-noturno/
     //http://www.progep.ufu.br/procedimento/adicional-noturno
 
-    var basesaude = remuneracao + fungrat + cargodir - outrosRendTrib + outrosRendTribIR;
+    var basesaude = remuneracao + funcao - outrosRendTrib + outrosRendTribIR;
     var saude = form.saude.checked
         ? valorSaude(basesaude, parseInt(form.ddIdade.value, 10), periodo) +
           valorSaude(basesaude, parseInt(form.ddIdadeDep1.value, 10), periodo) +
@@ -662,7 +700,7 @@ function calcSalario(form) {
           valorSaude(basesaude, parseInt(form.ddIdadeDep3.value, 10), periodo) * form.Dep3Qtd.value
         : 0;
 
-    var basecreche = vencimento + qualificacao + jud + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + cargodir + fungrat;
+    var basecreche = vencimento + qualificacao + jud + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + funcao;
     //basecreche aparentemente não leva em consideração o Incentivo à Qualificação - outros a ver
     var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
     
@@ -690,7 +728,7 @@ function calcSalario(form) {
     descAdiant = 0;
 
     if (form.ferias.checked) {
-        ferias = (remuneracao + fungrat + cargodir) / 3;
+        ferias = (remuneracao + funcao) / 3;
         if (carreira == "MF") {
             //Terço de férias de docentes é calculado sob salário de 45 dias
             ferias = ferias * 1.5;
@@ -699,11 +737,11 @@ function calcSalario(form) {
     } 
 
     if (adiantPct > 0 && !form.adiantRest.checked) {
-        adiantamento = (remuneracao + fungrat + cargodir) * adiantPct;
+        adiantamento = (remuneracao + funcao) * adiantPct;
         aliqirrfadiant = valorIRRF(adiantamento, periodo);
         aliqpssadiant = calcPSS(periodo, adiantamento, tetopss);
     } else if (adiantPct > 0 && form.adiantRest.checked) {
-        var tempAdiant = (remuneracao + fungrat + cargodir) * adiantPct;
+        var tempAdiant = (remuneracao + funcao) * adiantPct;
         descAdiant = tempAdiant - valorIRRF(tempAdiant, periodo) - calcPSS(periodo, tempAdiant, tetopss);
     }
 
@@ -712,16 +750,16 @@ function calcSalario(form) {
     if (form.decter.checked) {
         if(form.decter_par.value == "1") {
             //Primeira parcela, metade do bruto mas sem descontos
-            decter = (remuneracao + fungrat + cargodir) / 2;
+            decter = (remuneracao + funcao) / 2;
         } else {
             //Segunda parcela, bruto mas serao calculados descontos
-            decter = remuneracao + fungrat + cargodir;
+            decter = remuneracao + funcao;
         }
     }
 
     //Checa quais opcionais deverão entrar na base do PSS
     if (form.pssfgcd.checked) {
-        basepss += fungrat + cargodir;
+        basepss += funcao;
     }
     if (form.pssrisco.checked) {
         basepss += ftinsa * vencimento;
@@ -749,7 +787,7 @@ function calcSalario(form) {
             //Só pode ser ativo normal quem entrou depois de 02/2013 e recebe acima do teto da previdência
             var basefunp = vencimento + gratDesemp + jud + qualificacao - tetopss;
             if (form.rpcfgcd.checked) {
-                basefunp += fungrat + cargodir;
+                basefunp += funcao;
             }
             if (form.rpcrisco.checked) {
                 basefunp += ftinsa * vencimento;
@@ -796,7 +834,7 @@ function calcSalario(form) {
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
-    var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + ftinsa * vencimento + fungrat + cargodir + 
+    var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + ftinsa * vencimento + funcao + 
     outrosRendTrib + outrosRendTribIR + gratDesemp+ gratGeneric + abonoperm;
 
     //Checa e limita os valores máximos das gratificacoes que tem limite
@@ -821,7 +859,7 @@ function calcSalario(form) {
 
     var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + aliqirrfadiant + aliqpssadiant + descAdiant + outrosdescsum;
 
-    var bruto = remuneracao + saude + alimentacao + transporte + creche + fungrat + cargodir + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
+    var bruto = remuneracao + saude + alimentacao + transporte + creche + funcao + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
 
     var salario = bruto - descontos;
     if (form.name == "myform") {
@@ -854,8 +892,9 @@ function calcSalario(form) {
     form.txGratGen.value = formatValor(gratGeneric);
     form.txFunp.value = formatValor(aliqfunp);
     form.txDepIRRF.value = formatValor(reducaoDepsIRRF);
-    form.txFG.value = formatValor(fungrat);
-    form.txCD.value = form.rdCD[0].checked ? formatValor(cargodir) : formatValor(cdArray[parseInt(form.ddCD.value, 10)]);
+    //form.txFG.value = formatValor(fungrat);
+    //form.txCD.value = form.rdCD[0].checked ? formatValor(cargodir) : formatValor(cdArray[parseInt(form.ddCD.value, 10)]);
+    form.txFunc.value = formatValor(funcao);
     form.txNoturno.value = formatValor(noturno);
     form.txFerias.value = formatValor(ferias);
     form.txAdiant.value = formatValor(adiantamento - descAdiant);
@@ -864,8 +903,7 @@ function calcSalario(form) {
     //form.txDesc13.value = formatValor(desc_13);
     //form.tx13.value = formatValor(decter);
     form.txDescPct.value = formatValor(outrosdescontospct);
-    form.txDescPctIsnt.value = formatValor(outrosdescontospctIsnt);
-    //form.txFunc.value = formatValor(fungrat + cargodir);
+    form.txDescPctIsnt.value = formatValor(outrosdescontospctIsnt);    
     //form.txFeriasR.value = formatValor(ferias);
 
     //Display info on Detailed Results
@@ -888,8 +926,9 @@ function calcSalario(form) {
     if (noturno > 0) addDetailValue("#tabdetails-rend", formid, "Ad. Noturno", noturno);
     if (jud > 0) addDetailValue("#tabdetails-rend", formid, "Dec. Jud.", jud);
     if (ftpg > 0) addDetailValue("#tabdetails-rend", formid, infoCarreiras[carreira].labelIQRT, vencimento * ftpg);
-    if (fungrat > 0) addDetailValue("#tabdetails-rend", formid, "FG", fungrat);
-    if (cargodir > 0) addDetailValue("#tabdetails-rend", formid, "CD", cargodir);
+    //if (fungrat > 0) addDetailValue("#tabdetails-rend", formid, "FG", fungrat);
+    //if (cargodir > 0) addDetailValue("#tabdetails-rend", formid, "CD", cargodir);
+    if (funcao > 0) addDetailValue("#tabdetails-rend", formid, "Função", funcao);
     if (anuenio > 0) addDetailValue("#tabdetails-rend", formid, "Anuênio", anuenio);
     if (ftinsa > 0) addDetailValue("#tabdetails-rend", formid, "Insalubridade", ftinsa * vencimento);
     if (saude > 0) addDetailValue("#tabdetails-rend", formid, "Saúde Sup.", saude);

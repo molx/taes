@@ -390,6 +390,16 @@
                             <br>
                             <div>
                                 <label>
+                                    <span class="labelfunc">Função</span>:
+                                    <select name="ddFuncTipo" id="ddFuncTipo1" onchange="atualizaFunc(this.form);">                                        
+                                    </select>
+                                    <select name="ddFuncVal" id="ddFuncVal1" onchange="calcSalario(this.form);" style="width:42px">  
+                                        <option value="0" selected>1</option>                                      
+                                    </select>
+                                    <input type="text" name="txFunc" id="txFunc1" value="R$ 0,00" readonly />
+                                </label>
+                            <!--<div>
+                                <label>
                                     <span class="labelfg">Função</span>:
                                     <select name="ddFG" id="ddFG1" onchange="nocd(this.form);calcSalario(this.form);">
                                         <option value="0" selected>
@@ -446,6 +456,8 @@
                                             CD-4
                                         </option>
                                     </select>
+                                -->
+                                </div><div>
                                     <input type="radio" name="rdCD" id="rdCD11" value="0.6"
                                         onClick="calcSalario(this.form);" onKeyPress="calcSalario(this.form);"
                                         onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" checked />
@@ -455,7 +467,7 @@
                                         onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />100%
                                     <input type="text" name="txCD" value="R$ 0,00" readonly />
                                 </label>
-                            </div>
+                            </div><br>
                             <div style="margin-right: 20px;">
                                 <label>
                                     Anuênio:
@@ -1356,6 +1368,16 @@
                             <br>
                             <div>
                                 <label>
+                                    <span class="labelfunc">Função</span>:
+                                    <select name="ddFuncTipo" id="ddFuncTipo2" onchange="atualizaFunc(this.form);">                                        
+                                    </select>
+                                    <select name="ddFuncVal" id="ddFuncVal2" onchange="calcSalario(this.form);" style="width:42px">
+                                        <option value="0" selected>1</option>
+                                    </select>
+                                    <input type="text" name="txFunc" id="txFunc2" value="R$ 0,00" readonly />
+                                </label>
+                            <!--<div>
+                                <label>
                                     <span class="labelfg">Função</span>:
                                     <select name="ddFG" id="ddFG2" onchange="nocd(this.form);calcSalario(this.form);">
                                         <option value="0" selected>
@@ -1412,6 +1434,8 @@
                                             CD-4
                                         </option>
                                     </select>
+                                -->
+                                </div><div>
                                     <input type="radio" name="rdCD" id="rdCD12" value="0.6"
                                         onClick="calcSalario(this.form);" onKeyPress="calcSalario(this.form);"
                                         onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" checked />
@@ -1419,7 +1443,7 @@
                                     <input type="radio" name="rdCD" id="rdCD22" value="1"
                                         onClick="calcSalario(this.form);" onKeyPress="calcSalario(this.form);"
                                         onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />100%
-                                    <input type="text" name="txCD" value="R$ 0,00" readonly />
+                                    <!--<input type="text" name="txCD" value="R$ 0,00" readonly />-->
                                 </label>
                             </div>
                             <div style="margin-right: 20px;">
