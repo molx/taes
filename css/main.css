@@ -452,6 +452,7 @@ ul {
 
 .tab-details {
     display: none;
+	padding: 5px;
 }
 
 .tab-details > h4 {
