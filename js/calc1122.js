@@ -584,10 +584,11 @@ function calcSalario(form) {
         alimentacao = alimentacao / 2;
     }
 
-    var transporte = form.trans.checked ? valorTransporte(vencimento, form.gastoTrans.value, form.diasTrans.value) : 0;
-    var ftinsa = form.ddInsa.value;
-    var ftpg = calcfatorpg(form.ddQuali.value, true, carreira == "MF", ftcarga);
-    var jud = 0;
+    var transporte = form.trans.checked ? valorTransporte(vencimento, form.gastoTrans.value, form.diasTrans.value) : 0,
+    ftinsa = form.ddInsa.value,
+    valinsa = ftinsa * vencimento,
+    ftpg = calcfatorpg(form.ddQuali.value, true, carreira == "MF", ftcarga),
+    jud = 0;
     $('form[name="' + form.name + '"] label[name="numJudview"]').css("visibility", "hidden");
     //form.numJudview.style.visibility = "hidden";
     if (form.ddJud.value == 1) {
@@ -633,7 +634,7 @@ function calcSalario(form) {
     var outrosRendTribIR = parseFloat(form.numOutrosRendTribIR.value) || 0;
     var outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
-    var remuneracao = vencimento + jud + qualificacao + ftinsa * vencimento + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribIR + gratDesemp + gratGeneric;
+    var remuneracao = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribIR + gratDesemp + gratGeneric;
 
     //Checa e limita os valores máximos das gratificacoes que tem limite
     if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && vencimento > gratGenMax) {
@@ -661,18 +662,30 @@ function calcSalario(form) {
         cargodir = 0;
     } */
     var funcao = 0,
+    funcaoDisp = 0
+    funcaoSubst = false,
     funcNome = $(form).find("select[name='ddFuncTipo'] option:selected").text();
     for (let date in infoCarreiras.funcs) {        
         if (date > form.ddAno.value) break;
         if(funcNome !== "Não") {
             funcao = infoCarreiras.funcs[date][funcNome][form.ddFuncVal.value];
+            funcaoDisp = funcao;
         }
     }
-    if (["CD", "CCE"].includes(funcNome) && form.rdCD[0].checked) {
-        funcao = funcao * 0.6;
+    $('form[name="' + form.name + '"] [name="txVB"]').removeAttr('style');
+    $('form[name="' + form.name + '"] [name="txQualif"]').removeAttr('style');
+    if (["CD", "CCE"].includes(funcNome)) {
+        if (form.rdCD[0].checked) {
+            funcao = funcao * 0.6;
+            funcaoDisp = funcao;
+        } else {            
+            remuneracao = funcao;
+            funcao = 0;
+            funcaoSubst = true;
+            $('form[name="' + form.name + '"] [name="txVB"]').css({"text-decoration": "line-through", "color": "red"});
+            $('form[name="' + form.name + '"] [name="txQualif"]').css({"text-decoration": "line-through", "color": "red"}); 
+        }        
     }
-    //var fungrat = 0;
-    //var cargodir = 0;
 
     var sindicato = 0;
     var sindaliq = parseFloat(form.sindaliq.value) / 100;
@@ -688,11 +701,11 @@ function calcSalario(form) {
         }
     }
 
-    var noturno = (remuneracao / (30 * 8 * ftcarga)) * (form.noturno.value * (60 / 52.5)) * 0.25;
+    var noturno = ((remuneracao + valinsa) / (30 * 8 * ftcarga)) * (form.noturno.value * (60 / 52.5)) * 0.25;
     //http://progep.sites.ufms.br/coordenadorias/administracao-de-pessoal/divisao-de-pagamento/adicional-noturno/
     //http://www.progep.ufu.br/procedimento/adicional-noturno
 
-    var basesaude = remuneracao + funcao - outrosRendTrib + outrosRendTribIR;
+    var basesaude = remuneracao + valinsa + funcao - outrosRendTrib + outrosRendTribIR;
     var saude = form.saude.checked
         ? valorSaude(basesaude, parseInt(form.ddIdade.value, 10), periodo) +
           valorSaude(basesaude, parseInt(form.ddIdadeDep1.value, 10), periodo) +
@@ -700,12 +713,12 @@ function calcSalario(form) {
           valorSaude(basesaude, parseInt(form.ddIdadeDep3.value, 10), periodo) * form.Dep3Qtd.value
         : 0;
 
-    var basecreche = vencimento + qualificacao + jud + Math.floor(ftinsa * vencimento * 100) / 100 + anuenio + funcao;
+    var basecreche = vencimento + qualificacao + jud + Math.floor(valinsa * 100) / 100 + anuenio + funcao;
     //basecreche aparentemente não leva em consideração o Incentivo à Qualificação - outros a ver
     var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
     
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
-    var basepss = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + gratDesemp;
+    var basepss = remuneracao;
     var tetopss = 4663.75;
 
     if (periodo < 202501) {
@@ -728,7 +741,7 @@ function calcSalario(form) {
     descAdiant = 0;
 
     if (form.ferias.checked) {
-        ferias = (remuneracao + funcao) / 3;
+        ferias = (remuneracao + valinsa + funcao) / 3;
         if (carreira == "MF") {
             //Terço de férias de docentes é calculado sob salário de 45 dias
             ferias = ferias * 1.5;
@@ -737,11 +750,11 @@ function calcSalario(form) {
     } 
 
     if (adiantPct > 0 && !form.adiantRest.checked) {
-        adiantamento = (remuneracao + funcao) * adiantPct;
+        adiantamento = (remuneracao + valinsa + funcao) * adiantPct;
         aliqirrfadiant = valorIRRF(adiantamento, periodo);
         aliqpssadiant = calcPSS(periodo, adiantamento, tetopss);
     } else if (adiantPct > 0 && form.adiantRest.checked) {
-        var tempAdiant = (remuneracao + funcao) * adiantPct;
+        var tempAdiant = (remuneracao + valinsa + funcao) * adiantPct;
         descAdiant = tempAdiant - valorIRRF(tempAdiant, periodo) - calcPSS(periodo, tempAdiant, tetopss);
     }
 
@@ -750,10 +763,10 @@ function calcSalario(form) {
     if (form.decter.checked) {
         if(form.decter_par.value == "1") {
             //Primeira parcela, metade do bruto mas sem descontos
-            decter = (remuneracao + funcao) / 2;
+            decter = (remuneracao + valinsa + funcao) / 2;
         } else {
             //Segunda parcela, bruto mas serao calculados descontos
-            decter = remuneracao + funcao;
+            decter = remuneracao + valinsa + funcao;
         }
     }
 
@@ -762,7 +775,7 @@ function calcSalario(form) {
         basepss += funcao;
     }
     if (form.pssrisco.checked) {
-        basepss += ftinsa * vencimento;
+        basepss += valinsa;
     }
     if (form.pssnoturno.checked) {
         basepss += noturno;
@@ -786,11 +799,12 @@ function calcSalario(form) {
         if (basepss == tetopss) {
             //Só pode ser ativo normal quem entrou depois de 02/2013 e recebe acima do teto da previdência
             var basefunp = vencimento + gratDesemp + jud + qualificacao - tetopss;
+            if (funcaoSubst) basefunp = remuneracao;
             if (form.rpcfgcd.checked) {
                 basefunp += funcao;
             }
             if (form.rpcrisco.checked) {
-                basefunp += ftinsa * vencimento;
+                basefunp += valinsa;
             }
             if (form.rpcnoturno.checked) {
                 basefunp += noturno;
@@ -823,10 +837,10 @@ function calcSalario(form) {
     }
 
     var outrosdescontos = parseFloat(form.numOutros.value) || 0;
-    var outrosdescontospct = ((parseInt(form.numOutrosPct.value) || 0) / 100 ) * remuneracao;
+    var outrosdescontospct = ((parseInt(form.numOutrosPct.value) || 0) / 100 ) * (remuneracao + valinsa);
 
     var outrosdescontosIsnt = parseFloat(form.numOutrosIsnt.value) || 0;
-    var outrosdescontospctIsnt = ((parseInt(form.numOutrosPctIsnt.value) || 0) / 100 ) * remuneracao;
+    var outrosdescontospctIsnt = ((parseInt(form.numOutrosPctIsnt.value) || 0) / 100 ) * (remuneracao + valinsa);
 
     var outrosdescsum = outrosdescontos + outrosdescontospct + outrosdescontosIsnt + outrosdescontospctIsnt;
 
@@ -834,12 +848,14 @@ function calcSalario(form) {
 
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
-    var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + ftinsa * vencimento + funcao + 
+    var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + valinsa + funcao + 
     outrosRendTrib + outrosRendTribIR + gratDesemp+ gratGeneric + abonoperm;
 
     //Checa e limita os valores máximos das gratificacoes que tem limite
     if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && remuneracao > gratGenMax) {
         rendTributavel = gratGenMax;
+    } else if (funcaoSubst) {
+        rendTributavel = remuneracao;
     }
 
     var deducoesIrrf = valorpss + aliqfunp + aliqFunpFacul + reducaoDepsIRRF + outrosdescontosIsnt + outrosdescontospctIsnt;
@@ -859,7 +875,7 @@ function calcSalario(form) {
 
     var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + aliqirrfadiant + aliqpssadiant + descAdiant + outrosdescsum;
 
-    var bruto = remuneracao + saude + alimentacao + transporte + creche + funcao + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
+    var bruto = remuneracao + valinsa + saude + alimentacao + transporte + creche + funcao + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
 
     var salario = bruto - descontos;
     if (form.name == "myform") {
@@ -875,7 +891,7 @@ function calcSalario(form) {
     $('#diffLiqPor').html(((100 * liq2) / liq1).toFixed(0) + "%");
     form.txVB.value = formatValor(vencimento);
     form.txResult.value = formatValor(salario);
-    form.txInsa.value = formatValor(ftinsa * vencimento);
+    form.txInsa.value = formatValor(valinsa);
     form.txInss.value = formatValor(valorpss);
     form.txBruto.value = formatValor(bruto);
     form.txIrrf.value = formatValor(aliqirrf);
@@ -894,7 +910,7 @@ function calcSalario(form) {
     form.txDepIRRF.value = formatValor(reducaoDepsIRRF);
     //form.txFG.value = formatValor(fungrat);
     //form.txCD.value = form.rdCD[0].checked ? formatValor(cargodir) : formatValor(cdArray[parseInt(form.ddCD.value, 10)]);
-    form.txFunc.value = formatValor(funcao);
+    form.txFunc.value = formatValor(funcaoDisp);
     form.txNoturno.value = formatValor(noturno);
     form.txFerias.value = formatValor(ferias);
     form.txAdiant.value = formatValor(adiantamento - descAdiant);
@@ -928,9 +944,9 @@ function calcSalario(form) {
     if (ftpg > 0) addDetailValue("#tabdetails-rend", formid, infoCarreiras[carreira].labelIQRT, vencimento * ftpg);
     //if (fungrat > 0) addDetailValue("#tabdetails-rend", formid, "FG", fungrat);
     //if (cargodir > 0) addDetailValue("#tabdetails-rend", formid, "CD", cargodir);
-    if (funcao > 0) addDetailValue("#tabdetails-rend", formid, "Função", funcao);
+    if (funcaoDisp > 0) addDetailValue("#tabdetails-rend", formid, "Função", funcaoDisp);
     if (anuenio > 0) addDetailValue("#tabdetails-rend", formid, "Anuênio", anuenio);
-    if (ftinsa > 0) addDetailValue("#tabdetails-rend", formid, "Insalubridade", ftinsa * vencimento);
+    if (valinsa > 0) addDetailValue("#tabdetails-rend", formid, "Insalubridade", valinsa);
     if (saude > 0) addDetailValue("#tabdetails-rend", formid, "Saúde Sup.", saude);
     if (diffPisoEnf > 0) addDetailValue("#tabdetails-rend", formid, "Dif. Piso Enf.", diffPisoEnf);
     if (outrosRendIsnt > 0) addDetailValue("#tabdetails-rend", formid, "Outros Isen.", outrosRendIsnt);
