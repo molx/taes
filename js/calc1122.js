@@ -446,8 +446,10 @@ function valorAlim(periodo) {
     var alimentacao = 0;
     if (periodo < 202305) {
         alimentacao = 658;
-    } else  {
+    } else if (periodo < 202512)  {
         alimentacao = 1000;
+    } else {
+        alimentacao = 1175;
     }
     return alimentacao;
 }
