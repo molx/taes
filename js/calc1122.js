@@ -632,10 +632,10 @@ function calcSalario(form) {
     }
 
     var outrosRendTrib = parseFloat(form.numOutrosRendTrib.value) || 0;
-    var outrosRendTribIR = parseFloat(form.numOutrosRendTribIR.value) || 0;
+    var outrosRendTribPSS = parseFloat(form.numoutrosRendTribPSS.value) || 0;
     var outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
-    var remuneracao = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribIR + gratDesemp + gratGeneric;
+    var remuneracao = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribPSS + gratDesemp + gratGeneric;
 
     //Checa e limita os valores máximos das gratificacoes que tem limite
     if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && vencimento > gratGenMax) {
@@ -706,7 +706,7 @@ function calcSalario(form) {
     //http://progep.sites.ufms.br/coordenadorias/administracao-de-pessoal/divisao-de-pagamento/adicional-noturno/
     //http://www.progep.ufu.br/procedimento/adicional-noturno
 
-    var basesaude = remuneracao + valinsa + funcao - outrosRendTrib + outrosRendTribIR;
+    var basesaude = remuneracao + valinsa + funcao - outrosRendTrib + outrosRendTribPSS;
     var saude = form.saude.checked
         ? valorSaude(basesaude, parseInt(form.ddIdade.value, 10), periodo) +
           valorSaude(basesaude, parseInt(form.ddIdadeDep1.value, 10), periodo) +
@@ -719,7 +719,8 @@ function calcSalario(form) {
     var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
     
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
-    var basepss = remuneracao;
+    //Subtrair também os rendimentos tributaveis mas isentos de PSS
+    var basepss = remuneracao - outrosRendTribPSS;
     var tetopss = 4663.75;
 
     if (periodo < 202501) {
@@ -850,7 +851,7 @@ function calcSalario(form) {
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
     var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + valinsa + funcao + 
-    outrosRendTrib + outrosRendTribIR + gratDesemp+ gratGeneric + abonoperm;
+    outrosRendTrib + outrosRendTribPSS + gratDesemp+ gratGeneric + abonoperm;
 
     //Checa e limita os valores máximos das gratificacoes que tem limite
     if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && remuneracao > gratGenMax) {
@@ -952,7 +953,7 @@ function calcSalario(form) {
     if (diffPisoEnf > 0) addDetailValue("#tabdetails-rend", formid, "Dif. Piso Enf.", diffPisoEnf);
     if (outrosRendIsnt > 0) addDetailValue("#tabdetails-rend", formid, "Outros Isen.", outrosRendIsnt);
     if (outrosRendTrib > 0) addDetailValue("#tabdetails-rend", formid, "Outros Trib.", outrosRendTrib);
-    if (outrosRendTribIR > 0) addDetailValue("#tabdetails-rend", formid, "Outros Trib.", outrosRendTribIR);
+    if (outrosRendTribPSS > 0) addDetailValue("#tabdetails-rend", formid, "Outros Trib.", outrosRendTribPSS);
     if (abonoperm > 0) addDetailValue("#tabdetails-rend", formid, "Abono Perm.", abonoperm);
     if (ferias > 0) addDetailValue("#tabdetails-rend", formid, "1/3 Férias", ferias);
     if (adiantamento > 0) addDetailValue("#tabdetails-rend", formid, "Adiantamento", adiantamento);
