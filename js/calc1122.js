@@ -104,9 +104,7 @@ function atualizaCarreira() {
     $('select[name="ddCD"]').each(function(i, x) {$(x).val(cdv[i])});
 
     $('.labelCD').html(infoCarreiras[carreira].tipoCD);
-    $('select[name="ddCargaH"]').empty().each(function() {
-        infoCarreiras[carreira].chlab.forEach((opt, i) => $(this).append(`<option value="${infoCarreiras[carreira].chval[i]}">${opt}</option>`));
-    });
+    */
     if (infoCarreiras[carreira].escol) {
         $('select[name="ddEscol"]').empty().each(function() {
             infoCarreiras[carreira].escol.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
@@ -114,7 +112,10 @@ function atualizaCarreira() {
         $('select[name="ddEscol"]').parent().parent().show();
     } else {
         $('select[name="ddEscol"]').parent().parent().hide();
-    }*/
+    }
+    $('select[name="ddCargaH"]').empty().each(function() {
+        infoCarreiras[carreira].chlab.forEach((opt, i) => $(this).append(`<option value="${infoCarreiras[carreira].chval[i]}">${opt}</option>`));
+    });
     $('select[name="ddFuncTipo"]').empty().each(function() {
         infoCarreiras[carreira].funcs.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
     }).prop('selectedIndex', 0);
