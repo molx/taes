@@ -208,8 +208,9 @@ function formatValor(valor) {
     return "R$ " + valor.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-function valorIRRF(base, periodo) {
+function valorIRRF(base, periodo, deducoes) {
     var aliquota = 0;
+    var desconto = 0;
     if (periodo < 202505) {
         if (base <= 2259.20) {
             aliquota = 0;
@@ -235,7 +236,16 @@ function valorIRRF(base, periodo) {
             aliquota = base * 0.275 - 908.73;
         }
     }
-    return Math.floor(aliquota * 100) / 100;
+    //Regras isenção e desconto 
+    if (periodo >= 202601) {
+        if ((base + deducoes) <= 5000.00) {
+            desconto = aliquota;
+        } else if ((base + deducoes) < 7350.00) {
+            desconto = 978.62 - 0.133145 * (base + deducoes);
+        }
+    }
+    aliquota = aliquota - desconto;
+    return [Math.floor(aliquota * 100) / 100, desconto];
 }
 
 function calcPSS(periodo, base, teto) {
@@ -750,16 +760,16 @@ function calcSalario(form) {
             //Terço de férias de docentes é calculado sob salário de 45 dias
             ferias = ferias * 1.5;
         }
-        aliqirrfferias = valorIRRF(ferias - deducaoSimp, periodo);
+        aliqirrfferias = valorIRRF(ferias - deducaoSimp, periodo, deducaoSimp)[0];
     } 
 
     if (adiantPct > 0 && !form.adiantRest.checked) {
         adiantamento = (remuneracao + valinsa + funcao) * adiantPct;
-        aliqirrfadiant = valorIRRF(adiantamento, periodo);
+        aliqirrfadiant = valorIRRF(adiantamento, periodo)[0];
         aliqpssadiant = calcPSS(periodo, adiantamento, tetopss);
     } else if (adiantPct > 0 && form.adiantRest.checked) {
         var tempAdiant = (remuneracao + valinsa + funcao) * adiantPct;
-        descAdiant = tempAdiant - valorIRRF(tempAdiant, periodo) - calcPSS(periodo, tempAdiant, tetopss);
+        descAdiant = tempAdiant - valorIRRF(tempAdiant, periodo, deducaoSimp)[0] - calcPSS(periodo, tempAdiant, tetopss);
     }
 
     var decter = 0;
@@ -868,12 +878,15 @@ function calcSalario(form) {
 
     //Checa se a deducao calculada é menor que o valor da simplificada
     //Valor da deducao é definido acima para uso em férias também
+    //Lei 9.250/95, Art. 4, § 2º: deve ser usada a maior deducação mensal entre a calculada e a simplificada 
 
     if (deducoesIrrf < deducaoSimp) {
         baseirrf = rendTributavel - deducaoSimp;
     }
 
-    var aliqirrf = valorIRRF(baseirrf, periodo);
+    var valsirrf = valorIRRF(baseirrf, periodo, Math.max(deducoesIrrf, deducaoSimp)),
+    aliqirrf = valsirrf[0],
+    descIrrf = valsirrf[1];    
 
     var desc_13 = form.decter.checked && form.decter_par.value == "2" ? aliqirrf + valorpss + aliqfunp + aliqFunpFacul + decter/2 : 0;
 
@@ -984,9 +997,10 @@ function calcSalario(form) {
     addDetailValue("#tabdetails-outros", formid, "Descontos", descontos);
     addDetailValue("#tabdetails-outros", formid, "Líquido", salario);
     addDetailValue("#tabdetails-outros", formid, "Base CPSS", basepss);
+    addDetailValue("#tabdetails-outros", formid, "Rend. Trib.", rendTributavel);
+    addDetailValue("#tabdetails-outros", formid, "Deduções IR", Math.max(deducoesIrrf, deducaoSimp));
     addDetailValue("#tabdetails-outros", formid, "Base IR", baseirrf);
-    addDetailValue("#tabdetails-outros", formid, "Deduções IR", deducoesIrrf);
-
+    addDetailValue("#tabdetails-outros", formid, "Desc. IR", descIrrf);
 
     //cdorfg(form);
     saveStorage();
