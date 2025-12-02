@@ -1049,11 +1049,21 @@ function inverterform(tipo) {
     if (tipo == "inverter") {
         fillform(form1, fields.myform2);
         fillform(form2, fields.myform);
+        atualizaFunc(form1);
+        //Campos de func precisam ser atualizados manualmente pois os valores são dependentes do tipo de função
+        form1.ddFuncVal.value = fields.myform2.ddFuncVal;
+        atualizaFunc(form2);
+        form2.ddFuncVal.value = fields.myform.ddFuncVal;
     } else if (tipo == "cima") {
         fillform(form1, fields.myform2);
+        atualizaFunc(form1);
+        form1.ddFuncVal.value = fields.myform2.ddFuncVal;
     } else {
         fillform(form2, fields.myform);
+        atualizaFunc(form2);
+        form2.ddFuncVal.value = fields.myform.ddFuncVal;
     }
+    
 
     updateQuali(form1, form1.ddClasse.value);
     updateQuali(form2, form2.ddClasse.value);
