@@ -1000,7 +1000,7 @@ function calcSalario(form) {
     addDetailValue("#tabdetails-outros", formid, "Rend. Trib.", rendTributavel);
     addDetailValue("#tabdetails-outros", formid, "Deduções IR", Math.max(deducoesIrrf, deducaoSimp));
     addDetailValue("#tabdetails-outros", formid, "Base IR", baseirrf);
-    addDetailValue("#tabdetails-outros", formid, "Desc. IR", descIrrf);
+    addDetailValue("#tabdetails-outros", formid, "Desconto IR", descIrrf);
 
     //cdorfg(form);
     saveStorage();
