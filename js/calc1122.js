@@ -244,7 +244,7 @@ function valorIRRF(base, periodo, deducoes) {
             desconto = 978.62 - 0.133145 * (base + deducoes);
         }
     }
-    aliquota = aliquota - desconto;
+    aliquota = aliquota - desconto > 0 ? aliquota - desconto : 0;
     return [Math.floor(aliquota * 100) / 100, desconto];
 }
 
