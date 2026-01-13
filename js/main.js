@@ -17,7 +17,7 @@ function saveStorage() {
     //localStorage.setItem('rdMF', $('#rdMF').prop("checked"));
 }
 
-function loadStorage() {
+function loadStorage(urlonly = false) {
     let params = new URLSearchParams(window.location.search);
     let compressed = params.get('data');
     if (compressed) {
@@ -26,15 +26,19 @@ function loadStorage() {
         Object.entries(restoredStorage).forEach(([key, value]) => {
             localStorage.setItem(key, value);
         });
-    } 
-    $.each(localStorage, function(key, val) {
-        var ptype = $('#' + key).prop("type");
-        if (ptype && ptype == "radio" || ptype == "checkbox") {
-            $('#' + key).prop("checked", val == 'true');
-        } else {
-            $('#' + key).val(val);
-        }
-    });    
+    }
+    if (!urlonly) { 
+        //urlnonly baixa os dados da URL para o localstorage sem atualizar os campos para evitar
+        //         erros caso a DOM não esteja compatível com a carreira do storage
+        $.each(localStorage, function(key, val) {
+            var ptype = $('#' + key).prop("type");
+            if (ptype && ptype == "radio" || ptype == "checkbox") {
+                $('#' + key).prop("checked", val == 'true');
+            } else {
+                $('#' + key).val(val);
+            }
+        });   
+    }
 }
 
 function exportStorage() {
@@ -103,11 +107,20 @@ $(document).ready(function() {
     );
 
 	$.getJSON('js/carreiras.json', function(data) {        
-        infoCarreiras = data;
         //Espera carregar os dados e executa os cálculos pela 1a vez
-        loadStorage();        
+        infoCarreiras = data;
+        
+        //1. Carrega o Storage para baixar dados da URL caso existam, sem atualizar DOM
+        loadStorage(true);
+        //2. Atualiza carreira manualmente do storage
+        $('#selCarreira').val(localStorage.selCarreira || 'TAE');
+        //3. Atualiza a UI com a carreira correta carregada
         atualizaCarreira();
-       
+        //4. Carrega o storage novamente, agora com a carreira e a DOM selecionadas para atualizar os campos
+        loadStorage(false);        
+        //Por último calcula tudo
+        calcSalario(myform);
+        calcSalario(myform2);
     });
     //Primeira execução ocorre após o load de carreiras.json
     // calcSalario(myform);

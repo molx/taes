@@ -81,30 +81,19 @@ function atualizaCarreira() {
     //Novas regras
     //$('[name^=ddPadrao]').empty();
     var pads = [];
-    $('select[name="ddPadrao"]').each(function(i, x) {pads.push($(x).val())});
+    $('select[name="ddPadrao"]').each(function(i, x) {pads.push($(x)[0].selectedIndex)});
     $('select[name="ddPadrao"]').empty().each(function() {
         infoCarreiras[carreira].niveis.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
     });
-    $('select[name="ddPadrao"]').each(function(i, x) {$(x).val(pads[i])});
+    pads.forEach(function(x, i) {
+        var el = $('select[name="ddPadrao"]')[i];
+        el.selectedIndex = Math.min(x, el.length-1)
+    });
+
     $('.labelch').html(infoCarreiras[carreira].nomech);
     $('.labelIQRT').html(infoCarreiras[carreira].labelIQRT);
     $('.labelIQRT2').html(infoCarreiras[carreira].labelIQRT2);
 
-    /*var fgv = [],
-    cdv = [];
-    $('select[name="ddFG"]').each(function(i, x) {fgv.push($(x).val())});    
-    $('select[name="ddFG"]').empty().each(function() {
-        infoCarreiras[carreira].func.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
-    });
-    $('select[name="ddFG"]').each(function(i, x) {$(x).val(fgv[i])});
-    $('select[name="ddCD"]').each(function(i, x) {cdv.push($(x).val())});
-    $('select[name="ddCD"]').empty().each(function() {
-        infoCarreiras[carreira].CD.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
-    });
-    $('select[name="ddCD"]').each(function(i, x) {$(x).val(cdv[i])});
-
-    $('.labelCD').html(infoCarreiras[carreira].tipoCD);
-    */
     if (infoCarreiras[carreira].escol) {
         $('select[name="ddEscol"]').empty().each(function() {
             infoCarreiras[carreira].escol.forEach((opt, i) => $(this).append(`<option value="${i}">${opt}</option>`));
