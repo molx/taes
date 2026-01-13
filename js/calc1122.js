@@ -272,7 +272,7 @@ function calcPSS(periodo, base, teto) {
         } else {
             valor = base * 0.22 - 2713.47;
         }
-    } else { //2025
+    } else if (periodo < 202601) { //2025
         if (base <= 1518.00) {
             //salario minimo
             valor = 0.075 * base;
@@ -291,6 +291,26 @@ function calcPSS(periodo, base, teto) {
             valor = base * 0.19 - 1209.05;
         } else {
             valor = base * 0.22 - 2843.48;
+        }
+    } else { //2026
+        if (base <= 1621.00) {
+            //salario minimo
+            valor = 0.075 * base;
+        } else if (base <= 2902.84) {
+            valor = base * 0.09 - 24.32;
+        } else if (base <=  4354.27) {
+            valor = base * 0.12 - 111.40;
+        } else if (base <=  8475.55) {
+            //teto
+            valor = base * 0.14 - 198.49;
+        } else if (base <=  14514.30) {
+            valor = base * 0.145 - 240.86;
+        } else if (base <=  29028.57) {
+            valor = base * 0.165 - 531.15;
+        } else if (base <= 56605.73) {
+            valor = base * 0.19 -1256.86;
+        } else {
+            valor = base * 0.22 - 2955.04;
         }
     }
     return Math.floor(valor * 100) / 100;
@@ -747,8 +767,10 @@ function calcSalario(form) {
 
     if (periodo < 202501) {
         tetopss = 7786.02;
-    } else {
+    } else if (periodo < 202601) {
         tetopss = 8157.41;
+    } else {
+        tetopss = 8475.55;
     }
 
     var deducaoSimp = 564.80
