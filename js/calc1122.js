@@ -240,70 +240,84 @@ function valorIRRF(base, periodo, deducoes) {
     return [Math.floor(aliquota * 100) / 100, desconto];
 }
 
-function calcPSS(periodo, base, teto) {
-    var valor = 0;
-    if (periodo < 202501) { //2024
-        if (base <= 1412.00) {
-            //salario minimo
-            valor = 0.075 * base;
-        } else if (base <= 2666.68) {
-            valor = base * 0.09 - 21.18;
-        } else if (base <= 4000.03) {
-            valor = base * 0.12 - 101.18;
-        } else if (base <= 7786.02) {
-            //teto
-            valor = base * 0.14 - 181.18;
-        } else if (base <= 13333.48) {
-            valor = base * 0.145 - 220.11;
-        } else if (base <= 26666.94) {
-            valor = base * 0.165 - 486.78;
-        } else if (base <= 52000.54) {
-            valor = base * 0.19 - 1153.46;
-        } else {
-            valor = base * 0.22 - 2713.47;
-        }
-    } else if (periodo < 202601) { //2025
-        if (base <= 1518.00) {
-            //salario minimo
-            valor = 0.075 * base;
-        } else if (base <= 2793.88) {
-            valor = base * 0.09 - 22.77;
-        } else if (base <= 4190.83) {
-            valor = base * 0.12 - 106.59;
-        } else if (base <= 8157.41) {
-            //teto
-            valor = base * 0.14 - 190.40;
-        } else if (base <= 13969.49) {
-            valor = base * 0.145 - 231.19;
-        } else if (base <= 27938.95) {
-            valor = base * 0.165 - 510.58;
-        } else if (base <= 54480.97) {
-            valor = base * 0.19 - 1209.05;
-        } else {
-            valor = base * 0.22 - 2843.48;
-        }
-    } else { //2026
-        if (base <= 1621.00) {
-            //salario minimo
-            valor = 0.075 * base;
-        } else if (base <= 2902.84) {
-            valor = base * 0.09 - 24.32;
-        } else if (base <=  4354.27) {
-            valor = base * 0.12 - 111.40;
-        } else if (base <=  8475.55) {
-            //teto
-            valor = base * 0.14 - 198.49;
-        } else if (base <=  14514.30) {
-            valor = base * 0.145 - 240.86;
-        } else if (base <=  29028.57) {
-            valor = base * 0.165 - 531.15;
-        } else if (base <= 56605.73) {
-            valor = base * 0.19 -1256.86;
-        } else {
-            valor = base * 0.22 - 2955.04;
-        }
-    }
-    return Math.floor(valor * 100) / 100;
+function calcPSS(periodo, basepss) {
+    // var valor = 0;
+    // if (periodo < 202501) { //2024
+    //     if (base <= 1412.00) {
+    //         //salario minimo
+    //         valor = 0.075 * base;
+    //     } else if (base <= 2666.68) {
+    //         valor = base * 0.09 - 21.18;
+    //     } else if (base <= 4000.03) {
+    //         valor = base * 0.12 - 101.18;
+    //     } else if (base <= 7786.02) {
+    //         //teto
+    //         valor = base * 0.14 - 181.18;
+    //     } else if (base <= 13333.48) {
+    //         valor = base * 0.145 - 220.11;
+    //     } else if (base <= 26666.94) {
+    //         valor = base * 0.165 - 486.78;
+    //     } else if (base <= 52000.54) {
+    //         valor = base * 0.19 - 1153.46;
+    //     } else {
+    //         valor = base * 0.22 - 2713.47;
+    //     }
+    // } else if (periodo < 202601) { //2025
+    //     if (base <= 1518.00) {
+    //         //salario minimo
+    //         valor = 0.075 * base;
+    //     } else if (base <= 2793.88) {
+    //         valor = base * 0.09 - 22.77;
+    //     } else if (base <= 4190.83) {
+    //         valor = base * 0.12 - 106.59;
+    //     } else if (base <= 8157.41) {
+    //         //teto
+    //         valor = base * 0.14 - 190.40;
+    //     } else if (base <= 13969.49) {
+    //         valor = base * 0.145 - 231.19;
+    //     } else if (base <= 27938.95) {
+    //         valor = base * 0.165 - 510.58;
+    //     } else if (base <= 54480.97) {
+    //         valor = base * 0.19 - 1209.05;
+    //     } else {
+    //         valor = base * 0.22 - 2843.48;
+    //     }
+    // } else { //2026
+    //     if (base <= 1621.00) {
+    //         //salario minimo
+    //         valor = 0.075 * base;
+    //     } else if (base <= 2902.84) {
+    //         valor = base * 0.09 - 24.32;
+    //     } else if (base <=  4354.27) {
+    //         valor = base * 0.12 - 111.40;
+    //     } else if (base <=  8475.55) {
+    //         //teto
+    //         valor = base * 0.14 - 198.49;
+    //     } else if (base <=  14514.30) {
+    //         valor = base * 0.145 - 240.86;
+    //     } else if (base <=  29028.57) {
+    //         valor = base * 0.165 - 531.15;
+    //     } else if (base <= 56605.73) {
+    //         valor = base * 0.19 -1256.86;
+    //     } else {
+    //         valor = base * 0.22 - 2955.04;
+    //     }
+    // }
+    // return Math.floor(valor * 100) / 100;
+    const tabelas = {
+        202601: [1621, 2902.84, 4354.27, 8475.55, 14514.30, 29028.57, 56605.73],
+        202501: [1518, 2793.88, 4190.83, 8157.41, 13969.49, 27938.95, 54480.97],
+        1: [1412, 2666.68, 4000.03, 7786.02, 13333.48, 26666.94, 52000.54] //202401
+    };
+    const vigencia = Object.keys(tabelas).sort((a, b) => b - a).find(v => periodo >= v);
+    const faixas = tabelas[vigencia];
+
+    return Number[0.075, 0.09, 0.12, 0.14, 0.145, 0.165, 0.19, 0.22].reduce((acc, aliq, i) => {
+        const teto = faixas[i] || Infinity;
+        const piso = faixas[i - 1] || 0;
+        const base = Math.max(0, Math.min(basepss, teto) - piso);
+        return acc + (Math.floor(base * aliq * 100) / 100);
+    }, 0);
 }
 
 function dependentesIR(deps, periodo) {
@@ -424,46 +438,6 @@ function valorTransporte(vencimento, gasto, dias) {
     }
 }
 
-// function valorFG(FG, periodo) {
-//     //FG 1-9 + FCC;
-//     var FG2023 = Array(0, 1063.31, 715.35, 579.96, 270.83, 219.76, 161.14, 102.77, 76.02, 61.67, 1071.67);
-//     var FG2025 = Array(0, 1159.01, 779.73, 632.16, 295.2, 239.54, 175.64, 112.02, 82.86, 67.22, 1168.12);
-//     var FG2026 = Array(0, 1263.32, 849.91, 689.05, 321.77, 261.1, 191.45, 122.1, 90.32, 73.27, 1273.25);
-    
-//     var valor = 0;
-//     if (periodo < 202501) {
-//         //a partir de maio/2023
-//         valor = FG2023[FG];
-//     } else if (periodo < 202604) {
-//         //a partir de janeiro/2025
-//         valor = FG2025[FG];
-//     } else {
-//         //a partir de abril/2026 (as FGs na verdade mudam já em Janeiro)
-//         valor = FG2026[FG];
-//     }
-//     return valor; 
-// }
-
-// function valorCD(CD, periodo) {
-//     //var CD2012 = Array(0, 8889.52, 7431.09, 5833.75, 4236.41)
-//     var CD2023 = Array(0, 14686.79, 12277.25, 9638.21, 6999.17);
-//     var CD2025 = Array(0, 18064.75, 14364.38, 11276.71, 7629.10);
-//     var CD2026 = Array(0, 22219.64, 16806.33, 12291.61, 8315.71);
-
-//     var valor = 0;
-//     if (periodo < 202501) {
-//         //a partir de maio/2023
-//         valor = CD2023[CD];
-//     } else if (periodo < 202604) {
-//         //a partir de janeiro/2025
-//         valor = CD2025[CD];
-//     } else {
-//        //a partir de abril/2026 (as FGs na verdade mudam já em Janeiro)
-//         valor = CD2026[CD];
-//     } 
-//     return valor;
-// }
-
 function valorAlim(periodo) {
     var alimentacao = 0;
     if (periodo < 202305) {
@@ -475,18 +449,6 @@ function valorAlim(periodo) {
     }
     return alimentacao;
 }
-
-// function nocd(form) {
-//     if (form.ddFG.value != 0) {
-//         form.ddCD.value = 0;
-//     }
-// }
-
-// function nofg(form) {
-//     if (form.ddCD.value != 0) {
-//         form.ddFG.value = 0;
-//     }
-// }
 
 function atualizaPold(form) {
     var pold = parseInt(form.ddPadrao.value),
