@@ -106,7 +106,7 @@ $(document).ready(function() {
         }
     );
 
-	$.getJSON('js/carreiras.json', function(data) {        
+	$.getJSON('js/carreiras.json', function(data) {
         //Espera carregar os dados e executa os cálculos pela 1a vez
         infoCarreiras = data;
         
@@ -117,7 +117,7 @@ $(document).ready(function() {
         //3. Atualiza a UI com a carreira correta carregada
         atualizaCarreira();
         //4. Carrega o storage novamente, agora com a carreira e a DOM selecionadas para atualizar os campos
-        loadStorage(false);        
+        loadStorage(false);
         //Por último calcula tudo
         calcSalario(myform);
         calcSalario(myform2);

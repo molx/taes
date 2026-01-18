@@ -1,7 +1,7 @@
 var liq1 = 0;
 var liq2 = 0;
 
-function updateQuali(form, classs) {
+function updateQuali(form, classs, recalc = true) {
     var alloptions = Array("Exigência Mínima", "Fundamental Completo", "Médio Completo", "Médio Técnico", "Superior", "Especialização", "Mestrado", "Doutorado");
     var allvalues = Array(0, 1, 2, 3, 4, 5, 6, 7);
     var newoptions = Array();
@@ -33,7 +33,7 @@ function updateQuali(form, classs) {
     if (newvalues.includes(parseInt(curValue, 10))) {
         form.ddQuali.value = curValue;
     }
-    calcSalario(form);
+    if (recalc) calcSalario(form);
 }
 
 function calcfatorpg(i, areadireta = true, docente = false, ch = 1) {
@@ -75,7 +75,7 @@ function firstload() {
     calcSalario(myform2);
 }
 
-function atualizaCarreira() {
+function atualizaCarreira(element = null) {
     var carreira = $('#selCarreira').val();
 
     //Novas regras
@@ -114,9 +114,9 @@ function atualizaCarreira() {
         $('.inpt_TAE').parent().parent().show();
         //Esconde campos específicos de docentes
         //$('.inpt_noTAE').parent().parent().hide();   
-    } else {        
+    } else {
         //Esconde campos específicos de TAEs:
-        $('.inpt_TAE').parent().parent().hide();        
+        $('.inpt_TAE').parent().parent().hide();
         //Mostra campos específicos de docentes
         //$('.inpt_noTAE').parent().parent().show();
     }
@@ -143,11 +143,13 @@ function atualizaCarreira() {
         $('.labelIQRT2').parent().hide();
         $('input[name="txQualif"]').parent().hide();
     }
-    updateQuali(myform, 1, carreira == "MF");
-    updateQuali(myform2, 1, carreira == "MF");
-    //UpdateQuali já chama calcSalario para o form
-    //calcSalario(myform);
-    //calcSalario(myform2);
+    updateQuali(myform, 1, carreira == "MF", false);
+    updateQuali(myform2, 1, carreira == "MF", false);
+    if (element && element.id == 'selCarreira') {
+        //Recalcular apenas quando chamado pelo select para n quebrar loadStorage
+        calcSalario(myform);
+        calcSalario(myform2);
+    }
 };
 
 function atualizaFunc(form) {
@@ -157,7 +159,7 @@ function atualizaFunc(form) {
     if (["Não", "FCC"].includes(func)) {
         vals = [0,0];
     } else {
-        for (let date in infoCarreiras.funcs) {        
+        for (let date in infoCarreiras.funcs) {
             if (date > form.ddAno.value) break;
             vals = infoCarreiras.funcs[date][func];
         }
@@ -502,7 +504,7 @@ function calcSalario(form) {
     
 
     if (carreira != "TAE") {
-        correl = 1;        
+        correl = 1;
     } else {
         //Código para retrocompatibilidade com prog por cap. em 2024
         if (periodo < 202501) {
@@ -662,7 +664,7 @@ function calcSalario(form) {
     funcaoDisp = 0
     funcaoSubst = false,
     funcNome = $(form).find("select[name='ddFuncTipo'] option:selected").text();
-    for (let date in infoCarreiras.funcs) {        
+    for (let date in infoCarreiras.funcs) {
         if (date > form.ddAno.value) break;
         if(funcNome !== "Não") {
             funcao = infoCarreiras.funcs[date][funcNome][form.ddFuncVal.value];
@@ -675,7 +677,7 @@ function calcSalario(form) {
         if (form.rdCD[0].checked) {
             funcao = funcao * 0.6;
             funcaoDisp = funcao;
-        } else {            
+        } else {
             remuneracao = funcao;
             funcao = 0;
             funcaoSubst = true;
@@ -692,8 +694,8 @@ function calcSalario(form) {
         if (form.ddSindTipo.value == "vb") {
             sindicato = Math.floor(vencimento * sindaliq * 100) / 100;
         } else if (form.ddSindTipo.value == "rem") {
-            sindicato = Math.floor(basesind * sindaliq * 100) / 100;    
-        } else {            
+            sindicato = Math.floor(basesind * sindaliq * 100) / 100;
+        } else {
             sindicato = 0; //?
         }
     }
@@ -872,7 +874,7 @@ function calcSalario(form) {
 
     var valsirrf = valorIRRF(baseirrf, periodo, Math.max(deducoesIrrf, deducaoSimp)),
     aliqirrf = valsirrf[0],
-    descIrrf = valsirrf[1];    
+    descIrrf = valsirrf[1];
 
     var desc_13 = form.decter.checked && form.decter_par.value == "2" ? aliqirrf + valorpss + aliqfunp + aliqFunpFacul + decter/2 : 0;
 
@@ -922,7 +924,7 @@ function calcSalario(form) {
     //form.txDesc13.value = formatValor(desc_13);
     //form.tx13.value = formatValor(decter);
     form.txDescPct.value = formatValor(outrosdescontospct);
-    form.txDescPctIsnt.value = formatValor(outrosdescontospctIsnt);    
+    form.txDescPctIsnt.value = formatValor(outrosdescontospctIsnt);
     //form.txFeriasR.value = formatValor(ferias);
 
     //Display info on Detailed Results
