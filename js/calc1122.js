@@ -197,6 +197,7 @@ function validateGD2(form) {
 
 function formatValor(valor) {
     return "R$ " + valor.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    //return "R$ " + valor.toString().replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 function valorIRRF(base, periodo, deducoes) {
@@ -615,7 +616,7 @@ function calcSalario(form) {
 
     var transporte = form.trans.checked ? valorTransporte(vencimento, form.gastoTrans.value, form.diasTrans.value) : 0,
     ftinsa = form.ddInsa.value,
-    valinsa = ftinsa * vencimento,
+    valinsa = Math.floor(ftinsa * vencimento * 100) / 100,
     ftpg = calcfatorpg(form.ddQuali.value, true, carreira == "MF", ftcarga),
     jud = 0;
     if (!infoCarreiras[carreira].labelIQRT) {
@@ -641,7 +642,7 @@ function calcSalario(form) {
     } else {
         form.numJud.disabled = true;
     }
-    var qualificacao = ftpg * vencimento;
+    var qualificacao = Math.floor(ftpg * vencimento * 100)/100; //evidence says it's floored/trucated
 
     var diffPisoEnf = 0;
     if (form.ddCargo.value == "2") {
@@ -667,6 +668,7 @@ function calcSalario(form) {
     var outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
     var remuneracao = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribPSS + gratDesemp + gratGeneric + gratAE;
+    //console.log("Remuneração:" + remuneracao, "Vencimento:" + vencimento, "Jud:" + jud, "Qualificação:" + qualificacao, "Anuênio:" + anuenio, "Diferença Piso Enf:" + diffPisoEnf, "Outros Rend Trib:" + outrosRendTrib, "Outros Rend PSS:" + outrosRendTribPSS, "Grat Desemp:" + gratDesemp, "Grat Generic:" + gratGeneric, "Grat AE:" + gratAE);
 
     //Checa e limita os valores máximos das gratificacoes que tem limite
     if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && vencimento > gratGenMax) {
@@ -725,9 +727,9 @@ function calcSalario(form) {
         var basesind = remuneracao + funcao;
         if (carreira == "MF") basesind -= jud; //ADUnB não cobra sobre a Dec Jud
         if (form.ddSindTipo.value == "vb") {
-            sindicato = vencimento * sindaliq;
+            sindicato = Math.floor(vencimento * sindaliq * 100) / 100;
         } else if (form.ddSindTipo.value == "rem") {
-            sindicato = basesind * sindaliq;
+            sindicato = Math.floor(basesind * sindaliq * 100) / 100;    
         } else {            
             sindicato = 0; //?
         }
@@ -847,7 +849,7 @@ function calcSalario(form) {
             if (form.rpcgrat.checked) {
                 basefunp += gratGeneric + gratAE;
             }
-            aliqfunp = basefunp * parseFloat(form.ddFunp.value);
+            aliqfunp = Math.floor(basefunp * parseFloat(form.ddFunp.value) * 100)/100;
             if (form.name == "myform") {
                 document.getElementById("funp_plano_norm1").checked = true;
                 document.getElementById("ddFunp1").disabled = false;
@@ -979,7 +981,7 @@ function calcSalario(form) {
     if (creche > 0) addDetailValue("#tabdetails-rend", formid, "Pré-escolar", creche);
     if (noturno > 0) addDetailValue("#tabdetails-rend", formid, "Ad. Noturno", noturno);
     if (jud > 0) addDetailValue("#tabdetails-rend", formid, "Dec. Jud.", jud);
-    if (ftpg > 0) addDetailValue("#tabdetails-rend", formid, infoCarreiras[carreira].labelIQRT, vencimento * ftpg);
+    if (ftpg > 0) addDetailValue("#tabdetails-rend", formid, infoCarreiras[carreira].labelIQRT, qualificacao);
     //if (fungrat > 0) addDetailValue("#tabdetails-rend", formid, "FG", fungrat);
     //if (cargodir > 0) addDetailValue("#tabdetails-rend", formid, "CD", cargodir);
     if (funcaoDisp > 0) addDetailValue("#tabdetails-rend", formid, "Função", funcaoDisp);
