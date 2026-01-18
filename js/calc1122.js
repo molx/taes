@@ -305,14 +305,15 @@ function calcPSS(periodo, basepss) {
     // }
     // return Math.floor(valor * 100) / 100;
     const tabelas = {
-        202601: [1621, 2902.84, 4354.27, 8475.55, 14514.30, 29028.57, 56605.73],
+        1: [1412, 2666.68, 4000.03, 7786.02, 13333.48, 26666.94, 52000.54], //202401
         202501: [1518, 2793.88, 4190.83, 8157.41, 13969.49, 27938.95, 54480.97],
-        1: [1412, 2666.68, 4000.03, 7786.02, 13333.48, 26666.94, 52000.54] //202401
+        202601: [1621, 2902.84, 4354.27, 8475.55, 14514.30, 29028.57, 56605.73]
     };
-    const vigencia = Object.keys(tabelas).sort((a, b) => b - a).find(v => periodo >= v);
+
+    const vigencia = Object.keys(tabelas).findLast(v => periodo >= v);
     const faixas = tabelas[vigencia];
 
-    return Number[0.075, 0.09, 0.12, 0.14, 0.145, 0.165, 0.19, 0.22].reduce((acc, aliq, i) => {
+    return [0.075, 0.09, 0.12, 0.14, 0.145, 0.165, 0.19, 0.22].reduce((acc, aliq, i) => {
         const teto = faixas[i] || Infinity;
         const piso = faixas[i - 1] || 0;
         const base = Math.max(0, Math.min(basepss, teto) - piso);
