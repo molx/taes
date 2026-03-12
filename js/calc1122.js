@@ -2,14 +2,14 @@ var liq1 = 0;
 var liq2 = 0;
 
 function updateQuali(form, classs, recalc = true) {
-    var alloptions = Array("Exigência Mínima", "Fundamental Completo", "Médio Completo", "Médio Técnico", "Superior", "Especialização", "Mestrado", "Doutorado");
+    var alloptions = Array("Exigência Mínima", "Fundamental Completo/RSC-I", "Médio Completo/RSC-II", "Médio Técnico", "Graduação/RSC-III", "Especialização/RSC-IV", "Mestrado/RSC-V", "Doutorado/RSC-VI");
     var allvalues = Array(0, 1, 2, 3, 4, 5, 6, 7);
     var newoptions = Array();
     var newvalues = Array();
     var curValue = form.ddQuali.value;
     var classe = parseFloat(classs);
     if ($('#selCarreira').val() == "MF") {
-        newoptions = ["Nenhum", "Aperfeiçoamento", "Especialização", "Mestrado", "Doutorado"];
+        newoptions = ["Nenhum", "Aperfeiçoamento", "Especialização/RSC-I", "Mestrado/RSC-II", "Doutorado/RSC-III"];
         newvalues = [0, 4, 5, 6, 7];
     } else if (classe <= 3) {
         newoptions = alloptions;
