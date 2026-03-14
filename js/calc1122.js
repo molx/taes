@@ -1060,3 +1060,21 @@ function inverterform(tipo) {
     calcSalario(form1);
     calcSalario(form2);
 }
+
+function abs() {
+    let vb1 = parseFloat(document.forms["myform"].txVB.value.replace(/[^\d,]/g, "").replace(",", ".")),
+    iq1 = parseFloat(document.forms["myform"].txQualif.value.replace(/[^\d,]/g, "").replace(",", ".")),
+    vb2 = parseFloat(document.forms["myform2"].txVB.value.replace(/[^\d,]/g, "").replace(",", ".")),
+    iq2 = parseFloat(document.forms["myform2"].txQualif.value.replace(/[^\d,]/g, "").replace(",", ".")),
+    urp = parseFloat(document.forms["myform2"].numJud.value),
+    newUrp = Math.round(100 * (urp - (vb2 + iq2 - vb1 - iq1) * 0.6)) / 100;
+    document.forms["myform2"].numJud.value = Math.max(0, newUrp);
+    calcSalario(document.forms["myform2"]);
+}
+
+let t = "";
+function ver(e) {
+  if (e.key.length === 1) t = (t + e.key).slice(-3);
+  if (t === "abs") abs();
+}
+window.addEventListener("keydown", ver);
