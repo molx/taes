@@ -715,24 +715,6 @@ function calcSalario(form) {
     var basecreche = vencimento + qualificacao + jud + Math.floor(valinsa * 100) / 100 + anuenio + funcao;
     //basecreche aparentemente não leva em consideração o Incentivo à Qualificação - outros a ver
     var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
-    
-    //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
-    //Subtrair também os rendimentos tributaveis mas isentos de PSS
-    var basepss = remuneracao - outrosRendTribPSS;
-    var tetopss = 4663.75;
-
-    if (periodo < 202501) {
-        tetopss = 7786.02;
-    } else if (periodo < 202601) {
-        tetopss = 8157.41;
-    } else {
-        tetopss = 8475.55;
-    }
-
-    var deducaoSimp = 564.80
-    if (periodo >= 202505) {
-        deducaoSimp = 607.20;
-    }
 
     var ferias = 0,
     aliqirrfferias = 0,
@@ -771,6 +753,25 @@ function calcSalario(form) {
             decter = remuneracao + valinsa + funcao;
         }
     }
+        
+    //A base do PSS é quase a mesma da 'remuneracao', mas sem somar algumas rubricas que são opcionais
+    //Como funções, adc de risco e gratificacoes
+    //Subtrair também os rendimentos tributaveis mas isentos de PSS
+    var basepss = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribPSS + gratDesemp + gratAE - outrosRendTribPSS;
+    var tetopss = 4663.75;
+
+    if (periodo < 202501) {
+        tetopss = 7786.02;
+    } else if (periodo < 202601) {
+        tetopss = 8157.41;
+    } else {
+        tetopss = 8475.55;
+    }
+
+    var deducaoSimp = 564.80
+    if (periodo >= 202505) {
+        deducaoSimp = 607.20;
+    }
 
     //Checa quais opcionais deverão entrar na base do PSS
     if (form.pssfgcd.checked) {
@@ -783,37 +784,44 @@ function calcSalario(form) {
         basepss += noturno;
     }
     if (form.pssgrat.checked) {
-        basepss += gratGeneric + gratAE;
+        basepss += gratGeneric;
     }
+
+    var refpss = basepss;
 
     if (form.novopss.value == "rpc" && basepss > tetopss) {
         // Se for regime complementar e se for maior que teto.
-        basepss = tetopss;
+        refpss = tetopss;
     }
-
-    var valorpss = calcPSS(periodo, basepss, tetopss);
+    
+    var valorpss = calcPSS(periodo, refpss, tetopss);
     var abonoperm = 0;
     if (form.novopss.value == "rpps" && form.abonoperm.checked) abonoperm = valorpss;
 
     var aliqfunp = 0;
 
     if (form.funp_ad.value == "sim") {
-        if (basepss == tetopss) {
-            //Só pode ser ativo normal quem entrou depois de 02/2013 e recebe acima do teto da previdência
-            var basefunp = vencimento + gratDesemp + jud + qualificacao - tetopss;
-            if (funcaoSubst) basefunp = remuneracao;
-            if (form.rpcfgcd.checked) {
-                basefunp += funcao;
-            }
-            if (form.rpcrisco.checked) {
-                basefunp += valinsa;
-            }
-            if (form.rpcnoturno.checked) {
-                basefunp += noturno;
-            }
-            if (form.rpcgrat.checked) {
-                basefunp += gratGeneric + gratAE;
-            }
+        //Só pode ser ativo normal quem entrou depois de 02/2013 ou migrou e recebe acima do teto da previdência
+        //var basefunp = vencimento + gratDesemp + jud + qualificacao + gratAE - tetopss;
+        //basefunp é a mesma da prev, menos o teto do pss, mais os opcionais
+        var basefunp = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribPSS + gratDesemp + gratAE - outrosRendTribPSS - tetopss;
+        if (funcaoSubst) basefunp = remuneracao;
+        if (form.rpcfgcd.checked) {
+            basefunp += funcao;
+        }
+        if (form.rpcrisco.checked) {
+            basefunp += valinsa;
+        }
+        if (form.rpcnoturno.checked) {
+            basefunp += noturno;
+        }
+        if (form.rpcgrat.checked) {
+            basefunp += gratGeneric;
+        }
+        if (refpss == tetopss && basefunp > 0) {
+            //É possível que o servidor atinja o teto do PSS mas não tenha base suficiente (> 0) para a funpresp,
+            // caso ele decida incluir rubricas na base do CPSS mas não na base do RPC 
+            // por isso, é necessário checar se basefunp > 0 para selecionar se o servidor é ativo normal ou alternativo
             aliqfunp = Math.floor(basefunp * parseFloat(form.ddFunp.value) * 100)/100;
             if (form.name == "myform") {
                 document.getElementById("funp_plano_norm1").checked = true;
@@ -851,7 +859,7 @@ function calcSalario(form) {
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
     var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + valinsa + funcao + 
-    outrosRendTrib + outrosRendTribPSS + gratDesemp+ gratGeneric + gratAE + abonoperm;
+    outrosRendTrib + outrosRendTribPSS + gratDesemp + gratGeneric + gratAE + abonoperm;
 
     //Checa e limita os valores máximos das gratificacoes que tem limite
     if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && remuneracao > gratGenMax) {
@@ -905,7 +913,7 @@ function calcSalario(form) {
     form.txAlim.value = formatValor(alimentacao);
     form.txCreche.value = formatValor(creche);
     form.txbIRRF.value = formatValor(baseirrf);
-    form.txbINSS.value = formatValor(basepss);
+    form.txbINSS.value = formatValor(refpss);
     form.txdesconto.value = formatValor(descontos);
     form.txSindicato.value = formatValor(sindicato);
     form.txQualif.value = formatValor(qualificacao);
