@@ -399,7 +399,7 @@ function valorSaude(bruto, ftidade, periodo) {
 }
 
 function valorCreche(rem, periodo, n, cota) {
-    var teto = 484.90;
+    var teto = 526,64;
     var desc = 0;
     var faixas = [7507.95, 15015.90, 22523.85, 30031.80];
     if (periodo >= 202501 & periodo < 202604) {
@@ -448,7 +448,7 @@ function valorAlim(periodo) {
     } else if (periodo < 202512)  {
         alimentacao = 1000;
     } else {
-        alimentacao = 1175;
+        alimentacao = 1192;
     }
     return alimentacao;
 }
