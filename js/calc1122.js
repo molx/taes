@@ -399,13 +399,18 @@ function valorSaude(bruto, ftidade, periodo) {
 }
 
 function valorCreche(rem, periodo, n, cota) {
-    var teto = 484.90;
-    var desc = 0;
-    var faixas = [7507.95, 15015.90, 22523.85, 30031.80];
-    if (periodo >= 202501 & periodo < 202604) {
+    var teto,
+    desc = 0,
+    faixas = Array();
+    if (periodo < 202501)  {
+        faixas = [7507.95, 15015.90, 22523.85, 30031.80];
+        teto = 484.90;
+    } else if (periodo < 202604) {
         faixas = [8183.65, 16367.3, 24550.95, 32734.6];
-    } else if(periodo >= 202501) {
+        teto = 484.90;
+    } else {
         faixas = [8592.85, 17185.7, 25778.55, 34371.4];
+        teto = 526.34;
     }
     if (rem < faixas[0]) {
         desc = 0.05;
@@ -447,8 +452,10 @@ function valorAlim(periodo) {
         alimentacao = 658;
     } else if (periodo < 202512)  {
         alimentacao = 1000;
-    } else {
+    } else if (periodo < 202604)  {
         alimentacao = 1175;
+    } else {
+        alimentacao = 1192;
     }
     return alimentacao;
 }
