@@ -541,7 +541,11 @@ function calcSalario(form) {
     for (let date in infoCarreiras[carreira].vbs[idxvbs]) {
         if (date > periodo) break;
         vbArray = infoCarreiras[carreira].vbs[idxvbs][date];
-        if (infoCarreiras[carreira].valGrat) {
+    }
+
+    if (infoCarreiras[carreira].valGrat) {
+        for (let date in infoCarreiras[carreira].valGrat[idxvbs]) {
+            if (date > periodo) break;
             gratArray = infoCarreiras[carreira].valGrat[idxvbs][date];
             gratDesemp = gratArray[padraovb] * form.ddGratDes.value;
         }
