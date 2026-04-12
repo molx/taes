@@ -405,8 +405,14 @@
                                     <img src="/img/repos.png"></div>-->
                             </div>
                             <div style="display: none;">
-                                <label>
-                                    <span class="inpt_GratDes">GDPGPE/GDPST</span>:
+                                <label class="gdclass">GD:
+                                    <!-- <span class="inpt_GratDes">GDPGPE/GDPST</span>: -->
+                                     <select name="ddGratDesTipo" id="ddGratDesTipo1"
+                                        onchange="calcSalario(this.form);">
+                                        <option value = "GDPGPE/GDPST">GDPGPE/GDPST</option>
+                                        <option value = "GDASS">GDASS</option>
+                                        <option value = "GDATE/GDAED">GDATE/GDAED</option>
+                                    </select>:
                                     <select name="ddGratDes" id="ddGratDes1"
                                         onchange="calcSalario(this.form);">
                                     </select>
@@ -1100,7 +1106,7 @@
                                 <div><input type="text" name="txVB" value="0" readonly /></div>
                                 <div><span class="labelIQRT2">Incentivo à qualificação</span>:</div>
                                 <div><input type="text" name="txQualif" value="0" readonly /></div>
-                                <div style="display: none;"><span class="labelGratDes">GDPGPE/GDPST</span>:</div>
+                                <div style="display: none;"><span class="labelGratDes">GD</span>:</div>
                                 <div style="display: none;"><input class="labelGratDes" type="text" name="txGratDes" value="0" readonly /></div>
                                 <div>Rendimento bruto:</div>
                                 <div><input type="text" name="txBruto" value="0" readonly /></div>
@@ -1388,8 +1394,14 @@
                                     <img src="/img/repos.png"></div>-->
                             </div>
                             <div style="display: none;">
-                                <label>
-                                    <span class="inpt_GratDes">GDPGPE/GDPST</span>:
+                                <label class="gdclass">GD:
+                                    <!-- <span class="inpt_GratDes">GDPGPE/GDPST</span>: -->
+                                     <select name="ddGratDesTipo" id="ddGratDesTipo2"
+                                        onchange="calcSalario(this.form);">
+                                        <option value = "GDPGPE/GDPST">GDPGPE/GDPST</option>
+                                        <option value = "GDASS">GDASS</option>
+                                        <option value = "GDATE/GDAED">GDATE/GDAED</option>
+                                    </select>:
                                     <select name="ddGratDes" id="ddGratDes2"
                                         onchange="calcSalario(this.form);">
                                     </select>

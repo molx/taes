@@ -126,12 +126,13 @@ function atualizaCarreira(element = null) {
         $('select[name="ddGratDes"]').empty().each(function() {
             gratVals.forEach((opt, i) => $(this).append(`<option value="${opt}">${opt}%</option>`));
         });
-        $('.inpt_GratDes').parent().parent().show();
+        $('.gdclass').parent().show();
         $('.labelGratDes').parent().show();
-        $('.inpt_GratDes').html(infoCarreiras[carreira].nomeGrat);
-        $('.labelGratDes').html(infoCarreiras[carreira].nomeGrat);
+        $('select[name="ddGratDesTipo"]').val(infoCarreiras[carreira].nomeGrat);
+        //$('.inpt_GratDes').html(infoCarreiras[carreira].nomeGrat);
+        //$('.labelGratDes').html(infoCarreiras[carreira].nomeGrat);
     } else {
-        $('.inpt_GratDes').parent().parent().hide();
+        $('.gdclass').parent().hide();
         $('.labelGratDes').parent().hide();
     }
     if (infoCarreiras[carreira].labelIQRT) {
@@ -543,12 +544,18 @@ function calcSalario(form) {
         vbArray = infoCarreiras[carreira].vbs[idxvbs][date];
     }
 
-    if (infoCarreiras[carreira].valGrat) {
-        for (let date in infoCarreiras[carreira].valGrat[idxvbs]) {
+    if (infoCarreiras[carreira].nomeGrat) { //Tem uma gratificação padrão da carreira
+        let gdname = form.ddGratDesTipo.value;
+        for (let date in infoCarreiras.GDs[gdname][idxvbs]) {
             if (date > periodo) break;
-            gratArray = infoCarreiras[carreira].valGrat[idxvbs][date];
+            gratArray = infoCarreiras.GDs[gdname][idxvbs][date];
             gratDesemp = gratArray[padraovb] * form.ddGratDes.value;
         }
+        // for (let date in infoCarreiras[carreira].valGrat[idxvbs]) {
+        //     if (date > periodo) break;
+        //     gratArray = infoCarreiras[carreira].valGrat[idxvbs][date];
+        //     gratDesemp = gratArray[padraovb] * form.ddGratDes.value;
+        // }
     }
 
     if (form.ddGratGen.value != "0") {
