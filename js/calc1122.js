@@ -1088,6 +1088,8 @@ function inverterform(tipo) {
         fillform(form2, fields.myform);
         atualizaFunc(form2);
         form2.ddFuncVal.value = fields.myform.ddFuncVal;
+        //Reativar button de absorção
+        $('#absbt').prop("disabled", false);
     }
     
 
@@ -1101,12 +1103,23 @@ function inverterform(tipo) {
 function abs() {
     let vb1 = parseFloat(document.forms["myform"].txVB.value.replace(/[^\d,]/g, "").replace(",", ".")),
     iq1 = parseFloat(document.forms["myform"].txQualif.value.replace(/[^\d,]/g, "").replace(",", ".")),
+    an1 = (document.forms["myform"].numAnuenio.value || 0)/100 * vb1,
+    //
     vb2 = parseFloat(document.forms["myform2"].txVB.value.replace(/[^\d,]/g, "").replace(",", ".")),
-    iq2 = parseFloat(document.forms["myform2"].txQualif.value.replace(/[^\d,]/g, "").replace(",", ".")),
+    iq2 = parseFloat(document.forms["myform2"].txQualif.value.replace(/[^\d,]/g, "").replace(",", ".")),    
+    an2 = (document.forms["myform2"].numAnuenio.value || 0)/100 * vb2,
+    //
     urp = parseFloat(document.forms["myform2"].numJud.value),
-    newUrp = Math.round(100 * (urp - (vb2 + iq2 - vb1 - iq1) * 0.6)) / 100;
+    newUrp = Math.round(100 * (urp - (vb2 + iq2 + an2 - vb1 - iq1 - an1) * 0.6)) / 100;
     document.forms["myform2"].numJud.value = Math.max(0, newUrp);
     calcSalario(document.forms["myform2"]);
+}
+
+function absjud() {
+    if ($('#diffLiqAbs').html() != "R$ 0,00") {
+        abs();
+        $('#absbt').prop("disabled", true);
+    }
 }
 
 let t = "";
