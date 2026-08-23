@@ -143,7 +143,6 @@ input[type="radio"] {
 	background-color: var(--surface);
 	vertical-align: middle;
 	cursor: pointer;
-	position: relative;
 	flex-shrink: 0;
 	transition: background-color .15s ease, border-color .15s ease;
 }
@@ -154,6 +153,8 @@ input[type="checkbox"] {
 
 input[type="radio"] {
 	border-radius: 50%;
+	display: inline-grid;
+	place-content: center;
 }
 
 input[type="checkbox"]:hover,
@@ -174,16 +175,18 @@ input[type="checkbox"]:checked {
 	background-size: 11px 11px;
 }
 
-input[type="radio"]:checked::after {
+input[type="radio"]::after {
 	content: "";
-	position: absolute;
-	left: 50%;
-	top: 50%;
 	width: 7px;
 	height: 7px;
 	background-color: #fff;
 	border-radius: 50%;
-	transform: translate(-50%, -50%);
+	transform: scale(0);
+	transition: transform .1s ease;
+}
+
+input[type="radio"]:checked::after {
+	transform: scale(1);
 }
 
 input[type="checkbox"]:focus-visible,
@@ -262,26 +265,32 @@ code {
    ========================================================================== */
 
 header {
-	margin: 0 0 0.5em 0;
-	padding: 1em 1em 0.5em 1em;
+	margin: 0 0 0.65rem 0;
+	padding: 0.7rem 1.25rem;
 	background: linear-gradient(160deg, var(--brand-900) 0%, var(--brand-700) 55%, var(--brand-500) 130%);
 	color: #ffffff;
 	box-shadow: var(--shadow-md);
 	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: clamp(1.5rem, 4vw, 4rem);
 }
 
 header h1 {
-	font-size: 1.35rem;
+	font-size: 1.05rem;
 	font-weight: 700;
 	letter-spacing: 0.01em;
-	margin: 0 auto 0.9em auto;
+	margin: 0;
 	text-align: center;
-	max-width: 900px;
+	max-width: none;
+	white-space: nowrap;
 }
 
 #menu-bar {
-	margin: 0 auto;
-	max-width: 620px;
+	margin: 0;
+	width: min(520px, 46vw);
+	max-width: 520px;
 	text-align: center;
 	background-color: rgba(255, 255, 255, .08);
 	border: 1px solid rgba(255, 255, 255, .18);
@@ -330,7 +339,7 @@ header h1 {
 
 #maindiv,
 #maindiv3 {
-	max-width: 1040px;
+	max-width: 1540px;
 	margin: 0 auto;
 	padding: 0 1em;
 	width: 100%;
@@ -338,16 +347,241 @@ header h1 {
 
 #maindiv {
 	flex: 1 0 auto;
+	position: relative;
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
 }
 
 #maindiv2 {
 	max-width: 1040px;
-	margin: 0.5em auto 0 auto;
+	margin: 0 auto;
 	width: 100%;
+}
+
+#maindiv2 h2 {
+	margin-top: 0.3em;
 }
 
 .main-content {
 	margin: 0 auto;
+}
+
+/* Two-scenario workspace */
+body.calculator-page .titleHolder {
+	min-height: 3rem;
+	justify-content: center;
+	position: relative;
+	top: auto;
+	right: auto;
+	z-index: auto;
+	margin: 0;
+	padding: 0 1rem;
+}
+
+body.calculator-page .titleHolder .mainTitle {
+	display: block;
+}
+
+body.calculator-page .titleHolder .cbajuda {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	margin: 0;
+}
+
+body.calculator-page .titleHolder .cbajuda > div:last-child {
+	padding: 0.35rem 0.55rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	background: var(--surface);
+}
+
+.skip-link {
+	position: fixed;
+	left: 1rem;
+	top: -5rem;
+	z-index: 1000;
+	padding: 0.65rem 1rem;
+	border-radius: var(--radius-sm);
+	background: var(--brand-900);
+	color: #fff;
+	font-weight: 700;
+}
+
+.skip-link:focus {
+	top: 1rem;
+}
+
+.simulator-intro {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 0;
+	margin: 0 0 0.35rem;
+	padding-right: 0;
+	text-align: center;
+}
+
+.simulator-intro > div {
+	width: min(100%, 760px);
+	margin: 0 auto;
+}
+
+.simulator-intro h1 {
+	margin: 0.08rem 0 0;
+	font-size: clamp(1.35rem, 2vw, 1.85rem);
+	line-height: 1.15;
+	color: var(--ink-900);
+}
+
+.simulator-intro p {
+	margin: 0 auto;
+	color: var(--ink-700);
+	font-size: 0.92rem;
+}
+
+.eyebrow,
+.simulation-kicker {
+	color: var(--brand-700);
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.simulations-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr);
+	align-items: start;
+	gap: 0.75rem;
+}
+
+.simulation-card {
+	width: 100%;
+	min-width: 0;
+	margin: 0;
+	align-self: stretch;
+	padding: 0.8rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-lg);
+	background: var(--surface);
+	box-shadow: var(--shadow-sm);
+	container-name: simulation-card;
+	container-type: inline-size;
+}
+
+/* The second simulation keeps a legacy ID from the old stacked layout.
+   Override that ID explicitly so it cannot shrink inside the new grid. */
+#maindiv2.simulation-card {
+	width: 100%;
+	min-width: 0;
+	max-width: none;
+	margin: 0;
+	justify-self: stretch;
+}
+
+.simulation-heading {
+	display: grid;
+	grid-template-columns: 2.2rem minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 0.65rem;
+	margin-bottom: 0.65rem;
+	text-align: left;
+}
+
+.simulation-heading h2,
+#maindiv2 .simulation-heading h2 {
+	margin: 0;
+	font-size: 1.08rem;
+	line-height: 1.05;
+	color: var(--ink-900);
+}
+
+.simulation-heading > div {
+	min-width: 0;
+	text-align: left;
+}
+
+.clear-simulation {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.4rem;
+	min-height: 2rem;
+	padding: 0.35rem 0.65rem;
+	border: 1px solid var(--border-strong);
+	border-radius: var(--radius-pill);
+	background: var(--surface);
+	color: var(--ink-700);
+	font-size: 0.78rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: border-color .15s ease, background-color .15s ease, color .15s ease;
+}
+
+.clear-simulation:hover {
+	border-color: var(--brand-500);
+	background: var(--brand-50);
+	color: var(--brand-800);
+}
+
+.simulation-number {
+	display: grid;
+	width: 2.2rem;
+	height: 2.2rem;
+	flex: 0 0 auto;
+	place-items: center;
+	border-radius: 0.7rem;
+	background: var(--brand-700);
+	color: white;
+	font-size: 1.05rem;
+	font-weight: 700;
+}
+
+#maindiv2 {
+	width: auto;
+	max-width: none;
+	margin: 0;
+}
+
+#div_botoes {
+	position: sticky;
+	top: 0.75rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	padding-top: 4.2rem;
+}
+
+#div_botoes button {
+	display: grid;
+	width: 56px;
+	min-height: 48px;
+	place-items: center;
+	gap: 0.1rem;
+	padding: 0.4rem;
+	border: 1px solid var(--border-strong);
+	border-radius: var(--radius-md);
+	background: var(--surface);
+	color: var(--brand-800);
+	font-weight: 700;
+	cursor: pointer;
+	box-shadow: var(--shadow-xs);
+}
+
+#div_botoes button:hover {
+	border-color: var(--brand-500);
+	background: var(--brand-50);
+}
+
+#div_botoes button span {
+	font-size: 0.62rem;
+	line-height: 1.05;
+}
+
+.buttonsep {
+	display: none;
 }
 
 p,
@@ -604,7 +838,7 @@ ol.sumario {
 
 #div_botoes {
 	text-align: center;
-	margin: 0.2em auto 0 auto;
+	margin: 0.5em auto 0 auto;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -666,7 +900,7 @@ ol.sumario {
 .buttonsep {
 	width: 100%;
 	max-width: 700px;
-	margin: 1em auto;
+	margin: 0.75em auto;
 }
 
 /* ==========================================================================
@@ -709,45 +943,40 @@ ol.sumario {
 }
 
 a.wiki-icon {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
+	display: inline-grid;
+	place-items: center;
 	width: 1.5em;
 	height: 1.5em;
+	flex: 0 0 1.5em;
+	vertical-align: middle;
 	color: var(--brand-600);
 	background-color: var(--brand-50);
 	border-radius: 50%;
 	font-size: 0.8em;
-	line-height: 1;
 	vertical-align: middle;
 	margin: 0 0.1em;
 	text-decoration: none;
 	transition: background-color .15s ease, color .15s ease;
 }
 
+a.wiki-icon i {
+	display: grid;
+	width: 100%;
+	height: 100%;
+	place-items: center;
+	line-height: 1;
+	text-align: center;
+}
+
+a.wiki-icon i::before {
+	display: block;
+	line-height: 1;
+}
+
 a.wiki-icon:hover {
 	color: #ffffff;
 	background-color: var(--brand-600);
 	text-decoration: none;
-}
-
-/* ==========================================================================
-   Ads
-   ========================================================================== */
-
-.side-ad {
-	height: 500px;
-	width: 120px;
-}
-
-.left-ad {
-	margin-left: -250px;
-	float: left;
-}
-
-.right-ad {
-	float: right;
-	margin-right: -250px;
 }
 
 /* ==========================================================================
@@ -846,7 +1075,7 @@ a.wiki-icon:hover {
 	background-color: var(--surface-sunken);
 	border: 1px solid var(--border);
 	border-radius: var(--radius-md);
-	padding: 0.7em 0.9em 0.4em 0.9em;
+	padding: 0.7em 0.9em 0.8em 0.9em;
 	margin-top: 0.9em;
 }
 
@@ -876,6 +1105,59 @@ a.wiki-icon:hover {
 	text-transform: uppercase;
 	letter-spacing: 0.04em;
 	color: var(--brand-700);
+}
+
+.field-group > .field-subsection-title {
+	margin-top: 0.75rem;
+	padding-top: 0.6rem;
+	border-top: 1px solid var(--border);
+	color: var(--ink-700);
+	font-size: 0.68rem;
+	letter-spacing: 0.06em;
+}
+
+.field-group > .field-group-title + .field-subsection-title {
+	margin-top: 0.45rem;
+	padding-top: 0;
+	border-top: 0;
+}
+
+.field-group > .field-subsection-title + div {
+	margin-top: 0.35rem;
+}
+
+/* These labels are rewritten via JS per carreira (see calc1122.js), so the
+   trailing ":" is appended in CSS instead of the HTML to survive that. */
+.labelch::after,
+.labelIQRT::after {
+	content: ":";
+}
+
+/* Standardized card grid: groups related field-groups into a single,
+   evenly-spaced row so every tab follows the same layout rhythm. */
+.tab-content > div.field-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 0.75em;
+	row-gap: 0.5em;
+	margin-top: 0.5em;
+}
+
+.tab-content > div.field-grid:first-child {
+	margin-top: 0;
+}
+
+.field-grid > .field-group {
+	margin-top: 0;
+	height: 100%;
+}
+
+.field-grid > .field-group-full {
+	grid-column: 1 / -1;
+}
+
+.tab-content > div.field-grid.field-grid--single {
+	grid-template-columns: 1fr;
 }
 
 #tab-carreira1,
@@ -928,6 +1210,13 @@ a.wiki-icon:hover {
 	text-align: center;
 }
 
+.simulation-card .calcform {
+	display: grid;
+	grid-template-columns: minmax(330px, 1fr) minmax(225px, 0.62fr);
+	align-items: start;
+	gap: 0.65rem;
+}
+
 .centerImg {
 	display: block;
 	margin-left: auto;
@@ -961,6 +1250,46 @@ a.wiki-icon:hover {
 	margin-bottom: 0.5em;
 }
 
+.simulation-card .divdata,
+.simulation-card .divresults {
+	display: block;
+	width: 100%;
+	max-width: none;
+	margin: 0;
+}
+
+.simulation-card .tab,
+.simulation-card .tabresults {
+	width: 100%;
+}
+
+.simulation-card .tabs-menu {
+	overflow-x: auto;
+	scrollbar-width: thin;
+}
+
+.simulation-card .tabs-menu li {
+	flex: 1 0 auto;
+	text-align: center;
+}
+
+.simulation-card .tabs-menu li a {
+	padding: 0.48em 0.55em;
+	white-space: nowrap;
+}
+
+.simulation-card .tab-content {
+	padding: 0.6em;
+}
+
+.simulation-card .field-group {
+	padding: 0.55em 0.65em 0.62em;
+}
+
+.simulation-card .tab-content > div.field-grid {
+	gap: 0.45em;
+}
+
 .divresults {
 	display: inline-block;
 	max-width: 390px;
@@ -971,6 +1300,36 @@ a.wiki-icon:hover {
 .divresults_col {
 	display: grid;
 	grid-template-columns: 220px 170px;
+}
+
+.simulation-card .divresults_col {
+	grid-template-columns: minmax(0, 1fr) 105px;
+	width: 100%;
+	font-size: 0.86rem;
+	row-gap: 0.08rem;
+}
+
+.simulation-card .divresults_col input[type="text"] {
+	width: 100%;
+	text-align: right;
+}
+
+.simulation-card .divresults_col label[for^="txResult"] {
+	color: var(--brand-800);
+	font-weight: 700;
+}
+
+.simulation-card .divresults_col div:has(input[id^="txResult"]) {
+	width: 100%;
+	margin: 0.15rem 0;
+	padding: 0.25rem 0.4rem;
+	border-radius: var(--radius-sm);
+	background: var(--brand-100);
+}
+
+.simulation-card .divresults_col input[id^="txResult"] {
+	color: var(--brand-900);
+	font-size: 1.05rem;
 }
 
 .divresults_col label {
@@ -1032,12 +1391,6 @@ a.wiki-icon:hover {
    Responsive
    ========================================================================== */
 
-@media (max-width: 1800px) {
-	.side-ad {
-		display: none;
-	}
-}
-
 @media (max-width: 800px) {
 	#maindiv2 {
 		margin: 0 auto;
@@ -1051,9 +1404,12 @@ a.wiki-icon:hover {
 
 	header {
 		padding: 1.2em 0.75em 0.75em 0.75em;
+		flex-direction: column;
+		gap: 0.65rem;
 	}
 
 	#menu-bar {
+		width: min(340px, 100%);
 		max-width: 340px;
 		border-radius: var(--radius-lg);
 	}
@@ -1063,11 +1419,18 @@ a.wiki-icon:hover {
 	}
 
 	.titleHolder {
+		position: static;
+		top: auto;
+		right: auto;
 		max-width: none;
 		margin: 0 auto;
-		min-height: 110px;
+		min-height: 62px;
 		flex-direction: column;
 		padding-top: 0.5em;
+	}
+
+	.simulator-intro {
+		padding-right: 0;
 	}
 
 	.mainTitle {
@@ -1112,6 +1475,52 @@ a.wiki-icon:hover {
 
 	.divresults_col {
 		width: inherit;
+	}
+}
+
+@media (max-width: 1280px) {
+	.simulations-grid {
+		grid-template-columns: 1fr;
+	}
+
+	#div_botoes {
+		position: static;
+		flex-direction: row;
+		justify-content: center;
+		padding: 0;
+	}
+
+	#div_botoes button {
+		display: flex;
+		width: auto;
+		min-height: 40px;
+		padding: 0.5rem 0.75rem;
+	}
+
+	#div_botoes button span {
+		font-size: 0.76rem;
+	}
+
+	.simulation-card .calcform {
+		grid-template-columns: minmax(0, 1.5fr) minmax(240px, 0.7fr);
+	}
+}
+
+@media (max-width: 700px) {
+	.simulator-intro p {
+		font-size: 0.86rem;
+	}
+
+	.simulation-card {
+		padding: 0.65rem;
+	}
+
+	.simulation-card .calcform {
+		grid-template-columns: 1fr;
+	}
+
+	.simulation-card .tab-content > div.field-grid {
+		grid-template-columns: 1fr;
 	}
 }
 
@@ -1350,8 +1759,6 @@ html.a11y-contrast input[type="radio"] {
 	header,
 	footer,
 	#menu-bar,
-	.side-ad,
-	ins.adsbygoogle,
 	.a11y-widget,
 	.no-print,
 	.titleHolder,
@@ -1417,4 +1824,742 @@ html.a11y-contrast input[type="radio"] {
 		border-color: #000;
 		background: none;
 	}
+}
+
+/* Comparison workspace refinements
+   Kept at the end so these rules take precedence over the legacy controls. */
+@media screen {
+	#maindiv {
+		max-width: 1780px;
+	}
+
+	.simulations-grid {
+		grid-template-columns: minmax(0, 1fr) 108px minmax(0, 1fr);
+		gap: 0.85rem;
+	}
+
+	.simulation-card .calcform {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.85rem;
+		height: auto;
+	}
+
+	.simulation-card .calcform > *,
+	.simulation-card .divdata,
+	.simulation-card .divresults,
+	.simulation-card .tab,
+	.simulation-card .tabresults,
+	.simulation-card .tab-content,
+	.simulation-card .divresults_col {
+		min-width: 0;
+		max-width: 100%;
+	}
+
+	.simulation-card .tab,
+	.simulation-card .tabresults {
+		border-color: var(--border);
+		border-radius: 0 0 var(--radius-md) var(--radius-md);
+		box-shadow: none;
+	}
+
+	.simulation-card .divdata,
+	.simulation-card .divresults {
+		align-self: start;
+	}
+
+	.simulation-card .divresults {
+		margin-top: 0.1rem;
+	}
+
+	.simulation-card .divresults_col {
+		grid-template-columns: minmax(0, 1fr) minmax(130px, auto);
+	}
+
+	#div_botoes {
+		position: sticky;
+		top: 1rem;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		align-items: stretch;
+		gap: 0.65rem;
+		margin: 0;
+		padding: 4.35rem 0.2rem 0;
+	}
+
+	#div_botoes button {
+		display: grid;
+		grid-template-columns: 24px 1fr;
+		grid-template-rows: auto auto;
+		width: 100%;
+		min-height: 58px;
+		padding: 0.55rem 0.5rem;
+		border: 1px solid var(--border-strong);
+		border-radius: var(--radius-md);
+		background: var(--surface);
+		color: var(--brand-800);
+		box-shadow: var(--shadow-sm);
+		cursor: pointer;
+		text-align: left;
+		transition: background-color .15s ease, border-color .15s ease, transform .1s ease;
+	}
+
+	#div_botoes button:hover {
+		border-color: var(--brand-600);
+		background: var(--brand-50);
+		transform: translateY(-1px);
+	}
+
+	#div_botoes button i {
+		grid-row: 1 / 3;
+		align-self: center;
+		font-size: 1.05rem;
+		text-align: center;
+	}
+
+	#div_botoes .direction-icon--stacked {
+		display: none;
+	}
+
+	#div_botoes button span {
+		display: block;
+		margin: 0 !important;
+		padding: 0;
+		border: 0;
+		border-radius: 0;
+		background: none;
+		box-shadow: none;
+		color: inherit;
+		font-size: 0.78rem;
+		line-height: 1.1;
+		cursor: inherit;
+	}
+
+	#div_botoes button span:hover {
+		border: 0;
+		background: none;
+		box-shadow: none;
+		color: inherit;
+	}
+
+	#div_botoes button small {
+		color: var(--ink-500);
+		font-size: 0.68rem;
+		font-weight: 700;
+		line-height: 1.1;
+	}
+
+	.simulation-card .tab-resumo {
+		padding: 0.8rem;
+	}
+
+	.simulation-card .divresults_col {
+		grid-template-columns: minmax(145px, 1fr) minmax(112px, auto);
+		column-gap: 0.75rem;
+		row-gap: 0.18rem;
+		font-size: 0.9rem;
+		line-height: 1.45;
+	}
+
+	.simulation-card .divresults_col label {
+		min-width: 0;
+		overflow-wrap: normal;
+		word-break: normal;
+	}
+
+	.simulation-card .divresults_col input[type="text"] {
+		min-width: 108px;
+		padding-right: 0;
+	}
+
+	.simulation-card .tabdetails-info {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.4rem;
+	}
+
+	.simulation-card .tabdetails-info > div {
+		min-width: 0;
+		white-space: nowrap;
+		line-height: 1.35;
+		overflow: visible;
+	}
+}
+
+/* Respond to the card's actual width, not only to the browser viewport.
+   This prevents either internal column from crossing the rounded card edge. */
+@container simulation-card (max-width: 720px) {
+	.simulation-card .calcform {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.simulation-card .divresults {
+		margin-top: 0.25rem;
+	}
+
+	.simulation-card .divresults_col {
+		grid-template-columns: minmax(0, 1fr) minmax(112px, auto);
+	}
+}
+
+@container simulation-card (max-width: 480px) {
+	.simulation-card .tab-content > div.field-grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.simulation-card .tabs-menu li a {
+		padding-inline: 0.45em;
+		font-size: 0.68rem;
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	.simulations-grid {
+		grid-template-columns: 1fr;
+	}
+
+	#div_botoes {
+		position: static;
+		flex-direction: row;
+		justify-content: center;
+		margin: 1rem 0 !important;
+		padding: 0;
+	}
+
+	#div_botoes button {
+		width: 112px;
+	}
+
+	#div_botoes .direction-icon--desktop {
+		display: none;
+	}
+
+	#div_botoes .direction-icon--stacked {
+		display: inline-block;
+	}
+}
+
+@media screen and (max-width: 760px) {
+	.simulation-card .calcform {
+		grid-template-columns: 1fr;
+	}
+
+	#div_botoes {
+		flex-wrap: wrap;
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	body.calculator-page .titleHolder {
+		min-height: 5.5rem;
+		flex-direction: column;
+		padding: 0.35rem 0;
+	}
+
+	body.calculator-page .titleHolder .mainTitle,
+	body.calculator-page .titleHolder .cbajuda {
+		position: static;
+		transform: none;
+		margin: 0.2rem 0;
+	}
+}
+
+/* Dependents: explicit, scannable rows instead of a continuous inline sentence. */
+.simulation-card .dependents-grid {
+	display: grid !important;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.55rem !important;
+	margin-top: 0.75rem !important;
+	padding-top: 0.7rem;
+	border-top: 1px solid var(--border);
+}
+
+.simulation-card .dependents-heading {
+	grid-column: 1 / -1;
+	color: var(--ink-700);
+	font-size: 0.74rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+}
+
+.simulation-card .dependents-grid > label {
+	display: grid !important;
+	grid-template-columns: minmax(0, 1fr);
+	align-content: start;
+	gap: 0.3rem !important;
+	min-width: 0;
+	margin: 0 !important;
+	padding: 0.55rem 0.6rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+	background: var(--surface);
+}
+
+.simulation-card .dependents-grid > label > span {
+	color: var(--ink-700);
+	font-size: 0.78rem;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.simulation-card .dependents-grid select {
+	width: 100% !important;
+	min-width: 0;
+}
+
+.simulation-card .dependents-grid .dependent-quantity {
+	grid-template-columns: minmax(0, 1fr) 3.5rem;
+	align-items: center;
+}
+
+.simulation-card .dependents-grid .dependent-quantity input {
+	width: 100% !important;
+	text-align: center;
+}
+
+@container simulation-card (max-width: 430px) {
+	.simulation-card .dependents-grid {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.simulation-card .dependents-heading {
+		grid-column: 1;
+	}
+}
+
+/* Consistent rows for benefits, retirement settings and extra payroll items. */
+:is([id^="tab-ad"], [id^="tab-aux"]) .field-group > div:not(.dependents-grid),
+[id^="tab-prev"] .field-group > div,
+[id^="tab-outros"] .field-group > div {
+	padding: 0.55rem 0.6rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+	background: var(--surface);
+}
+
+:is([id^="tab-ad"], [id^="tab-aux"]) .field-group > div:not(.dependents-grid) {
+	justify-content: flex-start;
+}
+
+[id^="tab-prev"] .field-group > div {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem 0.8rem;
+}
+
+[id^="tab-prev"] .field-group > div > br {
+	display: none;
+}
+
+[id^="tab-prev"] .funpresp-plans {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	align-items: stretch;
+	gap: 0.55rem;
+}
+
+[id^="tab-prev"] .funpresp-guidance {
+	max-width: none;
+	margin: 0;
+	padding: 0.55rem 0.65rem;
+	border-left: 3px solid var(--brand-400);
+	border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+	background: var(--brand-50);
+	color: var(--ink-700);
+	font-size: 0.82rem;
+	line-height: 1.4;
+}
+
+[id^="tab-prev"] .funpresp-plan {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	align-items: center;
+	gap: 0.35rem 0.55rem;
+	margin: 0;
+	padding: 0.65rem;
+	border-radius: var(--radius-sm);
+	background: var(--surface-muted);
+}
+
+[id^="tab-prev"] .funpresp-plan-name {
+	font-weight: 700;
+	color: var(--ink-900);
+}
+
+[id^="tab-prev"] .funpresp-plan-name::after {
+	content: "Aguardando definição";
+	display: block;
+	margin-top: 0.1rem;
+	color: var(--ink-500);
+	font-size: 0.66rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+}
+
+[id^="tab-prev"] .funpresp-plan input[type="radio"]:disabled {
+	opacity: 1;
+}
+
+[id^="tab-prev"] .funpresp-plan.is-selected {
+	background: var(--brand-100);
+	box-shadow: inset 4px 0 0 var(--brand-600);
+}
+
+[id^="tab-prev"] .funpresp-plan.is-selected .funpresp-plan-name::after {
+	content: "Plano selecionado automaticamente";
+	color: var(--brand-800);
+}
+
+[id^="tab-prev"] .funpresp-plans.has-plan-selection .funpresp-plan:not(.is-selected) {
+	opacity: 0.55;
+}
+
+[id^="tab-prev"] .funpresp-plans.has-plan-selection .funpresp-plan:not(.is-selected) .funpresp-plan-name::after {
+	content: "Plano indisponível";
+}
+
+[id^="tab-prev"] .funpresp-plan-control {
+	grid-column: 2;
+	display: inline-flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+	color: var(--ink-700);
+}
+
+[id^="tab-prev"] .funpresp-extra {
+	grid-column: 1 / -1;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 0.6rem;
+	margin: 0;
+	padding: 0.65rem;
+	border-radius: var(--radius-sm);
+	background: var(--surface-muted);
+}
+
+[id^="tab-prev"] .funpresp-extra > span:last-child {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+}
+
+@container simulation-card (max-width: 560px) {
+	[id^="tab-prev"] .funpresp-plans {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	[id^="tab-prev"] .funpresp-extra {
+		grid-column: 1;
+	}
+}
+
+[id^="tab-outros"] > small {
+	display: block;
+	margin-bottom: 0.65rem;
+	padding: 0.55rem 0.7rem;
+	border-left: 3px solid var(--brand-500);
+	border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+	background: var(--brand-50);
+	color: var(--ink-700);
+	line-height: 1.4;
+}
+
+[id^="tab-outros"] .field-group > div {
+	display: flex !important;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.45rem;
+	margin-top: 0.55rem !important;
+}
+
+[id^="tab-outros"] .field-group > div > label {
+	width: 100% !important;
+	margin: 0 !important;
+	color: var(--ink-700);
+	font-weight: 600;
+}
+
+/* [id^="tab-outros"] .field-group input[type="number"] {
+	width: 6.5rem !important;
+	margin-left: 0 !important;
+} */
+
+[id^="tab-outros"] .field-group input[type="text"] {
+	margin-left: 0;
+	/* text-align: right; */
+}
+
+/* Legacy inline margins are replaced by the shared flex/grid gaps. */
+/* .calcform [style*="margin-left"],
+.calcform [style*="margin-right"] {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+} */
+
+.calcform .field-group input[readonly] {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/* Supporting information follows the same left-aligned reading column. */
+#maindiv3 {
+	max-width: 932px;
+}
+
+#maindiv3 h2,
+#maindiv3 p,
+#maindiv3 ul {
+	max-width: none;
+	margin-left: 0;
+	margin-right: 0;
+	text-align: left;
+}
+
+#maindiv3 h2 {
+	margin-top: 1.5rem;
+	margin-bottom: 0.55rem;
+}
+
+#maindiv3 ul {
+	padding-left: 1.35rem;
+}
+
+/* Unified form system */
+.calcform .tab-content {
+	color: var(--ink-900);
+}
+
+.calcform .field-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.calcform .field-group > div,
+.calcform .field-group > label {
+	min-width: 0;
+}
+
+.calcform .field-group > div {
+	margin-top: 0;
+}
+
+.calcform .field-group label {
+	line-height: 1.35;
+}
+
+.calcform select,
+.calcform input[type="number"],
+.calcform input[type="text"]:not([readonly]) {
+	min-height: 2rem;
+}
+
+.calcform select {
+	max-width: 100%;
+}
+
+.calcform input[readonly] {
+	min-height: 1.8rem;
+	color: var(--ink-900);
+	font-variant-numeric: tabular-nums;
+}
+
+.calcform input[type="number"],
+.calcform input[type="text"] {
+	font-variant-numeric: tabular-nums;
+}
+
+.calcform input:disabled,
+.calcform select:disabled {
+	background-color: var(--surface-sunken);
+	color: var(--ink-500);
+}
+
+.calcform .field-group > div:focus-within,
+.calcform .dependents-grid > label:focus-within {
+	border-color: var(--brand-400);
+	box-shadow: 0 0 0 2px var(--brand-50);
+}
+
+.calcform .field-group-title {
+	margin-bottom: 0.05rem;
+}
+
+.calcform .field-subsection-title {
+	margin-bottom: -0.15rem;
+}
+
+[id^="tab-carreira"] .field-group > div {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.45rem 0.65rem;
+	min-height: 2rem;
+	padding: 0.45rem 0.55rem;
+	border-radius: var(--radius-sm);
+	background: var(--surface);
+}
+
+[id^="tab-carreira"] .field-group > div > label {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+}
+
+[id^="tab-carreira"] .field-group > div:focus-within {
+	background: var(--brand-50);
+}
+
+[id^="tab-carreira"] .function-percentage-row {
+	display: none;
+}
+
+[id^="tab-carreira"] > .field-grid {
+	grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+}
+
+[id^="tab-carreira"] .performance-bonus-row {
+	width: 100%;
+}
+
+[id^="tab-carreira"] .performance-bonus-row .gdclass {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(4rem, auto);
+	align-items: center;
+	width: 100%;
+	gap: 0.4rem;
+}
+
+[id^="tab-carreira"] .performance-bonus-row .gdclass > span {
+	min-width: 0;
+	grid-column: 1 / -1;
+}
+
+[id^="tab-carreira"] .performance-bonus-row select {
+	width: 100%;
+	min-width: 0;
+}
+
+:is([id^="tab-ad"], [id^="tab-aux"]) .field-group > div:not(.dependents-grid) {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.45rem 0.65rem;
+	min-height: 2.7rem;
+}
+
+:is([id^="tab-ad"], [id^="tab-aux"]) .field-group > div:not(.dependents-grid) > label {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+}
+
+[id^="tab-prev"] .field-group > label {
+	display: flex;
+	align-items: center;
+	gap: 0.45rem;
+	padding: 0.35rem 0;
+}
+
+[id^="tab-prev"] .field-group > br {
+	display: none;
+}
+
+[id^="tab-prev"] .field-group > label + label {
+	border-top: 1px solid var(--border);
+}
+
+[id^="tab-outros"] .field-group h4 {
+	margin-bottom: 0.1rem;
+}
+
+.calcform .tabdetails-info > div,
+.calcform .divresults_col {
+	font-variant-numeric: tabular-nums;
+}
+
+@container simulation-card (max-width: 520px) {
+	.calcform .field-grid {
+		grid-template-columns: minmax(0, 1fr) !important;
+	}
+
+	.calcform .field-group {
+		padding: 0.65rem;
+	}
+
+	:is([id^="tab-ad"], [id^="tab-aux"]) .field-group > div:not(.dependents-grid),
+	[id^="tab-prev"] .field-group > div,
+	[id^="tab-outros"] .field-group > div {
+		align-items: flex-start;
+	}
+}
+
+/* Dense desktop viewport: keep both complete career forms visible together. */
+@media screen and (min-width: 1281px) and (max-height: 950px) {
+	.simulation-card {
+		padding: 0.65rem;
+	}
+
+	.simulation-heading {
+		margin-bottom: 0.45rem;
+	}
+
+	.simulation-card .tab-content {
+		padding: 0.5rem;
+	}
+
+	.calcform .field-group {
+		gap: 0.32rem;
+		padding: 0.48rem 0.58rem 0.52rem;
+	}
+
+	.calcform select,
+	.calcform input[type="number"],
+	.calcform input[type="text"]:not([readonly]) {
+		min-height: 1.85rem;
+	}
+
+	.field-group > .field-subsection-title {
+		margin-top: 0.4rem;
+		padding-top: 0.4rem;
+	}
+
+	[id^="tab-carreira"] .field-group > div {
+		min-height: 1.75rem;
+	}
+
+	.simulation-card .tab-resumo {
+		padding: 0.6rem;
+	}
+
+	.simulation-card .divresults_col {
+		line-height: 1.35;
+		row-gap: 0.08rem;
+	}
+}
+
+/* Cleaner forms: remove decorative outlines from internal objects. */
+.calcform .field-group,
+.calcform .dependents-grid > label,
+:is([id^="tab-ad"], [id^="tab-aux"]) .field-group > div:not(.dependents-grid),
+[id^="tab-prev"] .field-group > div,
+[id^="tab-outros"] .field-group > div {
+	border-color: transparent;
+	box-shadow: none;
+}
+
+.calcform .field-group > div:focus-within,
+.calcform .dependents-grid > label:focus-within {
+	border-color: transparent;
+	box-shadow: none;
+}
+
+[id^="tab-prev"] label:has(input[name="novopss"]),
+[id^="tab-prev"] label:has(input[name="funp_plano"]) {
+	border: 0;
 }
