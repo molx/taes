@@ -751,7 +751,12 @@ function calcSalario(form) {
     adiantPct = (parseInt(form.numAdiant.value) / 30) * 0.7,
     aliqirrfadiant = 0,
     aliqpssadiant = 0,
-    descAdiant = 0;
+    descAdiant = 0,
+    deducaoSimp = 564.80;
+    
+    if (periodo >= 202505) {
+        deducaoSimp = 607.20;
+    }
 
     if (form.ferias.checked) {
         ferias = (remuneracao + valinsa + funcao) / 3;
@@ -761,7 +766,7 @@ function calcSalario(form) {
         }
         aliqirrfferias = valorIRRF(ferias - deducaoSimp, periodo, deducaoSimp)[0];
     } 
-
+    console.log([ferias - deducaoSimp, periodo, deducaoSimp]);
     if (adiantPct > 0 && !form.adiantRest.checked) {
         adiantamento = (remuneracao + valinsa + funcao) * adiantPct;
         aliqirrfadiant = valorIRRF(adiantamento, periodo)[0];
@@ -795,11 +800,6 @@ function calcSalario(form) {
         tetopss = 8157.41;
     } else {
         tetopss = 8475.55;
-    }
-
-    var deducaoSimp = 564.80
-    if (periodo >= 202505) {
-        deducaoSimp = 607.20;
     }
 
     //Checa quais opcionais deverão entrar na base do PSS
