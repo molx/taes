@@ -934,7 +934,9 @@ function calcSalario(form) {
 
     var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + aliqirrfadiant + aliqpssadiant + descAdiant + outrosdescsum;
 
-    var bruto = remuneracao + valinsa + saude + alimentacao + transporte + creche + funcao + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
+    var fronteira = valorFronteira(form, periodo);
+
+    var bruto = remuneracao + valinsa + saude + alimentacao + transporte + creche + funcao + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm + fronteira;
 
     var salario = bruto - descontos;
     if (form.name == "myform") {
@@ -996,6 +998,7 @@ function calcSalario(form) {
 
     addDetailValue("#tabdetails-rend", formid, "Vencimento básico", vencimento);
     addDetailValue("#tabdetails-rend", formid, "Auxílio-alimentação", alimentacao);
+    if (fronteira > 0) addDetailValue("#tabdetails-rend", formid, "Adicional de fronteira (simulação)", fronteira);
     if (transporte > 0) addDetailValue("#tabdetails-rend", formid, "Auxílio-transporte", transporte);
     if (creche > 0) addDetailValue("#tabdetails-rend", formid, "Auxílio pré-escolar", creche);
     if (noturno > 0) addDetailValue("#tabdetails-rend", formid, "Adicional noturno", noturno);

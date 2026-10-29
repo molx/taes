@@ -1,4 +1,8 @@
+var carregandoStorage = false;
+
 function saveStorage() {
+    // A atualização da carreira pode recalcular antes de restaurar os campos.
+    if (carregandoStorage) return;
 	localStorage.clear();
 	var frms = ['myform', 'myform2'];
 	$.each(frms, function(i, v) {
@@ -115,9 +119,11 @@ $(document).ready(function() {
         //2. Atualiza carreira manualmente do storage
         $('#selCarreira').val(localStorage.selCarreira || 'TAE');
         //3. Atualiza a UI com a carreira correta carregada
+        carregandoStorage = true;
         atualizaCarreira();
         //4. Carrega o storage novamente, agora com a carreira e a DOM selecionadas para atualizar os campos
         loadStorage(false);
+        carregandoStorage = false;
         //Por último calcula tudo
         calcSalario(myform);
         calcSalario(myform2);
