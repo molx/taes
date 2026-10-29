@@ -117,7 +117,18 @@ $(document).ready(function() {
         //3. Atualiza a UI com a carreira correta carregada
         atualizaCarreira();
         //4. Carrega o storage novamente, agora com a carreira e a DOM selecionadas para atualizar os campos
+        const funcVals = [
+            localStorage.getItem('ddFuncVal1'),
+            localStorage.getItem('ddFuncVal2')
+        ];
         loadStorage(false);
+        [myform, myform2].forEach((form, i) => {
+            atualizaFunc(form);
+            const funcVal = funcVals[i];
+            if (funcVal !== null && Array.from(form.ddFuncVal.options).some(option => option.value === funcVal)) {
+                form.ddFuncVal.value = funcVal;
+            }
+        });
         //Por último calcula tudo
         calcSalario(myform);
         calcSalario(myform2);
@@ -126,6 +137,5 @@ $(document).ready(function() {
     // calcSalario(myform);
     // calcSalario(myform2);
 });
-
 
 

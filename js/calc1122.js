@@ -765,8 +765,7 @@ function calcSalario(form) {
             ferias = ferias * 1.5;
         }
         aliqirrfferias = valorIRRF(ferias - deducaoSimp, periodo, deducaoSimp)[0];
-    } 
-    console.log([ferias - deducaoSimp, periodo, deducaoSimp]);
+    }
     if (adiantPct > 0 && !form.adiantRest.checked) {
         adiantamento = (remuneracao + valinsa + funcao) * adiantPct;
         aliqirrfadiant = valorIRRF(adiantamento, periodo)[0];
@@ -1077,17 +1076,17 @@ function inverterform(tipo) {
         fillform(form2, fields.myform);
         atualizaFunc(form1);
         //Campos de func precisam ser atualizados manualmente pois os valores são dependentes do tipo de função
-        form1.ddFuncVal.value = fields.myform2.ddFuncVal;
+        form1.ddFuncVal.value = fields.myform2.ddFuncVal ?? 0;
         atualizaFunc(form2);
-        form2.ddFuncVal.value = fields.myform.ddFuncVal;
+        form2.ddFuncVal.value = fields.myform.ddFuncVal ?? 0;
     } else if (tipo == "cima") {
         fillform(form1, fields.myform2);
         atualizaFunc(form1);
-        form1.ddFuncVal.value = fields.myform2.ddFuncVal;
+        form1.ddFuncVal.value = fields.myform2.ddFuncVal ?? 0;
     } else {
         fillform(form2, fields.myform);
         atualizaFunc(form2);
-        form2.ddFuncVal.value = fields.myform.ddFuncVal;
+        form2.ddFuncVal.value = fields.myform.ddFuncVal ?? 0;
         //Reativar button de absorção
         $('#absbt').prop("disabled", false);
     }
