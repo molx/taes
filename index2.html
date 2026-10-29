@@ -40,6 +40,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
+    <script src="js/fronteira.js"></script>
     <script src="js/calc11222.js"></script>
     <script src="js/accessibility.js"></script>
     <!--<script type="text/javascript" src="js/nhpup_1.1.js"></script>-->
@@ -148,6 +149,15 @@
                 </div>
             </div>
         </div>
+        <div class="callout">
+            <strong>Adicional de fronteira aprovado no Congresso em 28/10/2026.</strong>
+            O PLV 12/2026 (MP 1.375/2026) prevê R$ 191,00 por dia de efetivo trabalho,
+            com efeitos financeiros a partir de janeiro de 2027, e segue para sanção presidencial.
+            O pagamento depende do enquadramento da carreira e da localidade pelo MGI.
+            Para simular, selecione o período a partir de 01/2027 e a opção nos auxílios.
+            <a href="https://www12.senado.leg.br/noticias/materias/2026/10/28/aprovada-ampliacao-do-adicional-de-fronteira-para-servidores-federais"
+                target="_blank" rel="noopener">Leia a notícia do Senado</a>.
+        </div>
         <!-- <div class="callout">
             <big>ATENÇÃO!</big><br />
             Os aumentos de 4,5% para 2025 e 2026 foram oferecidos pelo governo para todas carreiras e ainda estão em negociação.
@@ -210,7 +220,10 @@
                                                         Entre 01/2026 e 03/2026
                                                     </option>
                                                     <option value="202604" selected>
-                                                        A partir de 04/2026
+                                                        Entre 04/2026 e 12/2026
+                                                    </option>
+                                                    <option value="202701">
+                                                        A partir de 01/2027 (simulação)
                                                     </option>
                                                     <!--<option value="100">
                                             PROPOSTA Fasubra (plenária)
@@ -613,6 +626,23 @@
                                 </div>
                             </div>
                             <div id="tab-ad1" class="tab-content tab-content1">
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="fronteira" id="fronteira1"
+                                            onchange="calcSalario(this.form);" aria-describedby="fronteira-ajuda1" disabled />
+                                        Simular adicional de fronteira:
+                                    </label>
+                                    <label for="diasFronteira1">Dias de efetivo trabalho no mês:</label>
+                                    <input type="number" name="diasFronteira" id="diasFronteira1" min="0" max="31"
+                                        step="1" value="22" style="width: 48px;" oninput="calcSalario(this.form);"
+                                        aria-describedby="fronteira-ajuda1" disabled />
+                                    <input type="text" name="txFronteira" aria-label="Valor do adicional de fronteira"
+                                        value="R$ 0,00" readonly />
+                                    <br><small id="fronteira-ajuda1">R$ 191,00 por dia, a partir de 01/2027.
+                                        Simulação sujeita à sanção e ao enquadramento da carreira e da localidade.
+                                        Verba indenizatória, sem IR ou contribuição previdenciária.</small>
+                                </div>
+
                                 <div class="field-grid">
                                     <div class="field-group">
                                         <span class="field-group-title">Transporte e alimentação</span>
@@ -1270,7 +1300,10 @@
                                                         Entre 01/2026 e 03/2026
                                                     </option>
                                                     <option value="202604" selected>
-                                                        A partir de 04/2026
+                                                        Entre 04/2026 e 12/2026
+                                                    </option>
+                                                    <option value="202701">
+                                                        A partir de 01/2027 (simulação)
                                                     </option>
                                                     <!--<option value="100">
                                             PROPOSTA Fasubra (plenária)
@@ -1666,6 +1699,23 @@
                                 </div>
                             </div>
                             <div id="tab-ad2" class="tab-content tab-content2">
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="fronteira" id="fronteira2"
+                                            onchange="calcSalario(this.form);" aria-describedby="fronteira-ajuda2" disabled />
+                                        Simular adicional de fronteira:
+                                    </label>
+                                    <label for="diasFronteira2">Dias de efetivo trabalho no mês:</label>
+                                    <input type="number" name="diasFronteira" id="diasFronteira2" min="0" max="31"
+                                        step="1" value="22" style="width: 48px;" oninput="calcSalario(this.form);"
+                                        aria-describedby="fronteira-ajuda2" disabled />
+                                    <input type="text" name="txFronteira" aria-label="Valor do adicional de fronteira"
+                                        value="R$ 0,00" readonly />
+                                    <br><small id="fronteira-ajuda2">R$ 191,00 por dia, a partir de 01/2027.
+                                        Simulação sujeita à sanção e ao enquadramento da carreira e da localidade.
+                                        Verba indenizatória, sem IR ou contribuição previdenciária.</small>
+                                </div>
+
                                 <div class="field-grid">                                    
                                     <div class="field-group">
                                         <span class="field-group-title">Transporte e alimentação</span>
