@@ -39,7 +39,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
-    <script src="js/calc1122.js"></script>
+    <script src="js/compressed.js"></script>
     <!--<script type="text/javascript" src="js/nhpup_1.1.js"></script>-->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0242087922176548"
         crossorigin="anonymous"></script>
@@ -859,7 +859,10 @@
                             <div>
                                 <label>
                                     <input type="checkbox" name="fronteira" id="fronteira1" value="fronteira"
-                                        onClick="calcSalario(this.form);" /> Fronteira
+                                        onClick="calcSalario(this.form);" /> Fronteira (dias): 
+                                        <input type="number" name="frontDias" id="frontDias1" min="1" max="23" step="1" value="22"
+                                        style="width: 30px;" onClick="calcSalario(this.form);"
+                                        onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
                                 </label>
                             </div>
                             <div>
@@ -1853,7 +1856,10 @@
                             <div>
                                 <label>
                                     <input type="checkbox" name="fronteira" id="fronteira2" value="fronteira"
-                                        onClick="calcSalario(this.form);" /> Fronteira
+                                        onClick="calcSalario(this.form);" /> Fronteira (dias): 
+                                        <input type="number" name="frontDias" id="frontDias2" min="1" max="23" step="1" value="22"
+                                        style="width: 30px;" onClick="calcSalario(this.form);"
+                                        onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
                                 </label>
                             </div>
                             <div>

@@ -603,9 +603,11 @@ function calcSalario(form) {
     var anuenio = (form.numAnuenio.value / 100) * vencimento;
 
     var alimentacao = form.alim.checked ? valorAlim(periodo) : 0;
+    var fronteira = form.fronteira.checked ? 191 * form.frontDias.value : 0;
 
     if (ftcarga == 0.5) {
         alimentacao = alimentacao / 2;
+        fronteira = fronteira / 2;
     }
 
     var transporte = form.trans.checked ? valorTransporte(vencimento, form.gastoTrans.value, form.diasTrans.value) : 0,
@@ -916,7 +918,7 @@ function calcSalario(form) {
 
     var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + aliqirrfadiant + aliqpssadiant + descAdiant + outrosdescsum;
 
-    var bruto = remuneracao + valinsa + saude + alimentacao + transporte + creche + funcao + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
+    var bruto = remuneracao + valinsa + saude + alimentacao + fronteira + transporte + creche + funcao + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
 
     var salario = bruto - descontos;
     if (form.name == "myform") {
@@ -978,6 +980,7 @@ function calcSalario(form) {
 
     addDetailValue("#tabdetails-rend", formid, "VB", vencimento);
     addDetailValue("#tabdetails-rend", formid, "VA", alimentacao);
+    if (fronteira > 0) addDetailValue("#tabdetails-rend", formid, "Fronteira", fronteira);
     if (transporte > 0) addDetailValue("#tabdetails-rend", formid, "VT", transporte);
     if (creche > 0) addDetailValue("#tabdetails-rend", formid, "Pré-escolar", creche);
     if (noturno > 0) addDetailValue("#tabdetails-rend", formid, "Ad. Noturno", noturno);
