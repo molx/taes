@@ -650,9 +650,15 @@
                                 <input type="number" name="diasFronteira" id="diasFronteira1" min="0" max="31"
                                     step="1" value="22" style="width: 48px;" oninput="calcSalario(this.form);"
                                     aria-describedby="fronteira-ajuda1" disabled />
+                                <label for="horasFronteira1">Horas efetivas por dia:</label>
+                                <input type="number" name="horasFronteira" id="horasFronteira1" min="0" max="24"
+                                    step="0.25" value="" placeholder="8" style="width: 48px;" oninput="calcSalario(this.form);"
+                                    aria-describedby="fronteira-ajuda1" disabled />
                                 <input type="text" name="txFronteira" aria-label="Valor do adicional de fronteira"
                                     value="R$ 0,00" readonly />
-                                <br><small id="fronteira-ajuda1">R$ 191,00 por dia, a partir de 01/2027.
+                                <br><small id="fronteira-ajuda1">R$ 191,00 por 8 horas, a partir de 01/2027, proporcional às horas prestadas.
+                                    Horas em branco: carga semanal selecionada dividida por 5 dias (DE = 8h/dia).
+                                    Para plantões ou outra distribuição, informe as horas efetivas por dia.
                                     Simulação sujeita à sanção e ao enquadramento da carreira e da localidade.
                                     Verba indenizatória, sem IR ou contribuição previdenciária.</small>
                             </div>
@@ -1661,9 +1667,15 @@
                                 <input type="number" name="diasFronteira" id="diasFronteira2" min="0" max="31"
                                     step="1" value="22" style="width: 48px;" oninput="calcSalario(this.form);"
                                     aria-describedby="fronteira-ajuda2" disabled />
+                                <label for="horasFronteira2">Horas efetivas por dia:</label>
+                                <input type="number" name="horasFronteira" id="horasFronteira2" min="0" max="24"
+                                    step="0.25" value="" placeholder="8" style="width: 48px;" oninput="calcSalario(this.form);"
+                                    aria-describedby="fronteira-ajuda2" disabled />
                                 <input type="text" name="txFronteira" aria-label="Valor do adicional de fronteira"
                                     value="R$ 0,00" readonly />
-                                <br><small id="fronteira-ajuda2">R$ 191,00 por dia, a partir de 01/2027.
+                                <br><small id="fronteira-ajuda2">R$ 191,00 por 8 horas, a partir de 01/2027, proporcional às horas prestadas.
+                                    Horas em branco: carga semanal selecionada dividida por 5 dias (DE = 8h/dia).
+                                    Para plantões ou outra distribuição, informe as horas efetivas por dia.
                                     Simulação sujeita à sanção e ao enquadramento da carreira e da localidade.
                                     Verba indenizatória, sem IR ou contribuição previdenciária.</small>
                             </div>
