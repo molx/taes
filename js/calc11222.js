@@ -146,12 +146,13 @@ function atualizaCarreira(element = null) {
         $('input[name="txQualif"]').parent().hide();
         // $('.qualification-section-title').hide();
     }
-    updateQuali(myform, 1, carreira == "MF", false);
-    updateQuali(myform2, 1, carreira == "MF", false);
-    atualizaFunc(myform);
-    atualizaFunc(myform2);
+    updateQuali(myform, 1, false);
+    updateQuali(myform2, 1, false);
     if (element && element.id == 'selCarreira') {
         //Recalcular apenas quando chamado pelo select para n quebrar loadStorage
+        //(atualizaFunc também recalcula e salva o storage)
+        atualizaFunc(myform);
+        atualizaFunc(myform2);
         calcSalario(myform);
         calcSalario(myform2);
     }
@@ -609,9 +610,11 @@ function calcSalario(form) {
     var anuenio = (form.numAnuenio.value / 100) * vencimento;
 
     var alimentacao = form.alim.checked ? valorAlim(periodo) : 0;
+    var fronteira = form.fronteira.checked ? 191 * form.frontDias.value : 0;
 
     if (ftcarga == 0.5) {
         alimentacao = alimentacao / 2;
+        fronteira = fronteira / 2;
     }
 
     var transporte = form.trans.checked ? valorTransporte(vencimento, form.gastoTrans.value, form.diasTrans.value) : 0,
@@ -757,7 +760,12 @@ function calcSalario(form) {
     adiantPct = (parseInt(form.numAdiant.value) / 30) * 0.7,
     aliqirrfadiant = 0,
     aliqpssadiant = 0,
-    descAdiant = 0;
+    descAdiant = 0,
+    deducaoSimp = 564.80;
+
+    if (periodo >= 202505) {
+        deducaoSimp = 607.20;
+    }
 
     if (form.ferias.checked) {
         ferias = (remuneracao + valinsa + funcao) / 3;
@@ -801,11 +809,6 @@ function calcSalario(form) {
         tetopss = 8157.41;
     } else {
         tetopss = 8475.55;
-    }
-
-    var deducaoSimp = 564.80
-    if (periodo >= 202505) {
-        deducaoSimp = 607.20;
     }
 
     //Checa quais opcionais deverão entrar na base do PSS
@@ -934,7 +937,7 @@ function calcSalario(form) {
 
     var descontos = aliqirrf + valorpss + aliqfunp + aliqFunpFacul + desc_13 + sindicato + aliqirrfferias + aliqirrfadiant + aliqpssadiant + descAdiant + outrosdescsum;
 
-    var bruto = remuneracao + valinsa + saude + alimentacao + transporte + creche + funcao + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
+    var bruto = remuneracao + valinsa + saude + alimentacao + fronteira + transporte + creche + funcao + noturno + ferias + adiantamento + decter + outrosRendIsnt + abonoperm;
 
     var salario = bruto - descontos;
     if (form.name == "myform") {
@@ -996,6 +999,7 @@ function calcSalario(form) {
 
     addDetailValue("#tabdetails-rend", formid, "Vencimento básico", vencimento);
     addDetailValue("#tabdetails-rend", formid, "Auxílio-alimentação", alimentacao);
+    if (fronteira > 0) addDetailValue("#tabdetails-rend", formid, "Adicional de fronteira", fronteira);
     if (transporte > 0) addDetailValue("#tabdetails-rend", formid, "Auxílio-transporte", transporte);
     if (creche > 0) addDetailValue("#tabdetails-rend", formid, "Auxílio pré-escolar", creche);
     if (noturno > 0) addDetailValue("#tabdetails-rend", formid, "Adicional noturno", noturno);
@@ -1072,7 +1076,7 @@ function inverterform(tipo) {
     var frms = ['myform', 'myform2'];
     $.each(frms, function(i, v) {
         $('form[name="' + v + '"] *').filter(':input').each(function(i, inp){
-            if ($(inp).attr("id")) {
+            if ($(inp).attr("id") && $(inp).attr("name")) {
                 var ptype = $(inp).prop("type");
                 var prop = {};
                 if (ptype && ptype == "checkbox") {
@@ -1094,17 +1098,17 @@ function inverterform(tipo) {
         fillform(form2, fields.myform);
         atualizaFunc(form1);
         //Campos de func precisam ser atualizados manualmente pois os valores são dependentes do tipo de função
-        form1.ddFuncVal.value = fields.myform2.ddFuncVal;
+        form1.ddFuncVal.value = fields.myform2.ddFuncVal ?? 0;
         atualizaFunc(form2);
-        form2.ddFuncVal.value = fields.myform.ddFuncVal;
+        form2.ddFuncVal.value = fields.myform.ddFuncVal ?? 0;
     } else if (tipo == "cima") {
         fillform(form1, fields.myform2);
         atualizaFunc(form1);
-        form1.ddFuncVal.value = fields.myform2.ddFuncVal;
+        form1.ddFuncVal.value = fields.myform2.ddFuncVal ?? 0;
     } else {
         fillform(form2, fields.myform);
         atualizaFunc(form2);
-        form2.ddFuncVal.value = fields.myform.ddFuncVal;
+        form2.ddFuncVal.value = fields.myform.ddFuncVal ?? 0;
         //Reativar button de absorção
         $('#absbt').prop("disabled", false);
     }
@@ -1115,6 +1119,18 @@ function inverterform(tipo) {
 
     calcSalario(form1);
     calcSalario(form2);
+}
+
+function limparSimulacao(nome) {
+    var form = document.forms[nome];
+    var carreira = $('#selCarreira').val();
+    //Volta aos valores do HTML; selects montados por atualizaCarreira voltam para a 1a opção
+    form.reset();
+    if (infoCarreiras[carreira].nomeGrat) {
+        $(form).find('select[name="ddGratDesTipo"]').val(infoCarreiras[carreira].nomeGrat);
+    }
+    updateQuali(form, form.ddClasse.value, false);
+    atualizaFunc(form);
 }
 
 function abs() {
