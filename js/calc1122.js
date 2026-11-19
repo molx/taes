@@ -513,6 +513,9 @@ function calcSalario(form) {
     gratDesemp = 0,
     gratAE = 0,
     gratGeneric = 0,
+    gratGenericName = "",
+    gratGenericDesc = 0,
+    gratGenericLiq = 0,
     gratGenArray = [],
     gratGenMax = 0;
     padraovb = parseInt(form.ddPadrao.value),
@@ -568,7 +571,9 @@ function calcSalario(form) {
         for (let date in infoCarreiras.grats[idxGratGen]) {
             if (date > periodo) break;
             gratGenArray = infoCarreiras.grats[idxGratGen][date];
+            gratGenericName = infoCarreiras.gratsNm[form.ddGratGen.value];
             gratGeneric = gratGenArray[form.ddGratGen.value];
+            gratGenericLiq = gratGeneric;
             gratGenMax = infoCarreiras.gratsMax[idxGratGen][date][form.ddGratGen.value];
         }
     }
@@ -659,17 +664,19 @@ function calcSalario(form) {
         if (diffPisoEnf < 0) diffPisoEnf = 0;
     }
 
+    //Checa e limita os valores máximos das gratificacoes que tem limite
+    //Deve ser calculado aqui pois depende dos calculos dos valores que compoem o teto da gratificação
+    var refTetoGrat = vencimento + jud + qualificacao + gratGeneric;
+    if (form.ddGratGen.value > 0 && gratGenMax > 0 && refTetoGrat > gratGenMax) {
+        gratGenericDesc = refTetoGrat - gratGenMax;
+        gratGenericLiq = gratGeneric - gratGenericDesc;   
+    }
+
     var outrosRendTrib = parseFloat(form.numOutrosRendTrib.value) || 0;
     var outrosRendTribPSS = parseFloat(form.numoutrosRendTribPSS.value) || 0;
     var outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
-    var remuneracao = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribPSS + gratDesemp + gratGeneric + gratAE;
-    //console.log("Remuneração:" + remuneracao, "Vencimento:" + vencimento, "Jud:" + jud, "Qualificação:" + qualificacao, "Anuênio:" + anuenio, "Diferença Piso Enf:" + diffPisoEnf, "Outros Rend Trib:" + outrosRendTrib, "Outros Rend PSS:" + outrosRendTribPSS, "Grat Desemp:" + gratDesemp, "Grat Generic:" + gratGeneric, "Grat AE:" + gratAE);
-
-    //Checa e limita os valores máximos das gratificacoes que tem limite
-    if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && vencimento > gratGenMax) {
-        remuneracao = gratGenMax;
-    }
+    var remuneracao = vencimento + jud + qualificacao + anuenio + diffPisoEnf + outrosRendTrib + outrosRendTribPSS + gratDesemp + gratGenericLiq + gratAE;
 
     /*var tipoFG = infoCarreiras[carreira].tipoFG,
     //tipoCD = infoCarreiras[carreira].tipoCD;
@@ -814,7 +821,7 @@ function calcSalario(form) {
         basepss += noturno;
     }
     if (form.pssgrat.checked) {
-        basepss += gratGeneric;
+        basepss += gratGenericLiq;
     }
 
     var refpss = basepss;
@@ -846,7 +853,7 @@ function calcSalario(form) {
             basefunp += noturno;
         }
         if (form.rpcgrat.checked) {
-            basefunp += gratGeneric;
+            basefunp += gratGenericLiq;
         }
         if (refpss == tetopss && basefunp > 0) {
             //É possível que o servidor atinja o teto do PSS mas não tenha base suficiente (> 0) para a funpresp,
@@ -889,7 +896,7 @@ function calcSalario(form) {
     var reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
     var rendTributavel = vencimento + jud + qualificacao + anuenio + noturno + valinsa + funcao + 
-    outrosRendTrib + outrosRendTribPSS + gratDesemp + gratGeneric + gratAE + abonoperm;
+    outrosRendTrib + outrosRendTribPSS + gratDesemp + gratGenericLiq + gratAE + abonoperm;
 
     //Checa e limita os valores máximos das gratificacoes que tem limite
     if (form.ddGratGen.value >= 1 && form.ddGratGen.value <= 3 && remuneracao > gratGenMax) {
@@ -948,7 +955,7 @@ function calcSalario(form) {
     form.txSindicato.value = formatValor(sindicato);
     form.txQualif.value = formatValor(qualificacao);
     form.txGratDes.value = formatValor(gratDesemp);
-    form.txGratGen.value = formatValor(gratGeneric);
+    form.txGratGen.value = formatValor(gratGenericLiq);
     form.txFunp.value = formatValor(aliqfunp);
     form.txDepIRRF.value = formatValor(reducaoDepsIRRF);
     //form.txFG.value = formatValor(fungrat);
@@ -1003,8 +1010,7 @@ function calcSalario(form) {
     //
     if (gratDesemp > 0) addDetailValue("#tabdetails-rend", formid, infoCarreiras[carreira].nomeGrat, gratDesemp);
     if (gratAE > 0) addDetailValue("#tabdetails-rend", formid, "GAE", gratAE);
-    
-    
+    if (gratGeneric > 0) addDetailValue("#tabdetails-rend", formid, gratGenericName, gratGeneric);    
 
     addDetailValue("#tabdetails-desc", formid, "CPSS", valorpss);
     addDetailValue("#tabdetails-desc", formid, "IR", aliqirrf);
@@ -1020,6 +1026,7 @@ function calcSalario(form) {
     if (outrosdescontospct > 0) addDetailValue("#tabdetails-desc", formid, "Outros Trib.", outrosdescontospct);
     if (outrosdescontosIsnt > 0) addDetailValue("#tabdetails-desc", formid, "Outros Isen.", outrosdescontosIsnt);
     if (outrosdescontospctIsnt > 0) addDetailValue("#tabdetails-desc", formid, "Outros Isen.", outrosdescontospctIsnt);
+    if (gratGenericDesc > 0) addDetailValue("#tabdetails-desc", formid, "Limite "+ gratGenericName, gratGenericDesc);
 
     addDetailValue("#tabdetails-outros", formid, "Bruto", bruto);
     addDetailValue("#tabdetails-outros", formid, "Descontos", descontos);
