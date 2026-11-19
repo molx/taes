@@ -2563,3 +2563,54 @@ html.a11y-contrast input[type="radio"] {
 [id^="tab-prev"] label:has(input[name="funp_plano"]) {
 	border: 0;
 }
+
+/* ==========================================================================
+   Anúncios
+   ========================================================================== */
+
+.ad-band {
+	max-width: 932px;
+	margin: 1.5rem auto;
+}
+
+.side-ad {
+	display: none;
+	position: absolute;
+	top: 0;
+	width: 120px;
+	min-height: 500px;
+}
+
+.left-ad {
+	right: calc(100% + 20px);
+}
+
+.right-ad {
+	left: calc(100% + 20px);
+}
+
+@media screen and (min-width: 1860px) {
+	/* Abre espaço nas laterais para os anúncios (120px + 20px de cada lado) */
+	#maindiv {
+		max-width: min(1780px, calc(100vw - 340px));
+	}
+
+	.side-ad {
+		display: block;
+	}
+}
+
+/* Rótulos longos do detalhamento quebram linha em cards estreitos */
+@container simulation-card (max-width: 520px) {
+	.simulation-card .tabdetails-info > div {
+		white-space: normal;
+		overflow-wrap: anywhere;
+	}
+}
+
+/* Título do cabeçalho quebra linha em telas muito estreitas */
+@media screen and (max-width: 359px) {
+	header h1 {
+		white-space: normal;
+	}
+}

@@ -144,8 +144,8 @@ function atualizaCarreira(element = null) {
         $('.labelIQRT2').parent().hide();
         $('input[name="txQualif"]').parent().hide();
     }
-    updateQuali(myform, 1, carreira == "MF", false);
-    updateQuali(myform2, 1, carreira == "MF", false);
+    updateQuali(myform, 1, false);
+    updateQuali(myform2, 1, false);
     if (element && element.id == 'selCarreira') {
         //Recalcular apenas quando chamado pelo select para n quebrar loadStorage
         calcSalario(myform);
@@ -1057,7 +1057,7 @@ function inverterform(tipo) {
     var frms = ['myform', 'myform2'];
     $.each(frms, function(i, v) {
         $('form[name="' + v + '"] *').filter(':input').each(function(i, inp){
-            if ($(inp).attr("id")) {
+            if ($(inp).attr("id") && $(inp).attr("name")) {
                 var ptype = $(inp).prop("type");
                 var prop = {};
                 if (ptype && ptype == "checkbox") {
