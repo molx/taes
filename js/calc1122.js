@@ -410,7 +410,7 @@ function valorSaude(bruto, ftidade, periodo) {
     }
 }
 
-function valorCreche(rem, periodo, n, cota) {
+function valorCreche(rem, periodo, n,) {
     var teto,
     desc = 0,
     faixas = Array();
@@ -434,12 +434,9 @@ function valorCreche(rem, periodo, n, cota) {
         desc = 0.2;
     } else {
         desc = 0.25;
-    }    
-    if (cota) {
-        return teto * (1 - desc) * n;
-    } else {
-        return teto * n;
-    }
+    } 
+    //Retorna o valor com e sem a cota-parte para uso de ambos.
+    return [teto * (1 - desc) * n, teto * n];    
 }
 
 function valorTransporte(vencimento, gasto, dias) {
@@ -752,7 +749,13 @@ function calcSalario(form) {
 
     var basecreche = vencimento + qualificacao + jud + Math.floor(valinsa * 100) / 100 + anuenio + funcao;
     //basecreche aparentemente não leva em consideração o Incentivo à Qualificação - outros a ver
-    var creche = valorCreche(basecreche, periodo, form.numCreche.value, form.crechecota.checked);
+    var crecheCalc = valorCreche(basecreche, periodo, form.numCreche.value),
+    creche = 0;
+    if (form.crechecota.checked) {
+        creche = crecheCalc[0];
+    } else {
+        creche = crecheCalc[1];
+    }
 
     var ferias = 0,
     aliqirrfferias = 0,
@@ -989,7 +992,7 @@ function calcSalario(form) {
     addDetailValue("#tabdetails-rend", formid, "VA", alimentacao);
     if (fronteira > 0) addDetailValue("#tabdetails-rend", formid, "Fronteira", fronteira);
     if (transporte > 0) addDetailValue("#tabdetails-rend", formid, "VT", transporte);
-    if (creche > 0) addDetailValue("#tabdetails-rend", formid, "Pré-escolar", creche);
+    if (creche > 0) addDetailValue("#tabdetails-rend", formid, "Pré-escolar", crecheCalc[1]);
     if (noturno > 0) addDetailValue("#tabdetails-rend", formid, "Ad. Noturno", noturno);
     if (jud > 0) addDetailValue("#tabdetails-rend", formid, "Dec. Jud.", jud);
     if (ftpg > 0) addDetailValue("#tabdetails-rend", formid, infoCarreiras[carreira].labelIQRT, qualificacao);
@@ -1014,6 +1017,7 @@ function calcSalario(form) {
 
     addDetailValue("#tabdetails-desc", formid, "CPSS", valorpss);
     addDetailValue("#tabdetails-desc", formid, "IR", aliqirrf);
+    if (form.crechecota.checked) addDetailValue("#tabdetails-desc", formid, "Cota-parte", crecheCalc[1] - crecheCalc[0]);
     if (aliqirrfferias > 0) addDetailValue("#tabdetails-desc", formid, "IR Férias", aliqirrfferias);
     if (aliqirrfadiant > 0) addDetailValue("#tabdetails-desc", formid, "IR Adiant.", aliqirrfadiant);
     if (aliqpssadiant > 0) addDetailValue("#tabdetails-desc", formid, "CPSS Adiant.", aliqpssadiant);
